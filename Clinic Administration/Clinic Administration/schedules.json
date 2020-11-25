@@ -1,0 +1,62 @@
+[
+	{
+		"secondName": "Рошаль",
+		"firstName": "Леонид",
+		"patronymicName": "Михайлович",
+		"cabinet": 3,
+		"startingTime": {
+			"year": 2020,
+			"month": 11,
+			"day": 23,
+			"hour": 12,
+			"minute": 30
+		},
+		"endingTime": {
+			"year": 2020,
+			"month": 11,
+			"day": 23,
+			"hour": 15,
+			"minute": 0
+		}
+	},
+	{
+		"secondName": "Перельман",
+		"firstName": "Михайил",
+		"patronymicName": "Израйлевич",
+		"cabinet": 2,
+		"startingTime": {
+			"year": 2020,
+			"month": 11,
+			"day": 24,
+			"hour": 11,
+			"minute": 0
+		},
+		"endingTime": {
+			"year": 2020,
+			"month": 11,
+			"day": 24,
+			"hour": 15,
+			"minute": 25
+		}
+	},
+	{
+		"secondName": "Бокерия",
+		"firstName": "Лео",
+		"patronymicName": "Антонович",
+		"cabinet": 1,
+		"startingTime": {
+			"year": 2020,
+			"month": 11,
+			"day": 24,
+			"hour": 10,
+			"minute": 0
+		},
+		"endingTime": {
+			"year": 2020,
+			"month": 11,
+			"day": 24,
+			"hour": 14,
+			"minute": 30
+		}
+	},
+]
