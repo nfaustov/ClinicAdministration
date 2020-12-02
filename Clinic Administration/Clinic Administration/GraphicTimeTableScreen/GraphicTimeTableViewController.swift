@@ -15,7 +15,7 @@ class GraphicTimeTableViewController: UIViewController {
     private var datePicker: DatePicker!
     private var timeTableView: GraphicTimeTableView!
     
-    var date = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: Date())  // можно отобразить этот вью контроллер с определенной начальной датой, в планах также добавить и пикеру возможность открываться не на сегодняшней дате изначально
+    var date = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 86400, since: Date()))  // можно отобразить этот вью контроллер с определенной начальной датой, в планах также добавить и пикеру возможность открываться не на сегодняшней дате изначально
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class GraphicTimeTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        datePicker = DatePicker(currentDate: date)
+        datePicker = DatePicker(selectedDate: date)
         timeTableView = GraphicTimeTableView(date: date)
         
         view.addSubview(vScrollView)

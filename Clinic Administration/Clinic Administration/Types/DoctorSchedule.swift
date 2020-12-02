@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DoctorSchedule: Personable, Codable, Equatable {
+struct DoctorSchedule: Codable, Equatable {
     var secondName: String
     var firstName: String
     var patronymicName: String

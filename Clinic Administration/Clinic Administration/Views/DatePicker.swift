@@ -11,54 +11,83 @@ protocol DatePickerDelegate: AnyObject {
     func selectedDate(_ date: DateComponents)
 }
 
-class DatePicker: UIView {
+fileprivate enum DatePickerState: String {
+    case today = "Сегодня"
+    case tomorrow = "Завтра"
+    case afterTomorrow = "Послезавтра"
+    case calendar
+}
+
+final class DatePicker: UIView {
     
     private let date = Date()
     private let calendar = Calendar.current
     private let dateFormatter = DateFormatter()
     
-    private var monthLabel = UILabel() // лейблы для отображения даты
+    private var monthLabel = UILabel()
     private var dayLabel = UILabel()
     private var weekdayLabel = UILabel()
     
-    private let selectionLine = UIView() // подчеркивание, которое анимировано перемещается
-    private var selectionLineLeading = NSLayoutConstraint() // leadingAnchor этой линии
+    private let selectionLine = UIView()
     
-    private var buttons = [UIButton]()
+    private var buttonsStack = UIStackView()
 
-    private let calendarImage = UIImage(systemName: "calendar")?.withTintColor(Design.Color.brown, renderingMode: .alwaysOriginal) // картинки для кнопки с календарем
+    private let calendarImage = UIImage(systemName: "calendar")?.withTintColor(Design.Color.brown, renderingMode: .alwaysOriginal)
     private let selectedCalendarImage = UIImage(systemName: "calendar")?.withTintColor(Design.Color.lightGray, renderingMode: .alwaysOriginal)
+    
+    private var state: DatePickerState!
     
     weak var delegate: DatePickerDelegate?
     
-    var currentDate = DateComponents() {
+    private var selectedDate = DateComponents() {
         didSet {
             configureLabels()
         }
     }
     
-    init(currentDate components: DateComponents) {
+    init(selectedDate: DateComponents) {
         super.init(frame: .zero)
         
         layer.backgroundColor = Design.Color.chocolate.cgColor
         layer.cornerRadius = Design.Shape.largeCornerRadius
         
-        currentDate = components
+        self.selectedDate = selectedDate
+        
+        switch selectedDate {
+        case calendar.dateComponents([.year, .month, .day, .weekday], from: date): state = .today
+        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 86400, since: date)): state = .tomorrow
+        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 172800, since: date)): state = .afterTomorrow
+        default: state = .calendar
+        }
         
         configureLabels()
         configureLabelsStack()
-        configureButtonsStack()
+        configureButtonsStack(with: state)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        selectionLine.frame = CGRect(x: 0, y: buttonsStack.frame.maxY - 2, width: 30, height: 1)
+        let offset = (selectionLine.frame.width - buttonsStack.arrangedSubviews[3].frame.width) / 2
+
+        switch state {
+        case .today: selectionLine.frame.origin.x = 20 + buttonsStack.arrangedSubviews[0].frame.origin.x
+        case .tomorrow: selectionLine.frame.origin.x = 20 + buttonsStack.arrangedSubviews[1].frame.origin.x
+        case .afterTomorrow: selectionLine.frame.origin.x = 20 + buttonsStack.arrangedSubviews[2].frame.origin.x
+        default: selectionLine.frame.origin.x = 20 + buttonsStack.arrangedSubviews[3].frame.origin.x - offset
+        }
     }
     
     private func configureLabels() {
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "LLLL d EEEE"
         
-        guard let date = calendar.date(from: currentDate) else { return }
+        guard let date = calendar.date(from: selectedDate) else { return }
         let stringDate = dateFormatter.string(from: date)
         let splitDate = stringDate.split(separator: " ")
         let month = "\(splitDate[0].capitalized)"
@@ -99,22 +128,26 @@ class DatePicker: UIView {
         ])
     }
     
-    private func configureButtonsStack() {
-        let todayButton = button(title: "Сегодня")
-        todayButton.setTitleColor(Design.Color.lightGray, for: .normal)
+    private func configureButtonsStack(with state: DatePickerState) {
+        let todayButton = button(title: DatePickerState.today.rawValue)
         todayButton.addTarget(self, action: #selector(today(_:)), for: .touchUpInside)
         
-        let tomorrowButton = button(title: "Завтра")
+        let tomorrowButton = button(title: DatePickerState.tomorrow.rawValue)
         tomorrowButton.addTarget(self, action: #selector(tomorrow(_:)), for: .touchUpInside)
         
-        let afterTomorrowButton = button(title: "Послезавтра")
+        let afterTomorrowButton = button(title: DatePickerState.afterTomorrow.rawValue)
         afterTomorrowButton.addTarget(self, action: #selector(afterTomorrow(_:)), for: .touchUpInside)
         
         let calendarButton = button(image: calendarImage)
         calendarButton.addTarget(self, action: #selector(calendar(_:)), for: .touchUpInside)
         
-        buttons = [todayButton, tomorrowButton, afterTomorrowButton, calendarButton]
-        let buttonsStack = UIStackView(arrangedSubviews: buttons)
+        for button in [todayButton, tomorrowButton, afterTomorrowButton, calendarButton] {
+            buttonsStack.addArrangedSubview(button)
+            if button.titleLabel?.text == state.rawValue {
+                button.setTitleColor(Design.Color.lightGray, for: .normal)
+            }
+        }
+
         addSubview(buttonsStack)
         buttonsStack.axis = .horizontal
         buttonsStack.alignment = .center
@@ -125,73 +158,68 @@ class DatePicker: UIView {
         
         selectionLine.backgroundColor = Design.Color.lightGray
         addSubview(selectionLine)
-        selectionLine.translatesAutoresizingMaskIntoConstraints = false
-        selectionLineLeading = selectionLine.leadingAnchor.constraint(equalTo: todayButton.leadingAnchor)
         
         NSLayoutConstraint.activate([
             buttonsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             buttonsStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             buttonsStack.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, constant: -40),
-            buttonsStack.heightAnchor.constraint(equalToConstant: 28),
-            selectionLine.topAnchor.constraint(equalTo: buttonsStack.bottomAnchor, constant: -1),
-            selectionLineLeading,
-            selectionLine.widthAnchor.constraint(equalToConstant: 30),
-            selectionLine.heightAnchor.constraint(equalToConstant: 1)
+            buttonsStack.heightAnchor.constraint(equalToConstant: 28)
         ])
     }
     
     @objc func today(_ sender: UIButton) {
-        currentDate = calendar.dateComponents([.year, .month, .day, .weekday], from: date) // текущая дата
+        selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
         buttonInteraction(sender)
-        delegate?.selectedDate(currentDate)
+        delegate?.selectedDate(selectedDate)
     }
     
     @objc func tomorrow(_ sender: UIButton) {
-        let tomorrow = Date(timeInterval: 86400, since: date) // добавляем день к текущей дате
-        currentDate = calendar.dateComponents([.year, .month, .day, .weekday], from: tomorrow)
+        let tomorrow = Date(timeInterval: 86400, since: date)
+        selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: tomorrow)
         buttonInteraction(sender)
-        delegate?.selectedDate(currentDate)
+        delegate?.selectedDate(selectedDate)
     }
     
     @objc func afterTomorrow(_ sender: UIButton) {
-        let afterTomorrow = Date(timeInterval: 172800, since: date) // добавляем два дня к текущей дате
-        currentDate = calendar.dateComponents([.year, .month, .day, .weekday], from: afterTomorrow)
+        let afterTomorrow = Date(timeInterval: 172800, since: date)
+        selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: afterTomorrow)
         buttonInteraction(sender)
-        delegate?.selectedDate(currentDate)
+        delegate?.selectedDate(selectedDate)
     }
     
-    @objc func calendar(_ sender: UIButton) { // календарь для выбора дат пока не добавлял в приложение
-        let offset = (selectionLine.frame.width - sender.frame.width) / 2
-        selectionLineLeading.constant = sender.frame.origin.x - offset
+    @objc func calendar(_ sender: UIButton) { 
         UIView.animate(withDuration: 0.2) {
-            for button in self.buttons {
+            for button in self.buttonsStack.arrangedSubviews as! [UIButton] {
                 if button != sender {
                     button.setTitleColor(Design.Color.brown, for: .normal)
                 }
             }
             sender.setBackgroundImage(self.selectedCalendarImage, for: .normal)
+            self.state = .calendar
+            self.setNeedsLayout()
             self.layoutIfNeeded()
         }
     }
     
     private func buttonInteraction(_ sender: UIButton) {
-        selectionLineLeading.constant = sender.frame.origin.x // подчеркивание анимировано перемещается к нажатой кнопке
         UIView.animate(withDuration: 0.2) {
-            for button in self.buttons {
+            for button in self.buttonsStack.arrangedSubviews as! [UIButton] {
                 if button != sender {
-                    if button.backgroundImage(for: .normal) != nil { // если у кнопки есть изображение, то меняем изображение на неактивное
+                    if button.backgroundImage(for: .normal) != nil {
                         button.setBackgroundImage(self.calendarImage, for: .normal)
                     } else {
-                        button.setTitleColor(Design.Color.brown, for: .normal) // иначе меняем цвет title на неактивный
+                        button.setTitleColor(Design.Color.brown, for: .normal)
                     }
                 }
             }
-            sender.setTitleColor(Design.Color.lightGray, for: .normal) // у sender меняем цвет на активный
+            sender.setTitleColor(Design.Color.lightGray, for: .normal)
+            self.state = DatePickerState(rawValue: (sender.titleLabel?.text)!)
+            self.setNeedsLayout()
             self.layoutIfNeeded()
         }
     }
     
-    private func button(title: String? = nil, image: UIImage? = nil) -> UIButton { // общая функция для конфигурирования кнопок
+    private func button(title: String? = nil, image: UIImage? = nil) -> UIButton {
         let button = UIButton()
         if let buttonTitle = title {
             button.setTitle(buttonTitle, for: .normal)
