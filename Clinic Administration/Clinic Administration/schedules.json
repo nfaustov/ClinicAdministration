@@ -6,15 +6,15 @@
 		"cabinet": 3,
 		"startingTime": {
 			"year": 2020,
-			"month": 11,
-			"day": 23,
+			"month": 12,
+			"day": 4,
 			"hour": 12,
 			"minute": 30
 		},
 		"endingTime": {
 			"year": 2020,
-			"month": 11,
-			"day": 23,
+			"month": 12,
+			"day": 4,
 			"hour": 15,
 			"minute": 0
 		}
@@ -26,15 +26,15 @@
 		"cabinet": 2,
 		"startingTime": {
 			"year": 2020,
-			"month": 11,
-			"day": 24,
+			"month": 12,
+			"day": 5,
 			"hour": 11,
 			"minute": 0
 		},
 		"endingTime": {
 			"year": 2020,
-			"month": 11,
-			"day": 24,
+			"month": 12,
+			"day": 5,
 			"hour": 15,
 			"minute": 25
 		}
@@ -46,15 +46,15 @@
 		"cabinet": 1,
 		"startingTime": {
 			"year": 2020,
-			"month": 11,
-			"day": 24,
+			"month": 12,
+			"day": 6,
 			"hour": 10,
 			"minute": 0
 		},
 		"endingTime": {
 			"year": 2020,
-			"month": 11,
-			"day": 24,
+			"month": 12,
+			"day": 6,
 			"hour": 14,
 			"minute": 30
 		}

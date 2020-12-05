@@ -6,10 +6,7 @@
 //
 
 import UIKit
-
-protocol DatePickerDelegate: AnyObject {
-    func selectedDate(_ date: DateComponents)
-}
+import HorizonCalendar
 
 fileprivate enum DatePickerState: String {
     case today = "Сегодня"
@@ -24,34 +21,35 @@ final class DatePicker: UIView {
     private let calendar = Calendar.current
     private let dateFormatter = DateFormatter()
     
-    private var monthLabel = UILabel()
-    private var dayLabel = UILabel()
-    private var weekdayLabel = UILabel()
+    private let monthLabel = UILabel()
+    private let dayLabel = UILabel()
+    private let weekdayLabel = UILabel()
     
     private let selectionLine = UIView()
     
-    private var buttonsStack = UIStackView()
+    private let buttonsStack = UIStackView()
 
     private let calendarImage = UIImage(systemName: "calendar")?.withTintColor(Design.Color.brown, renderingMode: .alwaysOriginal)
     private let selectedCalendarImage = UIImage(systemName: "calendar")?.withTintColor(Design.Color.lightGray, renderingMode: .alwaysOriginal)
     
     private var state: DatePickerState!
     
-    weak var delegate: DatePickerDelegate?
-    
-    private var selectedDate = DateComponents() {
+    private var selectedDate: DateComponents {
         didSet {
             configureLabels()
+            dateAction?(selectedDate)
         }
     }
     
-    init(selectedDate: DateComponents) {
+    private var dateAction: ((DateComponents) -> Void)?
+    
+    init(selectedDate: DateComponents, dateAction: @escaping (DateComponents) -> Void) {
+        self.selectedDate = selectedDate
+        self.dateAction = dateAction
         super.init(frame: .zero)
         
         layer.backgroundColor = Design.Color.chocolate.cgColor
         layer.cornerRadius = Design.Shape.largeCornerRadius
-        
-        self.selectedDate = selectedDate
         
         switch selectedDate {
         case calendar.dateComponents([.year, .month, .day, .weekday], from: date): state = .today
@@ -63,6 +61,7 @@ final class DatePicker: UIView {
         configureLabels()
         configureLabelsStack()
         configureButtonsStack(with: state)
+        //configureCalendarPicker()
     }
     
     required init?(coder: NSCoder) {
@@ -82,6 +81,28 @@ final class DatePicker: UIView {
         default: selectionLine.frame.origin.x = 20 + buttonsStack.arrangedSubviews[3].frame.origin.x - offset
         }
     }
+    
+//    private func makeContent() -> CalendarViewContent {
+//        let startDate = Date(timeInterval: 60 * 60 * 24 * 3, since: date)
+//        let endDate = Date(timeInterval: 60 * 60 * 24 * 180, since: date)
+//
+//        return CalendarViewContent(calendar: calendar,
+//                                   visibleDateRange: startDate...endDate,
+//                                   monthsLayout: .vertical(options: VerticalMonthsLayoutOptions())/*.horizontal(monthWidth: frame.width)*/)
+//    }
+//
+//    private func configureCalendarPicker() {
+//        let calendarView = CalendarView(initialContent: makeContent())
+//        addSubview(calendarView)
+//
+//        calendarView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            calendarView.topAnchor.constraint(equalTo: bottomAnchor),
+//            calendarView.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            calendarView.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            calendarView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300)
+//        ])
+//    }
     
     private func configureLabels() {
         dateFormatter.locale = Locale(identifier: "ru_RU")
@@ -155,39 +176,35 @@ final class DatePicker: UIView {
         buttonsStack.spacing = 30
         buttonsStack.setCustomSpacing(45, after: afterTomorrowButton)
         buttonsStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        selectionLine.backgroundColor = Design.Color.lightGray
-        addSubview(selectionLine)
-        
         NSLayoutConstraint.activate([
             buttonsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             buttonsStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            buttonsStack.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, constant: -40),
+            buttonsStack.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, constant: 0),
             buttonsStack.heightAnchor.constraint(equalToConstant: 28)
         ])
+        
+        selectionLine.backgroundColor = Design.Color.lightGray
+        addSubview(selectionLine)
     }
     
     @objc func today(_ sender: UIButton) {
         selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
         buttonInteraction(sender)
-        delegate?.selectedDate(selectedDate)
     }
     
     @objc func tomorrow(_ sender: UIButton) {
         let tomorrow = Date(timeInterval: 86400, since: date)
         selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: tomorrow)
         buttonInteraction(sender)
-        delegate?.selectedDate(selectedDate)
     }
-    
+
     @objc func afterTomorrow(_ sender: UIButton) {
         let afterTomorrow = Date(timeInterval: 172800, since: date)
         selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: afterTomorrow)
         buttonInteraction(sender)
-        delegate?.selectedDate(selectedDate)
     }
     
-    @objc func calendar(_ sender: UIButton) { 
+    @objc func calendar(_ sender: UIButton) {
         UIView.animate(withDuration: 0.2) {
             for button in self.buttonsStack.arrangedSubviews as! [UIButton] {
                 if button != sender {
