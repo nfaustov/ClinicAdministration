@@ -9,6 +9,8 @@ import UIKit
 
 protocol GraphicTimeTableViewDelegate: AnyObject {
     func dateChanged(_ date: DateComponents)
+    
+    func openCalendar()
 }
 
 final class GraphicTimeTableView: UIView {
@@ -23,6 +25,16 @@ final class GraphicTimeTableView: UIView {
         timelineHeight + 2 * GraphicTableView.Size.headerHeight
     }
     
+    private var contentOffsetBounds: CGRect {
+        let width = vScrollView.contentSize.width - vScrollView.frame.width
+        let height = vScrollView.contentSize.height - vScrollView.frame.height
+        return CGRect(x: 0, y: 0, width: width, height: height)
+    }
+    
+    private func clampOffset(_ offset: CGPoint) -> CGPoint {
+        return offset.clamped(to: contentOffsetBounds)
+    }
+    
     private var hScrollViewHeightConstraint = NSLayoutConstraint()
     private var timeTableViewHeightConstraint = NSLayoutConstraint()
     private var timelineHeightConstraint = NSLayoutConstraint()
@@ -31,29 +43,28 @@ final class GraphicTimeTableView: UIView {
     
     private var tableView: GraphicTableView!
     private var timelineView: TimelineView!
-    
-    var date: DateComponents
+    private(set) var datePicker: DatePicker!
     
     init(date: DateComponents) {
-        self.date = date
         super.init(frame: .zero)
         
         backgroundColor = Design.Color.lightGray
         
-        let datePicker = DatePicker(selectedDate: date, dateAction: changeDate(to:))
-        tableView = GraphicTableView(date: date)
+        datePicker = DatePicker(selectedDate: date, dateAction: changeDate(to:), calendarAction: openCalendar)
+        tableView = GraphicTableView(date: date, transformAction: scheduleTransform(doctorView:tY:))
         timelineView = TimelineView(respectiveTo: tableView)
 
         addSubview(vScrollView)
         vScrollView.showsVerticalScrollIndicator = false
-        vScrollView.addSubview(datePicker)
         
         hScrollView.showsHorizontalScrollIndicator = false
         hScrollView.isPagingEnabled = true
         hScrollView.bounces = false
+        hScrollView.delegate = self
         hScrollView.addSubview(tableView)
         vScrollView.addSubview(hScrollView)
         vScrollView.addSubview(timelineView)
+        vScrollView.addSubview(datePicker)
         
         for view in [datePicker, tableView, timelineView, hScrollView, vScrollView] {
             view?.translatesAutoresizingMaskIntoConstraints = false
@@ -101,12 +112,66 @@ final class GraphicTimeTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if hScrollView.contentOffset.x == 0 { return }
+        
+        for doctorView in tableView.doctorViews {
+            let doctorViewOrigin = doctorView.convert(doctorView.frame.origin, to: tableView)
+            if hScrollView.contentOffset.x > doctorViewOrigin.x {
+                doctorView.alpha = 0
+            }
+        }
+    }
+    
     private func changeDate(to newDate: DateComponents) {
         tableView.date = newDate
-        timelineView.timeTableView = tableView
+        timelineView.tableView = tableView
         hScrollViewHeightConstraint.constant = tableViewHeight
         timeTableViewHeightConstraint.constant = tableViewHeight
         timelineHeightConstraint.constant = timelineHeight
         delegate?.dateChanged(newDate)
+    }
+    
+    private func openCalendar() {
+        delegate?.openCalendar()
+    }
+    
+    private func scheduleTransform(doctorView: DoctorScheduleView, tY: CGFloat) {
+        let updatedYOffset = tY
+
+        let contentOffset = clampOffset(CGPoint(x: vScrollView.contentOffset.x, y: updatedYOffset))
+        
+        vScrollView.setContentOffset(contentOffset, animated: true)
+    }
+}
+
+extension GraphicTimeTableView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == hScrollView {
+            for doctorView in tableView.doctorViews {
+                let doctorViewOrigin = doctorView.convert(doctorView.frame.origin, to: tableView)
+                UIView.animate(withDuration: 0.1) {
+                    if scrollView.contentOffset.x > doctorViewOrigin.x {
+                        doctorView.alpha = 0
+                    } else {
+                        doctorView.alpha = 1
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension CGPoint {
+    func clamped(to rect: CGRect) -> CGPoint {
+        return CGPoint(x: x.clamped(to: rect.minX...rect.maxX), y: y.clamped(to: rect.minY...rect.maxY))
+    }
+}
+
+extension Comparable {
+    func clamped(to limits: ClosedRange<Self>) -> Self {
+        return min(max(self, limits.lowerBound), limits.upperBound)
     }
 }

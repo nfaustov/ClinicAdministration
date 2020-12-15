@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import HorizonCalendar
 
 fileprivate enum DatePickerState: String {
     case today = "Сегодня"
@@ -42,26 +41,21 @@ final class DatePicker: UIView {
     }
     
     private var dateAction: ((DateComponents) -> Void)?
+    private var calendarAction: (() -> Void)?
     
-    init(selectedDate: DateComponents, dateAction: @escaping (DateComponents) -> Void) {
+    init(selectedDate: DateComponents, dateAction: @escaping (DateComponents) -> Void, calendarAction: @escaping () -> Void) {
         self.selectedDate = selectedDate
         self.dateAction = dateAction
+        self.calendarAction = calendarAction
         super.init(frame: .zero)
         
         layer.backgroundColor = Design.Color.chocolate.cgColor
         layer.cornerRadius = Design.Shape.largeCornerRadius
         
-        switch selectedDate {
-        case calendar.dateComponents([.year, .month, .day, .weekday], from: date): state = .today
-        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 86400, since: date)): state = .tomorrow
-        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 172800, since: date)): state = .afterTomorrow
-        default: state = .calendar
-        }
-        
+        setState(selectedDate: selectedDate)
         configureLabels()
         configureLabelsStack()
         configureButtonsStack(with: state)
-        //configureCalendarPicker()
     }
     
     required init?(coder: NSCoder) {
@@ -81,28 +75,6 @@ final class DatePicker: UIView {
         default: selectionLine.frame.origin.x = 20 + buttonsStack.arrangedSubviews[3].frame.origin.x - offset
         }
     }
-    
-//    private func makeContent() -> CalendarViewContent {
-//        let startDate = Date(timeInterval: 60 * 60 * 24 * 3, since: date)
-//        let endDate = Date(timeInterval: 60 * 60 * 24 * 180, since: date)
-//
-//        return CalendarViewContent(calendar: calendar,
-//                                   visibleDateRange: startDate...endDate,
-//                                   monthsLayout: .vertical(options: VerticalMonthsLayoutOptions())/*.horizontal(monthWidth: frame.width)*/)
-//    }
-//
-//    private func configureCalendarPicker() {
-//        let calendarView = CalendarView(initialContent: makeContent())
-//        addSubview(calendarView)
-//
-//        calendarView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            calendarView.topAnchor.constraint(equalTo: bottomAnchor),
-//            calendarView.leadingAnchor.constraint(equalTo: leadingAnchor),
-//            calendarView.trailingAnchor.constraint(equalTo: trailingAnchor),
-//            calendarView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 300)
-//        ])
-//    }
     
     private func configureLabels() {
         dateFormatter.locale = Locale(identifier: "ru_RU")
@@ -172,14 +144,12 @@ final class DatePicker: UIView {
         addSubview(buttonsStack)
         buttonsStack.axis = .horizontal
         buttonsStack.alignment = .center
-        buttonsStack.distribution = .fill
-        buttonsStack.spacing = 30
-        buttonsStack.setCustomSpacing(45, after: afterTomorrowButton)
+        buttonsStack.distribution = .equalSpacing
         buttonsStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             buttonsStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            buttonsStack.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, constant: 0),
+            buttonsStack.widthAnchor.constraint(equalTo: widthAnchor, constant: -40),
             buttonsStack.heightAnchor.constraint(equalToConstant: 28)
         ])
         
@@ -215,6 +185,8 @@ final class DatePicker: UIView {
             self.state = .calendar
             self.setNeedsLayout()
             self.layoutIfNeeded()
+        } completion: { _ in
+            self.calendarAction?()
         }
     }
     
@@ -249,5 +221,32 @@ final class DatePicker: UIView {
             button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
         }
         return button
+    }
+    
+    private func setState(selectedDate: DateComponents) {
+        switch selectedDate {
+        case calendar.dateComponents([.year, .month, .day, .weekday], from: date): state = .today
+        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 86400, since: date)): state = .tomorrow
+        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 172800, since: date)): state = .afterTomorrow
+        default: state = .calendar
+        }
+    }
+}
+
+extension DatePicker: CalendarViewControllerDelegate {
+    func selectedDate(_ date: DateComponents) {
+        selectedDate = date
+        
+        UIView.animate(withDuration: 0.3) {
+            self.setState(selectedDate: date)
+            for button in self.buttonsStack.arrangedSubviews as! [UIButton] {
+                if button.titleLabel?.text == self.state.rawValue {
+                    button.setTitleColor(Design.Color.lightGray, for: .normal)
+                } else if button.backgroundImage(for: .normal) != nil {
+                    button.setBackgroundImage(self.calendarImage, for: .normal)
+                }
+            }
+            self.layoutIfNeeded()
+        }
     }
 }

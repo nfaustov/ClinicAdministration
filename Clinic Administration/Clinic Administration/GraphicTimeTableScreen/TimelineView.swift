@@ -7,9 +7,9 @@
 
 import UIKit
 
-class TimelineView: UIView {
+final class TimelineView: UIView {
     
-    var timeTableView: GraphicTableView {
+    var tableView: GraphicTableView {
         didSet {
             for subview in subviews {
                 subview.removeFromSuperview()
@@ -18,8 +18,8 @@ class TimelineView: UIView {
         }
     }
     
-    init(respectiveTo timeTableView: GraphicTableView) {
-        self.timeTableView = timeTableView
+    init(respectiveTo tableView: GraphicTableView) {
+        self.tableView = tableView
         super.init(frame: .zero)
         
         configure()
@@ -30,16 +30,16 @@ class TimelineView: UIView {
     }
     
     func configure() {
-        let hours = timeTableView.close.hour! - timeTableView.opening.hour!
+        let hours = tableView.close.hour! - tableView.opening.hour!
         for hour in 0...hours {
             let step: CGFloat = (hour == hours) ? 1 : 0.25
             for quarterHour in stride(from: CGFloat(0), to: CGFloat(1), by: step) {
                 let minutes = Int(60 * quarterHour)
                 let label = UILabel()
-                label.text = (minutes == 0) ? "\(timeTableView.opening.hour! + hour):00" : "\(timeTableView.opening.hour! + hour):\(minutes)"
+                label.text = (minutes == 0) ? "\(tableView.opening.hour! + hour):00" : "\(tableView.opening.hour! + hour):\(minutes)"
                 label.font = Design.Font.regular(14)
                 label.sizeToFit()
-                label.frame.origin = CGPoint(x: 9, y: timeTableView.quarterHourHeight * ((CGFloat(hour) + quarterHour) * 4 + 1) - label.frame.height)
+                label.frame.origin = CGPoint(x: 9, y: tableView.quarterHourHeight * ((CGFloat(hour) + quarterHour) * 4 + 1) - label.frame.height)
                 label.textColor = Design.Color.brown
                 addSubview(label)
             }

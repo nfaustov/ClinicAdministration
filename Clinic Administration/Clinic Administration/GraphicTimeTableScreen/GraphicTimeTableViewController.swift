@@ -29,6 +29,13 @@ final class GraphicTimeTableViewController: UIViewController {
 
 extension GraphicTimeTableViewController: GraphicTimeTableViewDelegate {
     func dateChanged(_ date: DateComponents) {
-
+        self.date = date
+    }
+    
+    func openCalendar() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController {
+            present(vc, animated: true)
+            vc.delegate = graphicTimeTableView?.datePicker
+        }
     }
 }

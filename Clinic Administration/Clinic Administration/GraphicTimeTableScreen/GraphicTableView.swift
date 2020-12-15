@@ -7,10 +7,6 @@
 
 import UIKit
 
-//protocol TimeTableViewDelegate: AnyObject {  // делегат для автоскролла, если расписание жестом перемещается к верхней или нижней точке экрана (пока не реализован)
-//    func scheduleDidTransform(by y: CGFloat)
-//}
-
 final class GraphicTableView: UIView {
     
     var date: DateComponents { 
@@ -31,9 +27,7 @@ final class GraphicTableView: UIView {
         return dataSource.filterSchedules(for: date)
     }
 
-    var cabinets = 5 // в планах сделать эту переменную глобальной, с возможностью изменить ее на экране настроек в приложении
-    
-//    weak var delegate: TimeTableViewDelegate?
+    var cabinets = 5
     
     private let headerView = UIView()
     private let footerView = UIView()
@@ -41,14 +35,11 @@ final class GraphicTableView: UIView {
     private var cabinetViews = [UIView]()
     private var cabinetLabels = [UILabel]()
     
-    private var doctorViews = [DoctorScheduleView]()
-    
-    private var cabinetViewWidth: CGFloat {
-        (frame.width - Size.timelineWidth) / CGFloat(cabinets)
-    }
+    private(set) var doctorViews = [DoctorScheduleView]()
     
     private var originalLocation = CGPoint()
-    private var originalHeight = CGFloat()
+    
+    private var transformAction: ((DoctorScheduleView, CGFloat) -> Void)?
     
     private func setTimeTable(_ date: DateComponents) {
         opening = date
@@ -93,8 +84,9 @@ final class GraphicTableView: UIView {
         linePath.stroke()
     }
     
-    init(date: DateComponents) {
+    init(date: DateComponents, transformAction: @escaping (DoctorScheduleView, CGFloat) -> Void) {
         self.date = date
+        self.transformAction = transformAction
         super.init(frame: .zero)
         
         setTimeTable(date)
@@ -104,7 +96,7 @@ final class GraphicTableView: UIView {
         layer.masksToBounds = true
         
         setupHeaderFooter()
-        setupCabinetLabels(cabinets)
+        setupCabinetLabels()
         addCabinets(cabinets)
         schedules.forEach { (schedule) in
             addDoctorSchedule(schedule)
@@ -123,10 +115,13 @@ final class GraphicTableView: UIView {
         schedules.forEach { (schedule) in
             addDoctorSchedule(schedule)
         }
+        setNeedsLayout()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        let cabinetViewWidth = (bounds.width - Size.timelineWidth) / CGFloat(cabinets)
         
         for cabinet in 0..<cabinets {
             cabinetLabels[cabinet].center = CGPoint(x: Size.timelineWidth + cabinetViewWidth / 2 * CGFloat(cabinet * 2 + 1), y: headerView.frame.height / 2)
@@ -143,10 +138,10 @@ final class GraphicTableView: UIView {
             let timeIntervalFromStarting = calendar.dateComponents([.hour, .minute],
                                                                    from: schedules[index].startingTime,
                                                                    to: schedules[index].endingTime)
-            
+
             let minutesFromOpening = CGFloat(timeIntervalFromOpening.hour! * 60 + timeIntervalFromOpening.minute!)
             let scheduleMinutes = CGFloat(timeIntervalFromStarting.hour! * 60 + timeIntervalFromStarting.minute!)
-            
+
             doctorViews[index].frame = CGRect(x: Size.doctorViewOffset,
                                               y: minutesFromOpening * Size.minuteHeight,
                                               width: cabinetViewWidth - Size.doctorViewOffset * 2,
@@ -176,10 +171,10 @@ final class GraphicTableView: UIView {
         ])
     }
     
-    private func setupCabinetLabels(_ cabinets: Int) {
-        for cabinet in 0..<cabinets {
+    private func setupCabinetLabels() {
+        for cabinet in 1...cabinets {
             let label = UILabel()
-            label.text = "\(cabinet + 1)"
+            label.text = "\(cabinet)"
             label.font = Design.Font.medium(18)
             label.sizeToFit()
             label.textColor = Design.Color.white
@@ -212,7 +207,7 @@ final class GraphicTableView: UIView {
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let tY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
-        guard let doctorView = gesture.view?.superview else { return }
+        guard let doctorView = gesture.view?.superview as? DoctorScheduleView else { return }
         guard let cabinetView = doctorView.superview else { return }
         switch gesture.state {
         case .began:
@@ -221,7 +216,7 @@ final class GraphicTableView: UIView {
             let minTY = -originalLocation.y
             let maxTY = cabinetView.frame.height - originalLocation.y - doctorView.frame.height - 1
             doctorView.frame.origin.y = originalLocation.y + max(min(tY, maxTY), minTY)
-//            delegate?.scheduleDidTransform(by: tY)
+            transformAction?(doctorView, doctorView.frame.origin.y)
 //        case .ended:
 //            for index in doctorViews.indices {
 //                if doctorViews[index] == doctorView {

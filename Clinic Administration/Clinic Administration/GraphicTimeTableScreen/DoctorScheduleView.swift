@@ -7,21 +7,46 @@
 
 import UIKit
 
-class DoctorScheduleView: UIView {
+final class DoctorScheduleView: UIView {
     
-    let transformArea = UIView() // зона для перемещения расписания
-    private let topResizingPoint = UIView() // две зоны для изменения начала и конца расписания
-    private let bottomResizingPoint = UIView()
+    let transformArea = UIView()
+    let topResizingPoint = UIView()
+    let bottomResizingPoint = UIView()
     
-    private let closeButton = UIButton() // кнопка для деактивации вью
+    private let nameLabel = UILabel()
     
-    private let nameLabel = UILabel() // имя врача
-    
-    private var originalLocation = CGPoint() // переменные для pan gesture
+    private var originalLocation = CGPoint()
     private var originalHeight = CGFloat()
     
+    private var quarterHourHeight: CGFloat {
+        GraphicTableView.Size.minuteHeight * 15
+    }
+    
+    private enum Mode {
+        case editing, viewing
+        
+        var change: Mode {
+            switch self {
+            case .editing: return .viewing
+            case .viewing: return .editing
+            }
+        }
+    }
+    
+    private var mode: Mode = .viewing {
+        didSet {
+            for view in [topResizingPoint, transformArea, bottomResizingPoint] {
+                view.isUserInteractionEnabled = mode == .editing ? true : false
+            }
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
-        // планирую позже добавить тень
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.Shape.largeCornerRadius).cgPath
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = mode == .viewing ? 0.2 : 0
+        layer.shadowColor = Design.Color.brown.cgColor
+        layer.shadowRadius = 6
     }
     
     init(_ schedule: DoctorSchedule) {
@@ -39,23 +64,17 @@ class DoctorScheduleView: UIView {
         nameLabel.font = Design.Font.medium(13)
         nameLabel.sizeToFit()
         addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
         
         configureGestureAreas()
-        configureButton()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        nameLabel.center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
-        topResizingPoint.frame = CGRect(x: 0, y: 0, width: bounds.width, height: Size.resizingPointHeight)
-        transformArea.frame = CGRect(x: 0, y: Size.resizingPointHeight, width: bounds.width, height: bounds.height - Size.resizingPointHeight * 2)
-        bottomResizingPoint.frame = CGRect(x: 0, y: bounds.height - Size.resizingPointHeight, width: bounds.width, height: Size.resizingPointHeight)
-        closeButton.frame = CGRect(x: 0, y: Design.Shape.largeCornerRadius, width: 35, height: 35)
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureGestureAreas() {
@@ -63,109 +82,102 @@ class DoctorScheduleView: UIView {
         let bottomPan = UIPanGestureRecognizer(target: self, action: #selector(handleBottomPanGesture(_:)))
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
         
-        topResizingPoint.addGestureRecognizer(topPan) // каждой зоне добавляем определенный жест
+        topResizingPoint.addGestureRecognizer(topPan)
         bottomResizingPoint.addGestureRecognizer(bottomPan)
         addGestureRecognizer(longPress)
         
         addSubview(topResizingPoint)
         addSubview(transformArea)
         addSubview(bottomResizingPoint)
-        
-        topResizingPoint.isUserInteractionEnabled = false
-        transformArea.isUserInteractionEnabled = false
-        bottomResizingPoint.isUserInteractionEnabled = false
-    }
-    
-    private func configureButton() {
-        let image = UIImage(systemName: "checkmark.circle.fill")?.withTintColor(Design.Color.chocolate, renderingMode: .alwaysOriginal)
-        closeButton.setBackgroundImage(image, for: .normal)
-        closeButton.addTarget(self, action: #selector(disableUserInteractions(_:)), for: .touchUpInside)
-        closeButton.isHidden = true
-        closeButton.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-        addSubview(closeButton)
-    }
-    
-    @objc func disableUserInteractions(_ sender: UIButton) {
-        // деактивацию пока реализовал через кнопку, но не уверен, что это хорошо выглядит, особенно если сжать расписание минут до 15
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        
-        topResizingPoint.isUserInteractionEnabled = false
-        transformArea.isUserInteractionEnabled = false
-        bottomResizingPoint.isUserInteractionEnabled = false
-
-        UIView.animate(withDuration: 0.4,
-                       delay: 0,
-                       usingSpringWithDamping: 0.3,
-                       initialSpringVelocity: 1,
-                       options: .curveEaseOut) {
-            self.transform = .identity
-            self.layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.75).cgColor
-            self.layer.borderColor = Design.Color.darkGray.cgColor
-            self.nameLabel.textColor = Design.Color.chocolate
-            sender.isHidden = true
-            generator.impactOccurred()
-        } completion: { _ in
-            sender.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        for view in [topResizingPoint, transformArea, bottomResizingPoint] {
+            view.translatesAutoresizingMaskIntoConstraints = false
         }
+        NSLayoutConstraint.activate([
+            topResizingPoint.topAnchor.constraint(equalTo: topAnchor),
+            topResizingPoint.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topResizingPoint.trailingAnchor.constraint(equalTo: trailingAnchor),
+            topResizingPoint.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+            
+            transformArea.topAnchor.constraint(equalTo: topResizingPoint.bottomAnchor),
+            transformArea.leadingAnchor.constraint(equalTo: leadingAnchor),
+            transformArea.trailingAnchor.constraint(equalTo: trailingAnchor),
+            transformArea.bottomAnchor.constraint(equalTo: bottomResizingPoint.topAnchor),
+            
+            bottomResizingPoint.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bottomResizingPoint.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bottomResizingPoint.bottomAnchor.constraint(equalTo: bottomAnchor),
+            bottomResizingPoint.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1)
+        ])
+        
+        topResizingPoint.isUserInteractionEnabled = false
+        transformArea.isUserInteractionEnabled = false
+        bottomResizingPoint.isUserInteractionEnabled = false
     }
     
-    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) { // длительное нажатие активирует расписание для редактирования
+    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         let generator = UINotificationFeedbackGenerator()
         gesture.minimumPressDuration = 0.7
         switch gesture.state {
         case .began:
-            closeButton.isHidden = false
             UIView.animate(withDuration: gesture.minimumPressDuration,
-                           delay: 0,
-                           usingSpringWithDamping: 0.3,
-                           initialSpringVelocity: 1,
-                           options: .curveEaseOut) {
-                self.layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.35).cgColor
-                self.layer.borderColor = Design.Color.darkGray.withAlphaComponent(0.6).cgColor
-                self.nameLabel.textColor = Design.Color.chocolate.withAlphaComponent(0.6)
-                self.transform = CGAffineTransform(scaleX: 1.1, y: 1)
-                self.closeButton.transform = .identity
+                            delay: 0,
+                            usingSpringWithDamping: 0.3,
+                            initialSpringVelocity: 1,
+                            options: .curveEaseOut) {
+                if self.mode == .editing {
+                    self.transform = .identity
+                    self.layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.75).cgColor
+                    self.layer.borderColor = Design.Color.darkGray.cgColor
+                    self.layer.shadowOpacity = 0.2
+                    self.nameLabel.textColor = Design.Color.chocolate
+                } else {
+                    self.layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.35).cgColor
+                    self.layer.borderColor = Design.Color.darkGray.withAlphaComponent(0.6).cgColor
+                    self.layer.shadowOpacity = 0
+                    self.nameLabel.textColor = Design.Color.chocolate.withAlphaComponent(0.6)
+                    self.transform = CGAffineTransform(scaleX: 1.1, y: 1)
+                }
                 generator.notificationOccurred(.success)
             }
         case .ended:
-            topResizingPoint.isUserInteractionEnabled = true
-            transformArea.isUserInteractionEnabled = true
-            bottomResizingPoint.isUserInteractionEnabled = true
+            mode = mode.change
         default: break
         }
-        
     }
     
     @objc func handleBottomPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
-        let tY = translation.y - translation.y.truncatingRemainder(dividingBy: Size.quarterHourHeight / 3) // расписание меняется с шагом 5 минут (10 поинтов)
+        let tY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
+        guard let cabinetView = superview else { return }
         switch gesture.state {
         case .began:
+            originalLocation.y = frame.origin.y
             originalHeight = frame.height
         case .changed:
-            frame.size.height = originalHeight + tY
+            let minTY = quarterHourHeight - originalHeight
+            let maxTY = cabinetView.frame.height - originalLocation.y - originalHeight - 1
+            frame.size.height = originalHeight + max(min(tY, maxTY), minTY)
+        case .ended:
+            setNeedsDisplay()
         default: break
         }
     }
     
     @objc func handleTopPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
-        let tY = translation.y - translation.y.truncatingRemainder(dividingBy: Size.quarterHourHeight / 3)
+        let tY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
         switch gesture.state {
         case .began:
             originalLocation.y = frame.origin.y
             originalHeight = frame.height
         case .changed:
-            frame.size.height = originalHeight - tY
-            frame.origin.y = originalLocation.y + tY
+            let minTY = -originalLocation.y
+            let maxTY = originalHeight - quarterHourHeight
+            frame.size.height = originalHeight - min(max(tY, minTY), maxTY)
+            frame.origin.y = originalLocation.y + max(min(tY, maxTY), minTY)
+        case .ended:
+            setNeedsDisplay()
         default: break
         }
-    }
-}
-
-extension DoctorScheduleView {
-    private enum Size {
-        static let resizingPointHeight: CGFloat = 15
-        static let quarterHourHeight: CGFloat = 30
     }
 }

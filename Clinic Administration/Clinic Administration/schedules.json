@@ -7,14 +7,14 @@
 		"startingTime": {
 			"year": 2020,
 			"month": 12,
-			"day": 4,
+			"day": 19,
 			"hour": 12,
 			"minute": 30
 		},
 		"endingTime": {
 			"year": 2020,
 			"month": 12,
-			"day": 4,
+			"day": 19,
 			"hour": 15,
 			"minute": 0
 		}
@@ -27,14 +27,14 @@
 		"startingTime": {
 			"year": 2020,
 			"month": 12,
-			"day": 5,
+			"day": 19,
 			"hour": 11,
 			"minute": 0
 		},
 		"endingTime": {
 			"year": 2020,
 			"month": 12,
-			"day": 5,
+			"day": 19,
 			"hour": 15,
 			"minute": 25
 		}
@@ -47,16 +47,56 @@
 		"startingTime": {
 			"year": 2020,
 			"month": 12,
-			"day": 6,
+			"day": 19,
 			"hour": 10,
 			"minute": 0
 		},
 		"endingTime": {
 			"year": 2020,
 			"month": 12,
-			"day": 6,
+			"day": 19,
 			"hour": 14,
 			"minute": 30
 		}
 	},
+    {
+        "secondName": "Бокерия",
+        "firstName": "Лео",
+        "patronymicName": "Антонович",
+        "cabinet": 4,
+        "startingTime": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 10,
+            "minute": 0
+        },
+        "endingTime": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 14,
+            "minute": 30
+        }
+    },
+    {
+        "secondName": "Перельман",
+        "firstName": "Михайил",
+        "patronymicName": "Израйлевич",
+        "cabinet": 5,
+        "startingTime": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 11,
+            "minute": 0
+        },
+        "endingTime": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 15,
+            "minute": 25
+        }
+    },
 ]
