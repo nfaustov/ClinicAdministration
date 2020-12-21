@@ -10,6 +10,8 @@ import HorizonCalendar
 
 protocol CalendarViewControllerDelegate: AnyObject {
     func selectedDate(_ date: DateComponents)
+    
+    func cancelSelection()
 }
 
 final class CalendarViewController: UIViewController {
@@ -53,7 +55,17 @@ final class CalendarViewController: UIViewController {
         
         configureCalendar()
         configureConfirmation()
-
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let components = selectedDay?.components,
+           let pickedDate = calendar.date(from: components) {
+            delegate?.selectedDate(calendar.dateComponents([.year, .month, .day, .weekday], from: pickedDate))
+        } else {
+            delegate?.cancelSelection()
+        }
     }
     
     private func configureCalendar() {
@@ -141,16 +153,14 @@ final class CalendarViewController: UIViewController {
         confirmationView.confirmAction = { [weak self] in
             guard let self = self else { return }
             
-            if let components = self.selectedDay?.components,
-               let pickedDate = self.calendar.date(from: components) {
-                self.dismiss(animated: true) {
-                    self.delegate?.selectedDate(self.calendar.dateComponents([.year, .month, .day, .weekday], from: pickedDate))
-                }
-            }
+            self.dismiss(animated: true)
         }
         
         confirmationView.cancelAction = { [weak self] in
-            self?.dismiss(animated: true)
+            guard let self = self else { return }
+            
+            self.selectedDay = nil
+            self.dismiss(animated: true)
         }
     }
     

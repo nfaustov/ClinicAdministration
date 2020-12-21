@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ConfirmationView: UIView {
+final class ConfirmationView: UIView {
     
     let separatorView = UIView()
     let confirmButton = UIButton()

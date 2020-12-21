@@ -237,15 +237,30 @@ extension DatePicker: CalendarViewControllerDelegate {
     func selectedDate(_ date: DateComponents) {
         selectedDate = date
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.2) {
             self.setState(selectedDate: date)
             for button in self.buttonsStack.arrangedSubviews as! [UIButton] {
                 if button.titleLabel?.text == self.state.rawValue {
                     button.setTitleColor(Design.Color.lightGray, for: .normal)
-                } else if button.backgroundImage(for: .normal) != nil {
+                } else if button.backgroundImage(for: .normal) != nil, self.state != .calendar {
                     button.setBackgroundImage(self.calendarImage, for: .normal)
                 }
             }
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func cancelSelection() {
+        UIView.animate(withDuration: 0.2) {
+            self.setState(selectedDate: self.selectedDate)
+            for button in self.buttonsStack.arrangedSubviews as! [UIButton] {
+                if button.titleLabel?.text == self.state.rawValue {
+                    button.setTitleColor(Design.Color.lightGray, for: .normal)
+                } else if button.backgroundImage(for: .normal) != nil, self.state != .calendar {
+                    button.setBackgroundImage(self.calendarImage, for: .normal)
+                }
+            }
+            self.setNeedsLayout()
             self.layoutIfNeeded()
         }
     }
