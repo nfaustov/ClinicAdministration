@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B04A90E257846C700D15DCA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8B04A90D257846C700D15DCA /* HorizonCalendar */; };
-		8B188983259CCA4E000B0077 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B188982259CCA4E000B0077 /* Settings.swift */; };
 		8B29219E257930630058B51E /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29219D257930630058B51E /* TimelineView.swift */; };
-		8B4EC3BF259D3D0000ABFC7D /* Array-DoctorSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4EC3BE259D3D0000ABFC7D /* Array-DoctorSchedule.swift */; };
 		8B52E77D2588F02500037B4B /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52E77C2588F02500037B4B /* ConfirmationView.swift */; };
 		8B733D0E256878070082784E /* TimeTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B733D0D256878070082784E /* TimeTableDataSource.swift */; };
 		8B733D15256934BB0082784E /* schedules.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B733D14256934BB0082784E /* schedules.json */; };
@@ -41,9 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8B188982259CCA4E000B0077 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8B29219D257930630058B51E /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
-		8B4EC3BE259D3D0000ABFC7D /* Array-DoctorSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-DoctorSchedule.swift"; sourceTree = "<group>"; };
 		8B52E77C2588F02500037B4B /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		8B733D0D256878070082784E /* TimeTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableDataSource.swift; sourceTree = "<group>"; };
 		8B733D14256934BB0082784E /* schedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schedules.json; sourceTree = "<group>"; };
@@ -114,22 +110,6 @@
 			path = Design;
 			sourceTree = "<group>";
 		};
-		8B188985259CCA55000B0077 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				8B188982259CCA4E000B0077 /* Settings.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		8B4EC3BA259D3BE900ABFC7D /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8B4EC3BE259D3D0000ABFC7D /* Array-DoctorSchedule.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		8B733D1D256A052C0082784E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,17 +138,15 @@
 		8BCAB7982559D4A4001A93D0 /* Clinic Administration */ = {
 			isa = PBXGroup;
 			children = (
-				8B188985259CCA55000B0077 /* Settings */,
 				8B0F5BD1255D716800894410 /* Design */,
 				8B733D1D256A052C0082784E /* Views */,
 				8B0F5BC9255D49F400894410 /* Types */,
 				8BCAB7B42559D56A001A93D0 /* GraphicTimeTableScreen */,
-				8B4EC3BA259D3BE900ABFC7D /* Extensions */,
+				8B733D14256934BB0082784E /* schedules.json */,
 				8BCAB79F2559D4A4001A93D0 /* Main.storyboard */,
 				8BCAB7AF2559D4D5001A93D0 /* Supporting Files */,
-				8B733D14256934BB0082784E /* schedules.json */,
-				8BCAB7C72559DC72001A93D0 /* Fonts */,
 				8BCAB7A72559D4A5001A93D0 /* Info.plist */,
+				8BCAB7C72559DC72001A93D0 /* Fonts */,
 			);
 			path = "Clinic Administration";
 			sourceTree = "<group>";
@@ -309,7 +287,6 @@
 				8BCFC3552586C41D0072B160 /* DayLabel.swift in Sources */,
 				8BCAB7B82559D5BC001A93D0 /* DatePicker.swift in Sources */,
 				8BC15FDA257C1CF900323430 /* GraphicTimeTableView.swift in Sources */,
-				8B4EC3BF259D3D0000ABFC7D /* Array-DoctorSchedule.swift in Sources */,
 				8BCFC35C2586FF530072B160 /* MonthHeader.swift in Sources */,
 				8BCAB7BB2559D5EF001A93D0 /* GraphicTableView.swift in Sources */,
 				8B52E77D2588F02500037B4B /* ConfirmationView.swift in Sources */,
@@ -323,7 +300,6 @@
 				8BCAB7B22559D564001A93D0 /* GraphicTimeTableViewController.swift in Sources */,
 				8BCFC35025865FC60072B160 /* CalendarViewController.swift in Sources */,
 				8BCAB7C42559D960001A93D0 /* Design.swift in Sources */,
-				8B188983259CCA4E000B0077 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

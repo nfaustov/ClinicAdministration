@@ -22,10 +22,9 @@ final class GraphicTableView: UIView {
     private(set) var opening = DateComponents()
     private(set) var close = DateComponents()
     
-    private let dataSource = TimeTableDataSource()
-    
     private var schedules: [DoctorSchedule] {
-        return dataSource.filteredSchedules(for: date)
+        let dataSource = TimeTableDataSource()
+        return dataSource.filterSchedules(for: date)
     }
 
     var cabinets = 5
@@ -38,8 +37,7 @@ final class GraphicTableView: UIView {
     
     private(set) var doctorViews = [DoctorScheduleView]()
     
-    private var originalLocation = CGPoint.zero
-    private var minutesInterval = CGFloat.zero
+    private var originalLocation = CGPoint()
     
     private var transformAction: ((DoctorScheduleView, CGFloat) -> Void)?
     
@@ -103,8 +101,6 @@ final class GraphicTableView: UIView {
         schedules.forEach { (schedule) in
             addDoctorSchedule(schedule)
         }
-        // Выводим пересекающиеся расписания на передний план.
-        moveIntersectionsToFront()
     }
     
     required init?(coder: NSCoder) {
@@ -119,9 +115,6 @@ final class GraphicTableView: UIView {
         schedules.forEach { (schedule) in
             addDoctorSchedule(schedule)
         }
-        // При перезагрузке экрана выводим пересекающиеся расписания на передний план.
-        moveIntersectionsToFront()
-        
         setNeedsLayout()
     }
     
@@ -199,58 +192,17 @@ final class GraphicTableView: UIView {
     }
     
     private func addDoctorSchedule(_ schedule: DoctorSchedule) {
-        let doctorView = DoctorScheduleView(schedule, minuteHeight: Size.minuteHeight,
-                                            intersectionDetection: detectIntersection(for:), moveToFrontAction: { [weak self] doctorView in
-                                                // В состоянии редактирования или пересечения вью доктора перемещается на передний план.
-                                                self?.cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
-        })
-        
+        let doctorView = DoctorScheduleView(schedule)
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         doctorView.transformArea.addGestureRecognizer(pan)
         cabinetViews[schedule.cabinet - 1].addSubview(doctorView)
         doctorViews.append(doctorView)
     }
-
-    /// Метод, который выясняет является ли расписание пересекающимся.
-    /// - Parameter schedule: Проверяемое расписание доктора.
-    /// - Returns: true, если расписание находится в списке пересекающихся в `TimeTableDataSource`
-    private func detectIntersection(for schedule: DoctorSchedule) -> Bool {
-        /*
-         Для начала в dataSource.updateSchedule проверяем изменялось(перемещалось) ли расписание, если да, то
-         обновляем его в dataSource и в этом случае попадаем в блок updated.
-         Поскольку перемещается только одно расписание, то другие проверять не нужно.
-         Тем более, это вызовет бесконечный цикл вызовов этого метода.
-        */
-        dataSource.updateSchedule(schedule, updated: { [weak self] in
-            guard let self = self else { return }
-            
-            let cabinetSchedules = self.schedules.filter({ $0.cabinet == schedule.cabinet })
-            for doctorSchedule in cabinetSchedules {
-                if doctorSchedule == schedule { continue }
-                let doctorView = self.doctorViews.first(where: { $0.schedule == doctorSchedule })
-                /*
-                Проверяем все расписания кроме того, которое вызвало этот метод
-                и устанавливаем им нужные состояния.
-                setView() заставит остальные вью докторов в кабинете также вызвать этот метод, но уже не попадая в блок updated
-                */
-                doctorView?.setView()
-            }
-        })
-        // Проверяем не находится ли вью доктора в списке пересекающихся.
-        let intersectedSchedules = dataSource.intersectedSchedules(for: date).filter({ $0.cabinet == schedule.cabinet })
-        return intersectedSchedules.contains(schedule)
-    }
     
-    /// Данный метод перемещает все пересекающиеся экземпляры `DoctorScheduleView` на передний план.
-    ///
-    /// Используется только в `init` и `reloadData`.
-    private func moveIntersectionsToFront() {
-        for schedule in dataSource.intersectedSchedules(for: date) {
-            if let doctorView = self.doctorViews.first(where: { $0.schedule == schedule }) {
-                cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
-            }
-        }
-    }
+//    func changeSchedule(_ schedule: inout DoctorSchedule, by interval: CGFloat) {
+//        schedule.startingTime += TimeInterval(interval * 60)
+//        schedule.endingTime += TimeInterval(interval * 60)
+//    }
     
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
@@ -264,12 +216,13 @@ final class GraphicTableView: UIView {
             let minTY = -originalLocation.y
             let maxTY = cabinetView.frame.height - originalLocation.y - doctorView.frame.height - 1
             doctorView.frame.origin.y = originalLocation.y + max(min(tY, maxTY), minTY)
-            // Переводим translation в минуты.
-            minutesInterval = max(min(tY, maxTY), minTY) / Size.minuteHeight
             transformAction?(doctorView, doctorView.frame.origin.y)
-        case .ended:
-            // Меняем расписание доктора.
-            doctorView.editSchedule(options: [.endingTime, .startingTime], by: TimeInterval(minutesInterval * 60))
+//        case .ended:
+//            for index in doctorViews.indices {
+//                if doctorViews[index] == doctorView {
+//                    changeSchedule(&schedules[index], by: tY)
+//                }
+//            }
         default: break
         }
     }
