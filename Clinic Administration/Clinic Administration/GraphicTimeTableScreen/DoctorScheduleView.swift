@@ -74,7 +74,7 @@ final class DoctorScheduleView: UIView {
         super.init(frame: .zero)
         
         layer.cornerRadius = Design.Shape.largeCornerRadius
-        setView()
+        checkState()
 
         nameLabel.numberOfLines = 0
         nameLabel.text = "\(schedule.secondName)\n\(schedule.firstName)\n\(schedule.patronymicName)"
@@ -133,7 +133,7 @@ final class DoctorScheduleView: UIView {
     }
     
     /// Данный метод используется для проверки текущего статуса и установки нужного состояния объекта `DoctorScheduleView`
-    func setView() {
+    func checkState() {
         switch mode {
         case .editing:
             layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.35).cgColor
@@ -203,7 +203,7 @@ final class DoctorScheduleView: UIView {
                             usingSpringWithDamping: 0.3,
                             initialSpringVelocity: 1,
                             options: .curveEaseOut) {
-                self.setView()
+                self.checkState()
                 generator.notificationOccurred(.success)
             }
         default: break

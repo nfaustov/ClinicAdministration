@@ -30,6 +30,10 @@ final class TimeTableDataSource {
         schedules = doctorSchedules
     }
     
+    init(schedules: [DoctorSchedule]) {
+        self.schedules = schedules
+    }
+    
     /// Данный метод возвращает все расписания на определенную дату.
     /// - Parameter date: Необхоимая дата.
     func filteredSchedules(for date: DateComponents) -> [DoctorSchedule] {
@@ -45,12 +49,13 @@ final class TimeTableDataSource {
     // которому будет нужна эта информация, чтобы уведомлять пользователя, даже когда `GraphicTimeTableScreen` еще не загружен
     func intersectedSchedules(for date: DateComponents) -> [DoctorSchedule] {
         var intersectedSchedules = [DoctorSchedule]()
-        let schedules = filteredSchedules(for: date)
+        let dateSchedules = filteredSchedules(for: date)
         
         for cabinet in 1...Settings.cabinets {
             // Сортируем расписания в кабинете по времени начала приема (по возрастанию).
-            let sortedSchedules = schedules.filter({ $0.cabinet == cabinet }).sortedByStartingTime(.orderedAscending)
-            if sortedSchedules.count <= 1 { continue }
+            let cabinetSchedules = dateSchedules.filter({ $0.cabinet == cabinet })
+            if cabinetSchedules.count <= 1 { continue }
+            let sortedSchedules = sortedByStartingTime(schedules: cabinetSchedules, .orderedAscending)
             
             for index in 1..<sortedSchedules.count {
                 let previousSchedule = sortedSchedules[index - 1]
@@ -91,6 +96,20 @@ final class TimeTableDataSource {
                     updated()
                 }
             }
+        }
+    }
+    
+    /// Метод для сортировки расписаний врачей по времени начала приема.
+    /// - Parameters:
+    ///   - schedules: Расписания, которые нужно отсортировать.
+    ///   - result: Необходимый порядок сортировки.
+    func sortedByStartingTime(schedules: [DoctorSchedule], _ result: ComparisonResult) -> [DoctorSchedule] {
+        if schedules.count <= 1 { return schedules }
+        return schedules.sorted { (schedule1, schedule2) -> Bool in
+            let firstStartingTime = Calendar.current.date(from: schedule1.startingTime)
+            let secondStartingTime = Calendar.current.date(from: schedule2.startingTime)
+            let compareResult = Calendar.current.compare(firstStartingTime!, to: secondStartingTime!, toGranularity: .minute)
+            return compareResult == result
         }
     }
 }
