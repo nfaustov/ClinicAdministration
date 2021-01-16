@@ -1,0 +1,56 @@
+[
+	{
+        "id": "4989d34f-817c-4ffe-a53c-83b72a01868a",
+		"secondName": "Рошаль",
+		"firstName": "Леонид",
+		"patronymicName": "Михайлович",
+		"cabinet": 1,
+		"startingTime": "2021-01-18T12:30",
+		"endingTime": "2021-01-18T15:00"
+	},
+	{
+        "id": "25e69af2-26c6-49be-ae1e-f4e7ff8ef53d",
+		"secondName": "Перельман",
+		"firstName": "Михайил",
+		"patronymicName": "Израйлевич",
+		"cabinet": 2,
+		"startingTime": "2021-01-18T11:00",
+		"endingTime": "2021-01-18T15:25"
+	},
+	{
+        "id": "bf0b4ccc-9083-4a75-a156-f48d4a8dad4e",
+		"secondName": "Бокерия",
+		"firstName": "Лео",
+		"patronymicName": "Антонович",
+		"cabinet": 4,
+		"startingTime": "2021-01-18T8:30",
+		"endingTime": "2021-01-18T10:30"
+	},
+    {
+        "id": "6f57d4a5-1d2b-4293-80d8-e98653f7661e",
+        "secondName": "Аншина",
+        "firstName": "Маргарита",
+        "patronymicName": "Бениаминовна",
+        "cabinet": 4,
+        "startingTime": "2021-01-18T10:00",
+        "endingTime": "2021-01-18T12:00"
+    },
+    {
+        "id": "4ac6cabf-c138-4ad5-b131-04f1bc67c197",
+        "secondName": "Разумовский",
+        "firstName": "Александр",
+        "patronymicName": "Юрьевич",
+        "cabinet": 4,
+        "startingTime": "2021-01-18T11:30",
+        "endingTime": "2021-01-18T14:00"
+    },
+    {
+        "id": "3a25fc5a-1b9a-4b56-aae6-f50809802c30",
+        "secondName": "Дземешкевич",
+        "firstName": "Сергей",
+        "patronymicName": "Леонидович",
+        "cabinet": 4,
+        "startingTime": "2021-01-18T13:00",
+        "endingTime": "2021-01-18T16:00"
+    }
+]

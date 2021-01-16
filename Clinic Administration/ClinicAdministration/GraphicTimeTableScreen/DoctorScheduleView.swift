@@ -181,14 +181,10 @@ final class DoctorScheduleView: UIView {
     ///   - timeInterval: Временной интервал в секундах для изменения расписания доктоа.
     func editSchedule(options: Set<ScheduleEditOption>, by timeInterval: TimeInterval) {
         if options.contains(.startingTime) {
-            var startingDate = Calendar.current.date(from: schedule.startingTime)!
-            startingDate += timeInterval
-            schedule.startingTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: startingDate)
+            schedule.startingTime.addTimeInterval(timeInterval)
         }
         if options.contains(.endingTime) {
-            var endingDate = Calendar.current.date(from: schedule.endingTime)!
-            endingDate += timeInterval
-            schedule.endingTime = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: endingDate)
+            schedule.endingTime.addTimeInterval(timeInterval)
         }
     }
     

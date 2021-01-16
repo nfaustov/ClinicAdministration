@@ -23,6 +23,10 @@ final class TimeTableDataSource {
         
         let decoder = JSONDecoder()
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        
         guard let doctorSchedules = try? decoder.decode([DoctorSchedule].self, from: data) else {
             fatalError("Failed to decode JSON")
         }
@@ -36,8 +40,18 @@ final class TimeTableDataSource {
     
     /// Данный метод возвращает все расписания на определенную дату.
     /// - Parameter date: Необхоимая дата.
-    func filteredSchedules(for date: DateComponents) -> [DoctorSchedule] {
-        return schedules.filter { $0.startingTime.year == date.year && $0.startingTime.month == date.month && $0.startingTime.day == date.day }
+    func filteredSchedules(for date: Date) -> [DoctorSchedule] {
+        var filteredSchedules = [DoctorSchedule]()
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        
+        for schedule in schedules {
+            let scheduleStartingComponents = Calendar.current.dateComponents([.year, .month, .day], from: schedule.startingTime)
+            if dateComponents == scheduleStartingComponents {
+                filteredSchedules.append(schedule)
+            }
+        }
+        
+        return filteredSchedules
     }
     
     /// Данный метод возвращает список всех пересекающихся расписаний на определенную дату.
@@ -47,7 +61,7 @@ final class TimeTableDataSource {
     
     // Он нужен здесь в dataSource, потому что будет и другой экран с расписаниями врачей (не графический),
     // которому будет нужна эта информация, чтобы уведомлять пользователя, даже когда `GraphicTimeTableScreen` еще не загружен
-    func intersectedSchedules(for date: DateComponents) -> [DoctorSchedule] {
+    func intersectedSchedules(for date: Date) -> [DoctorSchedule] {
         var intersectedSchedules = [DoctorSchedule]()
         let dateSchedules = filteredSchedules(for: date)
         
@@ -55,16 +69,17 @@ final class TimeTableDataSource {
             // Сортируем расписания в кабинете по времени начала приема (по возрастанию).
             let cabinetSchedules = dateSchedules.filter({ $0.cabinet == cabinet })
             if cabinetSchedules.count <= 1 { continue }
-            let sortedSchedules = sortedByStartingTime(schedules: cabinetSchedules, .orderedAscending)
+            let sortedSchedules = cabinetSchedules.sorted(by: { $0.startingTime < $1.startingTime })
             
             for index in 1..<sortedSchedules.count {
                 let previousSchedule = sortedSchedules[index - 1]
                 let currentSchedule = sortedSchedules[index]
                 
                 // Сравниваем два соседних расписания.
-                let previousEndingTime = Calendar.current.date(from: previousSchedule.endingTime)
-                let currentStartingTime = Calendar.current.date(from: currentSchedule.startingTime)
-                let compareResult = Calendar.current.compare(previousEndingTime!, to: currentStartingTime!, toGranularity: .minute)
+                let compareResult = Calendar.current.compare(
+                    previousSchedule.endingTime,
+                    to: currentSchedule.startingTime,
+                    toGranularity: .minute)
                 
                 // Чисто визуально выглядит грязно, если все покрасить в красный,
                 // однако, если подумать, то и логика в этом есть: мы как бы говорим пользователю с чего начать или
@@ -96,20 +111,6 @@ final class TimeTableDataSource {
                     updated()
                 }
             }
-        }
-    }
-    
-    /// Метод для сортировки расписаний врачей по времени начала приема.
-    /// - Parameters:
-    ///   - schedules: Расписания, которые нужно отсортировать.
-    ///   - result: Необходимый порядок сортировки.
-    func sortedByStartingTime(schedules: [DoctorSchedule], _ result: ComparisonResult) -> [DoctorSchedule] {
-        if schedules.count <= 1 { return schedules }
-        return schedules.sorted { (schedule1, schedule2) -> Bool in
-            let firstStartingTime = Calendar.current.date(from: schedule1.startingTime)
-            let secondStartingTime = Calendar.current.date(from: schedule2.startingTime)
-            let compareResult = Calendar.current.compare(firstStartingTime!, to: secondStartingTime!, toGranularity: .minute)
-            return compareResult == result
         }
     }
 }

@@ -33,17 +33,17 @@ final class DatePicker: UIView {
     
     private var state: DatePickerState!
     
-    private var selectedDate: DateComponents {
+    private var selectedDate: Date {
         didSet {
             configureLabels()
             dateAction?(selectedDate)
         }
     }
     
-    private var dateAction: ((DateComponents) -> Void)?
+    private var dateAction: ((Date) -> Void)?
     private var calendarAction: (() -> Void)?
     
-    init(selectedDate: DateComponents, dateAction: @escaping (DateComponents) -> Void, calendarAction: @escaping () -> Void) {
+    init(selectedDate: Date, dateAction: @escaping (Date) -> Void, calendarAction: @escaping () -> Void) {
         self.selectedDate = selectedDate
         self.dateAction = dateAction
         self.calendarAction = calendarAction
@@ -51,7 +51,7 @@ final class DatePicker: UIView {
         
         layer.backgroundColor = Design.Color.chocolate.cgColor
         layer.cornerRadius = Design.Shape.largeCornerRadius
-        
+
         setState(selectedDate: selectedDate)
         configureLabels()
         configureLabelsStack()
@@ -80,8 +80,7 @@ final class DatePicker: UIView {
         dateFormatter.locale = Locale(identifier: "ru_RU")
         dateFormatter.dateFormat = "LLLL d EEEE"
         
-        guard let date = calendar.date(from: selectedDate) else { return }
-        let stringDate = dateFormatter.string(from: date)
+        let stringDate = dateFormatter.string(from: selectedDate)
         let splitDate = stringDate.split(separator: " ")
         let month = "\(splitDate[0].capitalized)"
         let day = "\(splitDate[1])"
@@ -158,19 +157,17 @@ final class DatePicker: UIView {
     }
     
     @objc func today(_ sender: UIButton) {
-        selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
+        selectedDate = date
         buttonInteraction(sender)
     }
     
     @objc func tomorrow(_ sender: UIButton) {
-        let tomorrow = Date(timeInterval: 86400, since: date)
-        selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: tomorrow)
+        selectedDate = date.addingTimeInterval(86400)
         buttonInteraction(sender)
     }
 
     @objc func afterTomorrow(_ sender: UIButton) {
-        let afterTomorrow = Date(timeInterval: 172800, since: date)
-        selectedDate = calendar.dateComponents([.year, .month, .day, .weekday], from: afterTomorrow)
+        selectedDate = date.addingTimeInterval(172800)
         buttonInteraction(sender)
     }
     
@@ -223,18 +220,24 @@ final class DatePicker: UIView {
         return button
     }
     
-    private func setState(selectedDate: DateComponents) {
-        switch selectedDate {
-        case calendar.dateComponents([.year, .month, .day, .weekday], from: date): state = .today
-        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 86400, since: date)): state = .tomorrow
-        case calendar.dateComponents([.year, .month, .day, .weekday], from: Date(timeInterval: 172800, since: date)): state = .afterTomorrow
-        default: state = .calendar
+    private func setState(selectedDate: Date) {
+        let tommorow = date.addingTimeInterval(86400)
+        let afterTommorow = date.addingTimeInterval(172800)
+        
+        if calendar.isDate(selectedDate, inSameDayAs: date) {
+            state = .today
+        } else if calendar.isDate(selectedDate, inSameDayAs: tommorow) {
+            state = .tomorrow
+        } else if calendar.isDate(selectedDate, inSameDayAs: afterTommorow) {
+            state = .afterTomorrow
+        } else {
+            state = .calendar
         }
     }
 }
 
 extension DatePicker: CalendarViewControllerDelegate {
-    func selectedDate(_ date: DateComponents) {
+    func selectedDate(_ date: Date) {
         selectedDate = date
         
         UIView.animate(withDuration: 0.2) {

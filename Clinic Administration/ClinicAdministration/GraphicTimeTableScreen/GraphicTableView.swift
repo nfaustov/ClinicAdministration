@@ -9,7 +9,7 @@ import UIKit
 
 final class GraphicTableView: UIView {
     
-    var date: DateComponents { 
+    var date: Date {
         didSet {
             setTimeTable(date)
             reloadData()
@@ -43,11 +43,13 @@ final class GraphicTableView: UIView {
     
     private var transformAction: ((DoctorScheduleView, CGFloat) -> Void)?
     
-    private func setTimeTable(_ date: DateComponents) {
-        opening = date
-        close = date
+    private func setTimeTable(_ date: Date) {
+        let dateComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
         
-        switch date.weekday {
+        opening = dateComponents
+        close = dateComponents
+        
+        switch dateComponents.weekday {
         case 1:
             opening.hour = 9
             close.hour = 15
@@ -86,7 +88,7 @@ final class GraphicTableView: UIView {
         linePath.stroke()
     }
     
-    init(date: DateComponents, transformAction: @escaping (DoctorScheduleView, CGFloat) -> Void) {
+    init(date: Date, transformAction: @escaping (DoctorScheduleView, CGFloat) -> Void) {
         self.date = date
         self.transformAction = transformAction
         super.init(frame: .zero)
@@ -139,9 +141,10 @@ final class GraphicTableView: UIView {
         }
         
         for index in schedules.indices {
+            let scheduleStartingTime = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: schedules[index].startingTime)
             let timeIntervalFromOpening = calendar.dateComponents([.hour, .minute],
                                                                   from: opening,
-                                                                  to: schedules[index].startingTime)
+                                                                  to: scheduleStartingTime)
             let timeIntervalFromStarting = calendar.dateComponents([.hour, .minute],
                                                                    from: schedules[index].startingTime,
                                                                    to: schedules[index].endingTime)

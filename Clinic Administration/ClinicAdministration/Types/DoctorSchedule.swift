@@ -14,6 +14,6 @@ struct DoctorSchedule: Codable, Equatable {
     var firstName: String
     var patronymicName: String
     var cabinet: Int
-    var startingTime: DateComponents
-    var endingTime: DateComponents
+    var startingTime: Date
+    var endingTime: Date
 }
