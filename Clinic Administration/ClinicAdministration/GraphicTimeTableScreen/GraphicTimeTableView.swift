@@ -71,7 +71,7 @@ final class GraphicTimeTableView: UIView {
         }
         
         let screenWidth = UIScreen.main.bounds.width
-        let tableViewWidth = GraphicTableView.Size.timelineWidth + (screenWidth - GraphicTableView.Size.timelineWidth) / 3 * CGFloat(tableView.cabinets)
+        let tableViewWidth = GraphicTableView.Size.timelineWidth + (screenWidth - GraphicTableView.Size.timelineWidth) / 3 * CGFloat(Settings.cabinets)
         
         hScrollViewHeightConstraint = hScrollView.frameLayoutGuide.heightAnchor.constraint(equalToConstant: tableViewHeight)
         timeTableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: tableViewHeight)

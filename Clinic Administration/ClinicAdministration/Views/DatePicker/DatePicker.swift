@@ -18,7 +18,6 @@ final class DatePicker: UIView {
     
     private let date = Date()
     private let calendar = Calendar.current
-    private let dateFormatter = DateFormatter()
     
     private let monthLabel = UILabel()
     private let dayLabel = UILabel()
@@ -50,7 +49,7 @@ final class DatePicker: UIView {
         super.init(frame: .zero)
         
         layer.backgroundColor = Design.Color.chocolate.cgColor
-        layer.cornerRadius = Design.Shape.largeCornerRadius
+        layer.cornerRadius = Design.CornerRadius.large
 
         setState(selectedDate: selectedDate)
         configureLabels()
@@ -77,30 +76,29 @@ final class DatePicker: UIView {
     }
     
     private func configureLabels() {
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        dateFormatter.dateFormat = "LLLL d EEEE"
+        DateFormatter.shared.dateFormat = "LLLL d EEEE"
         
-        let stringDate = dateFormatter.string(from: selectedDate)
+        let stringDate = DateFormatter.shared.string(from: selectedDate)
         let splitDate = stringDate.split(separator: " ")
         let month = "\(splitDate[0].capitalized)"
         let day = "\(splitDate[1])"
         let weekday = "\(splitDate[2])"
 
         monthLabel.text = month
-        monthLabel.font = Design.Font.bold(24)
+        monthLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .bold)
         monthLabel.textColor = Design.Color.white
 
         dayLabel.text = day
-        dayLabel.font = Design.Font.regular(24)
+        dayLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .regular)
         dayLabel.textColor = Design.Color.chocolate
         dayLabel.textAlignment = .center
         dayLabel.layer.backgroundColor = Design.Color.lightGray.cgColor
-        dayLabel.layer.cornerRadius = Design.Shape.smallCornerRadius
+        dayLabel.layer.cornerRadius = Design.CornerRadius.small
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.widthAnchor.constraint(equalToConstant: 38).isActive = true
 
         weekdayLabel.text = weekday
-        weekdayLabel.font = Design.Font.thin(24)
+        weekdayLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .thin)
         weekdayLabel.textColor = Design.Color.white
     }
     
@@ -156,22 +154,22 @@ final class DatePicker: UIView {
         addSubview(selectionLine)
     }
     
-    @objc func today(_ sender: UIButton) {
+    @objc private func today(_ sender: UIButton) {
         selectedDate = date
         buttonInteraction(sender)
     }
     
-    @objc func tomorrow(_ sender: UIButton) {
+    @objc private func tomorrow(_ sender: UIButton) {
         selectedDate = date.addingTimeInterval(86400)
         buttonInteraction(sender)
     }
 
-    @objc func afterTomorrow(_ sender: UIButton) {
+    @objc private func afterTomorrow(_ sender: UIButton) {
         selectedDate = date.addingTimeInterval(172800)
         buttonInteraction(sender)
     }
     
-    @objc func calendar(_ sender: UIButton) {
+    @objc private func calendar(_ sender: UIButton) {
         UIView.animate(withDuration: 0.2) {
             for button in self.buttonsStack.arrangedSubviews as! [UIButton] {
                 if button != sender {
@@ -210,7 +208,7 @@ final class DatePicker: UIView {
         if let buttonTitle = title {
             button.setTitle(buttonTitle, for: .normal)
             button.setTitleColor(Design.Color.brown, for: .normal)
-            button.titleLabel?.font = Design.Font.regular(15)
+            button.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .regular)
         } else if let buttonImage = image {
             button.setBackgroundImage(buttonImage, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false

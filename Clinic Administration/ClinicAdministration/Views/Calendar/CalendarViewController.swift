@@ -25,13 +25,11 @@ final class CalendarViewController: UIViewController {
     
     private var selectedDay: Day? {
         didSet {
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "ru_RU")
-            dateFormatter.dateFormat = "LLLL d EEEE"
+            DateFormatter.shared.dateFormat = "LLLL d EEEE"
             
             if let components = selectedDay?.components,
                let pickedDate = calendar.date(from: components) {
-                let stringDate = dateFormatter.string(from: pickedDate)
+                let stringDate = DateFormatter.shared.string(from: pickedDate)
                 let splitDate = stringDate.split(separator: " ")
                 let month = splitDate[0].capitalized
                 let day = splitDate[1]
@@ -104,7 +102,7 @@ final class CalendarViewController: UIViewController {
                                    monthsLayout: .vertical(options: VerticalMonthsLayoutOptions(pinDaysOfWeekToTop: true,
                                                                                                 alwaysShowCompleteBoundaryMonths: true)))
             .withDayItemModelProvider { day in
-                var invariantViewProperties = DayLabel.InvariantViewProperties(font: Design.Font.regular(19),
+                var invariantViewProperties = DayLabel.InvariantViewProperties(font: Design.Font.robotoFont(ofSize: 19, weight: .regular),
                                                                                textColor: Design.Color.brown,
                                                                                backgroundColor: .clear)
                 
@@ -121,13 +119,13 @@ final class CalendarViewController: UIViewController {
                                                    viewModel: .init(day: day))
             }
             .withMonthHeaderItemModelProvider { month in
-                CalendarItemModel<MonthHeader>(invariantViewProperties: .init(font: Design.Font.medium(22),
+                CalendarItemModel<MonthHeader>(invariantViewProperties: .init(font: Design.Font.robotoFont(ofSize: 22, weight: .medium),
                                                                               textColor: Design.Color.chocolate,
                                                                               backgoundColor: .clear),
                                                viewModel: .init(month: month))
             }
             .withDayOfWeekItemModelProvider { _, dayOfWeekIndex in
-                CalendarItemModel<DayOfWeekRow>(invariantViewProperties: .init(font: Design.Font.medium(17),
+                CalendarItemModel<DayOfWeekRow>(invariantViewProperties: .init(font: Design.Font.robotoFont(ofSize: 17, weight: .medium),
                                                                                  textColor: Design.Color.darkGray,
                                                                                  backgroundColor: .clear),
                                                   viewModel: .init(dayOfWeekIndex: dayOfWeekIndex))

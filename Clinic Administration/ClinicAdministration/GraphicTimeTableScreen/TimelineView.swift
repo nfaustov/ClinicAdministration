@@ -37,7 +37,7 @@ final class TimelineView: UIView {
                 let minutes = Int(60 * quarterHour)
                 let label = UILabel()
                 label.text = (minutes == 0) ? "\(tableView.opening.hour! + hour):00" : "\(tableView.opening.hour! + hour):\(minutes)"
-                label.font = Design.Font.regular(14)
+                label.font = Design.Font.robotoFont(ofSize: 14, weight: .regular)
                 label.sizeToFit()
                 label.frame.origin = CGPoint(x: 9, y: tableView.quarterHourHeight * ((CGFloat(hour) + quarterHour) * 4 + 1) - label.frame.height)
                 label.textColor = Design.Color.brown
