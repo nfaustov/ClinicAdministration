@@ -18,30 +18,24 @@ enum Design {
         static let chocolate = #colorLiteral(red: 0.2352941176, green: 0.2, blue: 0.1450980392, alpha: 1)
     }
     
-    enum Shape {
-        static let smallCornerRadius: CGFloat = 5
-        static let mediumCornerRadius: CGFloat = 10
-        static let largeCornerRadius: CGFloat = 15
+    enum CornerRadius {
+        static let small: CGFloat = 5
+        static let medium: CGFloat = 10
+        static let large: CGFloat = 15
     }
     
     enum Font {
-        static func black(_ size: CGFloat) -> UIFont {
-            return UIFont(name: "Roboto-Black", size: size)!
+        static func robotoFont(ofSize fontSize: CGFloat, weight: RobotoFontWeight) -> UIFont {
+            return UIFont(name: weight.rawValue, size: fontSize)!
         }
-        static func bold(_ size: CGFloat) -> UIFont {
-            return UIFont(name: "Roboto-Bold", size: size)!
-        }
-        static func medium(_ size: CGFloat) -> UIFont {
-            return UIFont(name: "Roboto-Medium", size: size)!
-        }
-        static func regular(_ size: CGFloat) -> UIFont {
-            return UIFont(name: "Roboto-Regular", size: size)!
-        }
-        static func light(_ size: CGFloat) -> UIFont {
-            return UIFont(name: "Roboto-Light", size: size)!
-        }
-        static func thin(_ size: CGFloat) -> UIFont {
-            return UIFont(name: "Roboto-Thin", size: size)!
+        
+        enum RobotoFontWeight: String {
+            case thin = "Roboto-Thin"
+            case light = "Roboto-Light"
+            case regular = "Roboto-Regular"
+            case medium = "Roboto-Medium"
+            case bold = "Roboto-Bold"
+            case black = "Roboto-Black"
         }
     }
 }

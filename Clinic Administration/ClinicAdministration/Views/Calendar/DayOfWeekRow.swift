@@ -33,11 +33,8 @@ struct DayOfWeekRow: CalendarItemViewRepresentable {
     }
 
     static func setViewModel(_ viewModel: ViewModel, on view: UILabel) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ru_RU")
-        
         for index in 0...viewModel.dayOfWeekIndex {
-            view.text = dateFormatter.shortWeekdaySymbols[index]
+            view.text = DateFormatter.shared.shortWeekdaySymbols[index]
         }
     }
 }

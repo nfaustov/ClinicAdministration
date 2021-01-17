@@ -29,7 +29,7 @@ struct DayLabel: CalendarItemViewRepresentable {
         
         label.textAlignment = .center
         label.clipsToBounds = true
-        label.layer.cornerRadius = Design.Shape.smallCornerRadius
+        label.layer.cornerRadius = Design.CornerRadius.small
         
         return label
     }
