@@ -13,7 +13,7 @@ final class GraphicTimeTableViewController: UIViewController {
         return viewIfLoaded as? GraphicTimeTableView
     }
     
-    var date = Calendar.current.dateComponents([.year, .month, .day, .weekday], from: Date().addingTimeInterval(172800))
+    var date = Date().addingTimeInterval(172800)
     
     override func loadView() {
         view = GraphicTimeTableView(date: date)
@@ -28,7 +28,7 @@ final class GraphicTimeTableViewController: UIViewController {
 }
 
 extension GraphicTimeTableViewController: GraphicTimeTableViewDelegate {
-    func dateChanged(_ date: DateComponents) {
+    func dateChanged(_ date: Date) {
         self.date = date
     }
     

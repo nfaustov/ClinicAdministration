@@ -9,7 +9,7 @@ import UIKit
 import HorizonCalendar
 
 protocol CalendarViewControllerDelegate: AnyObject {
-    func selectedDate(_ date: DateComponents)
+    func selectedDate(_ date: Date)
     
     func cancelSelection()
 }
@@ -62,7 +62,7 @@ final class CalendarViewController: UIViewController {
         
         if let components = selectedDay?.components,
            let pickedDate = calendar.date(from: components) {
-            delegate?.selectedDate(calendar.dateComponents([.year, .month, .day, .weekday], from: pickedDate))
+            delegate?.selectedDate(pickedDate)
         } else {
             delegate?.cancelSelection()
         }

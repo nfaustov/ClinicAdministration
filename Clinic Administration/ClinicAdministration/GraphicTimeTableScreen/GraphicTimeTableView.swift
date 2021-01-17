@@ -8,7 +8,7 @@
 import UIKit
 
 protocol GraphicTimeTableViewDelegate: AnyObject {
-    func dateChanged(_ date: DateComponents)
+    func dateChanged(_ date: Date)
     
     func openCalendar()
 }
@@ -45,7 +45,7 @@ final class GraphicTimeTableView: UIView {
     private var timelineView: TimelineView!
     private(set) var datePicker: DatePicker!
     
-    init(date: DateComponents) {
+    init(date: Date) {
         super.init(frame: .zero)
         
         backgroundColor = Design.Color.lightGray
@@ -125,7 +125,7 @@ final class GraphicTimeTableView: UIView {
         }
     }
     
-    private func changeDate(to newDate: DateComponents) {
+    private func changeDate(to newDate: Date) {
         tableView.date = newDate
         timelineView.tableView = tableView
         hScrollViewHeightConstraint.constant = tableViewHeight
