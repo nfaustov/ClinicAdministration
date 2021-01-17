@@ -8,8 +8,8 @@
 import Foundation
 
 struct Person: Codable {
-    let secondName: String
-    let firstName: String
-    let patronymicName: String
+    var secondName: String
+    var firstName: String
+    var patronymicName: String
 }
 

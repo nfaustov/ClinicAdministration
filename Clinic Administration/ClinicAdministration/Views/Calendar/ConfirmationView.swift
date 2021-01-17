@@ -9,10 +9,10 @@ import UIKit
 
 final class ConfirmationView: UIView {
     
-    private let separatorView = UIView()
-    private let confirmButton = UIButton()
-    private let cancelButton = UIButton()
-    private let dateLabel = UILabel()
+    let separatorView = UIView()
+    let confirmButton = UIButton()
+    let cancelButton = UIButton()
+    let dateLabel = UILabel()
     
     var dateText: String = " " {
         didSet {
@@ -32,23 +32,23 @@ final class ConfirmationView: UIView {
         separatorView.backgroundColor = Design.Color.darkGray
         
         dateLabel.numberOfLines = 2
-        dateLabel.font = Design.Font.robotoFont(ofSize: 16, weight: .medium)
+        dateLabel.font = Design.Font.medium(16)
         dateLabel.textColor = Design.Color.chocolate
         
         cancelButton.backgroundColor = Design.Color.gray
         cancelButton.setTitle("ОТМЕНИТЬ", for: .normal)
-        cancelButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 16, weight: .regular)
+        cancelButton.titleLabel?.font = Design.Font.regular(16)
         cancelButton.setTitleColor(Design.Color.brown, for: .normal)
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderColor = Design.Color.chocolate.cgColor
-        cancelButton.layer.cornerRadius = Design.CornerRadius.small
+        cancelButton.layer.cornerRadius = Design.Shape.smallCornerRadius
         cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         
         confirmButton.backgroundColor = Design.Color.red
         confirmButton.setTitle("ГОТОВО", for: .normal)
-        confirmButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 16, weight: .regular)
+        confirmButton.titleLabel?.font = Design.Font.regular(16)
         confirmButton.setTitleColor(Design.Color.white, for: .normal)
-        confirmButton.layer.cornerRadius = Design.CornerRadius.small
+        confirmButton.layer.cornerRadius = Design.Shape.smallCornerRadius
         confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         
         for view in [separatorView, dateLabel, cancelButton, confirmButton] {
@@ -81,11 +81,11 @@ final class ConfirmationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func cancel() {
+    @objc func cancel() {
         cancelAction?()
     }
     
-    @objc private func confirm() {
+    @objc func confirm() {
         confirmAction?()
     }
 }

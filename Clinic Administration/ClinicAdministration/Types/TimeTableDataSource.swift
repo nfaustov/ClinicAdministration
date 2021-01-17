@@ -23,8 +23,9 @@ final class TimeTableDataSource {
         
         let decoder = JSONDecoder()
         
-        DateFormatter.shared.dateFormat = "yyyy-MM-dd'T'HH:mm"
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.shared)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         
         guard let doctorSchedules = try? decoder.decode([DoctorSchedule].self, from: data) else {
             fatalError("Failed to decode JSON")

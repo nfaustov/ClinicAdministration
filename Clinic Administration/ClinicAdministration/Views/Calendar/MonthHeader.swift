@@ -32,10 +32,12 @@ struct MonthHeader: CalendarItemViewRepresentable {
     
     static func setViewModel(_ viewModel: ViewModel, on view: UILabel) {
         let calendar = Calendar.current
-        DateFormatter.shared.dateFormat = "LLLL"
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "LLLL"
         
         guard let date = calendar.date(from: viewModel.month.components) else { return }
         
-        view.text = DateFormatter.shared.string(from: date).capitalized
+        view.text = dateFormatter.string(from: date).capitalized
     }
 }

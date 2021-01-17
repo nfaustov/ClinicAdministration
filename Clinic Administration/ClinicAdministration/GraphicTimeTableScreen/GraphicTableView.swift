@@ -27,6 +27,8 @@ final class GraphicTableView: UIView {
     private var schedules: [DoctorSchedule] {
         return dataSource.filteredSchedules(for: date)
     }
+
+    var cabinets = 5
     
     private let headerView = UIView()
     private let footerView = UIView()
@@ -94,12 +96,12 @@ final class GraphicTableView: UIView {
         setTimeTable(date)
         
         backgroundColor = Design.Color.white
-        layer.cornerRadius = Design.CornerRadius.large
+        layer.cornerRadius = Design.Shape.largeCornerRadius
         layer.masksToBounds = true
         
         setupHeaderFooter()
         setupCabinetLabels()
-        addCabinets()
+        addCabinets(cabinets)
         schedules.forEach { (schedule) in
             addDoctorSchedule(schedule)
         }
@@ -128,9 +130,9 @@ final class GraphicTableView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let cabinetViewWidth = (bounds.width - Size.timelineWidth) / CGFloat(Settings.cabinets)
+        let cabinetViewWidth = (bounds.width - Size.timelineWidth) / CGFloat(cabinets)
         
-        for cabinet in 0..<Settings.cabinets {
+        for cabinet in 0..<cabinets {
             cabinetLabels[cabinet].center = CGPoint(x: Size.timelineWidth + cabinetViewWidth / 2 * CGFloat(cabinet * 2 + 1), y: headerView.frame.height / 2)
             cabinetViews[cabinet].frame = CGRect(x: Size.timelineWidth + cabinetViewWidth * CGFloat(cabinet),
                                                  y: Size.headerHeight + quarterHourHeight,
@@ -180,10 +182,10 @@ final class GraphicTableView: UIView {
     }
     
     private func setupCabinetLabels() {
-        for cabinet in 1...Settings.cabinets {
+        for cabinet in 1...cabinets {
             let label = UILabel()
             label.text = "\(cabinet)"
-            label.font = Design.Font.robotoFont(ofSize: 18, weight: .medium)
+            label.font = Design.Font.medium(18)
             label.sizeToFit()
             label.textColor = Design.Color.white
             headerView.addSubview(label)
@@ -191,8 +193,8 @@ final class GraphicTableView: UIView {
         }
     }
     
-    private func addCabinets() {
-        for _ in 1...Settings.cabinets {
+    private func addCabinets(_ cabinets: Int) {
+        for _ in 1...cabinets {
             let cabinetView = UIView()
             addSubview(cabinetView)
             cabinetViews.append(cabinetView)
@@ -253,7 +255,7 @@ final class GraphicTableView: UIView {
         }
     }
     
-    @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let tY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
         guard let doctorView = gesture.view?.superview as? DoctorScheduleView else { return }

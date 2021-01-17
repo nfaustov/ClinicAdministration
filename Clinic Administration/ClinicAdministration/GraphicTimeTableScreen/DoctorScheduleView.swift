@@ -56,7 +56,7 @@ final class DoctorScheduleView: UIView {
     private var moveToFrontAction: ((DoctorScheduleView) -> Void)?
     
     override func draw(_ rect: CGRect) {
-        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.large).cgPath
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.Shape.largeCornerRadius).cgPath
         layer.shadowColor = Design.Color.brown.cgColor
     }
     
@@ -73,13 +73,13 @@ final class DoctorScheduleView: UIView {
         self.moveToFrontAction = moveToFrontAction
         super.init(frame: .zero)
         
-        layer.cornerRadius = Design.CornerRadius.large
+        layer.cornerRadius = Design.Shape.largeCornerRadius
         checkState()
 
         nameLabel.numberOfLines = 0
         nameLabel.text = "\(schedule.secondName)\n\(schedule.firstName)\n\(schedule.patronymicName)"
         nameLabel.textAlignment = .center
-        nameLabel.font = Design.Font.robotoFont(ofSize: 13, weight: .medium)
+        nameLabel.font = Design.Font.medium(13)
         nameLabel.sizeToFit()
         addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -188,7 +188,7 @@ final class DoctorScheduleView: UIView {
         }
     }
     
-    @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         let generator = UINotificationFeedbackGenerator()
         gesture.minimumPressDuration = 0.7
         switch gesture.state {
@@ -206,7 +206,7 @@ final class DoctorScheduleView: UIView {
         }
     }
     
-    @objc private func handleBottomPanGesture(_ gesture: UIPanGestureRecognizer) {
+    @objc func handleBottomPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let tY = translation.y - translation.y.truncatingRemainder(dividingBy: 5 * minuteHeight)
         guard let cabinetView = superview else { return }
@@ -228,7 +228,7 @@ final class DoctorScheduleView: UIView {
         }
     }
     
-    @objc private func handleTopPanGesture(_ gesture: UIPanGestureRecognizer) {
+    @objc func handleTopPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let tY = translation.y - translation.y.truncatingRemainder(dividingBy: minuteHeight * 5)
         switch gesture.state {
