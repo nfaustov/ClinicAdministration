@@ -33,9 +33,8 @@ extension GraphicTimeTableViewController: GraphicTimeTableViewDelegate {
     }
     
     func openCalendar() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController {
-            present(vc, animated: true)
-            vc.delegate = graphicTimeTableView?.datePicker
-        }
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "CalendarViewController") as? CalendarViewController else { return }
+        present(vc, animated: true)
+        vc.delegate = graphicTimeTableView?.datePicker
     }
 }

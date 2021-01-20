@@ -21,7 +21,7 @@ final class CalendarViewController: UIViewController {
     weak var delegate: CalendarViewControllerDelegate?
     
     private let confirmationView = ConfirmationView()
-    private var topConstraint = NSLayoutConstraint()
+    private var confirmationViewTopConstraint: NSLayoutConstraint!
     
     private var selectedDay: Day? {
         didSet {
@@ -35,7 +35,7 @@ final class CalendarViewController: UIViewController {
                 let day = splitDate[1]
                 let weekday = splitDate[2]
                 confirmationView.dateText = "\(month) \(day)\n\(weekday)"
-                self.topConstraint.constant = -120
+                self.confirmationViewTopConstraint.constant = -120
                 
                 UIView.animate(withDuration: 0.2) {
                     self.view.layoutIfNeeded()
@@ -140,9 +140,9 @@ final class CalendarViewController: UIViewController {
         view.addSubview(confirmationView)
         
         confirmationView.translatesAutoresizingMaskIntoConstraints = false
-        topConstraint = confirmationView.topAnchor.constraint(equalTo: view.bottomAnchor)
+        confirmationViewTopConstraint = confirmationView.topAnchor.constraint(equalTo: view.bottomAnchor)
         NSLayoutConstraint.activate([
-            topConstraint,
+            confirmationViewTopConstraint,
             confirmationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             confirmationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             confirmationView.heightAnchor.constraint(equalToConstant: 120)
