@@ -1,6 +1,6 @@
 //
 //  Settings.swift
-//  Clinic Administration
+//  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 30.12.2020.
 //

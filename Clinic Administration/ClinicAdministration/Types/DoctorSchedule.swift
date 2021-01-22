@@ -1,6 +1,6 @@
 //
 //  DoctorSchedule.swift
-//  Clinic Administration
+//  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 09.11.2020.
 //

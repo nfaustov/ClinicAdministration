@@ -1,6 +1,6 @@
 //
 //  DoctorScheduleView.swift
-//  Clinic Administration
+//  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 09.11.2020.
 //
@@ -8,27 +8,27 @@
 import UIKit
 
 final class DoctorScheduleView: UIView {
-    
+
     let transformArea = UIView()
     private let topResizingPoint = UIView()
     private let bottomResizingPoint = UIView()
-    
+
     private let nameLabel = UILabel()
-    
+
     private let minuteHeight: CGFloat
-    
+
     private var originalLocation = CGPoint.zero
     private var originalHeight = CGFloat.zero
     private var minutesInterval = CGFloat.zero
-    
+
     /// Данное свойство является true, если расписание пересекающееся.
     private var isIntersected: Bool! {
         return intersectionDetection?(schedule)
     }
-    
+
     private enum Mode {
         case editing, viewing
-        
+
         var change: Mode {
             switch self {
             case .editing: return .viewing
@@ -36,7 +36,7 @@ final class DoctorScheduleView: UIView {
             }
         }
     }
-    
+
     private var mode: Mode = .viewing {
         didSet {
             for view in [topResizingPoint, transformArea, bottomResizingPoint] {
@@ -44,35 +44,39 @@ final class DoctorScheduleView: UIView {
             }
         }
     }
-    
+
     private(set) var schedule: DoctorSchedule
-    
+
     /// Замыкание, которое выясняет является ли расписание пересекающимся.
     private var intersectionDetection: ((DoctorSchedule) -> Bool)?
-    
+
     /// Замыкание, которое выводит вью доктора на передний план.
     ///
-    /// Используется, когда экземпляр `DoctorScheduleView` переводится в режим редактирования или когда является пересекающимся.
+    /// Используется, когда экземпляр `DoctorScheduleView` переводится в режим редактирования
+    /// или когда является пересекающимся.
     private var moveToFrontAction: ((DoctorScheduleView) -> Void)?
-    
+
     override func draw(_ rect: CGRect) {
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.large).cgPath
         layer.shadowColor = Design.Color.brown.cgColor
     }
-    
+
     /// Инициализирует `DoctorScheduleView`.
     /// - Parameters:
     ///   - schedule: Расписание доктора.
     ///   - minuteHeight: Высота минуты на экране.
     ///   - intersectionDetection: Метод, который выясняет является ли расписание пересекающимся.
     ///   - moveToFrontAction: Метод, которое выводит вью доктора на передний план.
-    init(_ schedule: DoctorSchedule, minuteHeight: CGFloat, intersectionDetection: @escaping (DoctorSchedule) -> Bool, moveToFrontAction: @escaping (DoctorScheduleView) -> Void) {
+    init(_ schedule: DoctorSchedule,
+         minuteHeight: CGFloat,
+         intersectionDetection: @escaping (DoctorSchedule) -> Bool,
+         moveToFrontAction: @escaping (DoctorScheduleView) -> Void) {
         self.schedule = schedule
         self.minuteHeight = minuteHeight
         self.intersectionDetection = intersectionDetection
         self.moveToFrontAction = moveToFrontAction
         super.init(frame: .zero)
-        
+
         layer.cornerRadius = Design.CornerRadius.large
         checkState()
 
@@ -87,23 +91,23 @@ final class DoctorScheduleView: UIView {
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-        
+
         configureGestureAreas()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func configureGestureAreas() {
         let topPan = UIPanGestureRecognizer(target: self, action: #selector(handleTopPanGesture(_:)))
         let bottomPan = UIPanGestureRecognizer(target: self, action: #selector(handleBottomPanGesture(_:)))
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
-        
+
         topResizingPoint.addGestureRecognizer(topPan)
         bottomResizingPoint.addGestureRecognizer(bottomPan)
         addGestureRecognizer(longPress)
-        
+
         addSubview(topResizingPoint)
         addSubview(transformArea)
         addSubview(bottomResizingPoint)
@@ -115,24 +119,25 @@ final class DoctorScheduleView: UIView {
             topResizingPoint.leadingAnchor.constraint(equalTo: leadingAnchor),
             topResizingPoint.trailingAnchor.constraint(equalTo: trailingAnchor),
             topResizingPoint.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
-            
+
             transformArea.topAnchor.constraint(equalTo: topResizingPoint.bottomAnchor),
             transformArea.leadingAnchor.constraint(equalTo: leadingAnchor),
             transformArea.trailingAnchor.constraint(equalTo: trailingAnchor),
             transformArea.bottomAnchor.constraint(equalTo: bottomResizingPoint.topAnchor),
-            
+
             bottomResizingPoint.leadingAnchor.constraint(equalTo: leadingAnchor),
             bottomResizingPoint.trailingAnchor.constraint(equalTo: trailingAnchor),
             bottomResizingPoint.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomResizingPoint.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1)
         ])
-        
+
         topResizingPoint.isUserInteractionEnabled = false
         transformArea.isUserInteractionEnabled = false
         bottomResizingPoint.isUserInteractionEnabled = false
     }
-    
-    /// Данный метод используется для проверки текущего статуса и установки нужного состояния объекта `DoctorScheduleView`
+
+    /// Данный метод используется для проверки текущего статуса и
+    /// установки нужного состояния объекта `DoctorScheduleView`
     func checkState() {
         switch mode {
         case .editing:
@@ -166,15 +171,14 @@ final class DoctorScheduleView: UIView {
             }
         }
     }
-    
+
     /// Опции редактирования расписания доктора.
     enum ScheduleEditOption {
         case startingTime
         case endingTime
         // Вероятно тут еще и кабинет появится со временем.
     }
-    
-    
+
     /// Данный метод используется для редактирования расписания доктора.
     /// - Parameters:
     ///   - options: Опции редактирования расписания доктора.
@@ -187,7 +191,7 @@ final class DoctorScheduleView: UIView {
             schedule.endingTime.addTimeInterval(timeInterval)
         }
     }
-    
+
     @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         let generator = UINotificationFeedbackGenerator()
         gesture.minimumPressDuration = 0.7
@@ -205,10 +209,10 @@ final class DoctorScheduleView: UIView {
         default: break
         }
     }
-    
+
     @objc private func handleBottomPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
-        let tY = translation.y - translation.y.truncatingRemainder(dividingBy: 5 * minuteHeight)
+        let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: 5 * minuteHeight)
         guard let cabinetView = superview else { return }
         switch gesture.state {
         case .began:
@@ -217,9 +221,9 @@ final class DoctorScheduleView: UIView {
         case .changed:
             let minTY = 15 * minuteHeight - originalHeight
             let maxTY = cabinetView.frame.height - originalLocation.y - originalHeight - 1
-            frame.size.height = originalHeight + max(min(tY, maxTY), minTY)
+            frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
             // Переводим translation в минуты.
-            minutesInterval = max(min(tY, maxTY), minTY) / minuteHeight
+            minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
         case .ended:
             // Меняем расписание доктора.
             editSchedule(options: [.endingTime], by: TimeInterval(minutesInterval * 60))
@@ -227,10 +231,10 @@ final class DoctorScheduleView: UIView {
         default: break
         }
     }
-    
+
     @objc private func handleTopPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
-        let tY = translation.y - translation.y.truncatingRemainder(dividingBy: minuteHeight * 5)
+        let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: minuteHeight * 5)
         switch gesture.state {
         case .began:
             originalLocation.y = frame.origin.y
@@ -238,10 +242,10 @@ final class DoctorScheduleView: UIView {
         case .changed:
             let minTY = -originalLocation.y
             let maxTY = originalHeight - 15 * minuteHeight
-            frame.size.height = originalHeight - min(max(tY, minTY), maxTY)
-            frame.origin.y = originalLocation.y + max(min(tY, maxTY), minTY)
+            frame.size.height = originalHeight - min(max(translationY, minTY), maxTY)
+            frame.origin.y = originalLocation.y + max(min(translationY, maxTY), minTY)
             // Переводим translation в минуты.
-            minutesInterval = max(min(tY, maxTY), minTY) / minuteHeight
+            minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
         case .ended:
             // Меняем расписание доктора.
             editSchedule(options: [.startingTime], by: TimeInterval(minutesInterval * 60))

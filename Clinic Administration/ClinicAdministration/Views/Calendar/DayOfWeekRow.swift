@@ -1,6 +1,6 @@
 //
 //  DayOfWeekRow.swift
-//  Clinic Administration
+//  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 14.12.2020.
 //
