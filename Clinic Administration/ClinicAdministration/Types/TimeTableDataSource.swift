@@ -9,7 +9,6 @@ import Foundation
 
 /// Класс для хранения и управления базой данных с расписаниями докторов.
 final class TimeTableDataSource {
-
     private var schedules: [DoctorSchedule]
 
     init() {
@@ -82,7 +81,8 @@ final class TimeTableDataSource {
                 let compareResult = Calendar.current.compare(
                     previousSchedule.endingTime,
                     to: currentSchedule.startingTime,
-                    toGranularity: .minute)
+                    toGranularity: .minute
+                )
 
                 // Чисто визуально выглядит грязно, если все покрасить в красный,
                 // однако, если подумать, то и логика в этом есть: мы как бы говорим пользователю с чего начать или

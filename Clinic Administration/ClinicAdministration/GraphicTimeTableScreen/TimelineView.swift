@@ -8,7 +8,6 @@
 import UIKit
 
 final class TimelineView: UIView {
-
     var tableView: GraphicTableView {
         didSet {
             for subview in subviews {
@@ -30,15 +29,17 @@ final class TimelineView: UIView {
     }
 
     func configure() {
-        let hours = tableView.close.hour! - tableView.opening.hour!
+        guard let closeHour = tableView.close.hour,
+              let openingHour = tableView.opening.hour else { return }
+        let hours = closeHour - openingHour
         for hour in 0...hours {
             let step: CGFloat = (hour == hours) ? 1 : 0.25
             for quarterHour in stride(from: CGFloat(0), to: CGFloat(1), by: step) {
                 let minutes = Int(60 * quarterHour)
                 let label = UILabel()
                 label.text = (minutes == 0) ?
-                    "\(tableView.opening.hour! + hour):00" :
-                    "\(tableView.opening.hour! + hour):\(minutes)"
+                    "\(openingHour + hour):00" :
+                    "\(openingHour + hour):\(minutes)"
                 label.font = Design.Font.robotoFont(ofSize: 14, weight: .regular)
                 label.sizeToFit()
                 label.frame.origin = CGPoint(

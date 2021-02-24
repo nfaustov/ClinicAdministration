@@ -14,12 +14,13 @@ protocol GraphicTimeTableViewDelegate: AnyObject {
 }
 
 final class GraphicTimeTableView: UIView {
-
     private let vScrollView = UIScrollView()
     private let hScrollView = UIScrollView()
 
     private var timelineHeight: CGFloat {
-        CGFloat(tableView.close.hour! - tableView.opening.hour!) * tableView.hourHeight + tableView.quarterHourHeight
+        guard let tableViewCloseHour = tableView.close.hour,
+              let tableViewOpeningHour = tableView.opening.hour else { return 0 }
+        return CGFloat(tableViewCloseHour - tableViewOpeningHour) * tableView.hourHeight + tableView.quarterHourHeight
     }
     private var tableViewHeight: CGFloat {
         timelineHeight + 2 * GraphicTableView.Size.headerHeight
@@ -31,19 +32,17 @@ final class GraphicTimeTableView: UIView {
         return CGRect(x: 0, y: 0, width: width, height: height)
     }
 
-    private func clampOffset(_ offset: CGPoint) -> CGPoint {
-        return offset.clamped(to: contentOffsetBounds)
-    }
-
     private var hScrollViewHeightConstraint = NSLayoutConstraint()
     private var timeTableViewHeightConstraint = NSLayoutConstraint()
     private var timelineHeightConstraint = NSLayoutConstraint()
 
     weak var delegate: GraphicTimeTableViewDelegate?
 
+    // swiftlint:disable implicitly_unwrapped_optional
     private var tableView: GraphicTableView!
     private var timelineView: TimelineView!
     private(set) var datePicker: DatePicker!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     init(date: Date) {
         super.init(frame: .zero)
@@ -132,6 +131,10 @@ final class GraphicTimeTableView: UIView {
         }
     }
 
+    private func clampOffset(_ offset: CGPoint) -> CGPoint {
+        offset.clamped(to: contentOffsetBounds)
+    }
+
     private func changeDate(to newDate: Date) {
         tableView.date = newDate
         timelineView.tableView = tableView
@@ -173,12 +176,12 @@ extension GraphicTimeTableView: UIScrollViewDelegate {
 
 extension CGPoint {
     func clamped(to rect: CGRect) -> CGPoint {
-        return CGPoint(x: x.clamped(to: rect.minX...rect.maxX), y: y.clamped(to: rect.minY...rect.maxY))
+        CGPoint(x: x.clamped(to: rect.minX...rect.maxX), y: y.clamped(to: rect.minY...rect.maxY))
     }
 }
 
 extension Comparable {
     func clamped(to limits: ClosedRange<Self>) -> Self {
-        return min(max(self, limits.lowerBound), limits.upperBound)
+        min(max(self, limits.lowerBound), limits.upperBound)
     }
 }

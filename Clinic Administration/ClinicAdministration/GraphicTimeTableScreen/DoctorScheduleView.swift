@@ -8,6 +8,23 @@
 import UIKit
 
 final class DoctorScheduleView: UIView {
+    private enum Mode {
+        case editing, viewing
+
+        var change: Mode {
+            switch self {
+            case .editing: return .viewing
+            case .viewing: return .editing
+            }
+        }
+    }
+
+    /// Опции редактирования расписания доктора.
+    enum ScheduleEditOption {
+        case startingTime
+        case endingTime
+        // Вероятно тут еще и кабинет появится со временем.
+    }
 
     let transformArea = UIView()
     private let topResizingPoint = UIView()
@@ -22,19 +39,9 @@ final class DoctorScheduleView: UIView {
     private var minutesInterval = CGFloat.zero
 
     /// Данное свойство является true, если расписание пересекающееся.
-    private var isIntersected: Bool! {
-        return intersectionDetection?(schedule)
-    }
-
-    private enum Mode {
-        case editing, viewing
-
-        var change: Mode {
-            switch self {
-            case .editing: return .viewing
-            case .viewing: return .editing
-            }
-        }
+    private var isIntersected: Bool {
+        guard let intersection = intersectionDetection?(schedule) else { return false }
+        return intersection
     }
 
     private var mode: Mode = .viewing {
@@ -56,21 +63,18 @@ final class DoctorScheduleView: UIView {
     /// или когда является пересекающимся.
     private var moveToFrontAction: ((DoctorScheduleView) -> Void)?
 
-    override func draw(_ rect: CGRect) {
-        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.large).cgPath
-        layer.shadowColor = Design.Color.brown.cgColor
-    }
-
     /// Инициализирует `DoctorScheduleView`.
     /// - Parameters:
     ///   - schedule: Расписание доктора.
     ///   - minuteHeight: Высота минуты на экране.
     ///   - intersectionDetection: Метод, который выясняет является ли расписание пересекающимся.
     ///   - moveToFrontAction: Метод, которое выводит вью доктора на передний план.
-    init(_ schedule: DoctorSchedule,
-         minuteHeight: CGFloat,
-         intersectionDetection: @escaping (DoctorSchedule) -> Bool,
-         moveToFrontAction: @escaping (DoctorScheduleView) -> Void) {
+    init(
+        _ schedule: DoctorSchedule,
+        minuteHeight: CGFloat,
+        intersectionDetection: @escaping (DoctorSchedule) -> Bool,
+        moveToFrontAction: @escaping (DoctorScheduleView) -> Void
+    ) {
         self.schedule = schedule
         self.minuteHeight = minuteHeight
         self.intersectionDetection = intersectionDetection
@@ -97,6 +101,11 @@ final class DoctorScheduleView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func draw(_ rect: CGRect) {
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.large).cgPath
+        layer.shadowColor = Design.Color.brown.cgColor
     }
 
     private func configureGestureAreas() {
@@ -172,13 +181,6 @@ final class DoctorScheduleView: UIView {
         }
     }
 
-    /// Опции редактирования расписания доктора.
-    enum ScheduleEditOption {
-        case startingTime
-        case endingTime
-        // Вероятно тут еще и кабинет появится со временем.
-    }
-
     /// Данный метод используется для редактирования расписания доктора.
     /// - Parameters:
     ///   - options: Опции редактирования расписания доктора.
@@ -198,11 +200,13 @@ final class DoctorScheduleView: UIView {
         switch gesture.state {
         case .began:
             mode = mode.change
-            UIView.animate(withDuration: 0.7,
-                            delay: 0,
-                            usingSpringWithDamping: 0.3,
-                            initialSpringVelocity: 1,
-                            options: .curveEaseOut) {
+            UIView.animate(
+                withDuration: 0.7,
+                delay: 0,
+                usingSpringWithDamping: 0.3,
+                initialSpringVelocity: 1,
+                options: .curveEaseOut
+            ) {
                 self.checkState()
                 generator.notificationOccurred(.success)
             }

@@ -8,7 +8,6 @@
 import UIKit
 
 final class GraphicTableView: UIView {
-
     var date: Date {
         didSet {
             setTimeTable(date)
@@ -25,7 +24,7 @@ final class GraphicTableView: UIView {
     private let dataSource = TimeTableDataSource()
 
     private var schedules: [DoctorSchedule] {
-        return dataSource.filteredSchedules(for: date)
+        dataSource.filteredSchedules(for: date)
     }
 
     private let headerView = UIView()
@@ -41,30 +40,39 @@ final class GraphicTableView: UIView {
 
     private var transformAction: ((DoctorScheduleView, CGFloat) -> Void)?
 
-    private func setTimeTable(_ date: Date) {
-        let dateComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
+    init(date: Date, transformAction: @escaping (DoctorScheduleView, CGFloat) -> Void) {
+        self.date = date
+        self.transformAction = transformAction
+        super.init(frame: .zero)
 
-        opening = dateComponents
-        close = dateComponents
+        setTimeTable(date)
 
-        switch dateComponents.weekday {
-        case 1:
-            opening.hour = 9
-            close.hour = 15
-        case 7:
-            opening.hour = 9
-            close.hour = 18
-        default:
-            opening.hour = 8
-            close.hour = 19
+        backgroundColor = Design.Color.white
+        layer.cornerRadius = Design.CornerRadius.large
+        layer.masksToBounds = true
+
+        setupHeaderFooter()
+        setupCabinetLabels()
+        addCabinets()
+        schedules.forEach { schedule in
+            addDoctorSchedule(schedule)
         }
+        // Выводим пересекающиеся расписания на передний план.
+        moveIntersectionsToFront()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func draw(_ rect: CGRect) {
         let linePath = UIBezierPath()
         let dashLinePath = UIBezierPath()
 
-        for quarterHour in 1...(close.hour! - opening.hour! + 1) * 4 {
+        guard let closeHour = close.hour,
+              let openingHour = opening.hour else { return }
+
+        for quarterHour in 1...(closeHour - openingHour + 1) * 4 {
             if (quarterHour - 1) % 4 == 0 {
                 linePath.move(
                     to: CGPoint(
@@ -106,37 +114,12 @@ final class GraphicTableView: UIView {
         linePath.stroke()
     }
 
-    init(date: Date, transformAction: @escaping (DoctorScheduleView, CGFloat) -> Void) {
-        self.date = date
-        self.transformAction = transformAction
-        super.init(frame: .zero)
-
-        setTimeTable(date)
-
-        backgroundColor = Design.Color.white
-        layer.cornerRadius = Design.CornerRadius.large
-        layer.masksToBounds = true
-
-        setupHeaderFooter()
-        setupCabinetLabels()
-        addCabinets()
-        schedules.forEach { (schedule) in
-            addDoctorSchedule(schedule)
-        }
-        // Выводим пересекающиеся расписания на передний план.
-        moveIntersectionsToFront()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     func reloadData() {
         for doctorView in doctorViews {
             doctorView.removeFromSuperview()
             doctorViews.remove(at: 0)
         }
-        schedules.forEach { (schedule) in
+        schedules.forEach { schedule in
             addDoctorSchedule(schedule)
         }
         // При перезагрузке экрана выводим пересекающиеся расписания на передний план.
@@ -179,13 +162,39 @@ final class GraphicTableView: UIView {
                 to: schedules[index].endingTime
             )
 
-            let minutesFromOpening = CGFloat(timeIntervalFromOpening.hour! * 60 + timeIntervalFromOpening.minute!)
-            let scheduleMinutes = CGFloat(timeIntervalFromStarting.hour! * 60 + timeIntervalFromStarting.minute!)
+            guard let hoursFromOpening = timeIntervalFromOpening.hour,
+                  let minutesFromOpening = timeIntervalFromOpening.minute,
+                  let scheduleHours = timeIntervalFromStarting.hour,
+                  let scheduleMinutes = timeIntervalFromStarting.minute else { return }
 
-            doctorViews[index].frame = CGRect(x: Size.doctorViewOffset,
-                                              y: minutesFromOpening * Size.minuteHeight,
-                                              width: cabinetViewWidth - Size.doctorViewOffset * 2,
-                                              height: scheduleMinutes * Size.minuteHeight)
+            let minutesIntervalFromOpening = CGFloat(hoursFromOpening * 60 + minutesFromOpening)
+            let scheduleMinutesInterval = CGFloat(scheduleHours * 60 + scheduleMinutes)
+
+            doctorViews[index].frame = CGRect(
+                x: Size.doctorViewOffset,
+                y: minutesIntervalFromOpening * Size.minuteHeight,
+                width: cabinetViewWidth - Size.doctorViewOffset * 2,
+                height: scheduleMinutesInterval * Size.minuteHeight
+            )
+        }
+    }
+
+    private func setTimeTable(_ date: Date) {
+        let dateComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
+
+        opening = dateComponents
+        close = dateComponents
+
+        switch dateComponents.weekday {
+        case 1:
+            opening.hour = 9
+            close.hour = 15
+        case 7:
+            opening.hour = 9
+            close.hour = 18
+        default:
+            opening.hour = 8
+            close.hour = 19
         }
     }
 
@@ -233,7 +242,8 @@ final class GraphicTableView: UIView {
 
     private func addDoctorSchedule(_ schedule: DoctorSchedule) {
         let doctorView = DoctorScheduleView(
-            schedule, minuteHeight: Size.minuteHeight,
+            schedule,
+            minuteHeight: Size.minuteHeight,
             intersectionDetection: detectIntersection(for:),
             moveToFrontAction: { [weak self] doctorView in
                 self?.cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)

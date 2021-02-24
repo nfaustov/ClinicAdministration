@@ -9,7 +9,6 @@ import UIKit
 import HorizonCalendar
 
 struct DayOfWeekRow: CalendarItemViewRepresentable {
-
     struct InvariantViewProperties: Hashable {
         let font: UIFont
         let textColor: UIColor

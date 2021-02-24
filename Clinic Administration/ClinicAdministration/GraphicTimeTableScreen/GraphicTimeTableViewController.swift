@@ -8,12 +8,11 @@
 import UIKit
 
 final class GraphicTimeTableViewController: UIViewController {
-
     private var graphicTimeTableView: GraphicTimeTableView? {
-        return viewIfLoaded as? GraphicTimeTableView
+        viewIfLoaded as? GraphicTimeTableView
     }
 
-    var date = Date().addingTimeInterval(172800)
+    var date = Date().addingTimeInterval(172_800)
 
     override func loadView() {
         view = GraphicTimeTableView(date: date)
@@ -24,7 +23,6 @@ final class GraphicTimeTableViewController: UIViewController {
 
         graphicTimeTableView?.delegate = self
     }
-
 }
 
 extension GraphicTimeTableViewController: GraphicTimeTableViewDelegate {

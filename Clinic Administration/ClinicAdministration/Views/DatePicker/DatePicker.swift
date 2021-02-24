@@ -7,14 +7,13 @@
 
 import UIKit
 
-private enum DatePickerState: String {
-    case today = "Сегодня"
-    case tomorrow = "Завтра"
-    case afterTomorrow = "Послезавтра"
-    case calendar
-}
-
 final class DatePicker: UIView {
+    private enum DatePickerState: String {
+        case today = "Сегодня"
+        case tomorrow = "Завтра"
+        case afterTomorrow = "Послезавтра"
+        case calendar
+    }
 
     private let today = Date()
     private let calendar = Calendar.current
@@ -32,7 +31,7 @@ final class DatePicker: UIView {
     private let selectedCalendarImage = UIImage(systemName: "calendar")?
         .withTintColor(Design.Color.lightGray, renderingMode: .alwaysOriginal)
 
-    private var state: DatePickerState!
+    private var state: DatePickerState! // swiftlint:disable:this implicitly_unwrapped_optional
 
     private var selectedDate: Date {
         didSet {
@@ -162,31 +161,35 @@ final class DatePicker: UIView {
     }
 
     @objc private func tomorrow(_ sender: UIButton) {
-        selectedDate = today.addingTimeInterval(86400)
+        selectedDate = today.addingTimeInterval(86_400)
         buttonInteraction(sender)
     }
 
     @objc private func afterTomorrow(_ sender: UIButton) {
-        selectedDate = today.addingTimeInterval(172800)
+        selectedDate = today.addingTimeInterval(172_800)
         buttonInteraction(sender)
     }
 
     @objc private func calendar(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.2) {
-            guard let buttons = self.buttonsStack.arrangedSubviews as? [UIButton] else { return }
+        UIView.animate(
+            withDuration: 0.2,
+            animations: {
+                guard let buttons = self.buttonsStack.arrangedSubviews as? [UIButton] else { return }
 
-            for button in buttons where button != sender {
-                button.setTitleColor(Design.Color.brown, for: .normal)
+                for button in buttons where button != sender {
+                    button.setTitleColor(Design.Color.brown, for: .normal)
+                }
+
+                sender.setBackgroundImage(self.selectedCalendarImage, for: .normal)
+                self.state = .calendar
+
+                self.setNeedsLayout()
+                self.layoutIfNeeded()
+            },
+            completion: { _ in
+                self.calendarAction?()
             }
-
-            sender.setBackgroundImage(self.selectedCalendarImage, for: .normal)
-            self.state = .calendar
-
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
-        } completion: { _ in
-            self.calendarAction?()
-        }
+        )
     }
 
     private func buttonInteraction(_ sender: UIButton) {
@@ -200,7 +203,8 @@ final class DatePicker: UIView {
                 }
             }
             sender.setTitleColor(Design.Color.lightGray, for: .normal)
-            self.state = DatePickerState(rawValue: (sender.titleLabel?.text)!)
+            guard let text = sender.titleLabel?.text else { return }
+            self.state = DatePickerState(rawValue: text)
             self.setNeedsLayout()
             self.layoutIfNeeded()
         }
@@ -222,8 +226,8 @@ final class DatePicker: UIView {
     }
 
     private func setState(selectedDate: Date) {
-        let tommorow = today.addingTimeInterval(86400)
-        let afterTommorow = today.addingTimeInterval(172800)
+        let tommorow = today.addingTimeInterval(86_400)
+        let afterTommorow = today.addingTimeInterval(172_800)
 
         if calendar.isDate(selectedDate, inSameDayAs: today) {
             state = .today

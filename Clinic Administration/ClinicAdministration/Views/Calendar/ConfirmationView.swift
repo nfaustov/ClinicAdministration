@@ -8,7 +8,6 @@
 import UIKit
 
 final class ConfirmationView: UIView {
-
     private let separatorView = UIView()
     private let confirmButton = UIButton()
     private let cancelButton = UIButton()

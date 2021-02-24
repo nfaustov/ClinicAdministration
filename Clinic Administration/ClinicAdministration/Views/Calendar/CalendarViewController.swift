@@ -15,13 +15,12 @@ protocol CalendarViewControllerDelegate: AnyObject {
 }
 
 final class CalendarViewController: UIViewController {
-
     private var calendar = Calendar.current
 
     weak var delegate: CalendarViewControllerDelegate?
 
     private let confirmationView = ConfirmationView()
-    private var confirmationViewTopConstraint: NSLayoutConstraint!
+    private var confirmationViewTopConstraint = NSLayoutConstraint()
 
     private var selectedDay: Day? {
         didSet {
@@ -89,7 +88,6 @@ final class CalendarViewController: UIViewController {
             let newContent = self.makeContent()
             calendarView.setContent(newContent)
         }
-
     }
 
     private func makeContent() -> CalendarViewContent {
@@ -120,8 +118,10 @@ final class CalendarViewController: UIViewController {
                     invariantViewProperties.textColor = Design.Color.gray
                 }
 
-                return CalendarItemModel<DayLabel>(invariantViewProperties: invariantViewProperties,
-                                                   viewModel: .init(day: day))
+                return CalendarItemModel<DayLabel>(
+                    invariantViewProperties: invariantViewProperties,
+                    viewModel: .init(day: day)
+                )
             }
             .withMonthHeaderItemModelProvider { month in
                 CalendarItemModel<MonthHeader>(
@@ -175,9 +175,9 @@ final class CalendarViewController: UIViewController {
         }
     }
 
-    private func compareToNow(_ day: Day) -> ComparisonResult {
-        let calendarDay = self.calendar.date(from: day.components)
-        let result = calendar.compare(calendarDay!, to: Date(), toGranularity: .day)
+    private func compareToNow(_ day: Day) -> ComparisonResult? {
+        guard let calendarDay = self.calendar.date(from: day.components) else { return nil }
+        let result = calendar.compare(calendarDay, to: Date(), toGranularity: .day)
 
         return result
     }

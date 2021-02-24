@@ -26,7 +26,7 @@ enum Design {
 
     enum Font {
         static func robotoFont(ofSize fontSize: CGFloat, weight: RobotoFontWeight) -> UIFont {
-            return UIFont(name: weight.rawValue, size: fontSize)!
+            UIFont(name: weight.rawValue, size: fontSize) ?? UIFont()
         }
     }
 
