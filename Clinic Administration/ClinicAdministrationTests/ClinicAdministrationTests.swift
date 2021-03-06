@@ -9,8 +9,6 @@ import XCTest
 @testable import ClinicAdministration
 
 class ClinicAdministrationTests: XCTestCase {
-    // swiftlint:disable force_unwrapping
-    // swiftlint:disable function_body_length
     func testDetectingIntersections() {
         let date = Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1))!
 

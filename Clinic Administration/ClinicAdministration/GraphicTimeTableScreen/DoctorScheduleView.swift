@@ -81,6 +81,7 @@ final class DoctorScheduleView: UIView {
         self.moveToFrontAction = moveToFrontAction
         super.init(frame: .zero)
 
+        layer.shadowColor = Design.Color.brown.cgColor
         layer.cornerRadius = Design.CornerRadius.large
         checkState()
 
@@ -103,9 +104,10 @@ final class DoctorScheduleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func draw(_ rect: CGRect) {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.large).cgPath
-        layer.shadowColor = Design.Color.brown.cgColor
     }
 
     private func configureGestureAreas() {

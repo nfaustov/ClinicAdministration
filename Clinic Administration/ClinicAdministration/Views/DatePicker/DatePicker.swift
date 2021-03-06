@@ -13,6 +13,7 @@ final class DatePicker: UIView {
         case tomorrow = "Завтра"
         case afterTomorrow = "Послезавтра"
         case calendar
+        case none
     }
 
     private let today = Date()
@@ -31,7 +32,7 @@ final class DatePicker: UIView {
     private let selectedCalendarImage = UIImage(systemName: "calendar")?
         .withTintColor(Design.Color.lightGray, renderingMode: .alwaysOriginal)
 
-    private var state: DatePickerState! // swiftlint:disable:this implicitly_unwrapped_optional
+    private var state: DatePickerState = .none
 
     private var selectedDate: Date {
         didSet {
@@ -204,7 +205,7 @@ final class DatePicker: UIView {
             }
             sender.setTitleColor(Design.Color.lightGray, for: .normal)
             guard let text = sender.titleLabel?.text else { return }
-            self.state = DatePickerState(rawValue: text)
+            self.state = DatePickerState(rawValue: text) ?? .calendar
             self.setNeedsLayout()
             self.layoutIfNeeded()
         }

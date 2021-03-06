@@ -4,7 +4,6 @@ opt_in_rules:
   - empty_collection_literal
   - empty_count
   - implicit_return
-  - implicitly_unwrapped_optional
   - multiline_arguments
   - multiline_arguments_brackets
   - multiline_function_chains
@@ -23,7 +22,6 @@ opt_in_rules:
 identifier_name:
   excluded:
     - id
-    - URL
 number_separator:
   minimum_length: 5
 custom_rules:

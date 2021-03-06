@@ -38,11 +38,9 @@ final class GraphicTimeTableView: UIView {
 
     weak var delegate: GraphicTimeTableViewDelegate?
 
-    // swiftlint:disable implicitly_unwrapped_optional
     private var tableView: GraphicTableView!
     private var timelineView: TimelineView!
     private(set) var datePicker: DatePicker!
-    // swiftlint:enable implicitly_unwrapped_optional
 
     init(date: Date) {
         super.init(frame: .zero)
