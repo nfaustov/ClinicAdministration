@@ -1,6 +1,6 @@
 //
 //  Doctor.swift
-//  Clinic Administration
+//  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 25.11.2020.
 //
@@ -23,9 +23,17 @@ class Doctor {
     var salaryType: SalaryType
     var monthlySalary: Double
     var agentSalary: Double
-    
-    init(name: Person, birthDate: Date, specialization: String, basicService: String, serviceDuration: TimeInterval,
-         salaryType: SalaryType, monthlySalary: Double = 0, agentSalary: Double = 0) {
+
+    init(
+        name: Person,
+        birthDate: Date,
+        specialization: String,
+        basicService: String,
+        serviceDuration: TimeInterval,
+        salaryType: SalaryType,
+        monthlySalary: Double = 0,
+        agentSalary: Double = 0
+    ) {
         secondName = name.secondName
         firstName = name.firstName
         patronymicName = name.patronymicName

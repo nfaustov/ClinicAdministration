@@ -1,6 +1,6 @@
 //
 //  Person.swift
-//  Clinic Administration
+//  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 25.11.2020.
 //
@@ -12,4 +12,3 @@ struct Person: Codable {
     let firstName: String
     let patronymicName: String
 }
-

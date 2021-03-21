@@ -9,8 +9,8 @@ import Foundation
 
 extension DateFormatter {
     static let shared: DateFormatter = {
-        let df = DateFormatter()
-        df.locale = Locale(identifier: "ru_RU")
-        return df
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        return dateFormatter
     }()
 }

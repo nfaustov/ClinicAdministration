@@ -9,17 +9,18 @@ import XCTest
 @testable import ClinicAdministration
 
 class ClinicAdministrationTests: XCTestCase {
-
     func testDetectingIntersections() {
         let date = Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1))!
-        
+
         let schedule1 = DoctorSchedule(
             id: UUID(uuidString: "4ac6cabf-c138-4ad5-b131-04f1bc67c197")!,
             secondName: "test1",
             firstName: "test1",
             patronymicName: "test1",
             cabinet: 3,
-            startingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 10, minute: 00))!,
+            startingTime: Calendar.current.date(
+                from: DateComponents(year: 2021, month: 1, day: 1, hour: 10, minute: 00)
+            )!,
             endingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 12, minute: 00))!
         )
         let schedule2 = DoctorSchedule(
@@ -28,7 +29,9 @@ class ClinicAdministrationTests: XCTestCase {
             firstName: "test2",
             patronymicName: "test2",
             cabinet: 3,
-            startingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 11, minute: 30))!,
+            startingTime: Calendar.current.date(
+                from: DateComponents(year: 2021, month: 1, day: 1, hour: 11, minute: 30)
+            )!,
             endingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 14, minute: 30))!
         )
         let schedule3 = DoctorSchedule(
@@ -37,7 +40,9 @@ class ClinicAdministrationTests: XCTestCase {
             firstName: "test3",
             patronymicName: "test3",
             cabinet: 3,
-            startingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 14, minute: 00))!,
+            startingTime: Calendar.current.date(
+                from: DateComponents(year: 2021, month: 1, day: 1, hour: 14, minute: 00)
+            )!,
             endingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 16, minute: 00))!
         )
         let schedule4 = DoctorSchedule(
@@ -46,7 +51,9 @@ class ClinicAdministrationTests: XCTestCase {
             firstName: "test4",
             patronymicName: "test4",
             cabinet: 3,
-            startingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 17, minute: 00))!,
+            startingTime: Calendar.current.date(
+                from: DateComponents(year: 2021, month: 1, day: 1, hour: 17, minute: 00)
+            )!,
             endingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 18, minute: 00))!
         )
         let schedule5 = DoctorSchedule(
@@ -55,26 +62,28 @@ class ClinicAdministrationTests: XCTestCase {
             firstName: "test5",
             patronymicName: "test5",
             cabinet: 3,
-            startingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 17, minute: 30))!,
+            startingTime: Calendar.current.date(
+                from: DateComponents(year: 2021, month: 1, day: 1, hour: 17, minute: 30)
+            )!,
             endingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 18, minute: 30))!
         )
-        
+
         let dataSource = TimeTableDataSource(schedules: [schedule5, schedule1, schedule2, schedule4, schedule3])
-        // включает в себя методы для сортировки по времени начала приема(по возрастанию) и фильтр по дате
         let intersectedSchedules = dataSource.intersectedSchedules(for: date)
-        
+
         XCTAssertEqual(intersectedSchedules, [schedule2, schedule5])
     }
-    
+
     func testUpdateSchedule() {
-        
         var schedule1 = DoctorSchedule(
             id: UUID(uuidString: "4ac6cabf-c138-4ad5-b131-04f1bc67c197")!,
             secondName: "test1",
             firstName: "test1",
             patronymicName: "test1",
             cabinet: 3,
-            startingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 10, minute: 00))!,
+            startingTime: Calendar.current.date(
+                from: DateComponents(year: 2021, month: 1, day: 1, hour: 10, minute: 00)
+            )!,
             endingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 12, minute: 00))!
         )
         let schedule2 = DoctorSchedule(
@@ -83,19 +92,25 @@ class ClinicAdministrationTests: XCTestCase {
             firstName: "test2",
             patronymicName: "test2",
             cabinet: 3,
-            startingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 10, minute: 00))!,
+            startingTime: Calendar.current.date(
+                from: DateComponents(year: 2021, month: 1, day: 1, hour: 10, minute: 00)
+            )!,
             endingTime: Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 12, minute: 00))!
         )
-        
+
         let dataSource = TimeTableDataSource(schedules: [schedule1, schedule2])
-        schedule1.startingTime = Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 13, minute: 00))!
-        schedule1.endingTime = Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1, hour: 17, minute: 00))!
-        
+        schedule1.startingTime = Calendar.current.date(
+            from: DateComponents(year: 2021, month: 1, day: 1, hour: 13, minute: 00)
+        )!
+        schedule1.endingTime = Calendar.current.date(
+            from: DateComponents(year: 2021, month: 1, day: 1, hour: 17, minute: 00)
+        )!
+
         dataSource.updateSchedule(schedule1) {
             XCTAssertNotEqual(schedule1.startingTime, schedule2.startingTime)
         }
         dataSource.updateSchedule(schedule2) {
-            XCTFail()
+            XCTFail("Failed. Updated unchanged shedule.")
         }
     }
 }
