@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Design
 import HorizonCalendar
 
 struct DayLabel: CalendarItemViewRepresentable {

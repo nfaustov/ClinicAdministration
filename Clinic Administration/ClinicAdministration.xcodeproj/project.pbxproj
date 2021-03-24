@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B04A90E257846C700D15DCA /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8B04A90D257846C700D15DCA /* HorizonCalendar */; };
 		8B188983259CCA4E000B0077 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B188982259CCA4E000B0077 /* Settings.swift */; };
 		8B29219E257930630058B51E /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29219D257930630058B51E /* TimelineView.swift */; };
-		8B4C543225B49C50005BD57A /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4C543125B49C50005BD57A /* DateFormatterExtension.swift */; };
-		8B52E77D2588F02500037B4B /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52E77C2588F02500037B4B /* ConfirmationView.swift */; };
+		8B4825DA260B14300086FB64 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825D9260B14300086FB64 /* Design */; };
+		8B4825F0260B254A0086FB64 /* DatePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825EF260B254A0086FB64 /* DatePicker */; };
+		8B4825F7260B26BD0086FB64 /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825F6260B26BD0086FB64 /* Extensions */; };
+		8B4825FD260B395B0086FB64 /* CalendarControl in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825FC260B395B0086FB64 /* CalendarControl */; };
 		8B733D0E256878070082784E /* TimeTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B733D0D256878070082784E /* TimeTableDataSource.swift */; };
 		8B733D15256934BB0082784E /* schedules.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B733D14256934BB0082784E /* schedules.json */; };
 		8B843668256DB0D1006057EF /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843667256DB0D1006057EF /* Doctor.swift */; };
@@ -19,25 +20,18 @@
 		8BC15FDA257C1CF900323430 /* GraphicTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC15FD9257C1CF900323430 /* GraphicTimeTableView.swift */; };
 		8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */; };
 		8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */; };
-		8BCAB7A12559D4A4001A93D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB79F2559D4A4001A93D0 /* Main.storyboard */; };
 		8BCAB7A32559D4A5001A93D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7A22559D4A5001A93D0 /* Assets.xcassets */; };
 		8BCAB7A62559D4A5001A93D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7A42559D4A5001A93D0 /* LaunchScreen.storyboard */; };
 		8BCAB7B22559D564001A93D0 /* GraphicTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7B12559D564001A93D0 /* GraphicTimeTableViewController.swift */; };
-		8BCAB7B82559D5BC001A93D0 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7B72559D5BC001A93D0 /* DatePicker.swift */; };
 		8BCAB7BB2559D5EF001A93D0 /* GraphicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7BA2559D5EF001A93D0 /* GraphicTableView.swift */; };
 		8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7BD2559D608001A93D0 /* DoctorScheduleView.swift */; };
 		8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7C02559D618001A93D0 /* DoctorSchedule.swift */; };
-		8BCAB7C42559D960001A93D0 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7C32559D960001A93D0 /* Design.swift */; };
 		8BCAB7D42559DC9C001A93D0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7C82559DC9C001A93D0 /* Roboto-Light.ttf */; };
 		8BCAB7D52559DC9C001A93D0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7C92559DC9C001A93D0 /* Roboto-Thin.ttf */; };
 		8BCAB7D72559DC9C001A93D0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7CB2559DC9C001A93D0 /* Roboto-Regular.ttf */; };
 		8BCAB7D92559DC9C001A93D0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7CD2559DC9C001A93D0 /* Roboto-Medium.ttf */; };
 		8BCAB7DB2559DC9C001A93D0 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7CF2559DC9C001A93D0 /* Roboto-Black.ttf */; };
 		8BCAB7DE2559DC9C001A93D0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7D22559DC9C001A93D0 /* Roboto-Bold.ttf */; };
-		8BCFC35025865FC60072B160 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFC34F25865FC60072B160 /* CalendarViewController.swift */; };
-		8BCFC3552586C41D0072B160 /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFC3542586C41D0072B160 /* DayLabel.swift */; };
-		8BCFC35C2586FF530072B160 /* MonthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCFC35B2586FF530072B160 /* MonthHeader.swift */; };
-		8BD05A70258805B80047DEC9 /* DayOfWeekRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD05A6F258805B80047DEC9 /* DayOfWeekRow.swift */; };
 		8BFE342A25B378150058F42F /* ClinicAdministrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFE342925B378150058F42F /* ClinicAdministrationTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,8 +48,10 @@
 /* Begin PBXFileReference section */
 		8B188982259CCA4E000B0077 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8B29219D257930630058B51E /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
-		8B4C543125B49C50005BD57A /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
-		8B52E77C2588F02500037B4B /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		8B4825D1260B13520086FB64 /* Design */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Design; sourceTree = "<group>"; };
+		8B4825DD260B1BDA0086FB64 /* CalendarControl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CalendarControl; sourceTree = "<group>"; };
+		8B4825E8260B20A30086FB64 /* DatePicker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DatePicker; sourceTree = "<group>"; };
+		8B4825F3260B26330086FB64 /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Extensions; sourceTree = "<group>"; };
 		8B733D0D256878070082784E /* TimeTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableDataSource.swift; sourceTree = "<group>"; };
 		8B733D14256934BB0082784E /* schedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schedules.json; sourceTree = "<group>"; };
 		8B843667256DB0D1006057EF /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
@@ -64,26 +60,19 @@
 		8BCAB7962559D4A4001A93D0 /* ClinicAdministration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinicAdministration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8BCAB7A02559D4A4001A93D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8BCAB7A22559D4A5001A93D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BCAB7A52559D4A5001A93D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BCAB7A72559D4A5001A93D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BCAB7B12559D564001A93D0 /* GraphicTimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableViewController.swift; sourceTree = "<group>"; };
-		8BCAB7B72559D5BC001A93D0 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		8BCAB7BA2559D5EF001A93D0 /* GraphicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTableView.swift; sourceTree = "<group>"; };
 		8BCAB7BD2559D608001A93D0 /* DoctorScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorScheduleView.swift; sourceTree = "<group>"; };
 		8BCAB7C02559D618001A93D0 /* DoctorSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSchedule.swift; sourceTree = "<group>"; };
-		8BCAB7C32559D960001A93D0 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		8BCAB7C82559DC9C001A93D0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		8BCAB7C92559DC9C001A93D0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		8BCAB7CB2559DC9C001A93D0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		8BCAB7CD2559DC9C001A93D0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		8BCAB7CF2559DC9C001A93D0 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		8BCAB7D22559DC9C001A93D0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		8BCFC34F25865FC60072B160 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		8BCFC3542586C41D0072B160 /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
-		8BCFC35B2586FF530072B160 /* MonthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthHeader.swift; sourceTree = "<group>"; };
-		8BD05A6F258805B80047DEC9 /* DayOfWeekRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekRow.swift; sourceTree = "<group>"; };
 		8BFE342725B378150058F42F /* ClinicAdministrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicAdministrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFE342925B378150058F42F /* ClinicAdministrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicAdministrationTests.swift; sourceTree = "<group>"; };
 		8BFE342B25B378150058F42F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,7 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B04A90E257846C700D15DCA /* HorizonCalendar in Frameworks */,
+				8B4825F7260B26BD0086FB64 /* Extensions in Frameworks */,
+				8B4825F0260B254A0086FB64 /* DatePicker in Frameworks */,
+				8B4825FD260B395B0086FB64 /* CalendarControl in Frameworks */,
+				8B4825DA260B14300086FB64 /* Design in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,14 +100,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8B04A9052578252300D15DCA /* DatePicker */ = {
-			isa = PBXGroup;
-			children = (
-				8BCAB7B72559D5BC001A93D0 /* DatePicker.swift */,
-			);
-			path = DatePicker;
-			sourceTree = "<group>";
-		};
 		8B0F5BC9255D49F400894410 /* Types */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,14 +111,6 @@
 			path = Types;
 			sourceTree = "<group>";
 		};
-		8B0F5BD1255D716800894410 /* Design */ = {
-			isa = PBXGroup;
-			children = (
-				8BCAB7C32559D960001A93D0 /* Design.swift */,
-			);
-			path = Design;
-			sourceTree = "<group>";
-		};
 		8B188985259CCA55000B0077 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,21 +119,22 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		8B4EC3BA259D3BE900ABFC7D /* Extensions */ = {
+		8B4825CB260B116C0086FB64 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				8B4C543125B49C50005BD57A /* DateFormatterExtension.swift */,
+				8B4825E8260B20A30086FB64 /* DatePicker */,
+				8B4825DD260B1BDA0086FB64 /* CalendarControl */,
+				8B4825F3260B26330086FB64 /* Extensions */,
+				8B4825D1260B13520086FB64 /* Design */,
 			);
-			path = Extensions;
+			path = Packages;
 			sourceTree = "<group>";
 		};
-		8B733D1D256A052C0082784E /* Views */ = {
+		8B4825D8260B14300086FB64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8B04A9052578252300D15DCA /* DatePicker */,
-				8BCFC3522586C3F70072B160 /* Calendar */,
 			);
-			path = Views;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8BCAB78D2559D4A4001A93D0 = {
@@ -166,6 +143,8 @@
 				8BCAB7982559D4A4001A93D0 /* ClinicAdministration */,
 				8BFE342825B378150058F42F /* ClinicAdministrationTests */,
 				8BCAB7972559D4A4001A93D0 /* Products */,
+				8B4825CB260B116C0086FB64 /* Packages */,
+				8B4825D8260B14300086FB64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,12 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				8B188985259CCA55000B0077 /* Settings */,
-				8B0F5BD1255D716800894410 /* Design */,
-				8B733D1D256A052C0082784E /* Views */,
 				8B0F5BC9255D49F400894410 /* Types */,
 				8BCAB7B42559D56A001A93D0 /* GraphicTimeTableScreen */,
-				8B4EC3BA259D3BE900ABFC7D /* Extensions */,
-				8BCAB79F2559D4A4001A93D0 /* Main.storyboard */,
 				8BCAB7AF2559D4D5001A93D0 /* Supporting Files */,
 				8B733D14256934BB0082784E /* schedules.json */,
 				8BCAB7C72559DC72001A93D0 /* Fonts */,
@@ -232,18 +207,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		8BCFC3522586C3F70072B160 /* Calendar */ = {
-			isa = PBXGroup;
-			children = (
-				8BCFC34F25865FC60072B160 /* CalendarViewController.swift */,
-				8BCFC3542586C41D0072B160 /* DayLabel.swift */,
-				8BCFC35B2586FF530072B160 /* MonthHeader.swift */,
-				8BD05A6F258805B80047DEC9 /* DayOfWeekRow.swift */,
-				8B52E77C2588F02500037B4B /* ConfirmationView.swift */,
-			);
-			path = Calendar;
-			sourceTree = "<group>";
-		};
 		8BFE342825B378150058F42F /* ClinicAdministrationTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +234,10 @@
 			);
 			name = ClinicAdministration;
 			packageProductDependencies = (
-				8B04A90D257846C700D15DCA /* HorizonCalendar */,
+				8B4825D9260B14300086FB64 /* Design */,
+				8B4825EF260B254A0086FB64 /* DatePicker */,
+				8B4825F6260B26BD0086FB64 /* Extensions */,
+				8B4825FC260B395B0086FB64 /* CalendarControl */,
 			);
 			productName = "Clinic Administration";
 			productReference = 8BCAB7962559D4A4001A93D0 /* ClinicAdministration.app */;
@@ -323,7 +289,6 @@
 			);
 			mainGroup = 8BCAB78D2559D4A4001A93D0;
 			packageReferences = (
-				8B04A90C257846C700D15DCA /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
 			);
 			productRefGroup = 8BCAB7972559D4A4001A93D0 /* Products */;
 			projectDirPath = "";
@@ -347,7 +312,6 @@
 				8BCAB7D42559DC9C001A93D0 /* Roboto-Light.ttf in Resources */,
 				8BCAB7DB2559DC9C001A93D0 /* Roboto-Black.ttf in Resources */,
 				8BCAB7D52559DC9C001A93D0 /* Roboto-Thin.ttf in Resources */,
-				8BCAB7A12559D4A4001A93D0 /* Main.storyboard in Resources */,
 				8B733D15256934BB0082784E /* schedules.json in Resources */,
 				8BCAB7D92559DC9C001A93D0 /* Roboto-Medium.ttf in Resources */,
 			);
@@ -390,23 +354,15 @@
 			files = (
 				8B733D0E256878070082784E /* TimeTableDataSource.swift in Sources */,
 				8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */,
-				8BCFC3552586C41D0072B160 /* DayLabel.swift in Sources */,
-				8BCAB7B82559D5BC001A93D0 /* DatePicker.swift in Sources */,
 				8BC15FDA257C1CF900323430 /* GraphicTimeTableView.swift in Sources */,
-				8BCFC35C2586FF530072B160 /* MonthHeader.swift in Sources */,
-				8B4C543225B49C50005BD57A /* DateFormatterExtension.swift in Sources */,
 				8BCAB7BB2559D5EF001A93D0 /* GraphicTableView.swift in Sources */,
-				8B52E77D2588F02500037B4B /* ConfirmationView.swift in Sources */,
 				8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */,
-				8BD05A70258805B80047DEC9 /* DayOfWeekRow.swift in Sources */,
 				8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */,
 				8B84366B256DB126006057EF /* Person.swift in Sources */,
 				8B29219E257930630058B51E /* TimelineView.swift in Sources */,
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,
 				8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */,
 				8BCAB7B22559D564001A93D0 /* GraphicTimeTableViewController.swift in Sources */,
-				8BCFC35025865FC60072B160 /* CalendarViewController.swift in Sources */,
-				8BCAB7C42559D960001A93D0 /* Design.swift in Sources */,
 				8B188983259CCA4E000B0077 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,14 +386,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8BCAB79F2559D4A4001A93D0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8BCAB7A02559D4A4001A93D0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8BCAB7A42559D4A5001A93D0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -681,22 +629,22 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		8B04A90C257846C700D15DCA /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/HorizonCalendar.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		8B04A90D257846C700D15DCA /* HorizonCalendar */ = {
+		8B4825D9260B14300086FB64 /* Design */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B04A90C257846C700D15DCA /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
-			productName = HorizonCalendar;
+			productName = Design;
+		};
+		8B4825EF260B254A0086FB64 /* DatePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DatePicker;
+		};
+		8B4825F6260B26BD0086FB64 /* Extensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Extensions;
+		};
+		8B4825FC260B395B0086FB64 /* CalendarControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CalendarControl;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

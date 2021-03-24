@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Design
+import CalendarControl
 
-final class DatePicker: UIView {
+public final class DatePicker: UIView {
     private enum DatePickerState: String {
         case today = "Сегодня"
         case tomorrow = "Завтра"
@@ -44,7 +46,7 @@ final class DatePicker: UIView {
     private var dateAction: ((Date) -> Void)?
     private var calendarAction: (() -> Void)?
 
-    init(selectedDate: Date, dateAction: @escaping (Date) -> Void, calendarAction: @escaping () -> Void) {
+    public init(selectedDate: Date, dateAction: @escaping (Date) -> Void, calendarAction: @escaping () -> Void) {
         self.selectedDate = selectedDate
         self.dateAction = dateAction
         self.calendarAction = calendarAction
@@ -63,7 +65,7 @@ final class DatePicker: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
 
         selectionLine.frame = CGRect(x: 0, y: buttonsStack.frame.maxY - 2, width: 30, height: 1)
@@ -255,7 +257,7 @@ final class DatePicker: UIView {
 }
 
 extension DatePicker: CalendarViewControllerDelegate {
-    func selectedDate(_ date: Date) {
+    public func selectedDate(_ date: Date) {
         selectedDate = date
 
         UIView.animate(withDuration: 0.2) {
@@ -264,7 +266,7 @@ extension DatePicker: CalendarViewControllerDelegate {
         }
     }
 
-    func cancelSelection() {
+    public func cancelSelection() {
         UIView.animate(withDuration: 0.2) {
             self.stateAnimation()
             self.setNeedsLayout()

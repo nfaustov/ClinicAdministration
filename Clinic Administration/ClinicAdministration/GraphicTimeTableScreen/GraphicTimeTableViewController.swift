@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CalendarControl
 
 final class GraphicTimeTableViewController: UIViewController {
     private var graphicTimeTableView: GraphicTimeTableView? {
@@ -31,9 +32,8 @@ extension GraphicTimeTableViewController: GraphicTimeTableViewDelegate {
     }
 
     func openCalendar() {
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "CalendarViewController")
-                as? CalendarViewController else { return }
-        present(viewController, animated: true)
-        viewController.delegate = graphicTimeTableView?.datePicker
+        let calendarViewController = CalendarViewController()
+        present(calendarViewController, animated: true)
+        calendarViewController.delegate = graphicTimeTableView?.datePicker
     }
 }

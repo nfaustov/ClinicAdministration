@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Extensions
 
 /// Класс для хранения и управления базой данных с расписаниями докторов.
 final class TimeTableDataSource {

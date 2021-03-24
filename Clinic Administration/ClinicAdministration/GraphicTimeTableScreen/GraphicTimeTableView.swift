@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Design
+import DatePicker
 
 protocol GraphicTimeTableViewDelegate: AnyObject {
     func dateChanged(_ date: Date)

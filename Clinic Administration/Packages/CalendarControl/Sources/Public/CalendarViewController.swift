@@ -6,18 +6,19 @@
 //
 
 import UIKit
+import Design
 import HorizonCalendar
 
-protocol CalendarViewControllerDelegate: AnyObject {
+public protocol CalendarViewControllerDelegate: AnyObject {
     func selectedDate(_ date: Date)
 
     func cancelSelection()
 }
 
-final class CalendarViewController: UIViewController {
+public final class CalendarViewController: UIViewController {
     private var calendar = Calendar.current
 
-    weak var delegate: CalendarViewControllerDelegate?
+    public weak var delegate: CalendarViewControllerDelegate?
 
     private let confirmationView = ConfirmationView()
     private var confirmationViewTopConstraint = NSLayoutConstraint()
@@ -43,7 +44,7 @@ final class CalendarViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = Design.Color.white
@@ -54,7 +55,7 @@ final class CalendarViewController: UIViewController {
         configureConfirmation()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         if let components = selectedDay?.components,
