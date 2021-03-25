@@ -20,11 +20,9 @@ final class DoctorScheduleView: UIView {
         }
     }
 
-    /// Опции редактирования расписания доктора.
     enum ScheduleEditOption {
         case startingTime
         case endingTime
-        // Вероятно тут еще и кабинет появится со временем.
     }
 
     let transformArea = UIView()
@@ -39,9 +37,9 @@ final class DoctorScheduleView: UIView {
     private var originalHeight = CGFloat.zero
     private var minutesInterval = CGFloat.zero
 
-    /// Данное свойство является true, если расписание пересекающееся.
     private var isIntersected: Bool {
         guard let intersection = intersectionDetection?(schedule) else { return false }
+        
         return intersection
     }
 
@@ -55,21 +53,10 @@ final class DoctorScheduleView: UIView {
 
     private(set) var schedule: DoctorSchedule
 
-    /// Замыкание, которое выясняет является ли расписание пересекающимся.
     private var intersectionDetection: ((DoctorSchedule) -> Bool)?
 
-    /// Замыкание, которое выводит вью доктора на передний план.
-    ///
-    /// Используется, когда экземпляр `DoctorScheduleView` переводится в режим редактирования
-    /// или когда является пересекающимся.
     private var moveToFrontAction: ((DoctorScheduleView) -> Void)?
 
-    /// Инициализирует `DoctorScheduleView`.
-    /// - Parameters:
-    ///   - schedule: Расписание доктора.
-    ///   - minuteHeight: Высота минуты на экране.
-    ///   - intersectionDetection: Метод, который выясняет является ли расписание пересекающимся.
-    ///   - moveToFrontAction: Метод, которое выводит вью доктора на передний план.
     init(
         _ schedule: DoctorSchedule,
         minuteHeight: CGFloat,
@@ -123,9 +110,11 @@ final class DoctorScheduleView: UIView {
         addSubview(topResizingPoint)
         addSubview(transformArea)
         addSubview(bottomResizingPoint)
+        
         for view in [topResizingPoint, transformArea, bottomResizingPoint] {
             view.translatesAutoresizingMaskIntoConstraints = false
         }
+        
         NSLayoutConstraint.activate([
             topResizingPoint.topAnchor.constraint(equalTo: topAnchor),
             topResizingPoint.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -148,8 +137,6 @@ final class DoctorScheduleView: UIView {
         bottomResizingPoint.isUserInteractionEnabled = false
     }
 
-    /// Данный метод используется для проверки текущего статуса и
-    /// установки нужного состояния объекта `DoctorScheduleView`
     func checkState() {
         switch mode {
         case .editing:
@@ -159,7 +146,6 @@ final class DoctorScheduleView: UIView {
             layer.shadowOpacity = 0
             nameLabel.textColor = Design.Color.chocolate.withAlphaComponent(0.6)
             transform = .init(scaleX: 1.1, y: 1)
-            // Если в режиме редактирования то через замыкание переместим вью на передний план.
             moveToFrontAction?(self)
         case .viewing:
             nameLabel.textColor = Design.Color.chocolate
@@ -171,7 +157,6 @@ final class DoctorScheduleView: UIView {
                 layer.shadowOffset = CGSize(width: 0, height: 6)
                 layer.shadowRadius = 12
                 layer.shadowOpacity = 0.15
-                // Если расписаие пересекает другие, то через замыкание переместим вью на передний план.
                 moveToFrontAction?(self)
             } else {
                 layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.75).cgColor
@@ -184,10 +169,6 @@ final class DoctorScheduleView: UIView {
         }
     }
 
-    /// Данный метод используется для редактирования расписания доктора.
-    /// - Parameters:
-    ///   - options: Опции редактирования расписания доктора.
-    ///   - timeInterval: Временной интервал в секундах для изменения расписания доктоа.
     func editSchedule(options: Set<ScheduleEditOption>, by timeInterval: TimeInterval) {
         if options.contains(.startingTime) {
             schedule.startingTime.addTimeInterval(timeInterval)
@@ -200,6 +181,7 @@ final class DoctorScheduleView: UIView {
     @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         let generator = UINotificationFeedbackGenerator()
         gesture.minimumPressDuration = 0.7
+        
         switch gesture.state {
         case .began:
             mode = mode.change
@@ -220,7 +202,9 @@ final class DoctorScheduleView: UIView {
     @objc private func handleBottomPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: 5 * minuteHeight)
+        
         guard let cabinetView = superview else { return }
+        
         switch gesture.state {
         case .began:
             originalLocation.y = frame.origin.y
@@ -229,11 +213,11 @@ final class DoctorScheduleView: UIView {
             let minTY = 15 * minuteHeight - originalHeight
             let maxTY = cabinetView.frame.height - originalLocation.y - originalHeight - 1
             frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
-            // Переводим translation в минуты.
             minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
+            // MARK: Scroll near the bottom edge of screen
         case .ended:
-            // Меняем расписание доктора.
             editSchedule(options: [.endingTime], by: TimeInterval(minutesInterval * 60))
+            
             setNeedsDisplay()
         default: break
         }
@@ -242,6 +226,7 @@ final class DoctorScheduleView: UIView {
     @objc private func handleTopPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: minuteHeight * 5)
+        
         switch gesture.state {
         case .began:
             originalLocation.y = frame.origin.y
@@ -251,11 +236,11 @@ final class DoctorScheduleView: UIView {
             let maxTY = originalHeight - 15 * minuteHeight
             frame.size.height = originalHeight - min(max(translationY, minTY), maxTY)
             frame.origin.y = originalLocation.y + max(min(translationY, maxTY), minTY)
-            // Переводим translation в минуты.
             minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
+            // MARK: Scroll near the top edge of screen
         case .ended:
-            // Меняем расписание доктора.
             editSchedule(options: [.startingTime], by: TimeInterval(minutesInterval * 60))
+            
             setNeedsDisplay()
         default: break
         }

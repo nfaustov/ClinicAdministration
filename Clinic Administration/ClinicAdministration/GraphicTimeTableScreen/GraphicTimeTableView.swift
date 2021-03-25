@@ -28,12 +28,6 @@ final class GraphicTimeTableView: UIView {
         timelineHeight + 2 * GraphicTableView.Size.headerHeight
     }
 
-    private var contentOffsetBounds: CGRect {
-        let width = vScrollView.contentSize.width - vScrollView.frame.width
-        let height = vScrollView.contentSize.height - vScrollView.frame.height
-        return CGRect(x: 0, y: 0, width: width, height: height)
-    }
-
     private var hScrollViewHeightConstraint = NSLayoutConstraint()
     private var timeTableViewHeightConstraint = NSLayoutConstraint()
     private var timelineHeightConstraint = NSLayoutConstraint()
@@ -50,7 +44,7 @@ final class GraphicTimeTableView: UIView {
         backgroundColor = Design.Color.lightGray
 
         datePicker = DatePicker(selectedDate: date, dateAction: changeDate(to:), calendarAction: openCalendar)
-        tableView = GraphicTableView(date: date, transformAction: scheduleTransform(doctorView:translation:))
+        tableView = GraphicTableView(date: date, transformAction: scheduleTransform(doctorView:))
         timelineView = TimelineView(respectiveTo: tableView)
 
         addSubview(vScrollView)
@@ -100,7 +94,7 @@ final class GraphicTimeTableView: UIView {
             hScrollView.topAnchor.constraint(equalTo: datePicker.bottomAnchor, constant: 25),
             hScrollView.leadingAnchor.constraint(equalTo: vScrollView.contentLayoutGuide.leadingAnchor),
             hScrollView.trailingAnchor.constraint(equalTo: vScrollView.contentLayoutGuide.trailingAnchor),
-            hScrollView.bottomAnchor.constraint(equalTo: vScrollView.contentLayoutGuide.bottomAnchor, constant: -25),
+            hScrollView.bottomAnchor.constraint(equalTo: vScrollView.contentLayoutGuide.bottomAnchor, constant: -10),
             hScrollView.widthAnchor.constraint(equalTo: vScrollView.frameLayoutGuide.widthAnchor),
             hScrollViewHeightConstraint,
 
@@ -131,10 +125,6 @@ final class GraphicTimeTableView: UIView {
         }
     }
 
-    private func clampOffset(_ offset: CGPoint) -> CGPoint {
-        offset.clamped(to: contentOffsetBounds)
-    }
-
     private func changeDate(to newDate: Date) {
         tableView.date = newDate
         timelineView.tableView = tableView
@@ -148,12 +138,17 @@ final class GraphicTimeTableView: UIView {
         delegate?.openCalendar()
     }
 
-    private func scheduleTransform(doctorView: DoctorScheduleView, translation: CGFloat) {
-        let updatedYOffset = translation
+    private func scheduleTransform(doctorView: DoctorScheduleView) {
+        let maxOriginY = vScrollView.contentSize.height - doctorView.frame.height
+        let originYToVisible = min(doctorView.frame.origin.y + doctorView.frame.origin.y / 2, maxOriginY)
+        let rectToVisible = CGRect(
+            x: doctorView.frame.origin.x,
+            y: originYToVisible,
+            width: doctorView.frame.width,
+            height: doctorView.frame.height
+        )
 
-        let contentOffset = clampOffset(CGPoint(x: vScrollView.contentOffset.x, y: updatedYOffset))
-
-        vScrollView.setContentOffset(contentOffset, animated: true)
+        vScrollView.scrollRectToVisible(rectToVisible, animated: false)
     }
 }
 
@@ -171,17 +166,5 @@ extension GraphicTimeTableView: UIScrollViewDelegate {
                 }
             }
         }
-    }
-}
-
-extension CGPoint {
-    func clamped(to rect: CGRect) -> CGPoint {
-        CGPoint(x: x.clamped(to: rect.minX...rect.maxX), y: y.clamped(to: rect.minY...rect.maxY))
-    }
-}
-
-extension Comparable {
-    func clamped(to limits: ClosedRange<Self>) -> Self {
-        min(max(self, limits.lowerBound), limits.upperBound)
     }
 }
