@@ -7,7 +7,6 @@
 
 import Foundation
 
-/// Модель расписания доктора.
 struct DoctorSchedule: Codable, Equatable {
     let id: UUID
     var secondName: String
