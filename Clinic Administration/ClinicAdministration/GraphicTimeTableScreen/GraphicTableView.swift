@@ -22,10 +22,10 @@ final class GraphicTableView: UIView {
     private(set) var opening = DateComponents()
     private(set) var close = DateComponents()
 
-    private let dataSource = TimeTableDataSource()
+    private let dataManager = TimeTableDataManager()
 
     private var schedules: [DoctorSchedule] {
-        dataSource.filteredSchedules(for: date)
+        dataManager.filteredSchedules(for: date)
     }
 
     private let headerView = UIView()
@@ -258,7 +258,7 @@ final class GraphicTableView: UIView {
     }
 
     private func detectIntersection(for schedule: DoctorSchedule) -> Bool {
-        dataSource.updateSchedule(schedule, updated: { [weak self] in
+        dataManager.updateSchedule(schedule, updated: { [weak self] in
             guard let self = self else { return }
 
             let cabinetSchedules = self.schedules.filter({ $0.cabinet == schedule.cabinet })
@@ -270,13 +270,13 @@ final class GraphicTableView: UIView {
             }
         })
 
-        let intersectedSchedules = dataSource.intersectedSchedules(for: date).filter({ $0.cabinet == schedule.cabinet })
+        let intersectedSchedules = dataManager.intersectedSchedules(for: date).filter({ $0.cabinet == schedule.cabinet })
 
         return intersectedSchedules.contains(schedule)
     }
 
     private func moveIntersectionsToFront() {
-        for schedule in dataSource.intersectedSchedules(for: date) {
+        for schedule in dataManager.intersectedSchedules(for: date) {
             if let doctorView = self.doctorViews.first(where: { $0.schedule == schedule }) {
                 cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
             }

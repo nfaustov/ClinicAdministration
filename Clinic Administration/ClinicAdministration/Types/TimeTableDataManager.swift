@@ -1,5 +1,5 @@
 //
-//  TimeTable.swift
+//  TimeTabledataManager.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 21.11.2020.
@@ -8,28 +8,11 @@
 import Foundation
 import Extensions
 
-final class TimeTableDataSource {
+final class TimeTableDataManager {
     private var schedules: [DoctorSchedule]
 
     init() {
-        guard let url = Bundle.main.url(forResource: "schedules", withExtension: "json") else {
-            fatalError("Can't find JSON")
-        }
-
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Unable to load JSON")
-        }
-
-        let decoder = JSONDecoder()
-
-        DateFormatter.shared.dateFormat = "yyyy-MM-dd'T'HH:mm"
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.shared)
-
-        guard let doctorSchedules = try? decoder.decode([DoctorSchedule].self, from: data) else {
-            fatalError("Failed to decode JSON")
-        }
-
-        schedules = doctorSchedules
+        schedules = Bundle.main.decode([DoctorSchedule].self, from: "schedules", dateFormat: .standard)
     }
 
     init(schedules: [DoctorSchedule]) {
@@ -45,6 +28,7 @@ final class TimeTableDataSource {
                 [.year, .month, .day],
                 from: schedule.startingTime
             )
+
             if dateComponents == scheduleStartingComponents {
                 filteredSchedules.append(schedule)
             }

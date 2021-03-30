@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-        let navigationController = UINavigationController(rootViewController: GraphicTimeTableViewController())
+        let navigationController = UINavigationController(rootViewController: TimeTableViewController())
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
