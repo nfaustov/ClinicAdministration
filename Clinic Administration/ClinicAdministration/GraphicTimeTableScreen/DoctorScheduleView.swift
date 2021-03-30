@@ -39,7 +39,7 @@ final class DoctorScheduleView: UIView {
 
     private var isIntersected: Bool {
         guard let intersection = intersectionDetection?(schedule) else { return false }
-        
+
         return intersection
     }
 
@@ -110,11 +110,11 @@ final class DoctorScheduleView: UIView {
         addSubview(topResizingPoint)
         addSubview(transformArea)
         addSubview(bottomResizingPoint)
-        
+
         for view in [topResizingPoint, transformArea, bottomResizingPoint] {
             view.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+
         NSLayoutConstraint.activate([
             topResizingPoint.topAnchor.constraint(equalTo: topAnchor),
             topResizingPoint.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -181,7 +181,7 @@ final class DoctorScheduleView: UIView {
     @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         let generator = UINotificationFeedbackGenerator()
         gesture.minimumPressDuration = 0.7
-        
+
         switch gesture.state {
         case .began:
             mode = mode.change
@@ -202,9 +202,9 @@ final class DoctorScheduleView: UIView {
     @objc private func handleBottomPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: 5 * minuteHeight)
-        
+
         guard let cabinetView = superview else { return }
-        
+
         switch gesture.state {
         case .began:
             originalLocation.y = frame.origin.y
@@ -217,7 +217,6 @@ final class DoctorScheduleView: UIView {
             // MARK: Scroll near the bottom edge of screen
         case .ended:
             editSchedule(options: [.endingTime], by: TimeInterval(minutesInterval * 60))
-            
             setNeedsDisplay()
         default: break
         }
@@ -226,7 +225,7 @@ final class DoctorScheduleView: UIView {
     @objc private func handleTopPanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: minuteHeight * 5)
-        
+
         switch gesture.state {
         case .began:
             originalLocation.y = frame.origin.y
@@ -240,7 +239,6 @@ final class DoctorScheduleView: UIView {
             // MARK: Scroll near the top edge of screen
         case .ended:
             editSchedule(options: [.startingTime], by: TimeInterval(minutesInterval * 60))
-            
             setNeedsDisplay()
         default: break
         }

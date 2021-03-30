@@ -270,7 +270,8 @@ final class GraphicTableView: UIView {
             }
         })
 
-        let intersectedSchedules = dataManager.intersectedSchedules(for: date).filter({ $0.cabinet == schedule.cabinet })
+        let intersectedSchedules = dataManager.intersectedSchedules(for: date)
+            .filter({ $0.cabinet == schedule.cabinet })
 
         return intersectedSchedules.contains(schedule)
     }
@@ -286,10 +287,10 @@ final class GraphicTableView: UIView {
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
-        
+
         guard let doctorView = gesture.view?.superview as? DoctorScheduleView else { return }
         guard let cabinetView = doctorView.superview else { return }
-        
+
         switch gesture.state {
         case .began:
             originalLocation = doctorView.frame.origin
