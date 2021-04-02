@@ -11,4 +11,8 @@ protocol TimeTableViewOutput: AnyObject {
     func viewDidLoad(with date: Date)
 
     func didSelected(doctorAt indexPath: IndexPath)
+
+    func didSelected(date: Date)
+
+    func calendarRequired()
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TimeTableViewInput: AnyObject {
-    func snapshot(ofSchedules: [DoctorSchedule])
+    func applyInitialSnapshot(ofSchedules: [DoctorSchedule])
 
     func updatePatientsSection(for indexPath: IndexPath)
 }

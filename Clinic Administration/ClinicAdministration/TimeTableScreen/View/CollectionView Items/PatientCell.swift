@@ -23,7 +23,8 @@ final class PatientCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        layer.backgroundColor = Design.Color.white.cgColor
+        backgroundColor = Design.Color.white
+        layer.masksToBounds = true
         layer.borderWidth = 1
         layer.borderColor = Design.Color.darkGray.cgColor
 
@@ -41,6 +42,13 @@ final class PatientCell: UICollectionViewCell {
     }
 
     override func draw(_ rect: CGRect) {
+        let trigonPath = UIBezierPath()
+        trigonPath.move(to: CGPoint(x: frame.width - 20, y: frame.height))
+        trigonPath.addLine(to: CGPoint(x: frame.width, y: frame.height))
+        trigonPath.addLine(to: CGPoint(x: frame.width, y: frame.height - 20))
+        trigonPath.close()
+        Design.Color.gray.set()
+        trigonPath.fill()
     }
 
     func configure(with cell: TimeTablePatientCell) {

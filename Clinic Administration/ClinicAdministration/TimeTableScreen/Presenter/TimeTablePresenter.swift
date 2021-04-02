@@ -21,10 +21,6 @@ final class TimeTablePresenter {
     func didSelected(patient: TimeTablePatient) {
         // MARK: Present patient screen
     }
-
-    func selectedDate(_ date: Date) {
-        // MARK: Present schedules for date in DatePicker
-    }
 }
 
 extension TimeTablePresenter: TimeTableViewOutput {
@@ -35,10 +31,16 @@ extension TimeTablePresenter: TimeTableViewOutput {
     func didSelected(doctorAt indexPath: IndexPath) {
         view.updatePatientsSection(for: indexPath)
     }
+
+    func didSelected(date: Date) {
+    }
+
+    func calendarRequired() {
+    }
 }
 
 extension TimeTablePresenter: TimeTableInteractorOutput {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
-        view.snapshot(ofSchedules: schedules)
+        view.applyInitialSnapshot(ofSchedules: schedules)
     }
 }

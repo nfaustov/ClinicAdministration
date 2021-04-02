@@ -38,11 +38,11 @@ final class DoctorCell: UICollectionViewCell {
         layer.borderWidth = 1
         layer.borderColor = Design.Color.darkGray.cgColor
 
-        gradientLayer = CAGradientLayer()
-        gradientLayer.startPoint = CGPoint(x: frame.width / 2, y: 0)
-        gradientLayer.endPoint = CGPoint(x: frame.width / 2, y: frame.height)
-        gradientLayer.colors = [Design.Color.lightGray.cgColor, Design.Color.white.cgColor]
-        layer.insertSublayer(gradientLayer, at: 0)
+//        gradientLayer = CAGradientLayer()
+//        gradientLayer.startPoint = CGPoint(x: frame.width / 2, y: 0)
+//        gradientLayer.endPoint = CGPoint(x: frame.width / 2, y: frame.height)
+//        gradientLayer.colors = [Design.Color.lightGray.cgColor, Design.Color.white.cgColor]
+//        layer.insertSublayer(gradientLayer, at: 0)
 
         [nameLabel, specializationLabel].forEach { view in
             addSubview(view)

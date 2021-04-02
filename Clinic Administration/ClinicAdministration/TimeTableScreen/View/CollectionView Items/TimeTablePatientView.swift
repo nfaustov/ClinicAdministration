@@ -36,7 +36,7 @@ final class TimeTablePatientView: UIView {
         layer.cornerRadius = 5
         layer.borderWidth = 1
         layer.borderColor = Design.Color.chocolate.cgColor
-        layer.shadowPath = UIBezierPath(roundedRect: frame, cornerRadius: 5).cgPath
+        layer.shadowOffset = .zero
         layer.shadowColor = Design.Color.darkGray.cgColor
         layer.shadowOpacity = 0.6
         layer.shadowRadius = 10
@@ -66,5 +66,11 @@ final class TimeTablePatientView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: 5).cgPath
     }
 }
