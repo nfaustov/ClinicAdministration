@@ -260,6 +260,9 @@ public final class DatePicker: UIView {
                 button.setBackgroundImage(calendarImage, for: .normal)
             }
         }
+
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 }
 
@@ -269,15 +272,12 @@ extension DatePicker: CalendarViewControllerDelegate {
 
         UIView.animate(withDuration: 0.2) {
             self.stateAnimation()
-            self.layoutIfNeeded()
         }
     }
 
     public func cancelSelection() {
         UIView.animate(withDuration: 0.2) {
             self.stateAnimation()
-            self.setNeedsLayout()
-            self.layoutIfNeeded()
         }
     }
 }
