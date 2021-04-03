@@ -28,8 +28,8 @@ extension TimeTablePresenter: TimeTableViewOutput {
         interactor.getSchedules(for: date)
     }
 
-    func didSelected(doctorAt indexPath: IndexPath) {
-        view.updatePatientsSection(for: indexPath)
+    func didSelected(_ schedule: DoctorSchedule) {
+        view.updatePatientsSection(for: schedule)
     }
 
     func didSelected(date: Date) {

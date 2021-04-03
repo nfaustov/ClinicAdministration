@@ -10,7 +10,7 @@ import Foundation
 protocol TimeTableViewOutput: AnyObject {
     func viewDidLoad(with date: Date)
 
-    func didSelected(doctorAt indexPath: IndexPath)
+    func didSelected(_ schedule: DoctorSchedule)
 
     func didSelected(date: Date)
 

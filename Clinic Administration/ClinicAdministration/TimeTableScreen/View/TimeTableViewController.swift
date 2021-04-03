@@ -11,7 +11,7 @@ import Design
 import DatePicker
 
 final class TimeTableViewController: UIViewController {
-    private struct ElementKind {
+    private enum ElementKind {
         static let patientSectionHeader = "patient-section-header"
         static let patientSectionFooter = "patient-section-footer"
         static let patientSectionBackground = "patient-section-background"
@@ -28,7 +28,7 @@ final class TimeTableViewController: UIViewController {
 
     var output: TimeTableViewOutput!
 
-    var date = Date().addingTimeInterval(172_800)
+    var date = Date().addingTimeInterval(86_400)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -199,11 +199,12 @@ final class TimeTableViewController: UIViewController {
 
 extension TimeTableViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let section = Section(rawValue: indexPath.section)
+        guard let dataSource = dataSource,
+              let doctorSchedule = dataSource.itemIdentifier(for: indexPath) as? DoctorSchedule else { return }
 
-        if section == .doctor {
-            output.didSelected(doctorAt: indexPath)
-        }
+        output.didSelected(doctorSchedule)
+
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
 }
 
@@ -218,16 +219,18 @@ extension TimeTableViewController: TimeTableViewInput {
         snapshot.appendItems(schedules, toSection: .doctor)
         snapshot.appendItems(firstSchedule.patientCells, toSection: .patient)
         dataSource?.apply(snapshot)
+
+        let indexPath = dataSource?.indexPath(for: firstSchedule)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
     }
 
-    func updatePatientsSection(for indexPath: IndexPath) {
-        guard let dataSource = dataSource,
-              let doctor = dataSource.itemIdentifier(for: indexPath) as? DoctorSchedule else { return }
+    func updatePatientsSection(for schedule: DoctorSchedule) {
+        guard let dataSource = dataSource else { return }
 
         var snapshot = dataSource.snapshot()
         snapshot.deleteSections([.patient])
         snapshot.appendSections([.patient])
-        snapshot.appendItems(doctor.patientCells, toSection: .patient)
+        snapshot.appendItems(schedule.patientCells, toSection: .patient)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

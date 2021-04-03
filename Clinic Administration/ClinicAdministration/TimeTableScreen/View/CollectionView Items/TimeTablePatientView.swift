@@ -38,7 +38,7 @@ final class TimeTablePatientView: UIView {
         layer.borderColor = Design.Color.chocolate.cgColor
         layer.shadowOffset = .zero
         layer.shadowColor = Design.Color.darkGray.cgColor
-        layer.shadowOpacity = 0.6
+        layer.shadowOpacity = 0.5
         layer.shadowRadius = 10
 
         nameLabel.text = "\(secondName)\n\(firstName) \(patronymicName)"

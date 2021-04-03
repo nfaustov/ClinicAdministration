@@ -28,7 +28,20 @@ final class DoctorCell: UICollectionViewCell {
         return label
     }()
 
-    private var gradientLayer: CAGradientLayer!
+    private var gradientLayer: CAGradientLayer = {
+       let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [Design.Color.lightGray.cgColor, Design.Color.lightGray.withAlphaComponent(0).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.8)
+        return gradientLayer
+    }()
+
+    override var isSelected: Bool {
+        didSet {
+            layer.shadowColor = isSelected ? Design.Color.brown.cgColor : Design.Color.darkGray.cgColor
+            transform = isSelected ? CGAffineTransform(scaleX: 1.08, y: 1.08) : .identity
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,12 +50,14 @@ final class DoctorCell: UICollectionViewCell {
         layer.cornerRadius = Design.CornerRadius.medium
         layer.borderWidth = 1
         layer.borderColor = Design.Color.darkGray.cgColor
-
-//        gradientLayer = CAGradientLayer()
-//        gradientLayer.startPoint = CGPoint(x: frame.width / 2, y: 0)
-//        gradientLayer.endPoint = CGPoint(x: frame.width / 2, y: frame.height)
-//        gradientLayer.colors = [Design.Color.lightGray.cgColor, Design.Color.white.cgColor]
-//        layer.insertSublayer(gradientLayer, at: 0)
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.medium).cgPath
+        layer.shadowColor = Design.Color.darkGray.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowRadius = 9
+        layer.shadowOpacity = 0.5
+        layer.addSublayer(gradientLayer)
+        gradientLayer.frame = bounds
+        gradientLayer.cornerRadius = Design.CornerRadius.medium
 
         [nameLabel, specializationLabel].forEach { view in
             addSubview(view)

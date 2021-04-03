@@ -10,5 +10,5 @@ import Foundation
 protocol TimeTableViewInput: AnyObject {
     func applyInitialSnapshot(ofSchedules: [DoctorSchedule])
 
-    func updatePatientsSection(for indexPath: IndexPath)
+    func updatePatientsSection(for schedule: DoctorSchedule)
 }
