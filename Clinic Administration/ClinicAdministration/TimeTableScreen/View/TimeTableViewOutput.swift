@@ -15,4 +15,6 @@ protocol TimeTableViewOutput: AnyObject {
     func didSelected(date: Date)
 
     func calendarRequired()
+
+    func switchToGraphicScreen(with date: Date)
 }

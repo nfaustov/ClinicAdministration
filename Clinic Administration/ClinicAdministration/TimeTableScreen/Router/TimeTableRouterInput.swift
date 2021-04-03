@@ -8,4 +8,5 @@
 import Foundation
 
 protocol TimeTableRouterInput: AnyObject {
+    func routeToGraphicTimeTableScreen(onDate: Date)
 }

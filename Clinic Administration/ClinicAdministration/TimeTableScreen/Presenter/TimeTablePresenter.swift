@@ -17,10 +17,6 @@ final class TimeTablePresenter {
         self.router = router
         self.interactor = interactor
     }
-
-    func didSelected(patient: TimeTablePatient) {
-        // MARK: Present patient screen
-    }
 }
 
 extension TimeTablePresenter: TimeTableViewOutput {
@@ -35,7 +31,15 @@ extension TimeTablePresenter: TimeTableViewOutput {
     func didSelected(date: Date) {
     }
 
+    func didSelected(patient: TimeTablePatient) {
+        // MARK: Present patient screen
+    }
+
     func calendarRequired() {
+    }
+
+    func switchToGraphicScreen(with date: Date) {
+        router.routeToGraphicTimeTableScreen(onDate: date)
     }
 }
 

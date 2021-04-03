@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Design
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        true
+        UINavigationBar.appearance().tintColor = Design.Color.chocolate
+        UINavigationBar.appearance().barTintColor = Design.Color.lightGray
+        UINavigationBar.appearance().shadowImage = UIImage()
+
+        return true
     }
 
     func application(

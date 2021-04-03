@@ -54,7 +54,7 @@ final class DoctorCell: UICollectionViewCell {
         layer.shadowColor = Design.Color.darkGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.shadowRadius = 9
-        layer.shadowOpacity = 0.5
+        layer.shadowOpacity = 0.4
         layer.addSublayer(gradientLayer)
         gradientLayer.frame = bounds
         gradientLayer.cornerRadius = Design.CornerRadius.medium

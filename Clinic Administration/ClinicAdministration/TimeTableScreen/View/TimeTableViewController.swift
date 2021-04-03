@@ -28,10 +28,19 @@ final class TimeTableViewController: UIViewController {
 
     var output: TimeTableViewOutput!
 
-    var date = Date().addingTimeInterval(86_400)
+    var date = Date().addingTimeInterval(259_200)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let switchToGraphicImage = UIImage(systemName: "squareshape.fill")
+        let rightBarButton = UIBarButtonItem(
+            image: switchToGraphicImage,
+            style: .plain,
+            target: self,
+            action: #selector(switchToGraphicScreen)
+        )
+        navigationItem.rightBarButtonItem = rightBarButton
 
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -39,19 +48,7 @@ final class TimeTableViewController: UIViewController {
         collectionView.delegate = self
         view.addSubview(collectionView)
 
-        collectionView.register(DoctorCell.self, forCellWithReuseIdentifier: DoctorCell.reuseIdentifier)
-        collectionView.register(PatientCell.self, forCellWithReuseIdentifier: PatientCell.reuseIdentifier)
-        collectionView.register(
-            DatePickerHeader.self,
-            forSupplementaryViewOfKind: ElementKind.patientSectionHeader,
-            withReuseIdentifier: DatePickerHeader.reuseIdentifier
-        )
-        collectionView.register(
-            CallButtonFooter.self,
-            forSupplementaryViewOfKind: ElementKind.patientSectionFooter,
-            withReuseIdentifier: CallButtonFooter.reuseIdentifier
-        )
-
+        registerViews()
         createDataSource()
         createSupplementaryViews()
 
@@ -94,6 +91,25 @@ final class TimeTableViewController: UIViewController {
             button.bottomAnchor.constraint(equalTo: superView.bottomAnchor),
             button.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+
+    private func registerViews() {
+        collectionView.register(DoctorCell.self, forCellWithReuseIdentifier: DoctorCell.reuseIdentifier)
+        collectionView.register(PatientCell.self, forCellWithReuseIdentifier: PatientCell.reuseIdentifier)
+        collectionView.register(
+            DatePickerHeader.self,
+            forSupplementaryViewOfKind: ElementKind.patientSectionHeader,
+            withReuseIdentifier: DatePickerHeader.reuseIdentifier
+        )
+        collectionView.register(
+            CallButtonFooter.self,
+            forSupplementaryViewOfKind: ElementKind.patientSectionFooter,
+            withReuseIdentifier: CallButtonFooter.reuseIdentifier
+        )
+    }
+
+    @objc private func switchToGraphicScreen() {
+        output.switchToGraphicScreen(with: date)
     }
 
     // MARK: - UICollectionViewDiffableDataSource
