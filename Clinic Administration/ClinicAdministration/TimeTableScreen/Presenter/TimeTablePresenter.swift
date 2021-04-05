@@ -8,18 +8,18 @@
 import Foundation
 
 final class TimeTablePresenter {
-    weak var view: TimeTableViewInput!
+    weak var view: TimeTableDisplaying!
     var interactor: TimeTableInteractorInput!
     var router: TimeTableRouterInput!
 
-    init(view: TimeTableViewInput, router: TimeTableRouterInput, interactor: TimeTableInteractorInput) {
+    init(view: TimeTableDisplaying, router: TimeTableRouterInput, interactor: TimeTableInteractorInput) {
         self.view = view
         self.router = router
         self.interactor = interactor
     }
 }
 
-extension TimeTablePresenter: TimeTableViewOutput {
+extension TimeTablePresenter: TimeTablePresentation {
     func viewDidLoad(with date: Date) {
         interactor.getSchedules(for: date)
     }
@@ -36,6 +36,12 @@ extension TimeTablePresenter: TimeTableViewOutput {
     }
 
     func calendarRequired() {
+    }
+
+    func addNewDoctorSchedule() {
+    }
+
+    func removeDoctorSchedule() {
     }
 
     func switchToGraphicScreen(with date: Date) {

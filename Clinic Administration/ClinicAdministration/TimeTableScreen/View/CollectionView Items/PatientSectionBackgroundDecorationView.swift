@@ -8,7 +8,7 @@
 import UIKit
 import Design
 
-class PatientSectionBackgroundDecorationView: UICollectionReusableView {
+final class PatientSectionBackgroundDecorationView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 

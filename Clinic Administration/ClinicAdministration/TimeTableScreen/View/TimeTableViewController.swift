@@ -15,6 +15,7 @@ final class TimeTableViewController: UIViewController {
         static let patientSectionHeader = "patient-section-header"
         static let patientSectionFooter = "patient-section-footer"
         static let patientSectionBackground = "patient-section-background"
+        static let doctorSectionHeader = "doctor-section-header"
     }
 
     private enum Section: Int, Hashable {
@@ -26,9 +27,9 @@ final class TimeTableViewController: UIViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
 
-    var output: TimeTableViewOutput!
+    var presenter: TimeTablePresentation!
 
-    var date = Date().addingTimeInterval(259_200)
+    var date = Date().addingTimeInterval(86_400)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,50 +53,21 @@ final class TimeTableViewController: UIViewController {
         createDataSource()
         createSupplementaryViews()
 
-        output.viewDidLoad(with: date)
+        presenter.viewDidLoad(with: date)
     }
 
-    private func addDatePicker(toView superView: UIView) {
-        let datePicker = DatePicker(
-            selectedDate: date,
-            dateAction: output.didSelected(date:),
-            calendarAction: output.calendarRequired
-        )
-
-        superView.addSubview(datePicker)
-
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            datePicker.topAnchor.constraint(equalTo: superView.topAnchor),
-            datePicker.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: 12),
-            datePicker.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -12),
-            datePicker.heightAnchor.constraint(equalToConstant: 90)
-        ])
-    }
-
-    private func addCallButton(toView superView: UIView) {
-        let button = UIButton()
-        button.setTitle("СВЯЗАТЬСЯ С ВРАЧОМ", for: .normal)
-        button.setTitleColor(Design.Color.white, for: .normal)
-        button.backgroundColor = Design.Color.red
-        button.layer.cornerRadius = Design.CornerRadius.medium
-        button.titleEdgeInsets.left = -70
-        superView.addSubview(button)
-
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: superView.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: superView.trailingAnchor),
-            button.bottomAnchor.constraint(equalTo: superView.bottomAnchor),
-            button.heightAnchor.constraint(equalToConstant: 50)
-        ])
+    @objc private func switchToGraphicScreen() {
+        presenter.switchToGraphicScreen(with: date)
     }
 
     private func registerViews() {
         collectionView.register(DoctorCell.self, forCellWithReuseIdentifier: DoctorCell.reuseIdentifier)
         collectionView.register(PatientCell.self, forCellWithReuseIdentifier: PatientCell.reuseIdentifier)
+        collectionView.register(
+            DoctorLeadingHeader.self,
+            forSupplementaryViewOfKind: ElementKind.doctorSectionHeader,
+            withReuseIdentifier: DoctorLeadingHeader.reuseIdentifier
+        )
         collectionView.register(
             DatePickerHeader.self,
             forSupplementaryViewOfKind: ElementKind.patientSectionHeader,
@@ -106,10 +78,6 @@ final class TimeTableViewController: UIViewController {
             forSupplementaryViewOfKind: ElementKind.patientSectionFooter,
             withReuseIdentifier: CallButtonFooter.reuseIdentifier
         )
-    }
-
-    @objc private func switchToGraphicScreen() {
-        output.switchToGraphicScreen(with: date)
     }
 
     // MARK: - UICollectionViewDiffableDataSource
@@ -157,25 +125,32 @@ final class TimeTableViewController: UIViewController {
     }
 
     private func createSupplementaryViews() {
-        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
-            if let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-                ofKind: ElementKind.patientSectionHeader,
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            guard let self = self else { return nil }
+
+            if kind == ElementKind.patientSectionHeader,
+               let patientSectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
                 withReuseIdentifier: DatePickerHeader.reuseIdentifier,
                 for: indexPath
-            ) as? DatePickerHeader,
-            kind == ElementKind.patientSectionHeader {
-                self.addDatePicker(toView: sectionHeader)
+            ) as? DatePickerHeader {
+                patientSectionHeader.configure(with: self.date, presenter: self.presenter)
 
-                return sectionHeader
-            } else if let sectionFooter = collectionView.dequeueReusableSupplementaryView(
-                ofKind: ElementKind.patientSectionFooter,
+                return patientSectionHeader
+            } else if kind == ElementKind.patientSectionFooter,
+                      let patientSectionFooter = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
                 withReuseIdentifier: CallButtonFooter.reuseIdentifier,
                 for: indexPath
-            ) as? CallButtonFooter,
-            kind == ElementKind.patientSectionFooter {
-                self.addCallButton(toView: sectionFooter)
-
-                return sectionFooter
+            ) as? CallButtonFooter {
+                return patientSectionFooter
+            } else if kind == ElementKind.doctorSectionHeader,
+                      let doctorSectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: DoctorLeadingHeader.reuseIdentifier,
+                for: indexPath
+            ) as? DoctorLeadingHeader {
+                return doctorSectionHeader
             } else { return nil }
         }
     }
@@ -188,10 +163,11 @@ final class TimeTableViewController: UIViewController {
                 fatalError("This section doesn't exist")
             }
 
-            let timeTableLayout = TimeTableLayout(
+            let timeTableLayout = TimeTableCollectionViewLayout(
                 patientSectionHeaderElementKind: ElementKind.patientSectionHeader,
                 patientSectionFooterElementKind: ElementKind.patientSectionFooter,
-                patientSectionBackgroundElementKind: ElementKind.patientSectionBackground
+                patientSectionBackgroundElementKind: ElementKind.patientSectionBackground,
+                doctorSectionHeaderElementKind: ElementKind.doctorSectionHeader
             )
 
             switch section {
@@ -218,15 +194,19 @@ extension TimeTableViewController: UICollectionViewDelegate {
         guard let dataSource = dataSource,
               let doctorSchedule = dataSource.itemIdentifier(for: indexPath) as? DoctorSchedule else { return }
 
-        output.didSelected(doctorSchedule)
+        presenter.didSelected(doctorSchedule)
 
-        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        collectionView.selectItem(
+            at: indexPath,
+            animated: true,
+            scrollPosition: indexPath.row == 0 ? .left : .centeredHorizontally
+        )
     }
 }
 
-// MARK: - TimeTableInput
+// MARK: - TimeTableDisplaying
 
-extension TimeTableViewController: TimeTableViewInput {
+extension TimeTableViewController: TimeTableDisplaying {
     func applyInitialSnapshot(ofSchedules schedules: [DoctorSchedule]) {
         guard let firstSchedule = schedules.first else { return }
 
@@ -237,7 +217,7 @@ extension TimeTableViewController: TimeTableViewInput {
         dataSource?.apply(snapshot)
 
         let indexPath = dataSource?.indexPath(for: firstSchedule)
-        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
     }
 
     func updatePatientsSection(for schedule: DoctorSchedule) {

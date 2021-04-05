@@ -1,5 +1,5 @@
 //
-//  TimeTableLayout.swift
+//  TimeTableCollectionViewLayout.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 01.04.2021.
@@ -7,20 +7,25 @@
 
 import UIKit
 
-class TimeTableLayout {
+final class TimeTableCollectionViewLayout {
     let patientSectionHeaderElementKind: String
     let patientSectionFooterElementKind: String
     let patientSectionBackgroundElementKind: String
+    let doctorSectionHeaderElementKind: String
 
     init(
         patientSectionHeaderElementKind: String,
         patientSectionFooterElementKind: String,
-        patientSectionBackgroundElementKind: String
+        patientSectionBackgroundElementKind: String,
+        doctorSectionHeaderElementKind: String
     ) {
         self.patientSectionHeaderElementKind = patientSectionHeaderElementKind
         self.patientSectionFooterElementKind = patientSectionFooterElementKind
         self.patientSectionBackgroundElementKind = patientSectionBackgroundElementKind
+        self.doctorSectionHeaderElementKind = doctorSectionHeaderElementKind
     }
+
+    // MARK: - Doctor section & supplementary items
 
     func createDoctorSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
@@ -35,10 +40,36 @@ class TimeTableLayout {
         )
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 72, bottom: 0, trailing: 0)
+        let layoutSectionHeader = createDoctorSectionHeader()
+        layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
+        layoutSection.supplementariesFollowContentInsets = false
         layoutSection.orthogonalScrollingBehavior = .continuous
+        layoutSection.visibleItemsInvalidationHandler = { visibleItems, contentOffset, _ in
+            guard let leadingHeader = visibleItems
+                    .first(where: { $0.representedElementKind == self.doctorSectionHeaderElementKind }) else { return}
+
+            leadingHeader.transform = CGAffineTransform(translationX: -contentOffset.x, y: 0)
+        }
 
         return layoutSection
     }
+
+    private func createDoctorSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(72),
+            heightDimension: .absolute(170)
+        )
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: layoutSectionHeaderSize,
+            elementKind: doctorSectionHeaderElementKind,
+            alignment: .leading
+        )
+
+        return layoutSectionHeader
+    }
+
+    // MARK: - Patient section & supplementary items
 
     func createPatientSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
@@ -53,8 +84,8 @@ class TimeTableLayout {
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
         layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        let layoutSectionHeader = createSectionHeader()
-        let layoutSectionFooter = createSectionFooter()
+        let layoutSectionHeader = createPatientSectionHeader()
+        let layoutSectionFooter = createPatientSectionFooter()
         layoutSection.boundarySupplementaryItems = [layoutSectionHeader, layoutSectionFooter]
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: patientSectionBackgroundElementKind
@@ -64,7 +95,7 @@ class TimeTableLayout {
         return layoutSection
     }
 
-    private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+    private func createPatientSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutSectionHeaderSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .absolute(90)
@@ -78,7 +109,7 @@ class TimeTableLayout {
         return layoutSectionHeader
     }
 
-    private func createSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+    private func createPatientSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutSectionFooterSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.85),
             heightDimension: .absolute(95)

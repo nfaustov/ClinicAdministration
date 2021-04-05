@@ -18,8 +18,6 @@ final class PatientCell: UICollectionViewCell {
         return label
     }()
 
-    private var patientView: UIView?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -53,22 +51,21 @@ final class PatientCell: UICollectionViewCell {
 
     func configure(with cell: TimeTablePatientCell) {
         DateFormatter.shared.dateFormat = "H:mm"
-
         timeLabel.text = DateFormatter.shared.string(from: cell.scheduledTime)
 
-        patientView?.removeFromSuperview()
+        for view in subviews where view != timeLabel {
+            view.removeFromSuperview()
+        }
 
         if let patient = cell.patient {
             timeLabel.textColor = Design.Color.darkGray
 
-            patientView = TimeTablePatientView(
+            let patientView = TimeTablePatientView(
                 secondName: patient.secondName,
                 firstName: patient.firstName,
                 patronymicName: patient.patronymicName,
                 phoneNumber: patient.phoneNumber
             )
-
-            guard let patientView = patientView else { return }
 
             addSubview(patientView)
 

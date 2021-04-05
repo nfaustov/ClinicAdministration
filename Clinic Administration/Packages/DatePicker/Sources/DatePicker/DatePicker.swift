@@ -36,15 +36,28 @@ public final class DatePicker: UIView {
 
     private var state: DatePickerState = .none
 
-    private var selectedDate: Date {
+    public var selectedDate: Date {
         didSet {
             configureLabels()
             dateAction?(selectedDate)
         }
     }
 
-    private var dateAction: ((Date) -> Void)?
-    private var calendarAction: (() -> Void)?
+    public var dateAction: ((Date) -> Void)?
+    public var calendarAction: (() -> Void)?
+
+    public init() {
+        selectedDate = Date()
+        super.init(frame: .zero)
+
+        layer.backgroundColor = Design.Color.chocolate.cgColor
+        layer.cornerRadius = Design.CornerRadius.large
+
+        setState(selectedDate: selectedDate)
+        configureLabels()
+        configureLabelsStack()
+        configureButtonsStack(with: state)
+    }
 
     public init(selectedDate: Date, dateAction: @escaping (Date) -> Void, calendarAction: @escaping () -> Void) {
         self.selectedDate = selectedDate

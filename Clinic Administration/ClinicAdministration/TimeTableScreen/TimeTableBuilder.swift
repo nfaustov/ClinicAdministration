@@ -13,7 +13,7 @@ final class TimeTableBuilder {
         let router = TimeTableRouter(viewController: view)
         let interactor = TimeTableInteractor()
         let presenter = TimeTablePresenter(view: view, router: router, interactor: interactor)
-        view.output = presenter
+        view.presenter = presenter
         interactor.output = presenter
 
         return view
