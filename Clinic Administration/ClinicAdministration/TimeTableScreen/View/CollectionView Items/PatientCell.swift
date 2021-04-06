@@ -21,7 +21,6 @@ final class PatientCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = Design.Color.white
         layer.masksToBounds = true
         layer.borderWidth = 1
         layer.borderColor = Design.Color.darkGray.cgColor
@@ -50,12 +49,20 @@ final class PatientCell: UICollectionViewCell {
     }
 
     func configure(with cell: TimeTablePatientCell) {
-        DateFormatter.shared.dateFormat = "H:mm"
-        timeLabel.text = DateFormatter.shared.string(from: cell.scheduledTime)
-
         for view in subviews where view != timeLabel {
             view.removeFromSuperview()
         }
+
+        guard let scheduledTime = cell.scheduledTime else {
+            timeLabel.text = ""
+            backgroundColor = Design.Color.gray
+            return
+        }
+
+        backgroundColor = Design.Color.white
+
+        DateFormatter.shared.dateFormat = "H:mm"
+        timeLabel.text = DateFormatter.shared.string(from: scheduledTime)
 
         if let patient = cell.patient {
             timeLabel.textColor = Design.Color.darkGray

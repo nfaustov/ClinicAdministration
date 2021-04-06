@@ -8,7 +8,7 @@
 import Foundation
 
 struct TimeTablePatientCell: Codable, Hashable {
-    var scheduledTime: Date
+    var scheduledTime: Date?
     var duration: TimeInterval
     var patient: TimeTablePatient?
 }

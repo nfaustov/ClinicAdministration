@@ -29,7 +29,7 @@ final class TimeTableViewController: UIViewController {
 
     var presenter: TimeTablePresentation!
 
-    var date = Date().addingTimeInterval(86_400)
+    var date = Date().addingTimeInterval(172_800)
 
     override func viewDidLoad() {
         super.viewDidLoad()

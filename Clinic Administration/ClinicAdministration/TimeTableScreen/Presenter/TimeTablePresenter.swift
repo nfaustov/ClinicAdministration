@@ -25,7 +25,7 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func didSelected(_ schedule: DoctorSchedule) {
-        view.updatePatientsSection(for: schedule)
+        view.updatePatientsSection(for: prepareIfNeeded(schedule))
     }
 
     func didSelected(date: Date) {
@@ -51,6 +51,24 @@ extension TimeTablePresenter: TimeTablePresentation {
 
 extension TimeTablePresenter: TimeTableInteractorOutput {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
-        view.applyInitialSnapshot(ofSchedules: schedules)
+        guard let firstSchedule = schedules.first else { return }
+
+        var preparedSchedules = schedules
+        preparedSchedules.remove(at: 0)
+        preparedSchedules.insert(prepareIfNeeded(firstSchedule), at: 0)
+        view.applyInitialSnapshot(ofSchedules: preparedSchedules)
+    }
+}
+
+private extension TimeTablePresenter {
+    func prepareIfNeeded(_ schedule: DoctorSchedule) -> DoctorSchedule {
+        if schedule.patientCells.count % 2 != 0 {
+            var preparedSchedule = schedule
+            let cell = TimeTablePatientCell(scheduledTime: nil, duration: 0, patient: nil)
+            preparedSchedule.patientCells.append(cell)
+            return preparedSchedule
+        } else {
+            return schedule
+        }
     }
 }
