@@ -9,18 +9,18 @@ import UIKit
 
 final class TimeTableCollectionViewLayout {
     let patientSectionHeaderElementKind: String
-    let patientSectionFooterElementKind: String
+    let actionListFooterElementKind: String
     let patientSectionBackgroundElementKind: String
     let doctorSectionHeaderElementKind: String
 
     init(
         patientSectionHeaderElementKind: String,
-        patientSectionFooterElementKind: String,
+        actionListFooterElementKind: String,
         patientSectionBackgroundElementKind: String,
         doctorSectionHeaderElementKind: String
     ) {
         self.patientSectionHeaderElementKind = patientSectionHeaderElementKind
-        self.patientSectionFooterElementKind = patientSectionFooterElementKind
+        self.actionListFooterElementKind = actionListFooterElementKind
         self.patientSectionBackgroundElementKind = patientSectionBackgroundElementKind
         self.doctorSectionHeaderElementKind = doctorSectionHeaderElementKind
     }
@@ -85,8 +85,7 @@ final class TimeTableCollectionViewLayout {
         layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         let layoutSectionHeader = createPatientSectionHeader()
-        let layoutSectionFooter = createPatientSectionFooter()
-        layoutSection.boundarySupplementaryItems = [layoutSectionHeader, layoutSectionFooter]
+        layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: patientSectionBackgroundElementKind
         )
@@ -109,14 +108,35 @@ final class TimeTableCollectionViewLayout {
         return layoutSectionHeader
     }
 
-    private func createPatientSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+    // MARK: - Action list section & supplementary items
+
+    func createActionListSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layoutGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(45)
+        )
+        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
+        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        let layoutSectionFooter = createActionListFooter()
+        layoutSection.boundarySupplementaryItems = [layoutSectionFooter]
+
+        return layoutSection
+    }
+
+    private func createActionListFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutSectionFooterSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.85),
             heightDimension: .absolute(95)
         )
         let layoutSectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: layoutSectionFooterSize,
-            elementKind: patientSectionFooterElementKind,
+            elementKind: actionListFooterElementKind,
             alignment: .bottom
         )
 

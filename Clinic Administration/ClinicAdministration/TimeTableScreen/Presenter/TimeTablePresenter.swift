@@ -25,7 +25,7 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func didSelected(_ schedule: DoctorSchedule) {
-        view.updatePatientsSection(for: prepareIfNeeded(schedule))
+        view.update(for: prepareIfNeeded(schedule))
     }
 
     func didSelected(date: Date) {
@@ -56,6 +56,7 @@ extension TimeTablePresenter: TimeTableInteractorOutput {
         var preparedSchedules = schedules
         preparedSchedules.remove(at: 0)
         preparedSchedules.insert(prepareIfNeeded(firstSchedule), at: 0)
+
         view.applyInitialSnapshot(ofSchedules: preparedSchedules)
     }
 }

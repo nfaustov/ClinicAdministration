@@ -13,14 +13,15 @@ import DatePicker
 final class TimeTableViewController: UIViewController {
     private enum ElementKind {
         static let patientSectionHeader = "patient-section-header"
-        static let patientSectionFooter = "patient-section-footer"
         static let patientSectionBackground = "patient-section-background"
         static let doctorSectionHeader = "doctor-section-header"
+        static let actionListFooter = "action-list-footer"
     }
 
     private enum Section: Int, Hashable {
         case doctor
         case patient
+        case actionList
     }
 
     private var collectionView: UICollectionView!
@@ -30,6 +31,8 @@ final class TimeTableViewController: UIViewController {
     var presenter: TimeTablePresentation!
 
     var date = Date().addingTimeInterval(172_800)
+
+    var actionList: [TimeTableAction] = [.showNextSchedule, .showAllSchedules, .editSchedule]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +66,7 @@ final class TimeTableViewController: UIViewController {
     private func registerViews() {
         collectionView.register(DoctorCell.self, forCellWithReuseIdentifier: DoctorCell.reuseIdentifier)
         collectionView.register(PatientCell.self, forCellWithReuseIdentifier: PatientCell.reuseIdentifier)
+        collectionView.register(ActionListCell.self, forCellWithReuseIdentifier: ActionListCell.reuseIdentifier)
         collectionView.register(
             DoctorLeadingHeader.self,
             forSupplementaryViewOfKind: ElementKind.doctorSectionHeader,
@@ -75,7 +79,7 @@ final class TimeTableViewController: UIViewController {
         )
         collectionView.register(
             CallButtonFooter.self,
-            forSupplementaryViewOfKind: ElementKind.patientSectionFooter,
+            forSupplementaryViewOfKind: ElementKind.actionListFooter,
             withReuseIdentifier: CallButtonFooter.reuseIdentifier
         )
     }
@@ -90,9 +94,7 @@ final class TimeTableViewController: UIViewController {
                 guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: DoctorCell.reuseIdentifier,
                         for: indexPath
-                ) as? DoctorCell else {
-                    fatalError("Unable to dequeue cell")
-                }
+                ) as? DoctorCell else { fatalError("Unable to dequeue cell") }
 
                 cell.configure(with: doctor)
 
@@ -101,9 +103,7 @@ final class TimeTableViewController: UIViewController {
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: PatientCell.reuseIdentifier,
                     for: indexPath
-                ) as? PatientCell else {
-                    fatalError("Unable to dequeue cell")
-                }
+                ) as? PatientCell else { fatalError("Unable to dequeue cell") }
 
                 cell.configure(with: patientCell)
 
@@ -118,9 +118,23 @@ final class TimeTableViewController: UIViewController {
                 }
 
                 return cell
-            } else {
-                fatalError("Unknown item type")
-            }
+            } else if let action = item as? TimeTableAction {
+                guard let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: ActionListCell.reuseIdentifier,
+                        for: indexPath
+                ) as? ActionListCell else { fatalError("Unable to dequeue cell") }
+
+                cell.configure(with: action)
+
+                if indexPath.row == 2 {
+                    cell.layer.cornerRadius = Design.CornerRadius.large
+                    cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+                } else {
+                    cell.layer.cornerRadius = .zero
+                }
+
+                return cell
+            } else { fatalError("Unknown item type") }
         }
     }
 
@@ -137,7 +151,7 @@ final class TimeTableViewController: UIViewController {
                 patientSectionHeader.configure(with: self.date, presenter: self.presenter)
 
                 return patientSectionHeader
-            } else if kind == ElementKind.patientSectionFooter,
+            } else if kind == ElementKind.actionListFooter,
                       let patientSectionFooter = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: CallButtonFooter.reuseIdentifier,
@@ -165,7 +179,7 @@ final class TimeTableViewController: UIViewController {
 
             let timeTableLayout = TimeTableCollectionViewLayout(
                 patientSectionHeaderElementKind: ElementKind.patientSectionHeader,
-                patientSectionFooterElementKind: ElementKind.patientSectionFooter,
+                actionListFooterElementKind: ElementKind.actionListFooter,
                 patientSectionBackgroundElementKind: ElementKind.patientSectionBackground,
                 doctorSectionHeaderElementKind: ElementKind.doctorSectionHeader
             )
@@ -175,6 +189,8 @@ final class TimeTableViewController: UIViewController {
                 return timeTableLayout.createPatientSection()
             case .doctor:
                 return timeTableLayout.createDoctorSection()
+            case .actionList:
+                return timeTableLayout.createActionListSection()
             }
         }
 
@@ -211,22 +227,24 @@ extension TimeTableViewController: TimeTableDisplaying {
         guard let firstSchedule = schedules.first else { return }
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-        snapshot.appendSections([.doctor, .patient])
+        snapshot.appendSections([.doctor, .patient, .actionList])
         snapshot.appendItems(schedules, toSection: .doctor)
         snapshot.appendItems(firstSchedule.patientCells, toSection: .patient)
+        snapshot.appendItems(actionList, toSection: .actionList)
         dataSource?.apply(snapshot)
 
         let indexPath = dataSource?.indexPath(for: firstSchedule)
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
     }
 
-    func updatePatientsSection(for schedule: DoctorSchedule) {
+    func update(for schedule: DoctorSchedule) {
         guard let dataSource = dataSource else { return }
 
         var snapshot = dataSource.snapshot()
-        snapshot.deleteSections([.patient])
-        snapshot.appendSections([.patient])
+        snapshot.deleteSections([.patient, .actionList])
+        snapshot.appendSections([.patient, .actionList])
         snapshot.appendItems(schedule.patientCells, toSection: .patient)
+        snapshot.appendItems(actionList, toSection: .actionList)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

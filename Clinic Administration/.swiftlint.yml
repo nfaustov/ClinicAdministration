@@ -14,7 +14,6 @@ opt_in_rules:
   - operator_usage_whitespace
   - prefer_zero_over_explicit_init
   - toggle_bool
-  - type_contents_order
   - unneeded_parentheses_in_closure_argument
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
