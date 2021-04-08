@@ -7,17 +7,17 @@
         "phoneNumber": "8-999-999-9999",
         "specialization": "Травматолог",
 		"cabinet": 1,
-		"startingTime": "2021-04-08T12:30",
-		"endingTime": "2021-04-08T15:00",
+		"startingTime": "2021-04-12T12:30",
+		"endingTime": "2021-04-12T15:00",
         "serviceDuration": 1800,
         "patientCells": [
             {
-                "scheduledTime": "2021-04-08T12:30",
+                "scheduledTime": "2021-04-12T12:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T13:00",
+                "scheduledTime": "2021-04-12T13:00",
                 "duration": 1800,
                 "patient": {
                     "id": "43fa501a-efaf-4837-89fe-aa8a5f048c06",
@@ -28,7 +28,7 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T13:30",
+                "scheduledTime": "2021-04-12T13:30",
                 "duration": 1800,
                 "patient": {
                     "id": "977f31d9-5f05-4b42-86a5-dbe97b4503f4",
@@ -39,12 +39,12 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T14:00",
+                "scheduledTime": "2021-04-12T14:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T14:30",
+                "scheduledTime": "2021-04-12T14:30",
                 "duration": 1800,
                 "patient": {
                     "id": "2c5ab4d5-a37f-4ed1-9e70-a0ea9a24464f",
@@ -64,12 +64,12 @@
         "phoneNumber": "8-000-000-0000",
         "specialization": "Физиопульмонолог",
         "cabinet": 2,
-        "startingTime": "2021-04-08T11:00",
-        "endingTime": "2021-04-08T15:25",
+        "startingTime": "2021-04-12T11:00",
+        "endingTime": "2021-04-12T15:25",
         "serviceDuration": 1800,
         "patientCells": [
             {
-                "scheduledTime": "2021-04-08T11:00",
+                "scheduledTime": "2021-04-12T11:00",
                 "duration": 1800,
                 "patient": {
                     "id": "7223c83b-465c-4177-a975-329bfbab899e",
@@ -80,7 +80,7 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T11:30",
+                "scheduledTime": "2021-04-12T11:30",
                 "duration": 1800,
                 "patient": {
                     "id": "8fdadbbd-4e64-4ae2-b7fd-35e3b529d2bd",
@@ -91,7 +91,7 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T12:00",
+                "scheduledTime": "2021-04-12T12:00",
                 "duration": 1800,
                 "patient": {
                     "id": "6f7816b8-9df4-4a87-be54-210d248e0ebc",
@@ -102,32 +102,32 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T12:30",
+                "scheduledTime": "2021-04-12T12:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T13:00",
+                "scheduledTime": "2021-04-12T13:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T13:30",
+                "scheduledTime": "2021-04-12T13:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T14:00",
+                "scheduledTime": "2021-04-12T14:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T14:30",
+                "scheduledTime": "2021-04-12T14:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T15:00",
+                "scheduledTime": "2021-04-12T15:00",
                 "duration": 1500,
                 "patient": null
             }
@@ -141,12 +141,12 @@
         "phoneNumber": "8-000-000-0000",
         "specialization": "Сосудистый хирург",
         "cabinet": 4,
-        "startingTime": "2021-04-08T8:30",
-        "endingTime": "2021-04-08T10:30",
+        "startingTime": "2021-04-12T8:30",
+        "endingTime": "2021-04-12T10:30",
         "serviceDuration": 1800,
         "patientCells": [
             {
-                "scheduledTime": "2021-04-08T8:30",
+                "scheduledTime": "2021-04-12T8:30",
                 "duration": 1800,
                 "patient": {
                     "id": "ca7a1f23-f6b0-4161-b53f-abc8cc37b1d5",
@@ -157,12 +157,12 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T9:00",
+                "scheduledTime": "2021-04-12T9:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T9:30",
+                "scheduledTime": "2021-04-12T9:30",
                 "duration": 1800,
                 "patient": {
                     "id": "f3f61653-77f4-42f0-afc5-cc83da691331",
@@ -173,7 +173,7 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T10:00",
+                "scheduledTime": "2021-04-12T10:00",
                 "duration": 1800,
                 "patient": {
                     "id": "571bd129-02b6-4d4d-ba4f-a567ab5ea57b",
@@ -193,12 +193,12 @@
         "phoneNumber": "8-999-999-9999",
         "specialization": "Гинеколог-эндокринолог",
         "cabinet": 4,
-        "startingTime": "2021-04-08T10:00",
-        "endingTime": "2021-04-08T12:00",
+        "startingTime": "2021-04-12T10:00",
+        "endingTime": "2021-04-12T12:00",
         "serviceDuration": 1800,
         "patientCells": [
             {
-                "scheduledTime": "2021-04-08T10:00",
+                "scheduledTime": "2021-04-12T10:00",
                 "duration": 1800,
                 "patient": {
                     "id": "842e0803-3dfd-4b4d-b0f4-2bf97e0cb91f",
@@ -209,12 +209,12 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T10:30",
+                "scheduledTime": "2021-04-12T10:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T11:00",
+                "scheduledTime": "2021-04-12T11:00",
                 "duration": 1800,
                 "patient": {
                     "id": "6c018b3c-b4cd-496c-9aee-f6ca7fa95ca7",
@@ -225,7 +225,7 @@
                 }
             },
             {
-                "scheduledTime": "2021-04-08T11:30",
+                "scheduledTime": "2021-04-12T11:30",
                 "duration": 1800,
                 "patient": {
                     "id": "e52065d5-cdcc-4a54-9294-51d2960269fe",
@@ -245,32 +245,32 @@
         "phoneNumber": "8-999-999-9999",
         "specialization": "Детсий хирург",
         "cabinet": 4,
-        "startingTime": "2021-04-08T11:30",
-        "endingTime": "2021-04-08T14:00",
+        "startingTime": "2021-04-12T11:30",
+        "endingTime": "2021-04-12T14:00",
         "serviceDuration": 1800,
         "patientCells": [
             {
-                "scheduledTime": "2021-04-08T11:30",
+                "scheduledTime": "2021-04-12T11:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T12:00",
+                "scheduledTime": "2021-04-12T12:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T12:30",
+                "scheduledTime": "2021-04-12T12:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T13:00",
+                "scheduledTime": "2021-04-12T13:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T13:30",
+                "scheduledTime": "2021-04-12T13:30",
                 "duration": 1800,
                 "patient": null
             },
@@ -284,37 +284,37 @@
         "phoneNumber": "8-000-000-0000",
         "specialization": "Кардиохирург",
         "cabinet": 4,
-        "startingTime": "2021-04-08T13:00",
-        "endingTime": "2021-04-08T16:00",
+        "startingTime": "2021-04-12T13:00",
+        "endingTime": "2021-04-12T16:00",
         "serviceDuration": 1800,
         "patientCells": [
             {
-                "scheduledTime": "2021-04-08T13:00",
+                "scheduledTime": "2021-04-12T13:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T13:30",
+                "scheduledTime": "2021-04-12T13:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T14:00",
+                "scheduledTime": "2021-04-12T14:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T14:30",
+                "scheduledTime": "2021-04-12T14:30",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T15:00",
+                "scheduledTime": "2021-04-12T15:00",
                 "duration": 1800,
                 "patient": null
             },
             {
-                "scheduledTime": "2021-04-08T15:30",
+                "scheduledTime": "2021-04-12T15:30",
                 "duration": 1800,
                 "patient": null
             },

@@ -30,7 +30,7 @@ final class TimeTableViewController: UIViewController {
 
     var presenter: TimeTablePresentation!
 
-    var date = Date().addingTimeInterval(172_800)
+    var date = Date().addingTimeInterval(259_200)
 
     var actionList: [TimeTableAction] = [.showNextSchedule, .showAllSchedules, .editSchedule]
 
@@ -90,51 +90,10 @@ final class TimeTableViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(
             collectionView: collectionView
         ) { collectionView, indexPath, item in
-            if let doctor = item as? DoctorSchedule {
-                guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: DoctorCell.reuseIdentifier,
-                        for: indexPath
-                ) as? DoctorCell else { fatalError("Unable to dequeue cell") }
+            let factory = TimeTableCellFactory(collectionView: collectionView)
+            let cell = factory.getCell(with: item, for: indexPath)
 
-                cell.configure(with: doctor)
-
-                return cell
-            } else if let patientCell = item as? TimeTablePatientCell {
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: PatientCell.reuseIdentifier,
-                    for: indexPath
-                ) as? PatientCell else { fatalError("Unable to dequeue cell") }
-
-                cell.configure(with: patientCell)
-
-                if indexPath.row == 0 {
-                    cell.layer.cornerRadius = Design.CornerRadius.large
-                    cell.layer.maskedCorners = .layerMinXMinYCorner
-                } else if indexPath.row == 1 {
-                    cell.layer.cornerRadius = Design.CornerRadius.large
-                    cell.layer.maskedCorners = .layerMaxXMinYCorner
-                } else {
-                    cell.layer.cornerRadius = .zero
-                }
-
-                return cell
-            } else if let action = item as? TimeTableAction {
-                guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: ActionListCell.reuseIdentifier,
-                        for: indexPath
-                ) as? ActionListCell else { fatalError("Unable to dequeue cell") }
-
-                cell.configure(with: action)
-
-                if indexPath.row == 2 {
-                    cell.layer.cornerRadius = Design.CornerRadius.large
-                    cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-                } else {
-                    cell.layer.cornerRadius = .zero
-                }
-
-                return cell
-            } else { fatalError("Unknown item type") }
+            return cell
         }
     }
 

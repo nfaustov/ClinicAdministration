@@ -20,6 +20,7 @@
 		8B38A1C8260D148000CA01A0 /* TimeTableRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1C7260D148000CA01A0 /* TimeTableRouterInput.swift */; };
 		8B38A1CC260D14AE00CA01A0 /* TimeTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1CB260D14AE00CA01A0 /* TimeTableRouter.swift */; };
 		8B38A1D8260D16E600CA01A0 /* TimeTablePatient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1D7260D16E600CA01A0 /* TimeTablePatient.swift */; };
+		8B41FE7F261E3D4B009ED53E /* TimeTableCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */; };
 		8B4825DA260B14300086FB64 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825D9260B14300086FB64 /* Design */; };
 		8B4825F0260B254A0086FB64 /* DatePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825EF260B254A0086FB64 /* DatePicker */; };
 		8B4825F7260B26BD0086FB64 /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825F6260B26BD0086FB64 /* Extensions */; };
@@ -80,6 +81,7 @@
 		8B38A1C7260D148000CA01A0 /* TimeTableRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRouterInput.swift; sourceTree = "<group>"; };
 		8B38A1CB260D14AE00CA01A0 /* TimeTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRouter.swift; sourceTree = "<group>"; };
 		8B38A1D7260D16E600CA01A0 /* TimeTablePatient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTablePatient.swift; sourceTree = "<group>"; };
+		8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCellFactory.swift; sourceTree = "<group>"; };
 		8B4825D1260B13520086FB64 /* Design */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Design; sourceTree = "<group>"; };
 		8B4825DD260B1BDA0086FB64 /* CalendarControl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CalendarControl; sourceTree = "<group>"; };
 		8B4825E8260B20A30086FB64 /* DatePicker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DatePicker; sourceTree = "<group>"; };
@@ -237,19 +239,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8B62D62B2615EDA7006A78F4 /* CollectionView Items */ = {
+		8B56D54F261FAC5400389955 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8B6B0F85261CA54C00F416D1 /* Models */,
 				8BA602F8260DA36700DF686B /* DoctorCell.swift */,
 				8BA60308260DDBCA00DF686B /* PatientCell.swift */,
-				8BA6030C260DDF8300DF686B /* TimeTablePatientView.swift */,
 				8BBEEF31261C968700A06B2D /* ActionListCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		8B56D550261FAC7600389955 /* Supplementaries */ = {
+			isa = PBXGroup;
+			children = (
 				8B0E46F72618F0D60035CF6D /* DoctorLeadingHeader.swift */,
 				8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */,
 				8B62D6272615ECC7006A78F4 /* CallButtonFooter.swift */,
 				8BE26CE92616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift */,
+			);
+			path = Supplementaries;
+			sourceTree = "<group>";
+		};
+		8B62D62B2615EDA7006A78F4 /* CollectionView Items */ = {
+			isa = PBXGroup;
+			children = (
+				8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */,
 				8BADB06F261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift */,
+				8BA6030C260DDF8300DF686B /* TimeTablePatientView.swift */,
+				8B56D550261FAC7600389955 /* Supplementaries */,
+				8B56D54F261FAC5400389955 /* Cells */,
+				8B6B0F85261CA54C00F416D1 /* Models */,
 			);
 			path = "CollectionView Items";
 			sourceTree = "<group>";
@@ -508,6 +527,7 @@
 				8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */,
 				8BCAB7B22559D564001A93D0 /* GraphicTimeTableViewController.swift in Sources */,
 				8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */,
+				8B41FE7F261E3D4B009ED53E /* TimeTableCellFactory.swift in Sources */,
 				8B62D61C2615C57A006A78F4 /* TimeTableBuilder.swift in Sources */,
 				8B38A1BC260D13DD00CA01A0 /* TimeTableInteractor.swift in Sources */,
 				8B38A1C4260D140200CA01A0 /* TimeTableInteractorOutput.swift in Sources */,
