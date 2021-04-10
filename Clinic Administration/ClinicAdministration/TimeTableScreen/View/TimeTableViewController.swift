@@ -16,6 +16,7 @@ final class TimeTableViewController: UIViewController {
         static let patientSectionBackground = "patient-section-background"
         static let doctorSectionHeader = "doctor-section-header"
         static let actionListFooter = "action-list-footer"
+        static let actionListBackground = "action-list-background"
     }
 
     private enum Section: Int, Hashable {
@@ -28,11 +29,11 @@ final class TimeTableViewController: UIViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
 
+    private var actionList: [TimeTableAction] = [.showNextSchedule, .showAllSchedules, .editSchedule]
+
     var presenter: TimeTablePresentation!
 
-    var date = Date().addingTimeInterval(259_200)
-
-    var actionList: [TimeTableAction] = [.showNextSchedule, .showAllSchedules, .editSchedule]
+    var date = Date().addingTimeInterval(172_800)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,7 +141,8 @@ final class TimeTableViewController: UIViewController {
                 patientSectionHeaderElementKind: ElementKind.patientSectionHeader,
                 actionListFooterElementKind: ElementKind.actionListFooter,
                 patientSectionBackgroundElementKind: ElementKind.patientSectionBackground,
-                doctorSectionHeaderElementKind: ElementKind.doctorSectionHeader
+                doctorSectionHeaderElementKind: ElementKind.doctorSectionHeader,
+                actionListBackgroundElementKind: ElementKind.actionListBackground
             )
 
             switch section {
@@ -156,6 +158,10 @@ final class TimeTableViewController: UIViewController {
         layout.register(
             PatientSectionBackgroundDecorationView.self,
             forDecorationViewOfKind: ElementKind.patientSectionBackground
+        )
+        layout.register(
+            ActionListBackgroundDecorationView.self,
+            forDecorationViewOfKind: ElementKind.actionListBackground
         )
 
         return layout

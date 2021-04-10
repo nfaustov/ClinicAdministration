@@ -22,6 +22,7 @@ final class PatientCell: UICollectionViewCell {
         super.init(frame: frame)
 
         layer.masksToBounds = true
+        layer.cornerRadius = Design.CornerRadius.small
         layer.borderWidth = 1
         layer.borderColor = Design.Color.darkGray.cgColor
 

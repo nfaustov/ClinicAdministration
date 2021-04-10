@@ -29,6 +29,7 @@
 		8B62D6242615CB7A006A78F4 /* DatePickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */; };
 		8B62D6282615ECC7006A78F4 /* CallButtonFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62D6272615ECC7006A78F4 /* CallButtonFooter.swift */; };
 		8B6B0F87261CA56700F416D1 /* TimeTableAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0F86261CA56700F416D1 /* TimeTableAction.swift */; };
+		8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */; };
 		8B733D0E256878070082784E /* TimeTableDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B733D0D256878070082784E /* TimeTableDataManager.swift */; };
 		8B733D15256934BB0082784E /* schedules.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B733D14256934BB0082784E /* schedules.json */; };
 		8B843668256DB0D1006057EF /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843667256DB0D1006057EF /* Doctor.swift */; };
@@ -90,6 +91,7 @@
 		8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerHeader.swift; sourceTree = "<group>"; };
 		8B62D6272615ECC7006A78F4 /* CallButtonFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallButtonFooter.swift; sourceTree = "<group>"; };
 		8B6B0F86261CA56700F416D1 /* TimeTableAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableAction.swift; sourceTree = "<group>"; };
+		8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		8B733D0D256878070082784E /* TimeTableDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableDataManager.swift; sourceTree = "<group>"; };
 		8B733D14256934BB0082784E /* schedules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schedules.json; sourceTree = "<group>"; };
 		8B843667256DB0D1006057EF /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */,
 				8B62D6272615ECC7006A78F4 /* CallButtonFooter.swift */,
 				8BE26CE92616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift */,
+				8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */,
 			);
 			path = Supplementaries;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				8BBEEF32261C968700A06B2D /* ActionListCell.swift in Sources */,
 				8B38A1C8260D148000CA01A0 /* TimeTableRouterInput.swift in Sources */,
 				8B62D6282615ECC7006A78F4 /* CallButtonFooter.swift in Sources */,
+				8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */,
 				8BC15FDA257C1CF900323430 /* GraphicTimeTableView.swift in Sources */,
 				8B38A1B4260D137200CA01A0 /* TimeTablePresentation.swift in Sources */,
 				8B38A1CC260D14AE00CA01A0 /* TimeTableRouter.swift in Sources */,

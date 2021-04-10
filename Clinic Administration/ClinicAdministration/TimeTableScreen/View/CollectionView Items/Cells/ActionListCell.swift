@@ -15,7 +15,7 @@ class ActionListCell: UICollectionViewCell {
 
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 16, weight: .regular)
+        label.font = Design.Font.robotoFont(ofSize: 15, weight: .medium)
         label.textColor = Design.Color.chocolate
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
@@ -25,18 +25,26 @@ class ActionListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        layer.backgroundColor = Design.Color.white.cgColor
-        layer.borderWidth = 1
-        layer.borderColor = Design.Color.darkGray.cgColor
+        layer.cornerRadius = Design.CornerRadius.small
+
+        let separator = UIView()
+        separator.backgroundColor = Design.Color.gray
 
         addSubview(nameLabel)
+        addSubview(separator)
 
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        separator.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -10)
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -10),
+
+            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            separator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            separator.bottomAnchor.constraint(equalTo: bottomAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 

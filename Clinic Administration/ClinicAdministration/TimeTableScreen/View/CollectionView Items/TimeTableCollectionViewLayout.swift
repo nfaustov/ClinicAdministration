@@ -12,17 +12,20 @@ final class TimeTableCollectionViewLayout {
     let actionListFooterElementKind: String
     let patientSectionBackgroundElementKind: String
     let doctorSectionHeaderElementKind: String
+    let actionListBackgroundElementKind: String
 
     init(
         patientSectionHeaderElementKind: String,
         actionListFooterElementKind: String,
         patientSectionBackgroundElementKind: String,
-        doctorSectionHeaderElementKind: String
+        doctorSectionHeaderElementKind: String,
+        actionListBackgroundElementKind: String
     ) {
         self.patientSectionHeaderElementKind = patientSectionHeaderElementKind
         self.actionListFooterElementKind = actionListFooterElementKind
         self.patientSectionBackgroundElementKind = patientSectionBackgroundElementKind
         self.doctorSectionHeaderElementKind = doctorSectionHeaderElementKind
+        self.actionListBackgroundElementKind = actionListBackgroundElementKind
     }
 
     // MARK: - Doctor section & supplementary items
@@ -47,7 +50,7 @@ final class TimeTableCollectionViewLayout {
         layoutSection.orthogonalScrollingBehavior = .continuous
         layoutSection.visibleItemsInvalidationHandler = { visibleItems, contentOffset, _ in
             guard let leadingHeader = visibleItems
-                    .first(where: { $0.representedElementKind == self.doctorSectionHeaderElementKind }) else { return}
+                    .first(where: { $0.representedElementKind == self.doctorSectionHeaderElementKind }) else { return }
 
             leadingHeader.transform = CGAffineTransform(translationX: -contentOffset.x, y: 0)
         }
@@ -123,8 +126,13 @@ final class TimeTableCollectionViewLayout {
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
         layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0)
         let layoutSectionFooter = createActionListFooter()
         layoutSection.boundarySupplementaryItems = [layoutSectionFooter]
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
+            elementKind: actionListBackgroundElementKind
+        )
+        layoutSection.decorationItems = [sectionBackgroundDecoration]
 
         return layoutSection
     }
@@ -132,7 +140,7 @@ final class TimeTableCollectionViewLayout {
     private func createActionListFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutSectionFooterSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.85),
-            heightDimension: .absolute(95)
+            heightDimension: .absolute(75)
         )
         let layoutSectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: layoutSectionFooterSize,
