@@ -23,6 +23,8 @@ final class TimeTableViewController: UIViewController {
         case doctor
         case patient
         case actionList
+        case doctorPlaceholder
+        case patientPlaceholder
     }
 
     private var collectionView: UICollectionView!
@@ -33,7 +35,7 @@ final class TimeTableViewController: UIViewController {
 
     var presenter: TimeTablePresentation!
 
-    var date = Date().addingTimeInterval(172_800)
+    var date = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +59,7 @@ final class TimeTableViewController: UIViewController {
         createDataSource()
         createSupplementaryViews()
 
-        presenter.viewDidLoad(with: date)
+        presenter.didSelected(date: date)
     }
 
     @objc private func switchToGraphicScreen() {
@@ -112,14 +114,14 @@ final class TimeTableViewController: UIViewController {
 
                 return patientSectionHeader
             } else if kind == ElementKind.actionListFooter,
-                      let patientSectionFooter = collectionView.dequeueReusableSupplementaryView(
+                let patientSectionFooter = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: CallButtonFooter.reuseIdentifier,
                 for: indexPath
             ) as? CallButtonFooter {
                 return patientSectionFooter
             } else if kind == ElementKind.doctorSectionHeader,
-                      let doctorSectionHeader = collectionView.dequeueReusableSupplementaryView(
+                let doctorSectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: DoctorLeadingHeader.reuseIdentifier,
                 for: indexPath
@@ -152,6 +154,10 @@ final class TimeTableViewController: UIViewController {
                 return timeTableLayout.createDoctorSection()
             case .actionList:
                 return timeTableLayout.createActionListSection()
+            case .doctorPlaceholder:
+                return timeTableLayout.createDoctorSection()
+            case .patientPlaceholder:
+                return timeTableLayout.createPatientSection()
             }
         }
 
@@ -188,21 +194,27 @@ extension TimeTableViewController: UICollectionViewDelegate {
 // MARK: - TimeTableDisplaying
 
 extension TimeTableViewController: TimeTableDisplaying {
-    func applyInitialSnapshot(ofSchedules schedules: [DoctorSchedule]) {
-        guard let firstSchedule = schedules.first else { return }
-
+    func daySnapshot(schedules: [DoctorSchedule]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-        snapshot.appendSections([.doctor, .patient, .actionList])
-        snapshot.appendItems(schedules, toSection: .doctor)
-        snapshot.appendItems(firstSchedule.patientCells, toSection: .patient)
-        snapshot.appendItems(actionList, toSection: .actionList)
-        dataSource?.apply(snapshot)
 
-        let indexPath = dataSource?.indexPath(for: firstSchedule)
-        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+        if let firstSchedule = schedules.first {
+            snapshot.deleteSections([.doctor, .patient, .actionList])
+            snapshot.appendSections([.doctor, .patient, .actionList])
+            snapshot.appendItems(schedules, toSection: .doctor)
+            snapshot.appendItems(firstSchedule.patientCells, toSection: .patient)
+            snapshot.appendItems(actionList, toSection: .actionList)
+            dataSource?.apply(snapshot)
+
+            let indexPath = dataSource?.indexPath(for: firstSchedule)
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+        } else {
+            snapshot.deleteSections([.doctor, .patient, .actionList])
+            snapshot.appendSections([.doctorPlaceholder, .patientPlaceholder])
+            dataSource?.apply(snapshot)
+        }
     }
 
-    func update(for schedule: DoctorSchedule) {
+    func doctorSnapshot(schedule: DoctorSchedule) {
         guard let dataSource = dataSource else { return }
 
         var snapshot = dataSource.snapshot()

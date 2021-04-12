@@ -7,6 +7,8 @@
 
 import Foundation
 
-protocol TimeTableRouterInput: AnyObject {
+protocol TimeTableRouting: AnyObject {
     func routeToGraphicTimeTableScreen(onDate: Date)
+
+    func routeToCalendarViewController()
 }

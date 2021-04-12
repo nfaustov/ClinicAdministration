@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TimeTableDisplaying: AnyObject {
-    func applyInitialSnapshot(ofSchedules: [DoctorSchedule])
+    func daySnapshot(schedules: [DoctorSchedule])
 
-    func update(for schedule: DoctorSchedule)
+    func doctorSnapshot(schedule: DoctorSchedule)
 }

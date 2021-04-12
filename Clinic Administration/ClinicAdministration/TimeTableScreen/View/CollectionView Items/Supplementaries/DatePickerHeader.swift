@@ -13,10 +13,21 @@ final class DatePickerHeader: UICollectionReusableView {
 
     private var datePicker: DatePicker!
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    func configure(with date: Date, presenter: TimeTablePresentation) {
+        if let datePicker = datePicker {
+            datePicker.removeFromSuperview()
+        }
 
-        datePicker = DatePicker()
+        datePicker = DatePicker(
+            selectedDate: date,
+            dateAction: { date in
+                presenter.didSelected(date: date)
+            },
+            calendarAction: {
+                presenter.calendarRequired()
+            }
+        )
+
         addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
 
@@ -26,15 +37,5 @@ final class DatePickerHeader: UICollectionReusableView {
             datePicker.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
             datePicker.heightAnchor.constraint(equalToConstant: 90)
         ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func configure(with date: Date, presenter: TimeTablePresentation) {
-        datePicker.selectedDate = date
-        datePicker.dateAction = presenter.didSelected(date:)
-        datePicker.calendarAction = presenter.calendarRequired
     }
 }

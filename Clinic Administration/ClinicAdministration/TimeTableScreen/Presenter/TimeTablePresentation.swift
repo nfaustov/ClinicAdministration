@@ -8,8 +8,6 @@
 import Foundation
 
 protocol TimeTablePresentation: AnyObject {
-    func viewDidLoad(with date: Date)
-
     func didSelected(_ schedule: DoctorSchedule)
 
     func didSelected(date: Date)

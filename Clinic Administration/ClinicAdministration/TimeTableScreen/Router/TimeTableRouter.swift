@@ -6,18 +6,36 @@
 //
 
 import UIKit
+import CalendarControl
 
 final class TimeTableRouter {
     let viewController: UIViewController
+    weak var output: TimeTableRouterOutput!
 
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
 }
 
-extension TimeTableRouter: TimeTableRouterInput {
+extension TimeTableRouter: TimeTableRouting {
     func routeToGraphicTimeTableScreen(onDate: Date) {
         let graphicTimeTableViewController = GraphicTimeTableViewController()
         viewController.navigationController?.present(graphicTimeTableViewController, animated: true)
+    }
+
+    func routeToCalendarViewController() {
+        let calendarViewController = CalendarViewController()
+        viewController.present(calendarViewController, animated: true)
+        calendarViewController.delegate = self
+    }
+}
+
+extension TimeTableRouter: CalendarViewControllerDelegate {
+    func cancelSelection() {
+        // TODO: - return DatePicker selector to the last state
+    }
+
+    func selectedDate(_ date: Date) {
+        output.selectedDate(date)
     }
 }

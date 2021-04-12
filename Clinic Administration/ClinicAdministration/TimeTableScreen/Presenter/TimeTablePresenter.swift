@@ -10,9 +10,9 @@ import Foundation
 final class TimeTablePresenter {
     weak var view: TimeTableDisplaying!
     var interactor: TimeTableInteractorInput!
-    var router: TimeTableRouterInput!
+    var router: TimeTableRouting!
 
-    init(view: TimeTableDisplaying, router: TimeTableRouterInput, interactor: TimeTableInteractorInput) {
+    init(view: TimeTableDisplaying, router: TimeTableRouting, interactor: TimeTableInteractorInput) {
         self.view = view
         self.router = router
         self.interactor = interactor
@@ -20,22 +20,20 @@ final class TimeTablePresenter {
 }
 
 extension TimeTablePresenter: TimeTablePresentation {
-    func viewDidLoad(with date: Date) {
-        interactor.getSchedules(for: date)
-    }
-
     func didSelected(_ schedule: DoctorSchedule) {
-        view.update(for: prepareIfNeeded(schedule))
-    }
-
-    func didSelected(date: Date) {
+        view.doctorSnapshot(schedule: prepareIfNeeded(schedule))
     }
 
     func didSelected(patient: TimeTablePatient) {
         // MARK: Present patient screen
     }
 
+    func didSelected(date: Date) {
+        interactor.getSchedules(for: date)
+    }
+
     func calendarRequired() {
+        router.routeToCalendarViewController()
     }
 
     func addNewDoctorSchedule() {
@@ -51,13 +49,21 @@ extension TimeTablePresenter: TimeTablePresentation {
 
 extension TimeTablePresenter: TimeTableInteractorOutput {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
-        guard let firstSchedule = schedules.first else { return }
+        if let firstSchedule = schedules.first {
+            var preparedSchedules = schedules
+            preparedSchedules.remove(at: 0)
+            preparedSchedules.insert(prepareIfNeeded(firstSchedule), at: 0)
 
-        var preparedSchedules = schedules
-        preparedSchedules.remove(at: 0)
-        preparedSchedules.insert(prepareIfNeeded(firstSchedule), at: 0)
+            view.daySnapshot(schedules: preparedSchedules)
+        } else {
+            view.daySnapshot(schedules: [])
+        }
+    }
+}
 
-        view.applyInitialSnapshot(ofSchedules: preparedSchedules)
+extension TimeTablePresenter: TimeTableRouterOutput {
+    func selectedDate(_ date: Date) {
+        didSelected(date: date)
     }
 }
 
