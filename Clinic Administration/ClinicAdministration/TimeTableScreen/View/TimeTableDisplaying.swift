@@ -8,6 +8,8 @@
 import Foundation
 
 protocol TimeTableDisplaying: AnyObject {
+    var date: Date { get set }
+
     func daySnapshot(schedules: [DoctorSchedule])
 
     func doctorSnapshot(schedule: DoctorSchedule)

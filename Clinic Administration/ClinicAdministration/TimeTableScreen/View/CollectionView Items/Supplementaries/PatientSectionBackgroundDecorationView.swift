@@ -9,6 +9,8 @@ import UIKit
 import Design
 
 final class PatientSectionBackgroundDecorationView: UICollectionReusableView {
+    static let reusIdentifier = "PatientSectionBackgroundDecorationView"
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 

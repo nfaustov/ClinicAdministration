@@ -16,47 +16,27 @@ final class TimeTableCellFactory {
 
     func getCell(with model: AnyHashable, for indexPath: IndexPath) -> UICollectionViewCell {
         if let doctor = model as? DoctorSchedule {
-            return configureDoctorCell(with: doctor, for: indexPath)
+            return configureCell(DoctorCell.self, with: doctor, for: indexPath)
         } else if let patient = model as? TimeTablePatientCell {
-            return configurePatientCell(with: patient, for: indexPath)
+            return configureCell(PatientCell.self, with: patient, for: indexPath)
         } else if let action = model as? TimeTableAction {
-            return configureActionListCell(with: action, for: indexPath)
+            return configureCell(ActionListCell.self, with: action, for: indexPath)
+        } else if let placeholder = model as? DoctorSectionPlaceholder {
+            return configureCell(DoctorPlaceholder.self, with: placeholder, for: indexPath)
         } else {
             fatalError("Unknown model type")
         }
     }
 
-    private func configureDoctorCell(with model: DoctorSchedule, for indexPath: IndexPath) -> DoctorCell {
+    private func configureCell<T>(
+        _ cellType: T.Type,
+        with model: T.Model,
+        for indexPath: IndexPath
+    ) -> T where T: TimeTableCell {
         guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: DoctorCell.reuseIdentifier,
-                for: indexPath
-        ) as? DoctorCell else {
-            fatalError("Unable to dequeue cell")
-        }
-
-        cell.configure(with: model)
-
-        return cell
-    }
-
-    private func configurePatientCell(with model: TimeTablePatientCell, for indexPath: IndexPath) -> PatientCell {
-        guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PatientCell.reuseIdentifier,
-                for: indexPath
-        ) as? PatientCell else {
-            fatalError("Unable to dequeue cell")
-        }
-
-        cell.configure(with: model)
-
-        return cell
-    }
-
-    private func configureActionListCell(with model: TimeTableAction, for indexPath: IndexPath) -> ActionListCell {
-        guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ActionListCell.reuseIdentifier,
-                for: indexPath
-        ) as? ActionListCell else {
+            withReuseIdentifier: cellType.reuseIdentifier,
+            for: indexPath
+        ) as? T else {
             fatalError("Unable to dequeue cell")
         }
 

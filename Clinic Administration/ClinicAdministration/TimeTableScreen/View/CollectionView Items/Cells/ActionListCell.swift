@@ -8,7 +8,7 @@
 import UIKit
 import Design
 
-class ActionListCell: UICollectionViewCell {
+class ActionListCell: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier = "ActionListCell"
 
     var imageView: UIImageView!

@@ -17,14 +17,13 @@ final class TimeTableViewController: UIViewController {
         static let doctorSectionHeader = "doctor-section-header"
         static let actionListFooter = "action-list-footer"
         static let actionListBackground = "action-list-background"
+        static let doctorPlaceholder = "doctor-placeholder"
     }
 
     private enum Section: Int, Hashable {
         case doctor
         case patient
         case actionList
-        case doctorPlaceholder
-        case patientPlaceholder
     }
 
     private var collectionView: UICollectionView!
@@ -40,7 +39,7 @@ final class TimeTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let switchToGraphicImage = UIImage(systemName: "squareshape.fill")
+        let switchToGraphicImage = UIImage(named: "dashboard")
         let rightBarButton = UIBarButtonItem(
             image: switchToGraphicImage,
             style: .plain,
@@ -49,7 +48,10 @@ final class TimeTableViewController: UIViewController {
         )
         navigationItem.rightBarButtonItem = rightBarButton
 
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
+        collectionView = UICollectionView(
+            frame: view.bounds,
+            collectionViewLayout: createCompositionalLayout(withSchedules: true)
+        )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = Design.Color.lightGray
         collectionView.delegate = self
@@ -70,6 +72,7 @@ final class TimeTableViewController: UIViewController {
         collectionView.register(DoctorCell.self, forCellWithReuseIdentifier: DoctorCell.reuseIdentifier)
         collectionView.register(PatientCell.self, forCellWithReuseIdentifier: PatientCell.reuseIdentifier)
         collectionView.register(ActionListCell.self, forCellWithReuseIdentifier: ActionListCell.reuseIdentifier)
+        collectionView.register(DoctorPlaceholder.self, forCellWithReuseIdentifier: DoctorPlaceholder.reuseIdentifier)
         collectionView.register(
             DoctorLeadingHeader.self,
             forSupplementaryViewOfKind: ElementKind.doctorSectionHeader,
@@ -133,7 +136,7 @@ final class TimeTableViewController: UIViewController {
 
     // MARK: - UICollectionViewLayout
 
-    private func createCompositionalLayout() -> UICollectionViewLayout {
+    private func createCompositionalLayout(withSchedules: Bool) -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             guard let section = Section(rawValue: sectionIndex) else {
                 fatalError("This section doesn't exist")
@@ -148,16 +151,12 @@ final class TimeTableViewController: UIViewController {
             )
 
             switch section {
+            case .doctor:
+                return withSchedules ? timeTableLayout.createDoctorSection() : timeTableLayout.createDoctorPlaceholder()
             case .patient:
                 return timeTableLayout.createPatientSection()
-            case .doctor:
-                return timeTableLayout.createDoctorSection()
             case .actionList:
                 return timeTableLayout.createActionListSection()
-            case .doctorPlaceholder:
-                return timeTableLayout.createDoctorSection()
-            case .patientPlaceholder:
-                return timeTableLayout.createPatientSection()
             }
         }
 
@@ -198,6 +197,7 @@ extension TimeTableViewController: TimeTableDisplaying {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
 
         if let firstSchedule = schedules.first {
+            collectionView.collectionViewLayout = createCompositionalLayout(withSchedules: true)
             snapshot.deleteSections([.doctor, .patient, .actionList])
             snapshot.appendSections([.doctor, .patient, .actionList])
             snapshot.appendItems(schedules, toSection: .doctor)
@@ -208,8 +208,19 @@ extension TimeTableViewController: TimeTableDisplaying {
             let indexPath = dataSource?.indexPath(for: firstSchedule)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
         } else {
+            collectionView.collectionViewLayout = createCompositionalLayout(withSchedules: false)
             snapshot.deleteSections([.doctor, .patient, .actionList])
-            snapshot.appendSections([.doctorPlaceholder, .patientPlaceholder])
+            snapshot.appendSections([.doctor, .patient])
+            snapshot.appendItems([DoctorSectionPlaceholder.addFirstSchedule], toSection: .doctor)
+            snapshot.appendItems(
+                [
+                    TimeTablePatientCell(scheduledTime: nil, duration: 0, patient: nil),
+                    TimeTablePatientCell(scheduledTime: nil, duration: 1, patient: nil),
+                    TimeTablePatientCell(scheduledTime: nil, duration: 2, patient: nil),
+                    TimeTablePatientCell(scheduledTime: nil, duration: 3, patient: nil)
+                ],
+                toSection: .patient
+            )
             dataSource?.apply(snapshot)
         }
     }

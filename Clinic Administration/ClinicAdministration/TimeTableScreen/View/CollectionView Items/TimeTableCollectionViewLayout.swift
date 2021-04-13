@@ -58,6 +58,22 @@ final class TimeTableCollectionViewLayout {
         return layoutSection
     }
 
+    func createDoctorPlaceholder() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layoutGroupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(170)
+        )
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 1)
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+
+        return layoutSection
+    }
+
     private func createDoctorSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutSectionHeaderSize = NSCollectionLayoutSize(
             widthDimension: .absolute(72),

@@ -8,7 +8,7 @@
 import UIKit
 import Design
 
-final class DoctorCell: UICollectionViewCell {
+final class DoctorCell: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier: String = "DoctorCell"
 
     private let nameLabel: UILabel = {

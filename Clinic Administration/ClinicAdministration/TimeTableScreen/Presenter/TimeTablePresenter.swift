@@ -21,6 +21,7 @@ final class TimeTablePresenter {
 
 extension TimeTablePresenter: TimeTablePresentation {
     func didSelected(_ schedule: DoctorSchedule) {
+        view.date = schedule.startingTime
         view.doctorSnapshot(schedule: prepareIfNeeded(schedule))
     }
 

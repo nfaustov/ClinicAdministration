@@ -9,7 +9,7 @@ import UIKit
 import Design
 import Extensions
 
-final class PatientCell: UICollectionViewCell {
+final class PatientCell: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier: String = "PatientCell"
 
     private let timeLabel: UILabel = {
@@ -56,7 +56,7 @@ final class PatientCell: UICollectionViewCell {
 
         guard let scheduledTime = cell.scheduledTime else {
             timeLabel.text = ""
-            backgroundColor = Design.Color.gray
+            backgroundColor = Design.Color.lightGray
             return
         }
 

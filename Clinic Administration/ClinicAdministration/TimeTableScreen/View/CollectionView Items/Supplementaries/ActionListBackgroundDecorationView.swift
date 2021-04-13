@@ -9,6 +9,8 @@ import UIKit
 import Design
 
 final class ActionListBackgroundDecorationView: UICollectionReusableView {
+    static let reuseIdentifier = "ActionListBackgroundDecorationView"
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
