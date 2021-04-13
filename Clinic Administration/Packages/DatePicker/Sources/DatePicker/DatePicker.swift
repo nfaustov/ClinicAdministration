@@ -198,7 +198,7 @@ public final class DatePicker: UIView {
     private func buttonInteraction(_ sender: UIButton) {
         UIView.animate(withDuration: 0.2) {
             guard let buttons = self.buttonsStack.arrangedSubviews as? [UIButton] else { return }
-            
+
             for button in buttons where button != sender {
                 if button.backgroundImage(for: .normal) != nil {
                     button.setBackgroundImage(self.calendarImage, for: .normal)
@@ -206,11 +206,11 @@ public final class DatePicker: UIView {
                     button.setTitleColor(Design.Color.brown, for: .normal)
                 }
             }
-            
+
             sender.setTitleColor(Design.Color.lightGray, for: .normal)
-            
+
             guard let text = sender.titleLabel?.text else { return }
-            
+
             self.state = DatePickerState(rawValue: text) ?? .calendar
             self.setNeedsLayout()
             self.layoutIfNeeded()
@@ -219,7 +219,7 @@ public final class DatePicker: UIView {
 
     private func button(title: String? = nil, image: UIImage? = nil) -> UIButton {
         let button = UIButton()
-        
+
         if let buttonTitle = title {
             button.setTitle(buttonTitle, for: .normal)
             button.setTitleColor(Design.Color.brown, for: .normal)
@@ -250,9 +250,9 @@ public final class DatePicker: UIView {
 
     private func stateAnimation() {
         setState(selectedDate: selectedDate)
-        
+
         guard let buttons = buttonsStack.arrangedSubviews as? [UIButton] else { return }
-        
+
         for button in buttons {
             if button.titleLabel?.text == state.rawValue {
                 button.setTitleColor(Design.Color.lightGray, for: .normal)

@@ -178,7 +178,7 @@ public final class CalendarViewController: UIViewController {
 
     private func compareToNow(_ day: Day) -> ComparisonResult? {
         guard let calendarDay = self.calendar.date(from: day.components) else { return nil }
-        
+
         let result = calendar.compare(calendarDay, to: Date(), toGranularity: .day)
 
         return result
