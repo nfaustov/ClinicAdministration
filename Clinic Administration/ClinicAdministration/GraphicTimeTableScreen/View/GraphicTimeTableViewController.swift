@@ -1,27 +1,27 @@
 //
-//  GraphicTimeTableView.swift
+//  GraphicTimeTableViewController.swift
 //  ClinicAdministration
 //
-//  Created by Nikolai Faustov on 05.12.2020.
+//  Created by Nikolai Faustov on 09.11.2020.
 //
 
 import UIKit
-import Design
 import DatePicker
+import Design
 
-protocol GraphicTimeTableViewDelegate: AnyObject {
-    func dateChanged(_ date: Date)
+final class GraphicTimeTableViewController: UIViewController {
+    var date: Date!
+    var schedules: [DoctorSchedule]!
 
-    func openCalendar()
-}
+    var presenter: GraphicTimeTablePresentation!
 
-final class GraphicTimeTableView: UIView {
     private let vScrollView = UIScrollView()
     private let hScrollView = UIScrollView()
 
     private var timelineHeight: CGFloat {
         guard let tableViewCloseHour = tableView.close.hour,
               let tableViewOpeningHour = tableView.opening.hour else { return 0 }
+
         return CGFloat(tableViewCloseHour - tableViewOpeningHour) * tableView.hourHeight + tableView.quarterHourHeight
     }
     private var tableViewHeight: CGFloat {
@@ -32,22 +32,24 @@ final class GraphicTimeTableView: UIView {
     private var timeTableViewHeightConstraint = NSLayoutConstraint()
     private var timelineHeightConstraint = NSLayoutConstraint()
 
-    weak var delegate: GraphicTimeTableViewDelegate?
-
     private var tableView: GraphicTableView!
     private var timelineView: TimelineView!
-    private(set) var datePicker: DatePicker!
+    private var datePicker: DatePicker!
 
-    init(date: Date) {
-        super.init(frame: .zero)
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-        backgroundColor = Design.Color.lightGray
+        view.backgroundColor = Design.Color.lightGray
 
-        datePicker = DatePicker(selectedDate: date, dateAction: changeDate(to:), calendarAction: openCalendar)
-        tableView = GraphicTableView(date: date, transformAction: scheduleTransform(doctorView:))
+        datePicker = DatePicker(
+            selectedDate: date,
+            dateAction: changeDate(to:),
+            calendarAction: presenter.calendarRequired
+        )
+        tableView = GraphicTableView(date: date, schedules, transformAction: scheduleTransform(doctorView:))
         timelineView = TimelineView(respectiveTo: tableView)
 
-        addSubview(vScrollView)
+        view.addSubview(vScrollView)
         vScrollView.showsVerticalScrollIndicator = false
 
         hScrollView.showsHorizontalScrollIndicator = false
@@ -62,8 +64,17 @@ final class GraphicTimeTableView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if hScrollView.contentOffset.x == 0 { return }
+
+        for doctorView in tableView.doctorViews {
+            let doctorViewOrigin = doctorView.convert(doctorView.frame.origin, to: tableView)
+            if hScrollView.contentOffset.x > doctorViewOrigin.x {
+                doctorView.alpha = 0
+            }
+        }
     }
 
     private func setupConstraints() {
@@ -81,10 +92,10 @@ final class GraphicTimeTableView: UIView {
         timelineHeightConstraint = timelineView.heightAnchor.constraint(equalToConstant: timelineHeight)
 
         NSLayoutConstraint.activate([
-            vScrollView.topAnchor.constraint(equalTo: topAnchor),
-            vScrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            vScrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            vScrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            vScrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            vScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            vScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            vScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             datePicker.topAnchor.constraint(equalTo: vScrollView.contentLayoutGuide.topAnchor, constant: 16),
             datePicker.leadingAnchor.constraint(equalTo: vScrollView.contentLayoutGuide.leadingAnchor, constant: 12),
@@ -112,32 +123,6 @@ final class GraphicTimeTableView: UIView {
         ])
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        if hScrollView.contentOffset.x == 0 { return }
-
-        for doctorView in tableView.doctorViews {
-            let doctorViewOrigin = doctorView.convert(doctorView.frame.origin, to: tableView)
-            if hScrollView.contentOffset.x > doctorViewOrigin.x {
-                doctorView.alpha = 0
-            }
-        }
-    }
-
-    private func changeDate(to newDate: Date) {
-        tableView.date = newDate
-        timelineView.tableView = tableView
-        hScrollViewHeightConstraint.constant = tableViewHeight
-        timeTableViewHeightConstraint.constant = tableViewHeight
-        timelineHeightConstraint.constant = timelineHeight
-        delegate?.dateChanged(newDate)
-    }
-
-    private func openCalendar() {
-        delegate?.openCalendar()
-    }
-
     private func scheduleTransform(doctorView: DoctorScheduleView) {
         let maxOriginY = vScrollView.contentSize.height - doctorView.frame.height
         let originYToVisible = min(doctorView.frame.origin.y + doctorView.frame.origin.y / 2, maxOriginY)
@@ -150,9 +135,14 @@ final class GraphicTimeTableView: UIView {
 
         vScrollView.scrollRectToVisible(rectToVisible, animated: false)
     }
+
+    private func changeDate(to newDate: Date) {
+        date = newDate
+        presenter.didSelected(date: date)
+    }
 }
 
-extension GraphicTimeTableView: UIScrollViewDelegate {
+extension GraphicTimeTableViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == hScrollView {
             for doctorView in tableView.doctorViews {
@@ -165,6 +155,20 @@ extension GraphicTimeTableView: UIScrollViewDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+extension GraphicTimeTableViewController: GraphicTimeTableDisplaying {
+    func updateTableView(with newSchedules: [DoctorSchedule]) {
+        if schedules != nil {
+            tableView.reload(with: date, schedules: newSchedules)
+            timelineView.tableView = tableView
+            hScrollViewHeightConstraint.constant = tableViewHeight
+            timeTableViewHeightConstraint.constant = tableViewHeight
+            timelineHeightConstraint.constant = timelineHeight
+        } else {
+            schedules = newSchedules
         }
     }
 }

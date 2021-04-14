@@ -9,24 +9,10 @@ import UIKit
 import Design
 
 final class GraphicTableView: UIView {
-    var date: Date {
-        didSet {
-            setTimeTable(date)
-            reloadData()
-            setNeedsDisplay()
-        }
-    }
-
     private let calendar = Calendar.current
 
     private(set) var opening = DateComponents()
     private(set) var close = DateComponents()
-
-    private let dataManager = TimeTableDataManager()
-
-    private var schedules: [DoctorSchedule] {
-        dataManager.filteredSchedules(for: date)
-    }
 
     private let headerView = UIView()
     private let footerView = UIView()
@@ -41,8 +27,10 @@ final class GraphicTableView: UIView {
 
     private var transformAction: ((DoctorScheduleView) -> Void)?
 
-    init(date: Date, transformAction: @escaping (DoctorScheduleView) -> Void) {
-        self.date = date
+    private var schedules: [DoctorSchedule]
+
+    init(date: Date, _ schedules: [DoctorSchedule], transformAction: @escaping (DoctorScheduleView) -> Void) {
+        self.schedules = schedules
         self.transformAction = transformAction
         super.init(frame: .zero)
 
@@ -59,7 +47,7 @@ final class GraphicTableView: UIView {
             addDoctorSchedule(schedule)
         }
 
-        moveIntersectionsToFront()
+        // moveIntersectionsToFront()
     }
 
     required init?(coder: NSCoder) {
@@ -115,7 +103,13 @@ final class GraphicTableView: UIView {
         linePath.stroke()
     }
 
-    func reloadData() {
+    func reload(with date: Date, schedules: [DoctorSchedule]) {
+        setTimeTable(date)
+        reloadData(schedules)
+        setNeedsDisplay()
+    }
+
+    private func reloadData(_ schedules: [DoctorSchedule]) {
         for doctorView in doctorViews {
             doctorView.removeFromSuperview()
             doctorViews.remove(at: 0)
@@ -123,8 +117,8 @@ final class GraphicTableView: UIView {
         schedules.forEach { schedule in
             addDoctorSchedule(schedule)
         }
-
-        moveIntersectionsToFront()
+        self.schedules = schedules
+        // moveIntersectionsToFront()
 
         setNeedsLayout()
     }
@@ -258,31 +252,32 @@ final class GraphicTableView: UIView {
     }
 
     private func detectIntersection(for schedule: DoctorSchedule) -> Bool {
-        dataManager.updateSchedule(schedule, updated: { [weak self] in
-            guard let self = self else { return }
-
-            let cabinetSchedules = self.schedules.filter({ $0.cabinet == schedule.cabinet })
-            for doctorSchedule in cabinetSchedules {
-                if doctorSchedule == schedule { continue }
-                let doctorView = self.doctorViews.first(where: { $0.schedule == doctorSchedule })
-
-                doctorView?.checkState()
-            }
-        })
-
-        let intersectedSchedules = dataManager.intersectedSchedules(for: date)
-            .filter({ $0.cabinet == schedule.cabinet })
-
-        return intersectedSchedules.contains(schedule)
+//        dataManager.updateSchedule(schedule, updated: { [weak self] in
+//            guard let self = self else { return }
+//
+//            let cabinetSchedules = self.schedules.filter({ $0.cabinet == schedule.cabinet })
+//            for doctorSchedule in cabinetSchedules {
+//                if doctorSchedule == schedule { continue }
+//                let doctorView = self.doctorViews.first(where: { $0.schedule == doctorSchedule })
+//
+//                doctorView?.checkState()
+//            }
+//        })
+//
+//        let intersectedSchedules = dataManager.intersectedSchedules(for: date)
+//            .filter({ $0.cabinet == schedule.cabinet })
+//
+//        return intersectedSchedules.contains(schedule)
+        false
     }
 
-    private func moveIntersectionsToFront() {
-        for schedule in dataManager.intersectedSchedules(for: date) {
-            if let doctorView = self.doctorViews.first(where: { $0.schedule == schedule }) {
-                cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
-            }
-        }
-    }
+//    private func moveIntersectionsToFront() {
+//        for schedule in dataManager.intersectedSchedules(for: date) {
+//            if let doctorView = self.doctorViews.first(where: { $0.schedule == schedule }) {
+//                cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
+//            }
+//        }
+//    }
 
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)

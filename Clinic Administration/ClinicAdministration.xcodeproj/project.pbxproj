@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		8B0E46F82618F0D60035CF6D /* DoctorLeadingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0E46F72618F0D60035CF6D /* DoctorLeadingHeader.swift */; };
+		8B10E37C2625CD9C00476862 /* GraphicTimeTableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E37B2625CD9C00476862 /* GraphicTimeTableBuilder.swift */; };
+		8B10E3822625CEFB00476862 /* GraphicTimeTableDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3812625CEFB00476862 /* GraphicTimeTableDisplaying.swift */; };
+		8B10E3882625CF4200476862 /* GraphicTimeTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3872625CF4200476862 /* GraphicTimeTablePresenter.swift */; };
+		8B10E38C2625CFBB00476862 /* GraphicTimeTablePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E38B2625CFBB00476862 /* GraphicTimeTablePresentation.swift */; };
+		8B10E3922625D04A00476862 /* GraphicTimeTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3912625D04A00476862 /* GraphicTimeTableInteractor.swift */; };
+		8B10E3992625D11000476862 /* GraphicTimeTableInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3982625D11000476862 /* GraphicTimeTableInteractorInput.swift */; };
+		8B10E39D2625D18000476862 /* GraphicTimeTableInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E39C2625D18000476862 /* GraphicTimeTableInteractorOutput.swift */; };
+		8B10E3A12625D1E000476862 /* GraphicTimeTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3A02625D1E000476862 /* GraphicTimeTableRouter.swift */; };
+		8B10E3A52625D24700476862 /* GraphicTimeTableRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3A42625D24700476862 /* GraphicTimeTableRouting.swift */; };
+		8B10E3AB2625D29B00476862 /* GraphicTimeTableRouterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3AA2625D29B00476862 /* GraphicTimeTableRouterOutput.swift */; };
 		8B188983259CCA4E000B0077 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B188982259CCA4E000B0077 /* Settings.swift */; };
 		8B29219E257930630058B51E /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29219D257930630058B51E /* TimelineView.swift */; };
 		8B38A1AA260D133500CA01A0 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1A9260D133500CA01A0 /* TimeTableViewController.swift */; };
@@ -17,7 +27,7 @@
 		8B38A1BC260D13DD00CA01A0 /* TimeTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1BB260D13DD00CA01A0 /* TimeTableInteractor.swift */; };
 		8B38A1C0260D13F600CA01A0 /* TimeTableInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1BF260D13F600CA01A0 /* TimeTableInteractorInput.swift */; };
 		8B38A1C4260D140200CA01A0 /* TimeTableInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1C3260D140200CA01A0 /* TimeTableInteractorOutput.swift */; };
-		8B38A1C8260D148000CA01A0 /* TimeTableRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1C7260D148000CA01A0 /* TimeTableRouterInput.swift */; };
+		8B38A1C8260D148000CA01A0 /* TimeTableRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1C7260D148000CA01A0 /* TimeTableRouting.swift */; };
 		8B38A1CC260D14AE00CA01A0 /* TimeTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1CB260D14AE00CA01A0 /* TimeTableRouter.swift */; };
 		8B38A1D8260D16E600CA01A0 /* TimeTablePatient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1D7260D16E600CA01A0 /* TimeTablePatient.swift */; };
 		8B41FE7F261E3D4B009ED53E /* TimeTableCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */; };
@@ -43,7 +53,6 @@
 		8BA6030D260DDF8300DF686B /* TimeTablePatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6030C260DDF8300DF686B /* TimeTablePatientView.swift */; };
 		8BADB070261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BADB06F261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift */; };
 		8BBEEF32261C968700A06B2D /* ActionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBEEF31261C968700A06B2D /* ActionListCell.swift */; };
-		8BC15FDA257C1CF900323430 /* GraphicTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC15FD9257C1CF900323430 /* GraphicTimeTableView.swift */; };
 		8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */; };
 		8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */; };
 		8BCAB7A32559D4A5001A93D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7A22559D4A5001A93D0 /* Assets.xcassets */; };
@@ -74,6 +83,16 @@
 
 /* Begin PBXFileReference section */
 		8B0E46F72618F0D60035CF6D /* DoctorLeadingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLeadingHeader.swift; sourceTree = "<group>"; };
+		8B10E37B2625CD9C00476862 /* GraphicTimeTableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableBuilder.swift; sourceTree = "<group>"; };
+		8B10E3812625CEFB00476862 /* GraphicTimeTableDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableDisplaying.swift; sourceTree = "<group>"; };
+		8B10E3872625CF4200476862 /* GraphicTimeTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTablePresenter.swift; sourceTree = "<group>"; };
+		8B10E38B2625CFBB00476862 /* GraphicTimeTablePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTablePresentation.swift; sourceTree = "<group>"; };
+		8B10E3912625D04A00476862 /* GraphicTimeTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableInteractor.swift; sourceTree = "<group>"; };
+		8B10E3982625D11000476862 /* GraphicTimeTableInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableInteractorInput.swift; sourceTree = "<group>"; };
+		8B10E39C2625D18000476862 /* GraphicTimeTableInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableInteractorOutput.swift; sourceTree = "<group>"; };
+		8B10E3A02625D1E000476862 /* GraphicTimeTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableRouter.swift; sourceTree = "<group>"; };
+		8B10E3A42625D24700476862 /* GraphicTimeTableRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableRouting.swift; sourceTree = "<group>"; };
+		8B10E3AA2625D29B00476862 /* GraphicTimeTableRouterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableRouterOutput.swift; sourceTree = "<group>"; };
 		8B188982259CCA4E000B0077 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8B29219D257930630058B51E /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		8B38A1A9260D133500CA01A0 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +102,7 @@
 		8B38A1BB260D13DD00CA01A0 /* TimeTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableInteractor.swift; sourceTree = "<group>"; };
 		8B38A1BF260D13F600CA01A0 /* TimeTableInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableInteractorInput.swift; sourceTree = "<group>"; };
 		8B38A1C3260D140200CA01A0 /* TimeTableInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableInteractorOutput.swift; sourceTree = "<group>"; };
-		8B38A1C7260D148000CA01A0 /* TimeTableRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRouterInput.swift; sourceTree = "<group>"; };
+		8B38A1C7260D148000CA01A0 /* TimeTableRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRouting.swift; sourceTree = "<group>"; };
 		8B38A1CB260D14AE00CA01A0 /* TimeTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRouter.swift; sourceTree = "<group>"; };
 		8B38A1D7260D16E600CA01A0 /* TimeTablePatient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTablePatient.swift; sourceTree = "<group>"; };
 		8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCellFactory.swift; sourceTree = "<group>"; };
@@ -109,7 +128,6 @@
 		8BA6030C260DDF8300DF686B /* TimeTablePatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTablePatientView.swift; sourceTree = "<group>"; };
 		8BADB06F261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCollectionViewLayout.swift; sourceTree = "<group>"; };
 		8BBEEF31261C968700A06B2D /* ActionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListCell.swift; sourceTree = "<group>"; };
-		8BC15FD9257C1CF900323430 /* GraphicTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableView.swift; sourceTree = "<group>"; };
 		8BCAB7962559D4A4001A93D0 /* ClinicAdministration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinicAdministration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +183,55 @@
 			path = Types;
 			sourceTree = "<group>";
 		};
+		8B10E3772625CD5800476862 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8BCAB7B12559D564001A93D0 /* GraphicTimeTableViewController.swift */,
+				8B10E3812625CEFB00476862 /* GraphicTimeTableDisplaying.swift */,
+				8B10E3952625D0B100476862 /* Subviews */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B10E3782625CD6900476862 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8B10E3872625CF4200476862 /* GraphicTimeTablePresenter.swift */,
+				8B10E38B2625CFBB00476862 /* GraphicTimeTablePresentation.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8B10E3792625CD7200476862 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8B10E3912625D04A00476862 /* GraphicTimeTableInteractor.swift */,
+				8B10E3982625D11000476862 /* GraphicTimeTableInteractorInput.swift */,
+				8B10E39C2625D18000476862 /* GraphicTimeTableInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8B10E37A2625CD7900476862 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				8B10E3A02625D1E000476862 /* GraphicTimeTableRouter.swift */,
+				8B10E3A42625D24700476862 /* GraphicTimeTableRouting.swift */,
+				8B10E3AA2625D29B00476862 /* GraphicTimeTableRouterOutput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		8B10E3952625D0B100476862 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				8BCAB7BA2559D5EF001A93D0 /* GraphicTableView.swift */,
+				8B29219D257930630058B51E /* TimelineView.swift */,
+				8BCAB7BD2559D608001A93D0 /* DoctorScheduleView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		8B188985259CCA55000B0077 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,7 +285,7 @@
 		8B38A1A7260D12E100CA01A0 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				8B38A1C7260D148000CA01A0 /* TimeTableRouterInput.swift */,
+				8B38A1C7260D148000CA01A0 /* TimeTableRouting.swift */,
 				8B51EF442624A164001384D9 /* TimeTableRouterOutput.swift */,
 				8B38A1CB260D14AE00CA01A0 /* TimeTableRouter.swift */,
 			);
@@ -354,11 +421,11 @@
 		8BCAB7B42559D56A001A93D0 /* GraphicTimeTableScreen */ = {
 			isa = PBXGroup;
 			children = (
-				8BCAB7B12559D564001A93D0 /* GraphicTimeTableViewController.swift */,
-				8BC15FD9257C1CF900323430 /* GraphicTimeTableView.swift */,
-				8BCAB7BA2559D5EF001A93D0 /* GraphicTableView.swift */,
-				8B29219D257930630058B51E /* TimelineView.swift */,
-				8BCAB7BD2559D608001A93D0 /* DoctorScheduleView.swift */,
+				8B10E37B2625CD9C00476862 /* GraphicTimeTableBuilder.swift */,
+				8B10E3772625CD5800476862 /* View */,
+				8B10E3782625CD6900476862 /* Presenter */,
+				8B10E3792625CD7200476862 /* Interactor */,
+				8B10E37A2625CD7900476862 /* Router */,
 			);
 			path = GraphicTimeTableScreen;
 			sourceTree = "<group>";
@@ -528,27 +595,35 @@
 				8B0E46F82618F0D60035CF6D /* DoctorLeadingHeader.swift in Sources */,
 				8B38A1B0260D136500CA01A0 /* TimeTableDisplaying.swift in Sources */,
 				8B38A1B8260D13B900CA01A0 /* TimeTablePresenter.swift in Sources */,
+				8B10E3AB2625D29B00476862 /* GraphicTimeTableRouterOutput.swift in Sources */,
 				8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */,
 				8B6B0F87261CA56700F416D1 /* TimeTableAction.swift in Sources */,
 				8B38A1AA260D133500CA01A0 /* TimeTableViewController.swift in Sources */,
 				8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */,
 				8BBEEF32261C968700A06B2D /* ActionListCell.swift in Sources */,
 				8B51EF452624A164001384D9 /* TimeTableRouterOutput.swift in Sources */,
-				8B38A1C8260D148000CA01A0 /* TimeTableRouterInput.swift in Sources */,
+				8B38A1C8260D148000CA01A0 /* TimeTableRouting.swift in Sources */,
+				8B10E3922625D04A00476862 /* GraphicTimeTableInteractor.swift in Sources */,
 				8B62D6282615ECC7006A78F4 /* CallButtonFooter.swift in Sources */,
+				8B10E3992625D11000476862 /* GraphicTimeTableInteractorInput.swift in Sources */,
 				8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */,
-				8BC15FDA257C1CF900323430 /* GraphicTimeTableView.swift in Sources */,
 				8B38A1B4260D137200CA01A0 /* TimeTablePresentation.swift in Sources */,
 				8B38A1CC260D14AE00CA01A0 /* TimeTableRouter.swift in Sources */,
+				8B10E3A52625D24700476862 /* GraphicTimeTableRouting.swift in Sources */,
+				8B10E3882625CF4200476862 /* GraphicTimeTablePresenter.swift in Sources */,
 				8BCAB7BB2559D5EF001A93D0 /* GraphicTableView.swift in Sources */,
 				8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */,
+				8B10E3822625CEFB00476862 /* GraphicTimeTableDisplaying.swift in Sources */,
 				8B38A1D8260D16E600CA01A0 /* TimeTablePatient.swift in Sources */,
+				8B10E39D2625D18000476862 /* GraphicTimeTableInteractorOutput.swift in Sources */,
 				8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */,
 				8BADB070261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift in Sources */,
+				8B10E3A12625D1E000476862 /* GraphicTimeTableRouter.swift in Sources */,
 				8B84366B256DB126006057EF /* Person.swift in Sources */,
 				8B38A1C0260D13F600CA01A0 /* TimeTableInteractorInput.swift in Sources */,
 				8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */,
 				8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */,
+				8B10E37C2625CD9C00476862 /* GraphicTimeTableBuilder.swift in Sources */,
 				8B29219E257930630058B51E /* TimelineView.swift in Sources */,
 				8B49426A2625790B00275057 /* TimeTableCell.swift in Sources */,
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,
@@ -557,6 +632,7 @@
 				8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */,
 				8B41FE7F261E3D4B009ED53E /* TimeTableCellFactory.swift in Sources */,
 				8B62D61C2615C57A006A78F4 /* TimeTableBuilder.swift in Sources */,
+				8B10E38C2625CFBB00476862 /* GraphicTimeTablePresentation.swift in Sources */,
 				8B38A1BC260D13DD00CA01A0 /* TimeTableInteractor.swift in Sources */,
 				8B38A1C4260D140200CA01A0 /* TimeTableInteractorOutput.swift in Sources */,
 				8B188983259CCA4E000B0077 /* Settings.swift in Sources */,

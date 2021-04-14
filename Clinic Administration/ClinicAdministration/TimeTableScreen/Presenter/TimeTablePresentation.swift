@@ -18,5 +18,5 @@ protocol TimeTablePresentation: AnyObject {
 
     func removeDoctorSchedule()
 
-    func switchToGraphicScreen(with date: Date)
+    func switchToGraphicScreen(onDate: Date)
 }

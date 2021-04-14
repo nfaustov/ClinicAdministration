@@ -31,6 +31,7 @@ extension TimeTablePresenter: TimeTablePresentation {
 
     func didSelected(date: Date) {
         interactor.getSchedules(for: date)
+        view.date = date
     }
 
     func calendarRequired() {
@@ -43,7 +44,7 @@ extension TimeTablePresenter: TimeTablePresentation {
     func removeDoctorSchedule() {
     }
 
-    func switchToGraphicScreen(with date: Date) {
+    func switchToGraphicScreen(onDate date: Date) {
         router.routeToGraphicTimeTableScreen(onDate: date)
     }
 }

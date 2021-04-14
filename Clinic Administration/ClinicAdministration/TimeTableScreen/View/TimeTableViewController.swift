@@ -65,7 +65,7 @@ final class TimeTableViewController: UIViewController {
     }
 
     @objc private func switchToGraphicScreen() {
-        presenter.switchToGraphicScreen(with: date)
+        presenter.switchToGraphicScreen(onDate: date)
     }
 
     private func registerViews() {

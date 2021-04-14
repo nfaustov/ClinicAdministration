@@ -248,21 +248,23 @@ public final class DatePicker: UIView {
         }
     }
 
-    private func stateAnimation() {
-        setState(selectedDate: selectedDate)
+    private func stateAnimate(duration: TimeInterval) {
+        UIView.animate(withDuration: duration) {
+            self.setState(selectedDate: self.selectedDate)
 
-        guard let buttons = buttonsStack.arrangedSubviews as? [UIButton] else { return }
+            guard let buttons = self.buttonsStack.arrangedSubviews as? [UIButton] else { return }
 
-        for button in buttons {
-            if button.titleLabel?.text == state.rawValue {
-                button.setTitleColor(Design.Color.lightGray, for: .normal)
-            } else if button.backgroundImage(for: .normal) != nil, state != .calendar {
-                button.setBackgroundImage(calendarImage, for: .normal)
+            for button in buttons {
+                if button.titleLabel?.text == self.state.rawValue {
+                    button.setTitleColor(Design.Color.lightGray, for: .normal)
+                } else if button.backgroundImage(for: .normal) != nil, self.state != .calendar {
+                    button.setBackgroundImage(self.calendarImage, for: .normal)
+                }
             }
-        }
 
-        setNeedsLayout()
-        layoutIfNeeded()
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+        }
     }
 }
 
@@ -270,14 +272,10 @@ extension DatePicker: CalendarViewControllerDelegate {
     public func selectedDate(_ date: Date) {
         selectedDate = date
 
-        UIView.animate(withDuration: 0.2) {
-            self.stateAnimation()
-        }
+        stateAnimate(duration: 0.2)
     }
 
     public func cancelSelection() {
-        UIView.animate(withDuration: 0.2) {
-            self.stateAnimation()
-        }
+        stateAnimate(duration: 0.2)
     }
 }

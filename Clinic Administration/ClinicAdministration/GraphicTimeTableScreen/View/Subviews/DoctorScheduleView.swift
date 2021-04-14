@@ -214,7 +214,6 @@ final class DoctorScheduleView: UIView {
             let maxTY = cabinetView.frame.height - originalLocation.y - originalHeight - 1
             frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
             minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
-            // MARK: Scroll near the bottom edge of screen
         case .ended:
             editSchedule(options: [.endingTime], by: TimeInterval(minutesInterval * 60))
             setNeedsDisplay()
@@ -236,7 +235,6 @@ final class DoctorScheduleView: UIView {
             frame.size.height = originalHeight - min(max(translationY, minTY), maxTY)
             frame.origin.y = originalLocation.y + max(min(translationY, maxTY), minTY)
             minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
-            // MARK: Scroll near the top edge of screen
         case .ended:
             editSchedule(options: [.startingTime], by: TimeInterval(minutesInterval * 60))
             setNeedsDisplay()
