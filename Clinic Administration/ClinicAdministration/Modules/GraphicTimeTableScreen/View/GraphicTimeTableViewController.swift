@@ -142,6 +142,8 @@ final class GraphicTimeTableViewController: UIViewController {
     }
 }
 
+// MARK: - UIScrollViewDelegate
+
 extension GraphicTimeTableViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == hScrollView {
@@ -158,6 +160,8 @@ extension GraphicTimeTableViewController: UIScrollViewDelegate {
         }
     }
 }
+
+// MARK: - GraphicTimeTableDisplaying
 
 extension GraphicTimeTableViewController: GraphicTimeTableDisplaying {
     func updateTableView(with newSchedules: [DoctorSchedule]) {

@@ -271,7 +271,6 @@ public final class DatePicker: UIView {
 extension DatePicker: CalendarViewControllerDelegate {
     public func selectedDate(_ date: Date) {
         selectedDate = date
-
         stateAnimate(duration: 0.2)
     }
 

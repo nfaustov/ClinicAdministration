@@ -11,7 +11,9 @@ final class GraphicTimeTableInteractor {
     weak var output: GraphicTimeTableInteractorOutput!
 }
 
-extension GraphicTimeTableInteractor: GraphicTimeTableInteractorInput {
+// MARK: - GraphicTimeTableInteractorInterface
+
+extension GraphicTimeTableInteractor: GraphicTimeTableInteractorInterface {
     func getSchedules(for date: Date) {
         let timeTableDataManager = TimeTableDataManager()
         let schedules = timeTableDataManager.filteredSchedules(for: date)

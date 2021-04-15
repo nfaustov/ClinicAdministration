@@ -1,28 +1,25 @@
 //
-//  TimeTableRouter.swift
+//  GraphicTimeTableRouter.swift
 //  ClinicAdministration
 //
-//  Created by Nikolai Faustov on 25.03.2021.
+//  Created by Nikolai Faustov on 13.04.2021.
 //
 
 import UIKit
 import CalendarControl
 
-final class TimeTableRouter {
+final class GraphicTimeTableRouter {
     let viewController: UIViewController
-    weak var output: TimeTableRouterOutput!
+    weak var output: GraphicTimeTableRouterOutput!
 
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
 }
 
-extension TimeTableRouter: TimeTableRouting {
-    func routeToGraphicTimeTableScreen(onDate date: Date) {
-        let graphicTimeTableViewController = GraphicTimeTableBuilder.build(with: date)
-        viewController.navigationController?.present(graphicTimeTableViewController, animated: true)
-    }
+// MARK: - GraphicTimeTableRouting
 
+extension GraphicTimeTableRouter: GraphicTimeTableRouting {
     func routeToCalendarViewController() {
         let calendarViewController = CalendarViewController()
         viewController.present(calendarViewController, animated: true)
@@ -30,7 +27,9 @@ extension TimeTableRouter: TimeTableRouting {
     }
 }
 
-extension TimeTableRouter: CalendarViewControllerDelegate {
+// MARK: - CalendarViewControllerDelegate
+
+extension GraphicTimeTableRouter: CalendarViewControllerDelegate {
     func selectedDate(_ date: Date) {
         output.selectedDate(date)
     }

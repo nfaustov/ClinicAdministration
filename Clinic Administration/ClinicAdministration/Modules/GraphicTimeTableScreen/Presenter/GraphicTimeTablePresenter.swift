@@ -9,19 +9,21 @@ import Foundation
 
 final class GraphicTimeTablePresenter {
     weak var view: GraphicTimeTableDisplaying!
-    var interactor: GraphicTimeTableInteractorInput!
+    var interactor: GraphicTimeTableInteractorInterface!
     var router: GraphicTimeTableRouting!
 
     init(
         view: GraphicTimeTableDisplaying,
         router: GraphicTimeTableRouting,
-        interactor: GraphicTimeTableInteractorInput
+        interactor: GraphicTimeTableInteractorInterface
     ) {
         self.view = view
         self.router = router
         self.interactor = interactor
     }
 }
+
+// MARK: - GraphicTimeTablePresentation
 
 extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
     func didSelected(date: Date) {
@@ -36,11 +38,15 @@ extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
     }
 }
 
+// MARK: - GraphicTimeTableInteractorOutput
+
 extension GraphicTimeTablePresenter: GraphicTimeTableInteractorOutput {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
         view.updateTableView(with: schedules)
     }
 }
+
+// MARK: - GraphicTimeTableRouterOutput
 
 extension GraphicTimeTablePresenter: GraphicTimeTableRouterOutput {
     func selectedDate(_ date: Date) {

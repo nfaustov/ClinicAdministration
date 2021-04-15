@@ -9,15 +9,28 @@ import Foundation
 
 final class TimeTablePresenter {
     weak var view: TimeTableDisplaying!
-    var interactor: TimeTableInteractorInput!
+    var interactor: TimeTableInteractorInterface!
     var router: TimeTableRouting!
 
-    init(view: TimeTableDisplaying, router: TimeTableRouting, interactor: TimeTableInteractorInput) {
+    init(view: TimeTableDisplaying, router: TimeTableRouting, interactor: TimeTableInteractorInterface) {
         self.view = view
         self.router = router
         self.interactor = interactor
     }
+
+    private func prepareIfNeeded(_ schedule: DoctorSchedule) -> DoctorSchedule {
+        if schedule.patientCells.count % 2 != 0 {
+            var preparedSchedule = schedule
+            let cell = TimeTablePatientCell(scheduledTime: nil, duration: 0, patient: nil)
+            preparedSchedule.patientCells.append(cell)
+            return preparedSchedule
+        } else {
+            return schedule
+        }
+    }
 }
+
+// MARK: - TimeTablePresentaion
 
 extension TimeTablePresenter: TimeTablePresentation {
     func didSelected(_ schedule: DoctorSchedule) {
@@ -49,6 +62,8 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 }
 
+// MARK: - TimeTableInteractorOutput
+
 extension TimeTablePresenter: TimeTableInteractorOutput {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
         if let firstSchedule = schedules.first {
@@ -63,21 +78,10 @@ extension TimeTablePresenter: TimeTableInteractorOutput {
     }
 }
 
+// MARK: - TimeTableRouterOutput
+
 extension TimeTablePresenter: TimeTableRouterOutput {
     func selectedDate(_ date: Date) {
         didSelected(date: date)
-    }
-}
-
-private extension TimeTablePresenter {
-    func prepareIfNeeded(_ schedule: DoctorSchedule) -> DoctorSchedule {
-        if schedule.patientCells.count % 2 != 0 {
-            var preparedSchedule = schedule
-            let cell = TimeTablePatientCell(scheduledTime: nil, duration: 0, patient: nil)
-            preparedSchedule.patientCells.append(cell)
-            return preparedSchedule
-        } else {
-            return schedule
-        }
     }
 }
