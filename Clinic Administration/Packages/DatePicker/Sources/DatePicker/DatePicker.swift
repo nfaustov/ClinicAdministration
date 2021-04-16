@@ -44,9 +44,13 @@ public final class DatePicker: UIView {
     }
 
     private var dateAction: ((Date) -> Void)?
-    private var calendarAction: (() -> Void)?
+    private var calendarAction: ((UIViewController) -> Void)?
 
-    public init(selectedDate: Date, dateAction: @escaping (Date) -> Void, calendarAction: @escaping () -> Void) {
+    public init(
+        selectedDate: Date,
+        dateAction: @escaping (Date) -> Void,
+        calendarAction: @escaping (UIViewController) -> Void
+    ) {
         self.selectedDate = selectedDate
         self.dateAction = dateAction
         self.calendarAction = calendarAction
@@ -190,7 +194,8 @@ public final class DatePicker: UIView {
                 self.layoutIfNeeded()
             },
             completion: { _ in
-                self.calendarAction?()
+                let calendar = CalendarBuilder.build(delegate: self)
+                self.calendarAction?(calendar)
             }
         )
     }
@@ -268,7 +273,7 @@ public final class DatePicker: UIView {
     }
 }
 
-extension DatePicker: CalendarViewControllerDelegate {
+extension DatePicker: CalendarRouterOutput {
     public func selectedDate(_ date: Date) {
         selectedDate = date
         stateAnimate(duration: 0.2)

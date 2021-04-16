@@ -15,7 +15,6 @@ final class GraphicTimeTableBuilder {
         let presenter = GraphicTimeTablePresenter(view: view, router: router, interactor: interactor)
         view.presenter = presenter
         interactor.output = presenter
-        router.output = presenter
         presenter.didSelected(date: date)
 
         return view

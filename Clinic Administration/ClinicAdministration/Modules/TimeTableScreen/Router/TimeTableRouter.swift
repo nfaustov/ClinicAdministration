@@ -10,14 +10,13 @@ import CalendarControl
 
 final class TimeTableRouter {
     let viewController: UIViewController
-    weak var output: TimeTableRouterOutput!
 
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
 }
 
-//MARK: - TimeTableRouting
+// MARK: - TimeTableRouting
 
 extension TimeTableRouter: TimeTableRouting {
     func routeToGraphicTimeTableScreen(onDate date: Date) {
@@ -25,21 +24,7 @@ extension TimeTableRouter: TimeTableRouting {
         viewController.navigationController?.present(graphicTimeTableViewController, animated: true)
     }
 
-    func routeToCalendarViewController() {
-        let calendarViewController = CalendarViewController()
+    func routeToCalendar(_ calendarViewController: UIViewController) {
         viewController.present(calendarViewController, animated: true)
-        calendarViewController.delegate = self
-    }
-}
-
-// MARK: - CalendarViewControllerDelegate
-
-extension TimeTableRouter: CalendarViewControllerDelegate {
-    func selectedDate(_ date: Date) {
-        output.selectedDate(date)
-    }
-
-    func cancelSelection() {
-        // TODO: - return DatePicker selector to the last state
     }
 }

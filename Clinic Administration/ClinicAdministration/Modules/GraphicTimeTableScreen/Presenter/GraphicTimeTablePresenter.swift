@@ -5,7 +5,7 @@
 //  Created by Nikolai Faustov on 13.04.2021.
 //
 
-import Foundation
+import UIKit
 
 final class GraphicTimeTablePresenter {
     weak var view: GraphicTimeTableDisplaying!
@@ -33,8 +33,8 @@ extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
         }
     }
 
-    func calendarRequired() {
-        router.routeToCalendarViewController()
+    func calendarRequired(_ viewController: UIViewController) {
+        router.routeToCalendar(viewController)
     }
 }
 
@@ -43,13 +43,5 @@ extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
 extension GraphicTimeTablePresenter: GraphicTimeTableInteractorOutput {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
         view.updateTableView(with: schedules)
-    }
-}
-
-// MARK: - GraphicTimeTableRouterOutput
-
-extension GraphicTimeTablePresenter: GraphicTimeTableRouterOutput {
-    func selectedDate(_ date: Date) {
-        didSelected(date: date)
     }
 }

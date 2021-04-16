@@ -23,8 +23,8 @@ final class DatePickerHeader: UICollectionReusableView {
             dateAction: { date in
                 presenter.didSelected(date: date)
             },
-            calendarAction: {
-                presenter.calendarRequired()
+            calendarAction: { viewController in
+                presenter.openCalendar(viewController)
             }
         )
 

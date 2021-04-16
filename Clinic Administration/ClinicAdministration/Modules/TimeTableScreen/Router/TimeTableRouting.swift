@@ -5,10 +5,10 @@
 //  Created by Nikolai Faustov on 25.03.2021.
 //
 
-import Foundation
+import UIKit
 
 protocol TimeTableRouting: AnyObject {
     func routeToGraphicTimeTableScreen(onDate: Date)
 
-    func routeToCalendarViewController()
+    func routeToCalendar(_ calendarViewController: UIViewController)
 }

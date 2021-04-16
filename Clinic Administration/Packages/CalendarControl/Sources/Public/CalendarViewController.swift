@@ -9,16 +9,10 @@ import UIKit
 import Design
 import HorizonCalendar
 
-public protocol CalendarViewControllerDelegate: AnyObject {
-    func selectedDate(_ date: Date)
+final class CalendarViewController: UIViewController {
+    var presenter: CalendarPresentation!
 
-    func cancelSelection()
-}
-
-public final class CalendarViewController: UIViewController {
     private var calendar = Calendar.current
-
-    public weak var delegate: CalendarViewControllerDelegate?
 
     private let confirmationView = ConfirmationView()
     private var confirmationViewTopConstraint = NSLayoutConstraint()
@@ -44,7 +38,9 @@ public final class CalendarViewController: UIViewController {
         }
     }
 
-    public override func viewDidLoad() {
+    private var isConfirmed = false
+
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = Design.Color.white
@@ -60,9 +56,9 @@ public final class CalendarViewController: UIViewController {
 
         if let components = selectedDay?.components,
            let pickedDate = calendar.date(from: components) {
-            delegate?.selectedDate(pickedDate)
+            presenter.exit(with: isConfirmed ? pickedDate : nil)
         } else {
-            delegate?.cancelSelection()
+            presenter.exit(with: nil)
         }
     }
 
@@ -165,6 +161,7 @@ public final class CalendarViewController: UIViewController {
         confirmationView.confirmAction = { [weak self] in
             guard let self = self else { return }
 
+            self.isConfirmed = true
             self.dismiss(animated: true)
         }
 

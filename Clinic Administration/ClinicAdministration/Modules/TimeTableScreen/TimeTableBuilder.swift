@@ -15,7 +15,6 @@ final class TimeTableBuilder {
         let presenter = TimeTablePresenter(view: view, router: router, interactor: interactor)
         view.presenter = presenter
         interactor.output = presenter
-        router.output = presenter
 
         return view
     }

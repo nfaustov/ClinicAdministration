@@ -5,10 +5,10 @@
 //  Created by Nikolai Faustov on 13.04.2021.
 //
 
-import Foundation
+import UIKit
 
 protocol GraphicTimeTablePresentation: AnyObject {
     func didSelected(date: Date)
 
-    func calendarRequired()
+    func calendarRequired(_ viewController: UIViewController)
 }

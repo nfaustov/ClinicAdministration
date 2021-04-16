@@ -5,7 +5,7 @@
 //  Created by Nikolai Faustov on 25.03.2021.
 //
 
-import Foundation
+import UIKit
 
 final class TimeTablePresenter {
     weak var view: TimeTableDisplaying!
@@ -47,8 +47,8 @@ extension TimeTablePresenter: TimeTablePresentation {
         view.date = date
     }
 
-    func calendarRequired() {
-        router.routeToCalendarViewController()
+    func openCalendar(_ viewController: UIViewController) {
+        router.routeToCalendar(viewController)
     }
 
     func addNewDoctorSchedule() {
@@ -75,13 +75,5 @@ extension TimeTablePresenter: TimeTableInteractorOutput {
         } else {
             view.daySnapshot(schedules: [])
         }
-    }
-}
-
-// MARK: - TimeTableRouterOutput
-
-extension TimeTablePresenter: TimeTableRouterOutput {
-    func selectedDate(_ date: Date) {
-        didSelected(date: date)
     }
 }
