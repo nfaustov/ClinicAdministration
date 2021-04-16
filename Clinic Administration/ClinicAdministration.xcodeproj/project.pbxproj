@@ -502,6 +502,7 @@
 				8B20CE4F2629993C0007C20A /* Design */,
 				8B188985259CCA55000B0077 /* Settings */,
 				8B0F5BC9255D49F400894410 /* Types */,
+				8BCAB7A72559D4A5001A93D0 /* Info.plist */,
 				8B733D14256934BB0082784E /* schedules.json */,
 			);
 			path = ClinicAdministration;
@@ -513,7 +514,6 @@
 				8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */,
 				8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */,
 				8BCAB7A22559D4A5001A93D0 /* Assets.xcassets */,
-				8BCAB7A72559D4A5001A93D0 /* Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
