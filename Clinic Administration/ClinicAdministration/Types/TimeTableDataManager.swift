@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Extensions
 
 final class TimeTableDataManager {
     private var schedules: [DoctorSchedule]

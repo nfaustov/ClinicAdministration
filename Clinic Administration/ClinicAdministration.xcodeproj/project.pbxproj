@@ -18,6 +18,24 @@
 		8B10E3A12625D1E000476862 /* GraphicTimeTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3A02625D1E000476862 /* GraphicTimeTableRouter.swift */; };
 		8B10E3A52625D24700476862 /* GraphicTimeTableRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3A42625D24700476862 /* GraphicTimeTableRouting.swift */; };
 		8B188983259CCA4E000B0077 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B188982259CCA4E000B0077 /* Settings.swift */; };
+		8B20CE0426298F630007C20A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0326298F630007C20A /* Coordinator.swift */; };
+		8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0726298FCE0007C20A /* MainCoordinator.swift */; };
+		8B20CE0F262995FA0007C20A /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0E262995FA0007C20A /* DatePicker.swift */; };
+		8B20CE23262997A70007C20A /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE22262997A70007C20A /* CalendarViewController.swift */; };
+		8B20CE2A262997B30007C20A /* MonthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE26262997B30007C20A /* MonthHeader.swift */; };
+		8B20CE2B262997B30007C20A /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE27262997B30007C20A /* DayLabel.swift */; };
+		8B20CE2C262997B30007C20A /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE28262997B30007C20A /* ConfirmationView.swift */; };
+		8B20CE2D262997B30007C20A /* DayOfWeekRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE29262997B30007C20A /* DayOfWeekRow.swift */; };
+		8B20CE33262997D00007C20A /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE31262997D00007C20A /* CalendarPresenter.swift */; };
+		8B20CE34262997D00007C20A /* CalendarPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE32262997D00007C20A /* CalendarPresentation.swift */; };
+		8B20CE3B262997E40007C20A /* CalendarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE38262997E40007C20A /* CalendarRouter.swift */; };
+		8B20CE3C262997E40007C20A /* CalendarRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE39262997E40007C20A /* CalendarRouting.swift */; };
+		8B20CE3D262997E40007C20A /* CalendarRouterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE3A262997E40007C20A /* CalendarRouterOutput.swift */; };
+		8B20CE41262997EF0007C20A /* CalendarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE40262997EF0007C20A /* CalendarBuilder.swift */; };
+		8B20CE4A262998B60007C20A /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 8B20CE49262998B60007C20A /* HorizonCalendar */; };
+		8B20CE532629995C0007C20A /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE522629995C0007C20A /* Design.swift */; };
+		8B20CE5D2629998F0007C20A /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE5B2629998F0007C20A /* Bundle-Decodable.swift */; };
+		8B20CE5E2629998F0007C20A /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE5C2629998F0007C20A /* DateFormatterExtension.swift */; };
 		8B29219E257930630058B51E /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B29219D257930630058B51E /* TimelineView.swift */; };
 		8B38A1AA260D133500CA01A0 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1A9260D133500CA01A0 /* TimeTableViewController.swift */; };
 		8B38A1B0260D136500CA01A0 /* TimeTableDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1AF260D136500CA01A0 /* TimeTableDisplaying.swift */; };
@@ -30,10 +48,6 @@
 		8B38A1CC260D14AE00CA01A0 /* TimeTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1CB260D14AE00CA01A0 /* TimeTableRouter.swift */; };
 		8B38A1D8260D16E600CA01A0 /* TimeTablePatient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1D7260D16E600CA01A0 /* TimeTablePatient.swift */; };
 		8B41FE7F261E3D4B009ED53E /* TimeTableCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */; };
-		8B4825DA260B14300086FB64 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825D9260B14300086FB64 /* Design */; };
-		8B4825F0260B254A0086FB64 /* DatePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825EF260B254A0086FB64 /* DatePicker */; };
-		8B4825F7260B26BD0086FB64 /* Extensions in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825F6260B26BD0086FB64 /* Extensions */; };
-		8B4825FD260B395B0086FB64 /* CalendarControl in Frameworks */ = {isa = PBXBuildFile; productRef = 8B4825FC260B395B0086FB64 /* CalendarControl */; };
 		8B49426A2625790B00275057 /* TimeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4942692625790B00275057 /* TimeTableCell.swift */; };
 		8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */; };
 		8B62D61C2615C57A006A78F4 /* TimeTableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62D61B2615C57A006A78F4 /* TimeTableBuilder.swift */; };
@@ -54,7 +68,6 @@
 		8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */; };
 		8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */; };
 		8BCAB7A32559D4A5001A93D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7A22559D4A5001A93D0 /* Assets.xcassets */; };
-		8BCAB7A62559D4A5001A93D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BCAB7A42559D4A5001A93D0 /* LaunchScreen.storyboard */; };
 		8BCAB7B22559D564001A93D0 /* GraphicTimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7B12559D564001A93D0 /* GraphicTimeTableViewController.swift */; };
 		8BCAB7BB2559D5EF001A93D0 /* GraphicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7BA2559D5EF001A93D0 /* GraphicTableView.swift */; };
 		8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7BD2559D608001A93D0 /* DoctorScheduleView.swift */; };
@@ -91,6 +104,23 @@
 		8B10E3A02625D1E000476862 /* GraphicTimeTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableRouter.swift; sourceTree = "<group>"; };
 		8B10E3A42625D24700476862 /* GraphicTimeTableRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableRouting.swift; sourceTree = "<group>"; };
 		8B188982259CCA4E000B0077 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8B20CE0326298F630007C20A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		8B20CE0726298FCE0007C20A /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		8B20CE0E262995FA0007C20A /* DatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
+		8B20CE22262997A70007C20A /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		8B20CE26262997B30007C20A /* MonthHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthHeader.swift; sourceTree = "<group>"; };
+		8B20CE27262997B30007C20A /* DayLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
+		8B20CE28262997B30007C20A /* ConfirmationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		8B20CE29262997B30007C20A /* DayOfWeekRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayOfWeekRow.swift; sourceTree = "<group>"; };
+		8B20CE31262997D00007C20A /* CalendarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
+		8B20CE32262997D00007C20A /* CalendarPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarPresentation.swift; sourceTree = "<group>"; };
+		8B20CE38262997E40007C20A /* CalendarRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRouter.swift; sourceTree = "<group>"; };
+		8B20CE39262997E40007C20A /* CalendarRouting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRouting.swift; sourceTree = "<group>"; };
+		8B20CE3A262997E40007C20A /* CalendarRouterOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRouterOutput.swift; sourceTree = "<group>"; };
+		8B20CE40262997EF0007C20A /* CalendarBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarBuilder.swift; sourceTree = "<group>"; };
+		8B20CE522629995C0007C20A /* Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		8B20CE5B2629998F0007C20A /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
+		8B20CE5C2629998F0007C20A /* DateFormatterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		8B29219D257930630058B51E /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		8B38A1A9260D133500CA01A0 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 		8B38A1AF260D136500CA01A0 /* TimeTableDisplaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableDisplaying.swift; sourceTree = "<group>"; };
@@ -103,10 +133,6 @@
 		8B38A1CB260D14AE00CA01A0 /* TimeTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableRouter.swift; sourceTree = "<group>"; };
 		8B38A1D7260D16E600CA01A0 /* TimeTablePatient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTablePatient.swift; sourceTree = "<group>"; };
 		8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCellFactory.swift; sourceTree = "<group>"; };
-		8B4825D1260B13520086FB64 /* Design */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Design; sourceTree = "<group>"; };
-		8B4825DD260B1BDA0086FB64 /* CalendarControl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CalendarControl; sourceTree = "<group>"; };
-		8B4825E8260B20A30086FB64 /* DatePicker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DatePicker; sourceTree = "<group>"; };
-		8B4825F3260B26330086FB64 /* Extensions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Extensions; sourceTree = "<group>"; };
 		8B4942692625790B00275057 /* TimeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCell.swift; sourceTree = "<group>"; };
 		8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSectionPlaceholder.swift; sourceTree = "<group>"; };
 		8B62D61B2615C57A006A78F4 /* TimeTableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableBuilder.swift; sourceTree = "<group>"; };
@@ -128,7 +154,6 @@
 		8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8BCAB7A22559D4A5001A93D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8BCAB7A52559D4A5001A93D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BCAB7A72559D4A5001A93D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BCAB7B12559D564001A93D0 /* GraphicTimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableViewController.swift; sourceTree = "<group>"; };
 		8BCAB7BA2559D5EF001A93D0 /* GraphicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTableView.swift; sourceTree = "<group>"; };
@@ -151,10 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B4825F7260B26BD0086FB64 /* Extensions in Frameworks */,
-				8B4825F0260B254A0086FB64 /* DatePicker in Frameworks */,
-				8B4825FD260B395B0086FB64 /* CalendarControl in Frameworks */,
-				8B4825DA260B14300086FB64 /* Design in Frameworks */,
+				8B20CE4A262998B60007C20A /* HorizonCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +257,99 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		8B20CE0026298DCE0007C20A /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE0326298F630007C20A /* Coordinator.swift */,
+				8B20CE0726298FCE0007C20A /* MainCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		8B20CE0D262995910007C20A /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE14262996C00007C20A /* DatePicker */,
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		8B20CE14262996C00007C20A /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE0E262995FA0007C20A /* DatePicker.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		8B20CE15262996D90007C20A /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE40262997EF0007C20A /* CalendarBuilder.swift */,
+				8B20CE1E2629977B0007C20A /* View */,
+				8B20CE30262997BC0007C20A /* Presenter */,
+				8B20CE37262997D60007C20A /* Router */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		8B20CE1E2629977B0007C20A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE22262997A70007C20A /* CalendarViewController.swift */,
+				8B20CE1F2629978B0007C20A /* Subviews */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B20CE1F2629978B0007C20A /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE28262997B30007C20A /* ConfirmationView.swift */,
+				8B20CE27262997B30007C20A /* DayLabel.swift */,
+				8B20CE29262997B30007C20A /* DayOfWeekRow.swift */,
+				8B20CE26262997B30007C20A /* MonthHeader.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		8B20CE30262997BC0007C20A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE32262997D00007C20A /* CalendarPresentation.swift */,
+				8B20CE31262997D00007C20A /* CalendarPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8B20CE37262997D60007C20A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE38262997E40007C20A /* CalendarRouter.swift */,
+				8B20CE3A262997E40007C20A /* CalendarRouterOutput.swift */,
+				8B20CE39262997E40007C20A /* CalendarRouting.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		8B20CE4F2629993C0007C20A /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE522629995C0007C20A /* Design.swift */,
+				8BCAB7C72559DC72001A93D0 /* Fonts */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		8B20CE58262999710007C20A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B20CE5B2629998F0007C20A /* Bundle-Decodable.swift */,
+				8B20CE5C2629998F0007C20A /* DateFormatterExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		8B38A1A3260D12B600CA01A0 /* TimeTableScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,24 +408,6 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		8B4825CB260B116C0086FB64 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				8B4825E8260B20A30086FB64 /* DatePicker */,
-				8B4825DD260B1BDA0086FB64 /* CalendarControl */,
-				8B4825F3260B26330086FB64 /* Extensions */,
-				8B4825D1260B13520086FB64 /* Design */,
-			);
-			path = Packages;
-			sourceTree = "<group>";
-		};
-		8B4825D8260B14300086FB64 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		8B494268262578FB00275057 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +444,7 @@
 		8B5D15B82627561F003450F6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8B20CE15262996D90007C20A /* Calendar */,
 				8BCAB7B42559D56A001A93D0 /* GraphicTimeTableScreen */,
 				8B38A1A3260D12B600CA01A0 /* TimeTableScreen */,
 			);
@@ -381,8 +479,6 @@
 				8BCAB7982559D4A4001A93D0 /* ClinicAdministration */,
 				8BFE342825B378150058F42F /* ClinicAdministrationTests */,
 				8BCAB7972559D4A4001A93D0 /* Products */,
-				8B4825CB260B116C0086FB64 /* Packages */,
-				8B4825D8260B14300086FB64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -398,26 +494,28 @@
 		8BCAB7982559D4A4001A93D0 /* ClinicAdministration */ = {
 			isa = PBXGroup;
 			children = (
+				8BCAB7AF2559D4D5001A93D0 /* Application */,
+				8B20CE0026298DCE0007C20A /* Coordinators */,
 				8B5D15B82627561F003450F6 /* Modules */,
+				8B20CE0D262995910007C20A /* ReusableViews */,
+				8B20CE58262999710007C20A /* Extensions */,
+				8B20CE4F2629993C0007C20A /* Design */,
 				8B188985259CCA55000B0077 /* Settings */,
 				8B0F5BC9255D49F400894410 /* Types */,
-				8BCAB7AF2559D4D5001A93D0 /* Supporting Files */,
 				8B733D14256934BB0082784E /* schedules.json */,
-				8BCAB7C72559DC72001A93D0 /* Fonts */,
-				8BCAB7A72559D4A5001A93D0 /* Info.plist */,
 			);
 			path = ClinicAdministration;
 			sourceTree = "<group>";
 		};
-		8BCAB7AF2559D4D5001A93D0 /* Supporting Files */ = {
+		8BCAB7AF2559D4D5001A93D0 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */,
 				8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */,
 				8BCAB7A22559D4A5001A93D0 /* Assets.xcassets */,
-				8BCAB7A42559D4A5001A93D0 /* LaunchScreen.storyboard */,
+				8BCAB7A72559D4A5001A93D0 /* Info.plist */,
 			);
-			path = "Supporting Files";
+			path = Application;
 			sourceTree = "<group>";
 		};
 		8BCAB7B42559D56A001A93D0 /* GraphicTimeTableScreen */ = {
@@ -472,10 +570,7 @@
 			);
 			name = ClinicAdministration;
 			packageProductDependencies = (
-				8B4825D9260B14300086FB64 /* Design */,
-				8B4825EF260B254A0086FB64 /* DatePicker */,
-				8B4825F6260B26BD0086FB64 /* Extensions */,
-				8B4825FC260B395B0086FB64 /* CalendarControl */,
+				8B20CE49262998B60007C20A /* HorizonCalendar */,
 			);
 			productName = "Clinic Administration";
 			productReference = 8BCAB7962559D4A4001A93D0 /* ClinicAdministration.app */;
@@ -527,6 +622,7 @@
 			);
 			mainGroup = 8BCAB78D2559D4A4001A93D0;
 			packageReferences = (
+				8B20CE48262998B60007C20A /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
 			);
 			productRefGroup = 8BCAB7972559D4A4001A93D0 /* Products */;
 			projectDirPath = "";
@@ -545,7 +641,6 @@
 			files = (
 				8BCAB7DE2559DC9C001A93D0 /* Roboto-Bold.ttf in Resources */,
 				8BCAB7D72559DC9C001A93D0 /* Roboto-Regular.ttf in Resources */,
-				8BCAB7A62559D4A5001A93D0 /* LaunchScreen.storyboard in Resources */,
 				8BCAB7A32559D4A5001A93D0 /* Assets.xcassets in Resources */,
 				8BCAB7D42559DC9C001A93D0 /* Roboto-Light.ttf in Resources */,
 				8BCAB7DB2559DC9C001A93D0 /* Roboto-Black.ttf in Resources */,
@@ -591,15 +686,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BA6030D260DDF8300DF686B /* TimeTablePatientView.swift in Sources */,
+				8B20CE5D2629998F0007C20A /* Bundle-Decodable.swift in Sources */,
+				8B20CE5E2629998F0007C20A /* DateFormatterExtension.swift in Sources */,
 				8B62D6242615CB7A006A78F4 /* DatePickerHeader.swift in Sources */,
+				8B20CE0426298F630007C20A /* Coordinator.swift in Sources */,
+				8B20CE3D262997E40007C20A /* CalendarRouterOutput.swift in Sources */,
 				8BE26CEA2616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift in Sources */,
 				8B733D0E256878070082784E /* TimeTableDataManager.swift in Sources */,
 				8B0E46F82618F0D60035CF6D /* DoctorLeadingHeader.swift in Sources */,
 				8B38A1B0260D136500CA01A0 /* TimeTableDisplaying.swift in Sources */,
 				8B38A1B8260D13B900CA01A0 /* TimeTablePresenter.swift in Sources */,
+				8B20CE41262997EF0007C20A /* CalendarBuilder.swift in Sources */,
+				8B20CE33262997D00007C20A /* CalendarPresenter.swift in Sources */,
 				8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */,
 				8B6B0F87261CA56700F416D1 /* TimeTableAction.swift in Sources */,
 				8B38A1AA260D133500CA01A0 /* TimeTableViewController.swift in Sources */,
+				8B20CE3B262997E40007C20A /* CalendarRouter.swift in Sources */,
 				8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */,
 				8BBEEF32261C968700A06B2D /* ActionListCell.swift in Sources */,
 				8B38A1C8260D148000CA01A0 /* TimeTableRouting.swift in Sources */,
@@ -609,14 +711,18 @@
 				8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */,
 				8B38A1B4260D137200CA01A0 /* TimeTablePresentation.swift in Sources */,
 				8B38A1CC260D14AE00CA01A0 /* TimeTableRouter.swift in Sources */,
+				8B20CE2D262997B30007C20A /* DayOfWeekRow.swift in Sources */,
 				8B10E3A52625D24700476862 /* GraphicTimeTableRouting.swift in Sources */,
 				8B10E3882625CF4200476862 /* GraphicTimeTablePresenter.swift in Sources */,
 				8BCAB7BB2559D5EF001A93D0 /* GraphicTableView.swift in Sources */,
 				8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */,
 				8B10E3822625CEFB00476862 /* GraphicTimeTableDisplaying.swift in Sources */,
+				8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */,
 				8B38A1D8260D16E600CA01A0 /* TimeTablePatient.swift in Sources */,
 				8B10E39D2625D18000476862 /* GraphicTimeTableInteractorOutput.swift in Sources */,
 				8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */,
+				8B20CE0F262995FA0007C20A /* DatePicker.swift in Sources */,
+				8B20CE23262997A70007C20A /* CalendarViewController.swift in Sources */,
 				8BADB070261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift in Sources */,
 				8B10E3A12625D1E000476862 /* GraphicTimeTableRouter.swift in Sources */,
 				8B84366B256DB126006057EF /* Person.swift in Sources */,
@@ -625,13 +731,19 @@
 				8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */,
 				8B10E37C2625CD9C00476862 /* GraphicTimeTableBuilder.swift in Sources */,
 				8B29219E257930630058B51E /* TimelineView.swift in Sources */,
+				8B20CE2A262997B30007C20A /* MonthHeader.swift in Sources */,
 				8B49426A2625790B00275057 /* TimeTableCell.swift in Sources */,
+				8B20CE2C262997B30007C20A /* ConfirmationView.swift in Sources */,
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,
 				8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */,
+				8B20CE2B262997B30007C20A /* DayLabel.swift in Sources */,
 				8BCAB7B22559D564001A93D0 /* GraphicTimeTableViewController.swift in Sources */,
 				8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */,
+				8B20CE3C262997E40007C20A /* CalendarRouting.swift in Sources */,
 				8B41FE7F261E3D4B009ED53E /* TimeTableCellFactory.swift in Sources */,
+				8B20CE532629995C0007C20A /* Design.swift in Sources */,
 				8B62D61C2615C57A006A78F4 /* TimeTableBuilder.swift in Sources */,
+				8B20CE34262997D00007C20A /* CalendarPresentation.swift in Sources */,
 				8B10E38C2625CFBB00476862 /* GraphicTimeTablePresentation.swift in Sources */,
 				8B38A1BC260D13DD00CA01A0 /* TimeTableInteractor.swift in Sources */,
 				8B38A1C4260D140200CA01A0 /* TimeTableInteractorOutput.swift in Sources */,
@@ -656,17 +768,6 @@
 			targetProxy = 8BFE342C25B378150058F42F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8BCAB7A42559D4A5001A93D0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8BCAB7A52559D4A5001A93D0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8BCAB7A82559D4A5001A93D0 /* Debug */ = {
@@ -901,22 +1002,22 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		8B20CE48262998B60007C20A /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/HorizonCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		8B4825D9260B14300086FB64 /* Design */ = {
+		8B20CE49262998B60007C20A /* HorizonCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Design;
-		};
-		8B4825EF260B254A0086FB64 /* DatePicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DatePicker;
-		};
-		8B4825F6260B26BD0086FB64 /* Extensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Extensions;
-		};
-		8B4825FC260B395B0086FB64 /* CalendarControl */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CalendarControl;
+			package = 8B20CE48262998B60007C20A /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
+			productName = HorizonCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

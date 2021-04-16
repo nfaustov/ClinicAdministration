@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 final class TimeTablePatientView: UIView {
     private let nameLabel: UILabel = {

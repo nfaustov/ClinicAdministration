@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 class ActionListCell: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier = "ActionListCell"

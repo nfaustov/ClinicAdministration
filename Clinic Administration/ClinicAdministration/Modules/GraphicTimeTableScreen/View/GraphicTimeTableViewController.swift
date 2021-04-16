@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import DatePicker
-import Design
 
 final class GraphicTimeTableViewController: UIViewController {
     var date: Date!

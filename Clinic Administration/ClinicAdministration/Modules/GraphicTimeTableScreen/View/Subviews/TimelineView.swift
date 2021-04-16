@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 final class TimelineView: UIView {
     var tableView: GraphicTableView {

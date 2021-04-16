@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 final class DoctorCell: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier: String = "DoctorCell"

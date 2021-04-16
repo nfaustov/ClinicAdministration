@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 final class PatientSectionBackgroundDecorationView: UICollectionReusableView {
     static let reusIdentifier = "PatientSectionBackgroundDecorationView"

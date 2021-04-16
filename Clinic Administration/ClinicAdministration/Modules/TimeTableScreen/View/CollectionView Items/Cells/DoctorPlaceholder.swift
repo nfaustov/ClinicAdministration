@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 class DoctorPlaceholder: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier = "DoctorPlaceholder"

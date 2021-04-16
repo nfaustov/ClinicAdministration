@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 final class ActionListBackgroundDecorationView: UICollectionReusableView {
     static let reuseIdentifier = "ActionListBackgroundDecorationView"

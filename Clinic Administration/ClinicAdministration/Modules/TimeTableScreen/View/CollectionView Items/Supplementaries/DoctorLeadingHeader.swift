@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 final class DoctorLeadingHeader: UICollectionReusableView {
     static let reuseIdentifier = "DoctorHeader"

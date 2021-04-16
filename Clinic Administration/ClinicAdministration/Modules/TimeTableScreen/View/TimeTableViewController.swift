@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import Extensions
-import Design
-import DatePicker
 
 final class TimeTableViewController: UIViewController {
     private enum ElementKind {

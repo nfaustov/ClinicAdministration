@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Extensions
 import HorizonCalendar
 
 struct MonthHeader: CalendarItemViewRepresentable {

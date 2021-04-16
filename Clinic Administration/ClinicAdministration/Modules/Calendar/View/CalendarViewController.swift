@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Design
-import HorizonCalendar
 
 final class CalendarViewController: UIViewController {
     var presenter: CalendarPresentation!

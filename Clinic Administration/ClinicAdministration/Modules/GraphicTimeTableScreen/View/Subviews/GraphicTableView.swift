@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Design
 
 final class GraphicTableView: UIView {
     private let calendar = Calendar.current
