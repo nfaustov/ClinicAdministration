@@ -11,13 +11,21 @@ final class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
+    private let modules: Modules
+
+    init(navigationController: UINavigationController, modules: Modules) {
         self.navigationController = navigationController
+        self.modules = modules
     }
 
     func start() {
-//        let viewController = TimeTableBuilder.build()
-//        viewcontroller.coordinator = self
-//        navigationController.pushViewController(viewController, animated: true)
+        timeTableCoordinator()
+    }
+
+    func timeTableCoordinator() {
+        let child = TimeTableCoordinator(navigationController: navigationController, modules: modules)
+        child.parentCoordinator = self
+        childCoordinators.append(child)
+        child.start()
     }
 }
