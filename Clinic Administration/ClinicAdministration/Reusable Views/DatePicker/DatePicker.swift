@@ -24,7 +24,7 @@ final class DatePicker: UIView {
     private let weekdayLabel = UILabel()
 
     private let selectionLine = UIView()
-    private var selectionLineLeading: NSLayoutConstraint!
+    private var selectionLineConstraint: NSLayoutConstraint!
 
     private let buttonsStack = UIStackView()
 
@@ -85,8 +85,7 @@ final class DatePicker: UIView {
               let calendarButton = buttons.last else { return }
 
         if rawValue == "calendar" {
-            let offset = (selectionLine.frame.width - calendarButton.frame.width) / 2
-            updateSelectionLine(anchor: calendarButton, constant: -offset)
+            updateSelectionLine(anchor: calendarButton)
             calendarButton.setBackgroundImage(selectedCalendarImage, for: .normal)
         } else {
             calendarButton.setBackgroundImage(calendarImage, for: .normal)
@@ -102,13 +101,15 @@ final class DatePicker: UIView {
         }
     }
 
-    private func updateSelectionLine(anchor: UIButton, constant: CGFloat? = nil) {
-        selectionLineLeading?.isActive = false
-        selectionLineLeading = selectionLine.leadingAnchor.constraint(
-            equalTo: anchor.leadingAnchor,
-            constant: constant ?? 0
-        )
-        selectionLineLeading.isActive = true
+    private func updateSelectionLine(anchor: UIButton) {
+        selectionLineConstraint?.isActive = false
+        defer { selectionLineConstraint.isActive = true }
+
+        if state == .calendar {
+            selectionLineConstraint = selectionLine.centerXAnchor.constraint(equalTo: anchor.centerXAnchor)
+        } else {
+            selectionLineConstraint = selectionLine.leadingAnchor.constraint(equalTo: anchor.leadingAnchor)
+        }
     }
 
     private func configureLabels() {
