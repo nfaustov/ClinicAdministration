@@ -208,7 +208,7 @@ extension TimeTableViewController: TimeTableDisplaying {
             snapshot.appendItems(schedules, toSection: .doctor)
             snapshot.appendItems(firstSchedule.patientCells, toSection: .patient)
             snapshot.appendItems(actionList, toSection: .actionList)
-            dataSource?.apply(snapshot)
+            dataSource?.apply(snapshot, animatingDifferences: false)
 
             let indexPath = dataSource?.indexPath(for: firstSchedule)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
@@ -226,7 +226,7 @@ extension TimeTableViewController: TimeTableDisplaying {
                 ],
                 toSection: .patient
             )
-            dataSource?.apply(snapshot)
+            dataSource?.apply(snapshot, animatingDifferences: false)
         }
     }
 
