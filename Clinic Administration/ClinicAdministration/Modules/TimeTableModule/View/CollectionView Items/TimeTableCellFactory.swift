@@ -23,6 +23,8 @@ final class TimeTableCellFactory {
             return configureCell(ActionListCell.self, with: action, for: indexPath)
         } else if let placeholder = model as? DoctorSectionPlaceholder {
             return configureCell(DoctorPlaceholder.self, with: placeholder, for: indexPath)
+        } else if let control = model as? DoctorControl {
+            return configureCell(DoctorControlCell.self, with: control, for: indexPath)
         } else {
             fatalError("Unknown model type")
         }

@@ -28,10 +28,8 @@ final class DatePicker: UIView {
 
     private let buttonsStack = UIStackView()
 
-    private let calendarImage = UIImage(systemName: "calendar")?
-        .withTintColor(Design.Color.brown, renderingMode: .alwaysOriginal)
-    private let selectedCalendarImage = UIImage(systemName: "calendar")?
-        .withTintColor(Design.Color.lightGray, renderingMode: .alwaysOriginal)
+    private let calendarImage = UIImage(named: "calendar")?.withTintColor(Design.Color.brown)
+    private let selectedCalendarImage = UIImage(named: "calendar")?.withTintColor(Design.Color.lightGray)
 
     private var state: DatePickerState! {
         didSet {
@@ -101,7 +99,7 @@ final class DatePicker: UIView {
         }
     }
 
-    private func updateSelectionLine(anchor: UIButton) {
+    private func updateSelectionLine(anchor: UIView) {
         selectionLineConstraint?.isActive = false
         defer { selectionLineConstraint.isActive = true }
 

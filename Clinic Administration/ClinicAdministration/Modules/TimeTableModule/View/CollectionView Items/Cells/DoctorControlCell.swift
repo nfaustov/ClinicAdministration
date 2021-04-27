@@ -1,26 +1,34 @@
 //
-//  DoctorLeadingHeader.swift
+//  DoctorControlCell.swift
 //  ClinicAdministration
 //
-//  Created by Nikolai Faustov on 03.04.2021.
+//  Created by Nikolai Faustov on 26.04.2021.
 //
 
 import UIKit
 
-final class DoctorLeadingHeader: UICollectionReusableView {
+class DoctorControlCell: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier = "DoctorHeader"
+
+    let plusButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "user_plus"), for: .normal)
+        button.backgroundColor = Design.Color.brown.withAlphaComponent(0.15)
+        button.layer.cornerRadius = Design.CornerRadius.medium
+        return button
+    }()
+    let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "user_close"), for: .normal)
+        button.backgroundColor = Design.Color.brown.withAlphaComponent(0.15)
+        button.layer.cornerRadius = Design.CornerRadius.medium
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let plusButton = UIButton(type: .custom)
-        plusButton.setImage(UIImage(named: "user_plus"), for: .normal)
-        let deleteButton = UIButton(type: .custom)
-        deleteButton.setImage(UIImage(named: "user_close"), for: .normal)
-
         for button in [plusButton, deleteButton] {
-            button.backgroundColor = Design.Color.brown.withAlphaComponent(0.15)
-            button.layer.cornerRadius = Design.CornerRadius.medium
             addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -40,5 +48,10 @@ final class DoctorLeadingHeader: UICollectionReusableView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(with model: DoctorControl) {
+        plusButton.addTarget(model.target, action: model.addAction, for: .touchUpInside)
+        deleteButton.addTarget(model.target, action: model.deleteAction, for: .touchUpInside)
     }
 }

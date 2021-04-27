@@ -9,7 +9,6 @@ import Foundation
 
 protocol TimeTableCell {
     associatedtype Model: Hashable
-
     static var reuseIdentifier: String { get }
 
     func configure(with: Model)

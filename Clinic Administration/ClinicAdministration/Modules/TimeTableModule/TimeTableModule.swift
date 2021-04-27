@@ -32,7 +32,7 @@ protocol TimeTablePresentation: AnyObject {
 
     func addNewDoctorSchedule()
 
-    func removeDoctorSchedule()
+    func removeDoctorSchedule(_ schedule: DoctorSchedule)
 
     func switchToGraphicScreen(onDate: Date)
 }

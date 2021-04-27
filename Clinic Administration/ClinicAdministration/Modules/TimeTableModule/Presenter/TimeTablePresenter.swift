@@ -54,7 +54,7 @@ extension TimeTablePresenter: TimeTablePresentation {
     func addNewDoctorSchedule() {
     }
 
-    func removeDoctorSchedule() {
+    func removeDoctorSchedule(_ schedule: DoctorSchedule) {
     }
 
     func switchToGraphicScreen(onDate date: Date) {

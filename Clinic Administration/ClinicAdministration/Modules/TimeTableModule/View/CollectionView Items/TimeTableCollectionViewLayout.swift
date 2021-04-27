@@ -11,49 +11,56 @@ final class TimeTableCollectionViewLayout {
     let patientSectionHeaderElementKind: String
     let actionListFooterElementKind: String
     let patientSectionBackgroundElementKind: String
-    let doctorSectionHeaderElementKind: String
     let actionListBackgroundElementKind: String
 
     init(
         patientSectionHeaderElementKind: String,
         actionListFooterElementKind: String,
         patientSectionBackgroundElementKind: String,
-        doctorSectionHeaderElementKind: String,
         actionListBackgroundElementKind: String
     ) {
         self.patientSectionHeaderElementKind = patientSectionHeaderElementKind
         self.actionListFooterElementKind = actionListFooterElementKind
         self.patientSectionBackgroundElementKind = patientSectionBackgroundElementKind
-        self.doctorSectionHeaderElementKind = doctorSectionHeaderElementKind
         self.actionListBackgroundElementKind = actionListBackgroundElementKind
     }
 
     // MARK: - Doctor section & supplementary items
 
-    func createDoctorSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
+    func createDoctorSection(count: Int = 0) -> NSCollectionLayoutSection {
+        let doctorItemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .fractionalHeight(1)
         )
-        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 10, bottom: 25, trailing: 10)
+        let doctorLayoutItem = NSCollectionLayoutItem(layoutSize: doctorItemSize)
+        doctorLayoutItem.contentInsets = NSDirectionalEdgeInsets(top: 25, leading: 10, bottom: 25, trailing: 10)
+        let doctorLayoutGroupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(CGFloat(count) * 170),
+            heightDimension: .fractionalHeight(1)
+        )
+        let doctorLayoutGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: doctorLayoutGroupSize,
+            subitem: doctorLayoutItem,
+            count: count
+        )
+
+        let controlItemSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(72),
+            heightDimension: .fractionalHeight(1)
+        )
+        let controlLayoutItem = NSCollectionLayoutItem(layoutSize: controlItemSize)
+
         let layoutGroupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.45),
+            widthDimension: .absolute(72 + CGFloat(count) * 170),
             heightDimension: .absolute(170)
         )
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: layoutGroupSize,
+            subitems: [controlLayoutItem, doctorLayoutGroup]
+        )
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 72, bottom: 0, trailing: 0)
-        let layoutSectionHeader = createDoctorSectionHeader()
-        layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
-        layoutSection.supplementariesFollowContentInsets = false
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         layoutSection.orthogonalScrollingBehavior = .continuous
-        layoutSection.visibleItemsInvalidationHandler = { visibleItems, contentOffset, _ in
-            guard let leadingHeader = visibleItems
-                    .first(where: { $0.representedElementKind == self.doctorSectionHeaderElementKind }) else { return }
-
-            leadingHeader.transform = CGAffineTransform(translationX: -contentOffset.x, y: 0)
-        }
 
         return layoutSection
     }
@@ -72,20 +79,6 @@ final class TimeTableCollectionViewLayout {
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
 
         return layoutSection
-    }
-
-    private func createDoctorSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(72),
-            heightDimension: .absolute(170)
-        )
-        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: layoutSectionHeaderSize,
-            elementKind: doctorSectionHeaderElementKind,
-            alignment: .leading
-        )
-
-        return layoutSectionHeader
     }
 
     // MARK: - Patient section & supplementary items
