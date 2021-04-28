@@ -8,9 +8,8 @@
 import Foundation
 
 protocol GraphicTimeTableModule: AnyObject {
-    var didFinish: ((_ date: Date) -> Void)? { get set }
-
     var coordinator: TimeTableCoordinator? { get set }
+    var didFinish: ((_ date: Date) -> Void)? { get set }
 }
 
 protocol GraphicTimeTableDisplaying: View {

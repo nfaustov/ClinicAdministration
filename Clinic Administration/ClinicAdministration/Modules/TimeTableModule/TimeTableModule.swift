@@ -8,8 +8,7 @@
 import Foundation
 
 protocol TimeTableModule: AnyObject {
-    var coordinator: (CalendarSubscription & GraphicTimeTableSubscription)? { get set }
-
+    var coordinator: (CalendarSubscription & GraphicTimeTableSubscription & CreateScheduleSubscription)? { get set }
     var didFinish: ((_ date: Date) -> Void)? { get set }
 }
 
@@ -30,7 +29,7 @@ protocol TimeTablePresentation: AnyObject {
 
     func pickDateInCalendar()
 
-    func addNewDoctorSchedule()
+    func addNewDoctorSchedule(onDate: Date)
 
     func removeDoctorSchedule(_ schedule: DoctorSchedule)
 

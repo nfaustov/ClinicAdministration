@@ -83,7 +83,7 @@ final class TimeTableViewController: UIViewController {
     }
 
     @objc private func addNewSchedule() {
-        presenter.addNewDoctorSchedule()
+        presenter.addNewDoctorSchedule(onDate: date)
     }
 
     @objc private func deleteSchedule() {

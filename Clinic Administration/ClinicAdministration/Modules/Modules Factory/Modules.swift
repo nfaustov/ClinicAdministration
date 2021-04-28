@@ -11,4 +11,5 @@ protocol Modules {
     func timeTable() -> (UIViewController, TimeTableModule)
     func graphicTimeTable(_ date: Date) -> (UIViewController, GraphicTimeTableModule)
     func calendar() -> (UIViewController, CalendarModule)
+    func createSchedule(with date: Date) -> (UIViewController, CreateScheduleModule)
 }
