@@ -24,13 +24,27 @@ final class CreateScheduleViewController: UIViewController {
 
         view.backgroundColor = Design.Color.lightGray
 
-        schedulePicker = SchedulePicker(
-            date: date,
-            calendarAction: presenter.pickDateInCalendar,
-            doctorAction: presenter.pickDoctor
-        )
-        schedulePicker.frame = CGRect(x: 0, y: 200, width: view.frame.width, height: 50)
+        schedulePicker = SchedulePicker(date: date)
+        schedulePicker.frame = CGRect(x: 0, y: 200, width: view.frame.width, height: 100)
         view.addSubview(schedulePicker)
+        schedulePicker.delegate = self
+    }
+}
+
+// MARK: - SchedulePickerDelegate
+
+extension CreateScheduleViewController: SchedulePickerDelegate {
+    func pickDate() {
+        presenter.pickDateInCalendar()
+    }
+
+    func pickDoctor() {
+    }
+
+    func pickTimeInterval() {
+    }
+
+    func pickCabinet() {
     }
 }
 

@@ -18,6 +18,7 @@
 		8B10E3882625CF4200476862 /* GraphicTimeTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3872625CF4200476862 /* GraphicTimeTablePresenter.swift */; };
 		8B10E3922625D04A00476862 /* GraphicTimeTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E3912625D04A00476862 /* GraphicTimeTableInteractor.swift */; };
 		8B188983259CCA4E000B0077 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B188982259CCA4E000B0077 /* Settings.swift */; };
+		8B203996263A623C00F96BAB /* SchedulePickerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B203995263A623C00F96BAB /* SchedulePickerField.swift */; };
 		8B20CE0426298F630007C20A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0326298F630007C20A /* Coordinator.swift */; };
 		8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0726298FCE0007C20A /* MainCoordinator.swift */; };
 		8B20CE0F262995FA0007C20A /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0E262995FA0007C20A /* DatePicker.swift */; };
@@ -104,6 +105,7 @@
 		8B10E3872625CF4200476862 /* GraphicTimeTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTablePresenter.swift; sourceTree = "<group>"; };
 		8B10E3912625D04A00476862 /* GraphicTimeTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableInteractor.swift; sourceTree = "<group>"; };
 		8B188982259CCA4E000B0077 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8B203995263A623C00F96BAB /* SchedulePickerField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePickerField.swift; sourceTree = "<group>"; };
 		8B20CE0326298F630007C20A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8B20CE0726298FCE0007C20A /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		8B20CE0E262995FA0007C20A /* DatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				8B10E30726383E56006022BB /* SchedulePicker.swift */,
+				8B203995263A623C00F96BAB /* SchedulePickerField.swift */,
 			);
 			path = SchedulePicker;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				8B20CE0F262995FA0007C20A /* DatePicker.swift in Sources */,
 				8B20CE23262997A70007C20A /* CalendarViewController.swift in Sources */,
 				8BADB070261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift in Sources */,
+				8B203996263A623C00F96BAB /* SchedulePickerField.swift in Sources */,
 				8B0F77412631EDEF00D68B43 /* CalendarModule.swift in Sources */,
 				8B84366B256DB126006057EF /* Person.swift in Sources */,
 				8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */,
