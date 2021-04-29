@@ -61,6 +61,35 @@ extension TimeTableCoordinator: CreateScheduleSubscription {
 // MARK: - PickDoctorSubscription
 
 extension TimeTableCoordinator: PickDoctorSubscription {
-    func routeToPickDoctor() {
+    func routeToPickDoctor(didFinish: @escaping ((Doctor?) -> Void)) {
+        let (viewController, module) = modules.pickDoctor()
+        module.didFinish = didFinish
+        viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
+        viewController.modalPresentationStyle = .custom
+        navigationController.present(viewController, animated: true)
+    }
+}
+
+// MARK: - PickTimeIntervalSubscription
+
+extension TimeTableCoordinator: PickTimeIntervalSubscription {
+    func routeToPickTimeInterval(didFinish: @escaping ((Date?, Date?) -> Void)) {
+        let (viewController, module) = modules.pickTimeInterval()
+        module.didFinish = didFinish
+        viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
+        viewController.modalPresentationStyle = .custom
+        navigationController.present(viewController, animated: true)
+    }
+}
+
+// MARK: - PickCabinetSubscription
+
+extension TimeTableCoordinator: PickCabinetSubscription {
+    func routeToPickCabinet(didFinish: @escaping ((Int?) -> Void)) {
+        let (viewController, module) = modules.pickCabinet()
+        module.didFinish = didFinish
+        viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
+        viewController.modalPresentationStyle = .custom
+        navigationController.present(viewController, animated: true)
     }
 }

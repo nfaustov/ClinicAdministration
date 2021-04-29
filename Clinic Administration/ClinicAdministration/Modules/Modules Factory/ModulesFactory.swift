@@ -40,4 +40,25 @@ final class ModulesFactory: Modules {
 
         return (view, presenter)
     }
+
+    func pickDoctor() -> (UIViewController, PickDoctorModule) {
+        let view = PickDoctorViewController()
+        let presenter = PickDoctorPresenter(view: view)
+
+        return (view, presenter)
+    }
+
+    func pickTimeInterval() -> (UIViewController, PickTimeIntervalModule) {
+        let view = PickTimeIntervalViewController()
+        let presenter = PickTimeIntervalPresenter(view: view)
+
+        return (view, presenter)
+    }
+
+    func pickCabinet() -> (UIViewController, PickCabinetModule) {
+        let view = PickCabinetViewController()
+        let presenter = PickCabinetPresenter(view: view)
+
+        return (view, presenter)
+    }
 }

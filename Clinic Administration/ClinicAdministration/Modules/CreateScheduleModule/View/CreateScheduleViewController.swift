@@ -39,16 +39,30 @@ extension CreateScheduleViewController: SchedulePickerDelegate {
     }
 
     func pickDoctor() {
+        presenter.pickDoctor()
     }
 
     func pickTimeInterval() {
+        presenter.pickTimeInterval()
     }
 
     func pickCabinet() {
+        presenter.pickCabinet()
     }
 }
 
 // MARK: - CreateScheduleDisplaying
 
 extension CreateScheduleViewController: CreateScheduleDisplaying {
+    func pickedDoctor(_ doctor: Doctor) {
+        schedulePicker.doctor = doctor
+    }
+
+    func pickedInterval(_ interval: (Date, Date)) {
+        schedulePicker.interval = interval
+    }
+
+    func pickedCabinet(_ cabinet: Int) {
+        schedulePicker.cabinet = cabinet
+    }
 }

@@ -8,8 +8,12 @@
 import Foundation
 
 final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
-    CreateScheduleModule where V: CreateScheduleDisplaying, I: CreateScheduleInteraction {
-    weak var coordinator: (CalendarSubscription & PickDoctorSubscription)?
+                                           CreateScheduleModule where V: CreateScheduleDisplaying,
+                                                                      I: CreateScheduleInteraction {
+    weak var coordinator: (CalendarSubscription &
+                           PickDoctorSubscription &
+                           PickTimeIntervalSubscription &
+                           PickCabinetSubscription)?
 
     var didFinish: (() -> Void)?
 }
@@ -26,7 +30,28 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
     }
 
     func pickDoctor() {
-        coordinator?.routeToPickDoctor()
+        coordinator?.routeToPickDoctor { doctor in
+            guard let doctor = doctor else { return }
+
+            self.view?.pickedDoctor(doctor)
+        }
+    }
+
+    func pickTimeInterval() {
+        coordinator?.routeToPickTimeInterval(didFinish: { starting, ending in
+            guard let starting = starting,
+                  let ending = ending else { return }
+
+            self.view?.pickedInterval((starting, ending))
+        })
+    }
+
+    func pickCabinet() {
+        coordinator?.routeToPickCabinet { cabinet in
+            guard let cabinet = cabinet else { return }
+
+            self.view?.pickedCabinet(cabinet)
+        }
     }
 }
 

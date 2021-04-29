@@ -8,18 +8,26 @@
 import Foundation
 
 protocol CreateScheduleModule: AnyObject {
-    var coordinator: (CalendarSubscription & PickDoctorSubscription)? { get set }
+    var coordinator: (CalendarSubscription &
+                      PickDoctorSubscription &
+                      PickTimeIntervalSubscription &
+                      PickCabinetSubscription)? { get set }
     var didFinish: (() -> Void)? { get set }
 }
 
 protocol CreateScheduleDisplaying: View {
     var date: Date { get set }
+
+    func pickedDoctor(_ doctor: Doctor)
+    func pickedInterval(_ interval: (Date, Date))
+    func pickedCabinet(_ cabinet: Int)
 }
 
 protocol CreateSchedulePresentation: AnyObject {
     func pickDateInCalendar()
-
     func pickDoctor()
+    func pickTimeInterval()
+    func pickCabinet()
 }
 
 protocol CreateScheduleInteraction: Interactor {

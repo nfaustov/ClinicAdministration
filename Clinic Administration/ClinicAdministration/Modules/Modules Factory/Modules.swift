@@ -12,4 +12,7 @@ protocol Modules {
     func graphicTimeTable(_ date: Date) -> (UIViewController, GraphicTimeTableModule)
     func calendar() -> (UIViewController, CalendarModule)
     func createSchedule(with date: Date) -> (UIViewController, CreateScheduleModule)
+    func pickDoctor() -> (UIViewController, PickDoctorModule)
+    func pickTimeInterval() -> (UIViewController, PickTimeIntervalModule)
+    func pickCabinet() -> (UIViewController, PickCabinetModule)
 }
