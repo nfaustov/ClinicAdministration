@@ -26,7 +26,7 @@ protocol CreateScheduleDisplaying: View {
 protocol CreateSchedulePresentation: AnyObject {
     func pickDateInCalendar()
     func pickDoctor()
-    func pickTimeInterval()
+    func pickTimeInterval(availableOnDate date: Date)
     func pickCabinet()
 }
 

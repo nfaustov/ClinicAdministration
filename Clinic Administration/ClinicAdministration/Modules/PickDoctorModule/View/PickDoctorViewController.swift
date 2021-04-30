@@ -7,33 +7,18 @@
 
 import UIKit
 
-final class PickDoctorViewController: UIViewController {
+final class PickDoctorViewController: PickerViewController<Doctor> {
     typealias PresenterType = PickDoctorPresentation
     var presenter: PresenterType!
 
-    let doctorPicker = UIPickerView()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = Design.Color.lightGray
+        presenter.didFinish(with: selectedItem0)
     }
-}
 
-// MARK: - UIViewControllerTransitioningDelegate
-
-extension PickDoctorViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(
-        forPresented presented: UIViewController,
-        presenting: UIViewController?,
-        source: UIViewController
-    ) -> UIPresentationController? {
-        let presentationController = CustomPresentationController(
-            presentedViewController: presented,
-            presenting: presenting ?? source
-        )
-
-        return presentationController
+    override func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        data[row].secondName + " " + data[row].firstName + " " + data[row].patronymicName
     }
 }
 

@@ -7,33 +7,18 @@
 
 import UIKit
 
-class PickCabinetViewController: UIViewController {
+class PickCabinetViewController: PickerViewController<Int> {
     typealias PresenterType = PickCabinetPresentation
     var presenter: PresenterType!
 
-    let cabinetPicker = UIPickerView()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = Design.Color.lightGray
+        presenter.didFinish(with: selectedItem0)
     }
-}
 
-// MARK: - UIViewControllerTransitioningDelegate
-
-extension PickCabinetViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(
-        forPresented presented: UIViewController,
-        presenting: UIViewController?,
-        source: UIViewController
-    ) -> UIPresentationController? {
-        let presentationController = CustomPresentationController(
-            presentedViewController: presented,
-            presenting: presenting ?? source
-        )
-
-        return presentationController
+    override func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        "\(data[row])"
     }
 }
 

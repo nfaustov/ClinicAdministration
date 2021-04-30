@@ -15,10 +15,6 @@ class CustomPresentationController: UIPresentationController {
         blurEffectView = UIVisualEffectView(effect: blurEffect)
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
 
-        presentedView?.layer.masksToBounds = true
-        presentedView?.layer.borderWidth = 1
-        presentedView?.layer.borderColor = Design.Color.gray.cgColor
-
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismiss))
 
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

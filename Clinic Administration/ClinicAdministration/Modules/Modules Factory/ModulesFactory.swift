@@ -48,8 +48,9 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func pickTimeInterval() -> (UIViewController, PickTimeIntervalModule) {
+    func pickTimeInterval(availableOnDate date: Date) -> (UIViewController, PickTimeIntervalModule) {
         let view = PickTimeIntervalViewController()
+        view.date = date
         let presenter = PickTimeIntervalPresenter(view: view)
 
         return (view, presenter)
