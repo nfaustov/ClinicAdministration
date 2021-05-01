@@ -8,5 +8,9 @@
 import Foundation
 
 protocol PickTimeIntervalSubscription: AnyObject {
-    func routeToPickTimeInterval(date: Date, didFinish: @escaping ((Date?, Date?) -> Void))
+    func routeToPickTimeInterval(
+        date: Date,
+        previouslyPicked: (Date, Date)?,
+        didFinish: @escaping ((Date?, Date?) -> Void)
+    )
 }

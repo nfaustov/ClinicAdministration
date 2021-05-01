@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PickerViewController<Model>: UIViewController,
+class PickerViewController<Model: Hashable>: UIViewController,
                                    UIPickerViewDataSource,
                                    UIPickerViewDelegate,
                                    UIViewControllerTransitioningDelegate {
@@ -41,6 +41,14 @@ class PickerViewController<Model>: UIViewController,
 
         configureButton()
         setupConstraints()
+    }
+
+    func previouslyPicked(_ model: Model, model1: Model? = nil) {
+        guard let indexOfModel = data.firstIndex(where: { $0 == model }),
+              let indexOfModel1 = data1?.firstIndex(where: { $0 == model1 }) else { return }
+
+        pickerView.selectRow(indexOfModel, inComponent: 0, animated: false)
+        pickerView.selectRow(indexOfModel1, inComponent: 1, animated: false)
     }
 
     private func configureButton() {

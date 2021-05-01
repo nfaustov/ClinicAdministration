@@ -37,13 +37,13 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func pickTimeInterval(availableOnDate date: Date) {
-        coordinator?.routeToPickTimeInterval(date: date, didFinish: { starting, ending in
+    func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?) {
+        coordinator?.routeToPickTimeInterval(date: date, previouslyPicked: selected) { starting, ending in
             guard let starting = starting,
                   let ending = ending else { return }
 
             self.view?.pickedInterval((starting, ending))
-        })
+        }
     }
 
     func pickCabinet() {

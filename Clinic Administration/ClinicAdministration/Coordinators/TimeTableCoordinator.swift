@@ -73,8 +73,12 @@ extension TimeTableCoordinator: PickDoctorSubscription {
 // MARK: - PickTimeIntervalSubscription
 
 extension TimeTableCoordinator: PickTimeIntervalSubscription {
-    func routeToPickTimeInterval(date: Date, didFinish: @escaping ((Date?, Date?) -> Void)) {
-        let (viewController, module) = modules.pickTimeInterval(availableOnDate: date)
+    func routeToPickTimeInterval(
+        date: Date,
+        previouslyPicked: (Date, Date)?,
+        didFinish: @escaping ((Date?, Date?) -> Void)
+    ) {
+        let (viewController, module) = modules.pickTimeInterval(availableOnDate: date, selected: previouslyPicked)
         module.didFinish = didFinish
         viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
         viewController.modalPresentationStyle = .custom

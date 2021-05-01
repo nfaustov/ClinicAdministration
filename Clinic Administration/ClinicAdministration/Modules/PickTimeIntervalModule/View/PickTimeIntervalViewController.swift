@@ -7,18 +7,23 @@
 
 import UIKit
 
-class PickTimeIntervalViewController: PickerViewController<Date> {
+final class PickTimeIntervalViewController: PickerViewController<Date> {
     typealias PresenterType = PickTimeIntervalPresentation
     var presenter: PresenterType!
 
     private let calendar = Calendar.current
 
     var date: Date!
+    var selectedInterval: (Date, Date)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         makeIntervals()
+
+        guard let interval = selectedInterval else { return }
+
+        previouslyPicked(interval.0, model1: interval.1)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -69,12 +74,13 @@ class PickTimeIntervalViewController: PickerViewController<Date> {
               let openingDate = calendar.date(from: openingDateComponents) else { return }
 
         let intervalsCount = (closeHour - openingHour) * 12 - 2
-        let fiveMinutesInterval = 300
+        let fiveMinutesInterval: Double = 300
+        let tenMinutesInterval: Double = 600
 
-        for intervalNumber in 0...intervalsCount {
-            let intervalPoint = openingDate.addingTimeInterval(TimeInterval(intervalNumber * fiveMinutesInterval))
+        for interval in 0...intervalsCount {
+            let intervalPoint = openingDate.addingTimeInterval(Double(interval) * fiveMinutesInterval)
             data.append(intervalPoint)
-            data1?.append(intervalPoint.addingTimeInterval(600))
+            data1?.append(intervalPoint.addingTimeInterval(tenMinutesInterval))
         }
     }
 }
