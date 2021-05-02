@@ -46,8 +46,8 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func pickCabinet() {
-        coordinator?.routeToPickCabinet { cabinet in
+    func pickCabinet(selected: Int?) {
+        coordinator?.routeToPickCabinet(previouslyPicked: selected) { cabinet in
             guard let cabinet = cabinet else { return }
 
             self.view?.pickedCabinet(cabinet)

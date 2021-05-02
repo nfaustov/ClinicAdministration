@@ -44,11 +44,13 @@ class PickerViewController<Model: Hashable>: UIViewController,
     }
 
     func previouslyPicked(_ model: Model, model1: Model? = nil) {
-        guard let indexOfModel = data.firstIndex(where: { $0 == model }),
-              let indexOfModel1 = data1?.firstIndex(where: { $0 == model1 }) else { return }
+        if let indexOfModel = data.firstIndex(where: { $0 == model }) {
+            pickerView.selectRow(indexOfModel, inComponent: 0, animated: false)
+        }
 
-        pickerView.selectRow(indexOfModel, inComponent: 0, animated: false)
-        pickerView.selectRow(indexOfModel1, inComponent: 1, animated: false)
+        if let indexOfModel1 = data1?.firstIndex(where: { $0 == model1 }) {
+            pickerView.selectRow(indexOfModel1, inComponent: 1, animated: false)
+        }
     }
 
     private func configureButton() {
@@ -72,10 +74,7 @@ class PickerViewController<Model: Hashable>: UIViewController,
 
             pickerView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10),
             pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            pickerView.trailingAnchor.constraint(
-                lessThanOrEqualTo: view.trailingAnchor,
-                constant: pickerView.numberOfComponents == 1 ? -100 : -10
-            ),
+            pickerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10),
             pickerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
     }

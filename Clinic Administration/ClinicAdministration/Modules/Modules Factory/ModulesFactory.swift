@@ -60,8 +60,9 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func pickCabinet() -> (UIViewController, PickCabinetModule) {
+    func pickCabinet(selected cabinet: Int?) -> (UIViewController, PickCabinetModule) {
         let view = PickCabinetViewController()
+        view.selectedCabinet = cabinet
         let presenter = PickCabinetPresenter(view: view)
 
         return (view, presenter)

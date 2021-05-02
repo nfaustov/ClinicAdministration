@@ -11,6 +11,20 @@ class PickCabinetViewController: PickerViewController<Int> {
     typealias PresenterType = PickCabinetPresentation
     var presenter: PresenterType!
 
+    var selectedCabinet: Int?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        for cabinet in 1...Settings.cabinets {
+            data.append(cabinet)
+        }
+
+        guard let cabinet = selectedCabinet else { return }
+
+        previouslyPicked(cabinet)
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 

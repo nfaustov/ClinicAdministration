@@ -46,8 +46,8 @@ extension CreateScheduleViewController: SchedulePickerDelegate {
         presenter.pickTimeInterval(availableOnDate: date, selected: interval)
     }
 
-    func pickCabinet() {
-        presenter.pickCabinet()
+    func pickCabinet(selected cabinet: Int?) {
+        presenter.pickCabinet(selected: cabinet)
     }
 }
 

@@ -11,7 +11,7 @@ protocol SchedulePickerDelegate: AnyObject {
     func pickDate()
     func pickDoctor()
     func pickTimeInterval(selected: (Date, Date)?)
-    func pickCabinet()
+    func pickCabinet(selected: Int?)
 }
 
 final class SchedulePicker: UIView {
@@ -148,6 +148,6 @@ final class SchedulePicker: UIView {
     }
 
     @objc private func pickCabinet() {
-        delegate?.pickCabinet()
+        delegate?.pickCabinet(selected: cabinet)
     }
 }

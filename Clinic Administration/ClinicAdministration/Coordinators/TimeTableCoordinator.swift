@@ -89,8 +89,8 @@ extension TimeTableCoordinator: PickTimeIntervalSubscription {
 // MARK: - PickCabinetSubscription
 
 extension TimeTableCoordinator: PickCabinetSubscription {
-    func routeToPickCabinet(didFinish: @escaping ((Int?) -> Void)) {
-        let (viewController, module) = modules.pickCabinet()
+    func routeToPickCabinet(previouslyPicked: Int?, didFinish: @escaping ((Int?) -> Void)) {
+        let (viewController, module) = modules.pickCabinet(selected: previouslyPicked)
         module.didFinish = didFinish
         viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
         viewController.modalPresentationStyle = .custom
