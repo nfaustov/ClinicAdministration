@@ -11,6 +11,53 @@ final class PickDoctorViewController: PickerViewController<Doctor> {
     typealias PresenterType = PickDoctorPresentation
     var presenter: PresenterType!
 
+    var selectedDoctor: Doctor?
+    // temporary
+    var doctors = [
+        Doctor(
+            secondName: "Рошаль",
+            firstName: "Леонид",
+            patronymicName: "Михайлович",
+            birthDate: Date(),
+            specialization: "",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .fixedSalary
+        ),
+        Doctor(
+            secondName: "Перельман",
+            firstName: "Михаил",
+            patronymicName: "Израйлевич",
+            birthDate: Date(),
+            specialization: "",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .piecerateSalary
+        ),
+        Doctor(
+            secondName: "Бокерия",
+            firstName: "Лео",
+            patronymicName: "Антонович",
+            birthDate: Date(),
+            specialization: "",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .fixedSalary
+        )
+    ]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        for doctor in doctors {
+            data.append(doctor)
+        }
+
+        guard let doctor = selectedDoctor else { return }
+
+        previouslyPicked(doctor)
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 

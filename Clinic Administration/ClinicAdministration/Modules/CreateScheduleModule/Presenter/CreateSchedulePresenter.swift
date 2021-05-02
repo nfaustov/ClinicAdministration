@@ -29,8 +29,8 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func pickDoctor() {
-        coordinator?.routeToPickDoctor { doctor in
+    func pickDoctor(selected: Doctor?) {
+        coordinator?.routeToPickDoctor(previouslyPicked: selected) { doctor in
             guard let doctor = doctor else { return }
 
             self.view?.pickedDoctor(doctor)

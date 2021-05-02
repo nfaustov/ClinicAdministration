@@ -61,8 +61,8 @@ extension TimeTableCoordinator: CreateScheduleSubscription {
 // MARK: - PickDoctorSubscription
 
 extension TimeTableCoordinator: PickDoctorSubscription {
-    func routeToPickDoctor(didFinish: @escaping ((Doctor?) -> Void)) {
-        let (viewController, module) = modules.pickDoctor()
+    func routeToPickDoctor(previouslyPicked: Doctor?, didFinish: @escaping ((Doctor?) -> Void)) {
+        let (viewController, module) = modules.pickDoctor(selected: previouslyPicked)
         module.didFinish = didFinish
         viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
         viewController.modalPresentationStyle = .custom

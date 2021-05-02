@@ -67,7 +67,6 @@
 		8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */; };
 		8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */; };
 		8B843668256DB0D1006057EF /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843667256DB0D1006057EF /* Doctor.swift */; };
-		8B84366B256DB126006057EF /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B84366A256DB126006057EF /* Person.swift */; };
 		8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */; };
 		8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA602F8260DA36700DF686B /* DoctorCell.swift */; };
 		8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA60308260DDBCA00DF686B /* PatientCell.swift */; };
@@ -166,7 +165,6 @@
 		8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetViewController.swift; sourceTree = "<group>"; };
 		8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetPresenter.swift; sourceTree = "<group>"; };
 		8B843667256DB0D1006057EF /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
-		8B84366A256DB126006057EF /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorPlaceholder.swift; sourceTree = "<group>"; };
 		8BA602F8260DA36700DF686B /* DoctorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorCell.swift; sourceTree = "<group>"; };
 		8BA60308260DDBCA00DF686B /* PatientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				8BCAB7C02559D618001A93D0 /* DoctorSchedule.swift */,
 				8B733D0D256878070082784E /* TimeTableDataManager.swift */,
 				8B843667256DB0D1006057EF /* Doctor.swift */,
-				8B84366A256DB126006057EF /* Person.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -902,7 +899,6 @@
 				8BADB070261623DF00DEC3AC /* TimeTableCollectionViewLayout.swift in Sources */,
 				8B203996263A623C00F96BAB /* SchedulePickerField.swift in Sources */,
 				8B0F77412631EDEF00D68B43 /* CalendarModule.swift in Sources */,
-				8B84366B256DB126006057EF /* Person.swift in Sources */,
 				8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */,
 				8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */,
 				8B24CF5B2639588400298C4A /* PickDoctorSubscription.swift in Sources */,

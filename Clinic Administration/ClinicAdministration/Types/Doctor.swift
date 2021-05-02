@@ -35,7 +35,9 @@ class Doctor: Hashable {
     var agentSalary: Double
 
     init(
-        name: Person,
+        secondName: String,
+        firstName: String,
+        patronymicName: String,
         birthDate: Date,
         specialization: String,
         basicService: String,
@@ -44,9 +46,9 @@ class Doctor: Hashable {
         monthlySalary: Double = 0,
         agentSalary: Double = 0
     ) {
-        secondName = name.secondName
-        firstName = name.firstName
-        patronymicName = name.patronymicName
+        self.secondName = secondName
+        self.firstName = firstName
+        self.patronymicName = patronymicName
         self.birthDate = birthDate
         self.specialization = specialization
         self.basicService = basicService

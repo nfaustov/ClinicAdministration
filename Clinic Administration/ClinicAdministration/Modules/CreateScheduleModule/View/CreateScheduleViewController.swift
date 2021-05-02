@@ -38,8 +38,8 @@ extension CreateScheduleViewController: SchedulePickerDelegate {
         presenter.pickDateInCalendar()
     }
 
-    func pickDoctor() {
-        presenter.pickDoctor()
+    func pickDoctor(selected doctor: Doctor?) {
+        presenter.pickDoctor(selected: doctor)
     }
 
     func pickTimeInterval(selected interval: (Date, Date)?) {

@@ -41,8 +41,9 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func pickDoctor() -> (UIViewController, PickDoctorModule) {
+    func pickDoctor(selected doctor: Doctor?) -> (UIViewController, PickDoctorModule) {
         let view = PickDoctorViewController()
+        view.selectedDoctor = doctor
         let presenter = PickDoctorPresenter(view: view)
 
         return (view, presenter)
