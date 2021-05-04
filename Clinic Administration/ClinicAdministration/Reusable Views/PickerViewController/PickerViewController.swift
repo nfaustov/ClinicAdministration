@@ -30,6 +30,7 @@ class PickerViewController<Model: Hashable>: UIViewController,
         view.addSubview(separator)
         separator.translatesAutoresizingMaskIntoConstraints = false
 
+        pickerView.tintColor = Design.Color.chocolate
         view.addSubview(pickerView)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.dataSource = self
