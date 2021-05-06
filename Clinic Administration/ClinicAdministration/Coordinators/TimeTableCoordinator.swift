@@ -48,6 +48,16 @@ extension TimeTableCoordinator: GraphicTimeTableSubscription {
     }
 }
 
+// MARK: - GraphicSchedulesSubscription
+
+extension TimeTableCoordinator: GraphicSchedulesSubscription {
+    func routeToGraphicSchedules(onDate: Date, didFinish: @escaping ((DoctorSchedule?) -> Void)) {
+        let (viewController, module) = modules.graphicSchedules(onDate)
+        module.didFinish = didFinish
+        navigationController.pushViewController(viewController, animated: true)
+    }
+}
+
 // MARK: - CreateScheduleSubscription
 
 extension TimeTableCoordinator: CreateScheduleSubscription {

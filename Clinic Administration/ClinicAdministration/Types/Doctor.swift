@@ -26,6 +26,7 @@ class Doctor: Hashable {
     var secondName: String
     var firstName: String
     var patronymicName: String
+    var phoneNumber: String
     var birthDate: Date
     var specialization: String // объединить в отдельный enum
     var basicService: String // специаизацию можно выбирать, базовая услуга назначается автоматически ???
@@ -38,6 +39,7 @@ class Doctor: Hashable {
         secondName: String,
         firstName: String,
         patronymicName: String,
+        phoneNumber: String,
         birthDate: Date,
         specialization: String,
         basicService: String,
@@ -49,6 +51,7 @@ class Doctor: Hashable {
         self.secondName = secondName
         self.firstName = firstName
         self.patronymicName = patronymicName
+        self.phoneNumber = phoneNumber
         self.birthDate = birthDate
         self.specialization = specialization
         self.basicService = basicService

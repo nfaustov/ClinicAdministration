@@ -23,9 +23,6 @@ extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
 
     func didSelected(date: Date) {
         interactor.getSchedules(for: date)
-        if view?.date == nil {
-            view?.date = date
-        }
     }
 
     func pickDateInCalendar() {

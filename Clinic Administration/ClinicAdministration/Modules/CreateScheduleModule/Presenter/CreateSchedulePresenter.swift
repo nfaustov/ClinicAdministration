@@ -13,7 +13,8 @@ final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
     weak var coordinator: (CalendarSubscription &
                            PickDoctorSubscription &
                            PickTimeIntervalSubscription &
-                           PickCabinetSubscription)?
+                           PickCabinetSubscription &
+                           GraphicSchedulesSubscription)?
 
     var didFinish: (() -> Void)?
 }
@@ -51,6 +52,14 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
             guard let cabinet = cabinet else { return }
 
             self.view?.pickedCabinet(cabinet)
+        }
+    }
+
+    func addSchedule(_ schedule: DoctorSchedule) {
+        coordinator?.routeToGraphicSchedules(onDate: schedule.startingTime) { schedule in
+             guard let schedule = schedule else { return }
+
+            // append schedule to data manager
         }
     }
 }

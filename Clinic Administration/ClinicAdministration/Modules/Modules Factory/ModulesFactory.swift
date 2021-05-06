@@ -18,9 +18,18 @@ final class ModulesFactory: Modules {
 
     func graphicTimeTable(_ date: Date) -> (UIViewController, GraphicTimeTableModule) {
         let view = GraphicTimeTableViewController()
+        view.date = date
         let interactor = GraphicTimeTableInteractor()
         let presenter = GraphicTimeTablePresenter(view: view, interactor: interactor)
-        presenter.didSelected(date: date)
+
+        return (view, presenter)
+    }
+
+    func graphicSchedules(_ date: Date) -> (UIViewController, GraphicSchedulesModule) {
+        let view = GraphicSchedulesViewController()
+        view.date = date
+        let interactor = GraphicSchedulesInteractor()
+        let presenter = GraphicSchedulesPresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }

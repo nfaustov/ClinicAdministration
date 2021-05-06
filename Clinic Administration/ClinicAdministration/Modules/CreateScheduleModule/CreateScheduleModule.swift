@@ -11,7 +11,8 @@ protocol CreateScheduleModule: AnyObject {
     var coordinator: (CalendarSubscription &
                       PickDoctorSubscription &
                       PickTimeIntervalSubscription &
-                      PickCabinetSubscription)? { get set }
+                      PickCabinetSubscription &
+                      GraphicSchedulesSubscription)? { get set }
     var didFinish: (() -> Void)? { get set }
 }
 
@@ -28,6 +29,7 @@ protocol CreateSchedulePresentation: AnyObject {
     func pickDoctor(selected: Doctor?)
     func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?)
     func pickCabinet(selected: Int?)
+    func addSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol CreateScheduleInteraction: Interactor {

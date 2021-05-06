@@ -13,11 +13,7 @@ final class GraphicTableView: UIView {
     private(set) var opening = DateComponents()
     private(set) var close = DateComponents()
 
-    private let headerView = UIView()
-    private let footerView = UIView()
-
     private var cabinetViews = [UIView]()
-    private var cabinetLabels = [UILabel]()
 
     private(set) var doctorViews = [DoctorScheduleView]()
 
@@ -26,25 +22,16 @@ final class GraphicTableView: UIView {
 
     private var transformAction: ((DoctorScheduleView) -> Void)?
 
-    private var schedules: [DoctorSchedule]
+    private var schedules: [DoctorSchedule]?
 
-    init(date: Date, _ schedules: [DoctorSchedule], transformAction: @escaping (DoctorScheduleView) -> Void) {
-        self.schedules = schedules
+    init(date: Date, transformAction: @escaping (DoctorScheduleView) -> Void) {
         self.transformAction = transformAction
         super.init(frame: .zero)
 
-        setTimeTable(date)
-
         backgroundColor = Design.Color.white
-        layer.cornerRadius = Design.CornerRadius.large
-        layer.masksToBounds = true
 
-        setupHeaderFooter()
-        setupCabinetLabels()
+        setTimeTable(date)
         addCabinets()
-        schedules.forEach { schedule in
-            addDoctorSchedule(schedule)
-        }
 
         // moveIntersectionsToFront()
     }
@@ -60,8 +47,8 @@ final class GraphicTableView: UIView {
         guard let closeHour = close.hour,
               let openingHour = opening.hour else { return }
 
-        for quarterHour in 1...(closeHour - openingHour + 1) * 4 {
-            if (quarterHour - 1) % 4 == 0 {
+        for quarterHour in 0..<(closeHour - openingHour + 1) * 4 {
+            if quarterHour % 4 == 0 {
                 linePath.move(
                     to: CGPoint(
                         x: Size.lineOffset,
@@ -74,7 +61,7 @@ final class GraphicTableView: UIView {
                         y: Int(Size.headerHeight) + Int(quarterHourHeight) * quarterHour
                     )
                 )
-            } else {
+            } else if quarterHour < (closeHour - openingHour) * 4 {
                 dashLinePath.move(
                     to: CGPoint(
                         x: Size.lineOffset,
@@ -100,6 +87,14 @@ final class GraphicTableView: UIView {
         linePath.close()
         Design.Color.gray.set()
         linePath.stroke()
+    }
+
+    func addSchedules(_ schedules: [DoctorSchedule]) {
+        self.schedules = schedules
+
+        schedules.forEach { schedule in
+            addDoctorSchedule(schedule)
+        }
     }
 
     func reload(with date: Date, schedules: [DoctorSchedule]) {
@@ -128,17 +123,15 @@ final class GraphicTableView: UIView {
         let cabinetViewWidth = (bounds.width - Size.timelineWidth) / CGFloat(Settings.cabinets)
 
         for cabinet in 0..<Settings.cabinets {
-            cabinetLabels[cabinet].center = CGPoint(
-                x: Size.timelineWidth + cabinetViewWidth / 2 * CGFloat(cabinet * 2 + 1),
-                y: headerView.frame.height / 2
-            )
             cabinetViews[cabinet].frame = CGRect(
                 x: Size.timelineWidth + cabinetViewWidth * CGFloat(cabinet),
-                y: Size.headerHeight + quarterHourHeight,
+                y: Size.headerHeight,
                 width: cabinetViewWidth,
-                height: bounds.height - Size.headerHeight * 2 - quarterHourHeight
+                height: bounds.height - quarterHourHeight * 2 + 1
             )
         }
+
+        guard let schedules = schedules else { return }
 
         for index in schedules.indices {
             let scheduleStartingTime = calendar.dateComponents(
@@ -189,40 +182,6 @@ final class GraphicTableView: UIView {
         default:
             opening.hour = 8
             close.hour = 19
-        }
-    }
-
-    private func setupHeaderFooter() {
-        addSubview(headerView)
-        headerView.backgroundColor = Design.Color.chocolate
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-
-        addSubview(footerView)
-        footerView.backgroundColor = Design.Color.chocolate
-        footerView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: Size.headerHeight),
-
-            footerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            footerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            footerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            footerView.heightAnchor.constraint(equalToConstant: Size.headerHeight)
-        ])
-    }
-
-    private func setupCabinetLabels() {
-        for cabinet in 1...Settings.cabinets {
-            let label = UILabel()
-            label.text = "\(cabinet)"
-            label.font = Design.Font.robotoFont(ofSize: 18, weight: .medium)
-            label.sizeToFit()
-            label.textColor = Design.Color.white
-            headerView.addSubview(label)
-            cabinetLabels.append(label)
         }
     }
 

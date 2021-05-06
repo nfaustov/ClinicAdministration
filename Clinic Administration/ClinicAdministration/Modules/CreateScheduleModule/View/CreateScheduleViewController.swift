@@ -41,13 +41,8 @@ final class CreateScheduleViewController: UIViewController {
 
         schedulePicker.translatesAutoresizingMaskIntoConstraints = false
 
-        schedulePickerTopConstraint = schedulePicker.topAnchor.constraint(
-            equalTo: view.safeAreaLayoutGuide.topAnchor,
-            constant: 50
-        )
-
         NSLayoutConstraint.activate([
-            schedulePickerTopConstraint,
+            schedulePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             schedulePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             schedulePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             schedulePicker.heightAnchor.constraint(equalToConstant: 100)
@@ -84,16 +79,11 @@ final class CreateScheduleViewController: UIViewController {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
 
-        confirmationBottomContstraint = confirmationView.bottomAnchor.constraint(
-            equalTo: view.bottomAnchor,
-            constant: -430
-        )
-
         NSLayoutConstraint.activate([
             confirmationView.topAnchor.constraint(equalTo: schedulePicker.bottomAnchor),
             confirmationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             confirmationView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            confirmationBottomContstraint,
+            confirmationView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -430),
 
             cancelButton.leadingAnchor.constraint(equalTo: confirmationView.leadingAnchor, constant: 20),
             cancelButton.bottomAnchor.constraint(equalTo: confirmationView.bottomAnchor, constant: -20),
@@ -108,11 +98,25 @@ final class CreateScheduleViewController: UIViewController {
     }
 
     @objc private func addDoctroSchedule() {
-        UIView.animate(withDuration: 0.3) {
-            self.schedulePickerTopConstraint.constant = 0
-            self.confirmationBottomContstraint.constant = -20
-            self.view.layoutIfNeeded()
-        }
+        guard let doctor = schedulePicker.doctor,
+              let cabinet = schedulePicker.cabinet,
+              let interval = schedulePicker.interval else { return }
+
+        let schedule = DoctorSchedule(
+            id: UUID(),
+            secondName: doctor.secondName,
+            firstName: doctor.firstName,
+            patronymicName: doctor.patronymicName,
+            phoneNumber: doctor.phoneNumber,
+            specialization: doctor.specialization,
+            cabinet: cabinet,
+            startingTime: interval.0,
+            endingTime: interval.1,
+            serviceDuration: doctor.serviceDuration,
+            patientCells: []
+        )
+
+        presenter.addSchedule(schedule)
     }
 
     @objc private func cancelDoctorSchedule() {
