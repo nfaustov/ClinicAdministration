@@ -12,7 +12,7 @@ protocol CreateScheduleModule: AnyObject {
                       PickDoctorSubscription &
                       PickTimeIntervalSubscription &
                       PickCabinetSubscription &
-                      GraphicSchedulesSubscription)? { get set }
+                      AddScheduleSubscription)? { get set }
     var didFinish: (() -> Void)? { get set }
 }
 

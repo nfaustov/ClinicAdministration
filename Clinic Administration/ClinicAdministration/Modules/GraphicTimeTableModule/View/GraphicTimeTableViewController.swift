@@ -81,7 +81,7 @@ extension GraphicTimeTableViewController: GraphicTimeTableDisplaying {
             graphicTimeTableView.updateTable(with: schedules)
         } else {
             self.schedules = schedules
-            graphicTimeTableView.setSchedules(schedules)
+            graphicTimeTableView.addSchedules(schedules)
         }
     }
 

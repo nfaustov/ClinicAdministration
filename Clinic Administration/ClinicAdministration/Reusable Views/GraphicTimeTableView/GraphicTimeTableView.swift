@@ -84,7 +84,7 @@ final class GraphicTimeTableView: UIView {
         timelineHeightConstraint.constant = timelineHeight
     }
 
-    func setSchedules(_ schedules: [DoctorSchedule]) {
+    func addSchedules(_ schedules: [DoctorSchedule]) {
         tableView.addSchedules(schedules)
     }
 

@@ -15,5 +15,5 @@ protocol Modules {
     func pickDoctor(selected: Doctor?) -> (UIViewController, PickDoctorModule)
     func pickTimeInterval(availableOnDate: Date, selected: (Date, Date)?) -> (UIViewController, PickTimeIntervalModule)
     func pickCabinet(selected: Int?) -> (UIViewController, PickCabinetModule)
-    func graphicSchedules(_ date: Date) -> (UIViewController, GraphicSchedulesModule)
+    func addSchedule(_ schedule: DoctorSchedule) -> (UIViewController, AddScheduleModule)
 }

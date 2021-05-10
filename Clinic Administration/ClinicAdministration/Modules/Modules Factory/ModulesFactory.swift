@@ -25,15 +25,6 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func graphicSchedules(_ date: Date) -> (UIViewController, GraphicSchedulesModule) {
-        let view = GraphicSchedulesViewController()
-        view.date = date
-        let interactor = GraphicSchedulesInteractor()
-        let presenter = GraphicSchedulesPresenter(view: view, interactor: interactor)
-
-        return (view, presenter)
-    }
-
     func calendar() -> (UIViewController, CalendarModule) {
         let view = CalendarViewController()
         let presenter = CalendarPresenter(view: view)
@@ -74,6 +65,15 @@ final class ModulesFactory: Modules {
         let view = PickCabinetViewController()
         view.selectedCabinet = cabinet
         let presenter = PickCabinetPresenter(view: view)
+
+        return (view, presenter)
+    }
+
+    func addSchedule(_ schedule: DoctorSchedule) -> (UIViewController, AddScheduleModule) {
+        let view = AddScheduleViewController()
+        view.newSchedule = schedule
+        let interactor = AddScheduleInteractor()
+        let presenter = AddSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }

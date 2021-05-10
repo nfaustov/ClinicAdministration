@@ -14,7 +14,7 @@ final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
                            PickDoctorSubscription &
                            PickTimeIntervalSubscription &
                            PickCabinetSubscription &
-                           GraphicSchedulesSubscription)?
+                           AddScheduleSubscription)?
 
     var didFinish: (() -> Void)?
 }
@@ -56,8 +56,8 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
     }
 
     func addSchedule(_ schedule: DoctorSchedule) {
-        coordinator?.routeToGraphicSchedules(onDate: schedule.startingTime) { schedule in
-             guard let schedule = schedule else { return }
+        coordinator?.routeToAddSchedule(schedule) { schedule in
+             guard let confirmedSchedule = schedule else { return }
 
             // append schedule to data manager
         }
