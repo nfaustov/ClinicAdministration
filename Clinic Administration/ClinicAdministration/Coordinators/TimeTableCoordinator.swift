@@ -48,6 +48,16 @@ extension TimeTableCoordinator: GraphicTimeTableSubscription {
     }
 }
 
+// MARK: - GraphicSchedulesSubscription
+
+extension TimeTableCoordinator: AddScheduleSubscription {
+    func routeToAddSchedule(_ schedule: DoctorSchedule, didFinish: @escaping ((DoctorSchedule?) -> Void)) {
+        let (viewController, module) = modules.addSchedule(schedule)
+        module.didFinish = didFinish
+        navigationController.pushViewController(viewController, animated: true)
+    }
+}
+
 // MARK: - CreateScheduleSubscription
 
 extension TimeTableCoordinator: CreateScheduleSubscription {
@@ -61,6 +71,39 @@ extension TimeTableCoordinator: CreateScheduleSubscription {
 // MARK: - PickDoctorSubscription
 
 extension TimeTableCoordinator: PickDoctorSubscription {
-    func routeToPickDoctor() {
+    func routeToPickDoctor(previouslyPicked: Doctor?, didFinish: @escaping ((Doctor?) -> Void)) {
+        let (viewController, module) = modules.pickDoctor(selected: previouslyPicked)
+        module.didFinish = didFinish
+        viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
+        viewController.modalPresentationStyle = .custom
+        navigationController.present(viewController, animated: true)
+    }
+}
+
+// MARK: - PickTimeIntervalSubscription
+
+extension TimeTableCoordinator: PickTimeIntervalSubscription {
+    func routeToPickTimeInterval(
+        date: Date,
+        previouslyPicked: (Date, Date)?,
+        didFinish: @escaping ((Date?, Date?) -> Void)
+    ) {
+        let (viewController, module) = modules.pickTimeInterval(availableOnDate: date, selected: previouslyPicked)
+        module.didFinish = didFinish
+        viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
+        viewController.modalPresentationStyle = .custom
+        navigationController.present(viewController, animated: true)
+    }
+}
+
+// MARK: - PickCabinetSubscription
+
+extension TimeTableCoordinator: PickCabinetSubscription {
+    func routeToPickCabinet(previouslyPicked: Int?, didFinish: @escaping ((Int?) -> Void)) {
+        let (viewController, module) = modules.pickCabinet(selected: previouslyPicked)
+        module.didFinish = didFinish
+        viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
+        viewController.modalPresentationStyle = .custom
+        navigationController.present(viewController, animated: true)
     }
 }

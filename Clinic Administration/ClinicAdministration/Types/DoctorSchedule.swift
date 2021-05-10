@@ -9,6 +9,7 @@ import Foundation
 
 struct DoctorSchedule: Codable, Equatable, Hashable {
     let id: UUID
+//    let doctor: Doctor
     var secondName: String
     var firstName: String
     var patronymicName: String

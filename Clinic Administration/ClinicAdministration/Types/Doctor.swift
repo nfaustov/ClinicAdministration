@@ -12,10 +12,21 @@ enum SalaryType: String, Codable {
     case piecerateSalary = "piecerate"
 }
 
-class Doctor {
+class Doctor: Hashable {
+    static func == (lhs: Doctor, rhs: Doctor) -> Bool {
+        lhs.secondName == rhs.secondName && lhs.firstName == rhs.firstName && lhs.patronymicName == rhs.patronymicName
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(secondName)
+        hasher.combine(firstName)
+        hasher.combine(patronymicName)
+    }
+
     var secondName: String
     var firstName: String
     var patronymicName: String
+    var phoneNumber: String
     var birthDate: Date
     var specialization: String // объединить в отдельный enum
     var basicService: String // специаизацию можно выбирать, базовая услуга назначается автоматически ???
@@ -25,7 +36,10 @@ class Doctor {
     var agentSalary: Double
 
     init(
-        name: Person,
+        secondName: String,
+        firstName: String,
+        patronymicName: String,
+        phoneNumber: String,
         birthDate: Date,
         specialization: String,
         basicService: String,
@@ -34,9 +48,10 @@ class Doctor {
         monthlySalary: Double = 0,
         agentSalary: Double = 0
     ) {
-        secondName = name.secondName
-        firstName = name.firstName
-        patronymicName = name.patronymicName
+        self.secondName = secondName
+        self.firstName = firstName
+        self.patronymicName = patronymicName
+        self.phoneNumber = phoneNumber
         self.birthDate = birthDate
         self.specialization = specialization
         self.basicService = basicService

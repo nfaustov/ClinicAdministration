@@ -47,7 +47,7 @@ final class TimelineView: UIView {
                 label.sizeToFit()
                 label.frame.origin = CGPoint(
                     x: 9,
-                    y: tableView.quarterHourHeight * ((CGFloat(hour) + quarterHour) * 4 + 1) - label.frame.height
+                    y: tableView.quarterHourHeight * ((CGFloat(hour) + quarterHour) * 4) - label.frame.height
                 )
                 label.textColor = Design.Color.brown
                 addSubview(label)

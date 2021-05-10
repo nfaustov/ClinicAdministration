@@ -8,8 +8,13 @@
 import Foundation
 
 final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
-    CreateScheduleModule where V: CreateScheduleDisplaying, I: CreateScheduleInteraction {
-    weak var coordinator: (CalendarSubscription & PickDoctorSubscription)?
+                                           CreateScheduleModule where V: CreateScheduleDisplaying,
+                                                                      I: CreateScheduleInteraction {
+    weak var coordinator: (CalendarSubscription &
+                           PickDoctorSubscription &
+                           PickTimeIntervalSubscription &
+                           PickCabinetSubscription &
+                           AddScheduleSubscription)?
 
     var didFinish: (() -> Void)?
 }
@@ -25,8 +30,37 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func pickDoctor() {
-        coordinator?.routeToPickDoctor()
+    func pickDoctor(selected: Doctor?) {
+        coordinator?.routeToPickDoctor(previouslyPicked: selected) { doctor in
+            guard let doctor = doctor else { return }
+
+            self.view?.pickedDoctor(doctor)
+        }
+    }
+
+    func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?) {
+        coordinator?.routeToPickTimeInterval(date: date, previouslyPicked: selected) { starting, ending in
+            guard let starting = starting,
+                  let ending = ending else { return }
+
+            self.view?.pickedInterval((starting, ending))
+        }
+    }
+
+    func pickCabinet(selected: Int?) {
+        coordinator?.routeToPickCabinet(previouslyPicked: selected) { cabinet in
+            guard let cabinet = cabinet else { return }
+
+            self.view?.pickedCabinet(cabinet)
+        }
+    }
+
+    func addSchedule(_ schedule: DoctorSchedule) {
+        coordinator?.routeToAddSchedule(schedule) { schedule in
+             guard let confirmedSchedule = schedule else { return }
+
+            // append schedule to data manager
+        }
     }
 }
 

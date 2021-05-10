@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PickDoctorSubscription: AnyObject {
-    func routeToPickDoctor()
+    func routeToPickDoctor(previouslyPicked: Doctor?, didFinish: @escaping ((Doctor?) -> Void))
 }
