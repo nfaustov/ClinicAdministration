@@ -4,7 +4,7 @@
 
 >  Language switch: [Русский](/README_RU.md)
 
-This is a thesis based on result of iOS development trainig course.
+This is a thesis based on result of iOS development trainig course (in progress).
 
 This application is designed to optimize business processes in medical clinics. It can also be reused for other service enterprises, where there are several performers, cabinets and who use register for customers.
 
