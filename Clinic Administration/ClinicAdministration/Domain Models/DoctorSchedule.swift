@@ -9,15 +9,9 @@ import Foundation
 
 struct DoctorSchedule: Codable, Equatable, Hashable {
     let id: UUID
-//    let doctor: Doctor
-    var secondName: String
-    var firstName: String
-    var patronymicName: String
-    var phoneNumber: String
-    var specialization: String
+    let doctor: Doctor
     var cabinet: Int
     var startingTime: Date
     var endingTime: Date
-    var serviceDuration: TimeInterval
-    var patientCells: [TimeTablePatientCell]
+    var patientAppointments: [PatientAppointment]
 }

@@ -47,7 +47,7 @@ final class PatientCell: UICollectionViewCell, TimeTableCell {
         trigonPath.fill()
     }
 
-    func configure(with cell: TimeTablePatientCell) {
+    func configure(with cell: PatientAppointment) {
         for view in subviews where view != timeLabel {
             view.removeFromSuperview()
         }

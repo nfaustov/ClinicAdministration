@@ -78,7 +78,7 @@ final class DoctorCell: UICollectionViewCell, TimeTableCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with doctor: DoctorSchedule) {
+    func configure(with doctor: Doctor) {
         specializationLabel.text = "\(doctor.specialization)"
         nameLabel.text = "\(doctor.secondName)\n\(doctor.firstName)\n\(doctor.patronymicName)"
     }

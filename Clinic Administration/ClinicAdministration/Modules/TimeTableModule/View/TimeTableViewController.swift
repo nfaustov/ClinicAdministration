@@ -217,7 +217,7 @@ extension TimeTableViewController: TimeTableDisplaying {
             snapshot.appendSections([.doctor, .patient, .actionList])
             snapshot.appendItems(controlItem, toSection: .doctor)
             snapshot.appendItems(schedules, toSection: .doctor)
-            snapshot.appendItems(firstSchedule.patientCells, toSection: .patient)
+            snapshot.appendItems(firstSchedule.patientAppointments, toSection: .patient)
             snapshot.appendItems(actionList, toSection: .actionList)
             dataSource?.apply(snapshot, animatingDifferences: false)
 
@@ -231,10 +231,10 @@ extension TimeTableViewController: TimeTableDisplaying {
             snapshot.appendItems([DoctorSectionPlaceholder.addFirstSchedule], toSection: .doctor)
             snapshot.appendItems(
                 [
-                    TimeTablePatientCell(scheduledTime: nil, duration: 0, patient: nil),
-                    TimeTablePatientCell(scheduledTime: nil, duration: 1, patient: nil),
-                    TimeTablePatientCell(scheduledTime: nil, duration: 2, patient: nil),
-                    TimeTablePatientCell(scheduledTime: nil, duration: 3, patient: nil)
+                    PatientAppointment(scheduledTime: nil, duration: 0, patient: nil),
+                    PatientAppointment(scheduledTime: nil, duration: 1, patient: nil),
+                    PatientAppointment(scheduledTime: nil, duration: 2, patient: nil),
+                    PatientAppointment(scheduledTime: nil, duration: 3, patient: nil)
                 ],
                 toSection: .patient
             )
@@ -248,7 +248,7 @@ extension TimeTableViewController: TimeTableDisplaying {
         var snapshot = dataSource.snapshot()
         snapshot.deleteSections([.patient, .actionList])
         snapshot.appendSections([.patient, .actionList])
-        snapshot.appendItems(schedule.patientCells, toSection: .patient)
+        snapshot.appendItems(schedule.patientAppointments, toSection: .patient)
         snapshot.appendItems(actionList, toSection: .actionList)
         dataSource.apply(snapshot, animatingDifferences: false)
     }

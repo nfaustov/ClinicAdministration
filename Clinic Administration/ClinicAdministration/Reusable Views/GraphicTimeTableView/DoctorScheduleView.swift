@@ -72,8 +72,9 @@ final class DoctorScheduleView: UIView {
         layer.cornerRadius = Design.CornerRadius.large
         checkState()
 
+        let doctor = schedule.doctor
+        nameLabel.text = "\(doctor.secondName)\n\(doctor.firstName)\n\(doctor.patronymicName)"
         nameLabel.numberOfLines = 0
-        nameLabel.text = "\(schedule.secondName)\n\(schedule.firstName)\n\(schedule.patronymicName)"
         nameLabel.textAlignment = .center
         nameLabel.font = Design.Font.robotoFont(ofSize: 13, weight: .medium)
         nameLabel.sizeToFit()

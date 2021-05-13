@@ -104,16 +104,11 @@ final class CreateScheduleViewController: UIViewController {
 
         let schedule = DoctorSchedule(
             id: UUID(),
-            secondName: doctor.secondName,
-            firstName: doctor.firstName,
-            patronymicName: doctor.patronymicName,
-            phoneNumber: doctor.phoneNumber,
-            specialization: doctor.specialization,
+            doctor: doctor,
             cabinet: cabinet,
             startingTime: interval.0,
             endingTime: interval.1,
-            serviceDuration: doctor.serviceDuration,
-            patientCells: []
+            patientAppointments: []
         )
 
         presenter.addSchedule(schedule)

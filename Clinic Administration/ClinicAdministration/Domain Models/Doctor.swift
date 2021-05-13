@@ -12,7 +12,7 @@ enum SalaryType: String, Codable {
     case piecerateSalary = "piecerate"
 }
 
-class Doctor: Hashable {
+class Doctor: Codable, Hashable {
     static func == (lhs: Doctor, rhs: Doctor) -> Bool {
         lhs.secondName == rhs.secondName && lhs.firstName == rhs.firstName && lhs.patronymicName == rhs.patronymicName
     }

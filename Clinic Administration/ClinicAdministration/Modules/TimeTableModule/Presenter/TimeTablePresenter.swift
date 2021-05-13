@@ -14,10 +14,10 @@ final class TimeTablePresenter<V, I>: PresenterInteractor<V, I>,
     var didFinish: ((Date) -> Void)?
 
     private func prepareIfNeeded(_ schedule: DoctorSchedule) -> DoctorSchedule {
-        if schedule.patientCells.count % 2 != 0 {
+        if schedule.patientAppointments.count % 2 != 0 {
             var preparedSchedule = schedule
-            let cell = TimeTablePatientCell(scheduledTime: nil, duration: 0, patient: nil)
-            preparedSchedule.patientCells.append(cell)
+            let cell = PatientAppointment(scheduledTime: nil, duration: 0, patient: nil)
+            preparedSchedule.patientAppointments.append(cell)
             return preparedSchedule
         } else {
             return schedule
@@ -33,7 +33,7 @@ extension TimeTablePresenter: TimeTablePresentation {
         view?.doctorSnapshot(schedule: prepareIfNeeded(schedule))
     }
 
-    func didSelected(patient: TimeTablePatient) {
+    func didSelected(patient: Patient) {
         // MARK: Present patient screen
     }
 
