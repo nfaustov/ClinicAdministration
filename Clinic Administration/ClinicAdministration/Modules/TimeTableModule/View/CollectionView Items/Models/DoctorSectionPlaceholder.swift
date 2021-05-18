@@ -10,9 +10,6 @@ import UIKit
 struct DoctorSectionPlaceholder: Hashable {
     var message: String
     var buttonTitle: String
-
-    static let addFirstSchedule = DoctorSectionPlaceholder(
-        message: "НА ЭТОТ ДЕНЬ НЕТ РАСПИСАНИЙ ВРАЧЕЙ",
-        buttonTitle: "СОЗДАТЬ РАСПИСАНИЕ"
-    )
+    var target: UIViewController
+    var action: Selector
 }

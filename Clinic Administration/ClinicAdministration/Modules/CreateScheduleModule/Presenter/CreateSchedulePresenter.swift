@@ -30,8 +30,8 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func pickDoctor(selected: Doctor?) {
-        coordinator?.routeToPickDoctor(previouslyPicked: selected) { doctor in
+    func pickDoctor(from doctors: [Doctor], selected: Doctor?) {
+        coordinator?.routeToPickDoctor(from: doctors, previouslyPicked: selected) { doctor in
             guard let doctor = doctor else { return }
 
             self.view?.pickedDoctor(doctor)
@@ -56,15 +56,18 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
     }
 
     func addSchedule(_ schedule: DoctorSchedule) {
-        coordinator?.routeToAddSchedule(schedule) { schedule in
-             guard let confirmedSchedule = schedule else { return }
+        coordinator?.routeToAddSchedule(schedule)
+    }
 
-            // append schedule to data manager
-        }
+    func getDoctors() {
+        interactor.getDoctors()
     }
 }
 
 // MARK: - CreateScheduleInteractorDelegate
 
 extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
+    func doctorsDidRecieved(_ doctors: [Doctor]) {
+        view?.doctorsList = doctors
+    }
 }

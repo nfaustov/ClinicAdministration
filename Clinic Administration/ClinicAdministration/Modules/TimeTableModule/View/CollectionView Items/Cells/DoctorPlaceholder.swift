@@ -66,5 +66,6 @@ class DoctorPlaceholder: UICollectionViewCell, TimeTableCell {
         addFirstScheduleButton.setTitle(model.buttonTitle, for: .normal)
         addFirstScheduleButton.setTitleColor(Design.Color.chocolate, for: .normal)
         addFirstScheduleButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 13, weight: .medium)
+        addFirstScheduleButton.addTarget(model.target, action: model.action, for: .touchUpInside)
     }
 }

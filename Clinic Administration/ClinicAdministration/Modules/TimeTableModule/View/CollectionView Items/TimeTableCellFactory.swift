@@ -15,8 +15,8 @@ final class TimeTableCellFactory {
     }
 
     func getCell(with model: AnyHashable, for indexPath: IndexPath) -> UICollectionViewCell {
-        if let doctor = model as? Doctor {
-            return configureCell(DoctorCell.self, with: doctor, for: indexPath)
+        if let schedule = model as? DoctorSchedule {
+            return configureCell(DoctorCell.self, with: schedule, for: indexPath)
         } else if let patient = model as? PatientAppointment {
             return configureCell(PatientCell.self, with: patient, for: indexPath)
         } else if let action = model as? TimeTableAction {

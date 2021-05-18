@@ -11,6 +11,7 @@ final class ModulesFactory: Modules {
     func timeTable() -> (UIViewController, TimeTableModule) {
         let view = TimeTableViewController()
         let interactor = TimeTableInteractor()
+        interactor.database = DoctorsDatabase()
         let presenter = TimeTablePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
@@ -36,13 +37,15 @@ final class ModulesFactory: Modules {
         let view = CreateScheduleViewController()
         view.date = date
         let interactor = CreateScheduleInteractor()
+        interactor.database = DoctorsDatabase()
         let presenter = CreateSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }
 
-    func pickDoctor(selected doctor: Doctor?) -> (UIViewController, PickDoctorModule) {
+    func pickDoctor(from doctors: [Doctor], selected doctor: Doctor?) -> (UIViewController, PickDoctorModule) {
         let view = PickDoctorViewController()
+        view.doctors = doctors
         view.selectedDoctor = doctor
         let presenter = PickDoctorPresenter(view: view)
 
@@ -73,6 +76,7 @@ final class ModulesFactory: Modules {
         let view = AddScheduleViewController()
         view.newSchedule = schedule
         let interactor = AddScheduleInteractor()
+        interactor.database = DoctorsDatabase()
         let presenter = AddSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)

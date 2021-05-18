@@ -10,14 +10,16 @@ import Foundation
 final class AddSchedulePresenter<V, I>: PresenterInteractor<V, I>,
                                              AddScheduleModule where V: AddScheduleDisplaying,
                                                                           I: AddScheduleInteractor {
-    var didFinish: ((DoctorSchedule?) -> Void)?
+    var didFinish: (() -> Void)?
 }
 
 // MARK: - AddSchedulePresentation
 
 extension AddSchedulePresenter: AddSchedulePresentation {
-    func didFinish(with schedule: DoctorSchedule?) {
-        didFinish?(schedule)
+    func addSchedule(_ schedule: DoctorSchedule) {
+        interactor.addSchedule(schedule) {
+            self.didFinish?()
+        }
     }
 
     func didSelected(date: Date) {

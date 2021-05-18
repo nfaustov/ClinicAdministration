@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AddScheduleModule: AnyObject {
-    var didFinish: ((_ schedule: DoctorSchedule?) -> Void)? { get set }
+    var didFinish: (() -> Void)? { get set }
 }
 
 protocol AddScheduleDisplaying: View {
@@ -18,13 +18,15 @@ protocol AddScheduleDisplaying: View {
 }
 
 protocol AddSchedulePresentation: AnyObject {
-    func didFinish(with schedule: DoctorSchedule?)
-
     func didSelected(date: Date)
+
+    func addSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol AddScheduleInteraction: Interactor {
     func getSchedules(for date: Date)
+
+    func addSchedule(_ schedule: DoctorSchedule, completion: @escaping () -> Void)
 }
 
 protocol AddScheduleInteractorDelegate: AnyObject {

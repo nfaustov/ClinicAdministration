@@ -48,12 +48,13 @@ extension TimeTableCoordinator: GraphicTimeTableSubscription {
     }
 }
 
-// MARK: - GraphicSchedulesSubscription
+// MARK: - AddScheduleSubscription
 
 extension TimeTableCoordinator: AddScheduleSubscription {
-    func routeToAddSchedule(_ schedule: DoctorSchedule, didFinish: @escaping ((DoctorSchedule?) -> Void)) {
+    func routeToAddSchedule(_ schedule: DoctorSchedule) {
         let (viewController, module) = modules.addSchedule(schedule)
-        module.didFinish = didFinish
+        module.didFinish = { self.navigationController.popToRootViewController(animated: true)
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
 }
@@ -71,8 +72,12 @@ extension TimeTableCoordinator: CreateScheduleSubscription {
 // MARK: - PickDoctorSubscription
 
 extension TimeTableCoordinator: PickDoctorSubscription {
-    func routeToPickDoctor(previouslyPicked: Doctor?, didFinish: @escaping ((Doctor?) -> Void)) {
-        let (viewController, module) = modules.pickDoctor(selected: previouslyPicked)
+    func routeToPickDoctor(
+        from doctors: [Doctor],
+        previouslyPicked: Doctor?,
+        didFinish: @escaping ((Doctor?) -> Void)
+    ) {
+        let (viewController, module) = modules.pickDoctor(from: doctors, selected: previouslyPicked)
         module.didFinish = didFinish
         viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
         viewController.modalPresentationStyle = .custom

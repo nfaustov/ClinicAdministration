@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E241" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Doctor" representedClassName=".DoctorEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="agentSalary" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="firstName" attributeType="String" defaultValueString=""/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="monthlySalary" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="patronymicName" attributeType="String" defaultValueString=""/>
+        <attribute name="phoneNumber" attributeType="String" defaultValueString=""/>
+        <attribute name="salaryType" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="secondName" attributeType="String" defaultValueString=""/>
+        <attribute name="serviceDuration" attributeType="Double" defaultValueString="1800" usesScalarValueType="YES"/>
+        <attribute name="specialization" attributeType="String" defaultValueString=""/>
+        <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DoctorSchedule" inverseName="doctor" inverseEntity="DoctorSchedule"/>
+    </entity>
+    <entity name="DoctorSchedule" representedClassName=".DoctorScheduleEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="cabinet" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="endingTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="startingTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="doctor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Doctor" inverseName="schedules" inverseEntity="Doctor"/>
+        <relationship name="patientAppointments" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="PatientAppointment" inverseName="schedule" inverseEntity="PatientAppointment"/>
+    </entity>
+    <entity name="Patient" representedClassName=".PatientEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="firstName" attributeType="String" defaultValueString=""/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="patronymicName" attributeType="String" defaultValueString=""/>
+        <attribute name="phoneNumber" attributeType="String" defaultValueString=""/>
+        <attribute name="secondName" attributeType="String" defaultValueString=""/>
+        <relationship name="appointment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientAppointment" inverseName="patient" inverseEntity="PatientAppointment"/>
+    </entity>
+    <entity name="PatientAppointment" representedClassName=".PatientAppointmentEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="duration" attributeType="Double" defaultValueString="1800" usesScalarValueType="YES"/>
+        <attribute name="sheduledTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="appointment" inverseEntity="Patient"/>
+        <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DoctorSchedule" inverseName="patientAppointments" inverseEntity="DoctorSchedule"/>
+    </entity>
+    <elements>
+        <element name="Doctor" positionX="-694.1411743164062" positionY="-195.401611328125" width="128" height="223"/>
+        <element name="DoctorSchedule" positionX="-480.5201416015625" positionY="-74.5311279296875" width="128" height="119"/>
+        <element name="Patient" positionX="-207.376953125" positionY="32.4600830078125" width="128" height="119"/>
+        <element name="PatientAppointment" positionX="-420.9577026367188" positionY="109.4419860839844" width="128" height="89"/>
+    </elements>
+</model>

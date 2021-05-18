@@ -38,6 +38,15 @@ final class TimeTableViewController: UIViewController {
         )
     ]
 
+    private lazy var doctorSectionPlaceHolder: [DoctorSectionPlaceholder] = [
+        DoctorSectionPlaceholder(
+            message: "НА ЭТОТ ДЕНЬ НЕТ РАСПИСАНИЙ ВРАЧЕЙ",
+            buttonTitle: "СОЗДАТЬ РАСПИСАНИЕ",
+            target: self,
+            action: #selector(addNewSchedule)
+        )
+    ]
+
     private var selectedSchedule: DoctorSchedule?
 
     private var datePicker: DatePicker!
@@ -74,6 +83,10 @@ final class TimeTableViewController: UIViewController {
         registerViews()
         createDataSource()
         createSupplementaryViews()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         presenter.didSelected(date: date)
     }
@@ -228,7 +241,7 @@ extension TimeTableViewController: TimeTableDisplaying {
             collectionView.collectionViewLayout = createCompositionalLayout(withSchedules: false)
             snapshot.deleteSections([.doctor, .patient, .actionList])
             snapshot.appendSections([.doctor, .patient])
-            snapshot.appendItems([DoctorSectionPlaceholder.addFirstSchedule], toSection: .doctor)
+            snapshot.appendItems(doctorSectionPlaceHolder, toSection: .doctor)
             snapshot.appendItems(
                 [
                     PatientAppointment(scheduledTime: nil, duration: 0, patient: nil),

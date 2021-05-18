@@ -22,6 +22,8 @@ final class CreateScheduleViewController: UIViewController {
         }
     }
 
+    var doctorsList: [Doctor]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +34,12 @@ final class CreateScheduleViewController: UIViewController {
 
         configurePicker()
         configureConfirmation()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        presenter.getDoctors()
     }
 
     private func configurePicker() {
@@ -104,11 +112,15 @@ final class CreateScheduleViewController: UIViewController {
 
         let schedule = DoctorSchedule(
             id: UUID(),
-            doctor: doctor,
+            secondName: doctor.secondName,
+            firstName: doctor.firstName,
+            patronymicName: doctor.patronymicName,
+            phoneNumber: doctor.phoneNumber,
+            specialization: doctor.specialization,
             cabinet: cabinet,
             startingTime: interval.0,
             endingTime: interval.1,
-            patientAppointments: []
+            serviceDuration: doctor.serviceDuration
         )
 
         presenter.addSchedule(schedule)
@@ -126,7 +138,9 @@ extension CreateScheduleViewController: SchedulePickerDelegate {
     }
 
     func pickDoctor(selected doctor: Doctor?) {
-        presenter.pickDoctor(selected: doctor)
+        guard let doctors = doctorsList else { return }
+
+        presenter.pickDoctor(from: doctors, selected: doctor)
     }
 
     func pickTimeInterval(selected interval: (Date, Date)?) {

@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        let database = ClinicDatabase()
+        let database = DoctorsDatabase()
         database.saveContext()
     }
 }

@@ -8,10 +8,11 @@
 import Foundation
 
 protocol Database {
+    associatedtype Model
     associatedtype Object
 
-    func create(object: Object)
-    func read() -> [Object]
+    func create(objectWithModel: Model)
+    func readDoctors() -> [Object]
     func update(changes: (() -> Void)?)
     func delete(object: Object)
 }

@@ -14,33 +14,33 @@ enum SalaryType: String, Codable {
 
 class Doctor: Codable, Hashable {
     static func == (lhs: Doctor, rhs: Doctor) -> Bool {
-        lhs.secondName == rhs.secondName && lhs.firstName == rhs.firstName && lhs.patronymicName == rhs.patronymicName
+        lhs.id == rhs.id
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(secondName)
-        hasher.combine(firstName)
-        hasher.combine(patronymicName)
+        hasher.combine(id)
     }
 
+    var id: UUID?
     var secondName: String
     var firstName: String
     var patronymicName: String
     var phoneNumber: String
-    var birthDate: Date
-    var specialization: String // объединить в отдельный enum
-    var basicService: String // специаизацию можно выбирать, базовая услуга назначается автоматически ???
+    var birthDate: Date?
+    var specialization: String
+    var basicService: String
     var serviceDuration: TimeInterval
     var salaryType: SalaryType
     var monthlySalary: Double
     var agentSalary: Double
 
     init(
+        id: UUID?,
         secondName: String,
         firstName: String,
         patronymicName: String,
         phoneNumber: String,
-        birthDate: Date,
+        birthDate: Date?,
         specialization: String,
         basicService: String,
         serviceDuration: TimeInterval,
@@ -48,6 +48,7 @@ class Doctor: Codable, Hashable {
         monthlySalary: Double = 0,
         agentSalary: Double = 0
     ) {
+        self.id = id
         self.secondName = secondName
         self.firstName = firstName
         self.patronymicName = patronymicName
@@ -59,5 +60,26 @@ class Doctor: Codable, Hashable {
         self.salaryType = salaryType
         self.monthlySalary = monthlySalary
         self.agentSalary = agentSalary
+    }
+
+    init?(entity: DoctorEntity) {
+        guard let entitySecondName = entity.secondName,
+              let entityFirstName = entity.firstName,
+              let entityPatronymicName = entity.patronymicName,
+              let entityPhoneNumber = entity.phoneNumber,
+              let entitySpecialization = entity.specialization else { return nil }
+
+        id = entity.id
+        secondName = entitySecondName
+        firstName = entityFirstName
+        patronymicName = entityPatronymicName
+        phoneNumber = entityPhoneNumber
+        birthDate = entity.birthDate
+        specialization = entitySpecialization
+        basicService = ""
+        serviceDuration = entity.serviceDuration
+        salaryType = SalaryType(rawValue: entity.salaryType ?? "") ?? .fixedSalary
+        monthlySalary = entity.monthlySalary
+        agentSalary = entity.agentSalary
     }
 }
