@@ -15,7 +15,7 @@ class PickCabinetViewController: PickerViewController<Int> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         (1...Settings.cabinets).forEach { data.append($0) }
 
         if let cabinet = selectedCabinet {
