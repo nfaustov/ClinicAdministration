@@ -54,9 +54,10 @@ final class CalendarViewController: UIViewController, CalendarDisplaying {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        if let components = selectedDay?.components,
+        if isConfirmed,
+           let components = selectedDay?.components,
            let pickedDate = calendar.date(from: components) {
-            presenter.didFinish(with: isConfirmed ? pickedDate : nil)
+            presenter.didFinish(with: pickedDate)
         } else {
             presenter.didFinish(with: nil)
         }
@@ -174,7 +175,7 @@ final class CalendarViewController: UIViewController, CalendarDisplaying {
     }
 
     private func compareToNow(_ day: Day) -> ComparisonResult? {
-        guard let calendarDay = self.calendar.date(from: day.components) else { return nil }
+        guard let calendarDay = calendar.date(from: day.components) else { return nil }
 
         let result = calendar.compare(calendarDay, to: Date(), toGranularity: .day)
 

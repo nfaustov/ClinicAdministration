@@ -8,8 +8,9 @@
 import Foundation
 
 final class GraphicTimeTablePresenter<V, I>: PresenterInteractor<V, I>,
-    GraphicTimeTableModule where V: GraphicTimeTableDisplaying, I: GraphicTimeTableInteractor {
-    weak var coordinator: TimeTableCoordinator?
+                                             GraphicTimeTableModule where V: GraphicTimeTableDisplaying,
+                                                                          I: GraphicTimeTableInteractor {
+    weak var coordinator: CalendarSubscription?
 
     var didFinish: ((Date) -> Void)?
 }

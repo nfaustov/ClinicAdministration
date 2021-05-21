@@ -21,6 +21,6 @@ struct TimeTableAction: Hashable {
     )
     static let editSchedule = TimeTableAction(
         name: "Редактировать расписание",
-        icon: UIImage(named: "calendar_edit")
+        icon: UIImage(named: "chevron_right")
     )
 }

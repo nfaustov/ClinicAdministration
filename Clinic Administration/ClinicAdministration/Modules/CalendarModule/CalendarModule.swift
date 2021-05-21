@@ -8,7 +8,6 @@
 import Foundation
 
 protocol CalendarModule: AnyObject {
-    var coordinator: TimeTableCoordinator? { get set }
     var didFinish: ((_ date: Date?) -> Void)? { get set }
 }
 

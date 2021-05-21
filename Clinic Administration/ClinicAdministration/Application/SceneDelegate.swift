@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let navigationController = UINavigationController()
-        let modules = ModulesFactory()
+        let dependencies: DatabaseDependencies & HttpServiceDependencies = Dependencies()
+        let modules = ModulesFactory(dependencies: dependencies)
         coordinator = MainCoordinator(navigationController: navigationController, modules: modules)
         coordinator?.start()
 

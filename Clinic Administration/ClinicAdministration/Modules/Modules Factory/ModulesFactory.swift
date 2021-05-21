@@ -8,10 +8,16 @@
 import UIKit
 
 final class ModulesFactory: Modules {
+    private let dependencies: DatabaseDependencies & HttpServiceDependencies
+
+    init(dependencies: DatabaseDependencies & HttpServiceDependencies) {
+        self.dependencies = dependencies
+    }
+
     func timeTable() -> (UIViewController, TimeTableModule) {
         let view = TimeTableViewController()
         let interactor = TimeTableInteractor()
-        interactor.database = DoctorsDatabase()
+        interactor.database = dependencies.doctorsDatabase
         let presenter = TimeTablePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
@@ -37,7 +43,7 @@ final class ModulesFactory: Modules {
         let view = CreateScheduleViewController()
         view.date = date
         let interactor = CreateScheduleInteractor()
-        interactor.database = DoctorsDatabase()
+        interactor.database = dependencies.doctorsDatabase
         let presenter = CreateSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
@@ -76,7 +82,7 @@ final class ModulesFactory: Modules {
         let view = AddScheduleViewController()
         view.newSchedule = schedule
         let interactor = AddScheduleInteractor()
-        interactor.database = DoctorsDatabase()
+        interactor.database = dependencies.doctorsDatabase
         let presenter = AddSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)

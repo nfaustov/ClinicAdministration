@@ -21,9 +21,9 @@ final class PickTimeIntervalViewController: PickerViewController<Date> {
 
         makeIntervals()
 
-        guard let interval = selectedInterval else { return }
-
-        previouslyPicked(interval.0, model1: interval.1)
+        if let interval = selectedInterval {
+            previouslyPicked(interval.0, model1: interval.1)
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {

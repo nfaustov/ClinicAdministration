@@ -13,16 +13,13 @@ final class CreateScheduleViewController: UIViewController {
 
     private var schedulePicker: SchedulePicker!
 
-    private var confirmationBottomContstraint: NSLayoutConstraint!
-    private var schedulePickerTopConstraint: NSLayoutConstraint!
-
     var date = Date() {
         didSet {
             schedulePicker?.date = date
         }
     }
 
-    var doctorsList: [Doctor]!
+    var doctorsList = [Doctor]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,9 +135,7 @@ extension CreateScheduleViewController: SchedulePickerDelegate {
     }
 
     func pickDoctor(selected doctor: Doctor?) {
-        guard let doctors = doctorsList else { return }
-
-        presenter.pickDoctor(from: doctors, selected: doctor)
+        presenter.pickDoctor(from: doctorsList, selected: doctor)
     }
 
     func pickTimeInterval(selected interval: (Date, Date)?) {

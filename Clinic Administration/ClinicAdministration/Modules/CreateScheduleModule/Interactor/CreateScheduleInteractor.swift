@@ -18,9 +18,8 @@ final class CreateScheduleInteractor {
 
 extension CreateScheduleInteractor: CreateScheduleInteraction {
     func getDoctors() {
-        guard let database = database else { return }
+        guard let doctorsEntities = database?.readDoctors() else { return }
 
-        let doctorsEntities = database.readDoctors()
         let doctors = doctorsEntities.compactMap({ Doctor(entity: $0) })
         delegate?.doctorsDidRecieved(doctors)
     }

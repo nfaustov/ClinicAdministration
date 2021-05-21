@@ -19,14 +19,12 @@ protocol AddScheduleDisplaying: View {
 
 protocol AddSchedulePresentation: AnyObject {
     func didSelected(date: Date)
-
     func addSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol AddScheduleInteraction: Interactor {
     func getSchedules(for date: Date)
-
-    func addSchedule(_ schedule: DoctorSchedule, completion: @escaping () -> Void)
+    func addSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol AddScheduleInteractorDelegate: AnyObject {

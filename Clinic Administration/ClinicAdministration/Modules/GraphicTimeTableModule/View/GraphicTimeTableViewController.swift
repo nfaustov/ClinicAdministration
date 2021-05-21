@@ -40,6 +40,10 @@ final class GraphicTimeTableViewController: UIViewController {
         view.addSubview(graphicTimeTableView)
 
         setupConstraints()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         presenter.didSelected(date: date)
     }

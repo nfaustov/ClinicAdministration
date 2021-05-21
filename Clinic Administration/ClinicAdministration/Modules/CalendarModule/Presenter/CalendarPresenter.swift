@@ -8,8 +8,6 @@
 import Foundation
 
 final class CalendarPresenter<V>: PresenterView<V>, CalendarModule where V: CalendarDisplaying {
-    weak var coordinator: TimeTableCoordinator?
-
     var didFinish: ((Date?) -> Void)?
 }
 

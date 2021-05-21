@@ -8,8 +8,8 @@
 import Foundation
 
 final class AddSchedulePresenter<V, I>: PresenterInteractor<V, I>,
-                                             AddScheduleModule where V: AddScheduleDisplaying,
-                                                                          I: AddScheduleInteractor {
+                                        AddScheduleModule where V: AddScheduleDisplaying,
+                                                                I: AddScheduleInteractor {
     var didFinish: (() -> Void)?
 }
 
@@ -17,9 +17,8 @@ final class AddSchedulePresenter<V, I>: PresenterInteractor<V, I>,
 
 extension AddSchedulePresenter: AddSchedulePresentation {
     func addSchedule(_ schedule: DoctorSchedule) {
-        interactor.addSchedule(schedule) {
-            self.didFinish?()
-        }
+        interactor.addSchedule(schedule)
+        didFinish?()
     }
 
     func didSelected(date: Date) {
@@ -35,7 +34,6 @@ extension AddSchedulePresenter: AddScheduleInteractorDelegate {
 
         var updatedSchedules = schedules
         updatedSchedules.append(newSchedule)
-
         view?.applySchedules(updatedSchedules)
     }
 }

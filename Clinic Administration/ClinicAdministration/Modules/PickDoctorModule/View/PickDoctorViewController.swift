@@ -17,13 +17,11 @@ final class PickDoctorViewController: PickerViewController<Doctor> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for doctor in doctors {
-            data.append(doctor)
+        doctors.forEach { data.append($0) }
+
+        if let doctor = selectedDoctor {
+            previouslyPicked(doctor)
         }
-
-        guard let doctor = selectedDoctor else { return }
-
-        previouslyPicked(doctor)
     }
 
     override func viewDidDisappear(_ animated: Bool) {

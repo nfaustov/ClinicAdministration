@@ -15,14 +15,12 @@ class PickCabinetViewController: PickerViewController<Int> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        (1...Settings.cabinets).forEach { data.append($0) }
 
-        for cabinet in 1...Settings.cabinets {
-            data.append(cabinet)
+        if let cabinet = selectedCabinet {
+            previouslyPicked(cabinet)
         }
-
-        guard let cabinet = selectedCabinet else { return }
-
-        previouslyPicked(cabinet)
     }
 
     override func viewDidDisappear(_ animated: Bool) {

@@ -16,23 +16,16 @@ protocol TimeTableDisplaying: View {
     var date: Date { get set }
 
     func daySnapshot(schedules: [DoctorSchedule])
-
     func doctorSnapshot(schedule: DoctorSchedule)
-
     func sidePicked(date: Date?)
 }
 
 protocol TimeTablePresentation: AnyObject {
     func didSelected(_ schedule: DoctorSchedule)
-
     func didSelected(date: Date)
-
     func pickDateInCalendar()
-
     func addNewDoctorSchedule(onDate: Date)
-
     func removeDoctorSchedule(_ schedule: DoctorSchedule)
-
     func switchToGraphicScreen(onDate: Date)
 }
 

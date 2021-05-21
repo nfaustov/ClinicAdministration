@@ -15,18 +15,18 @@ protocol SchedulePickerDelegate: AnyObject {
 }
 
 final class SchedulePicker: UIView {
-    enum FieldPosition {
+    private enum FieldPosition {
         case top, bottom
     }
 
     private let intervalImage = UIImage(named: "clock")?.withTintColor(Design.Color.lightGray)
 
+    private let calendar = Calendar.current
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter.shared
         formatter.dateFormat = "H:mm"
         return formatter
     }
-    private let calendar = Calendar.current
 
     private var doctorField: SchedulePickerField!
     private var dateField: SchedulePickerField!

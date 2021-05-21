@@ -21,7 +21,6 @@ struct MonthHeader: CalendarItemViewRepresentable {
 
     static func makeView(withInvariantViewProperties invariantViewProperties: InvariantViewProperties) -> UILabel {
         let label = UILabel()
-
         label.font = invariantViewProperties.font
         label.textColor = invariantViewProperties.textColor
         label.backgroundColor = invariantViewProperties.backgoundColor

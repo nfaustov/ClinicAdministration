@@ -42,7 +42,7 @@ enum Design {
         /// Creates roboto font with specified size and weight
         /// - Parameters:
         ///   - fontSize: font size
-        ///   - weight: weight
+        ///   - weight: font weight
         static func robotoFont(ofSize fontSize: CGFloat, weight: RobotoFontWeight) -> UIFont {
             UIFont(name: weight.rawValue, size: fontSize) ?? UIFont()
         }

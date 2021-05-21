@@ -91,10 +91,7 @@ final class GraphicTableView: UIView {
 
     func addSchedules(_ schedules: [DoctorSchedule]) {
         self.schedules = schedules
-
-        schedules.forEach { schedule in
-            addDoctorSchedule(schedule)
-        }
+        schedules.forEach { addDoctorSchedule($0) }
     }
 
     func reload(with date: Date, schedules: [DoctorSchedule]) {
@@ -108,12 +105,9 @@ final class GraphicTableView: UIView {
             doctorView.removeFromSuperview()
             doctorViews.remove(at: 0)
         }
-        schedules.forEach { schedule in
-            addDoctorSchedule(schedule)
-        }
-        self.schedules = schedules
-        // moveIntersectionsToFront()
 
+        addSchedules(schedules)
+        // moveIntersectionsToFront()
         setNeedsLayout()
     }
 
@@ -241,8 +235,8 @@ final class GraphicTableView: UIView {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
 
-        guard let doctorView = gesture.view?.superview as? DoctorScheduleView else { return }
-        guard let cabinetView = doctorView.superview else { return }
+        guard let doctorView = gesture.view?.superview as? DoctorScheduleView,
+              let cabinetView = doctorView.superview else { return }
 
         switch gesture.state {
         case .began:

@@ -25,7 +25,7 @@ final class TimeTableCollectionViewLayout {
         self.actionListBackgroundElementKind = actionListBackgroundElementKind
     }
 
-    // MARK: - Doctor section & supplementary items
+    // MARK: - Doctor section
 
     func createDoctorSection(count: Int = 0) -> NSCollectionLayoutSection {
         let doctorItemSize = NSCollectionLayoutSize(
@@ -59,7 +59,6 @@ final class TimeTableCollectionViewLayout {
             subitems: [controlLayoutItem, doctorLayoutGroup]
         )
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         layoutSection.orthogonalScrollingBehavior = .continuous
 
         return layoutSection
@@ -116,6 +115,7 @@ final class TimeTableCollectionViewLayout {
             elementKind: patientSectionHeaderElementKind,
             alignment: .top
         )
+        layoutSectionHeader.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12)
 
         return layoutSectionHeader
     }
@@ -140,6 +140,12 @@ final class TimeTableCollectionViewLayout {
         layoutSection.boundarySupplementaryItems = [layoutSectionFooter]
         let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(
             elementKind: actionListBackgroundElementKind
+        )
+        sectionBackgroundDecoration.contentInsets = NSDirectionalEdgeInsets(
+            top: 12,
+            leading: 12,
+            bottom: 0,
+            trailing: 12
         )
         layoutSection.decorationItems = [sectionBackgroundDecoration]
 

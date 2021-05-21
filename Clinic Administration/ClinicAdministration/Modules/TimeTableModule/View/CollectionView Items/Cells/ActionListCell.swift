@@ -10,8 +10,6 @@ import UIKit
 class ActionListCell: UICollectionViewCell, TimeTableCell {
     static let reuseIdentifier = "ActionListCell"
 
-    var imageView: UIImageView!
-
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = Design.Font.robotoFont(ofSize: 15, weight: .medium)
@@ -29,11 +27,10 @@ class ActionListCell: UICollectionViewCell, TimeTableCell {
         let separator = UIView()
         separator.backgroundColor = Design.Color.gray
 
-        addSubview(nameLabel)
-        addSubview(separator)
-
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        separator.translatesAutoresizingMaskIntoConstraints = false
+        [nameLabel, separator].forEach { view in
+            addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
 
         NSLayoutConstraint.activate([
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -53,11 +50,10 @@ class ActionListCell: UICollectionViewCell, TimeTableCell {
 
     func configure(with action: TimeTableAction) {
         nameLabel.text = action.name
-        imageView?.image = nil
 
         guard let icon = action.icon else { return }
 
-        imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.image = icon.withTintColor(Design.Color.brown)
         addSubview(imageView)
 

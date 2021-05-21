@@ -23,9 +23,9 @@ final class ActionListBackgroundDecorationView: UICollectionReusableView {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            view.topAnchor.constraint(equalTo: topAnchor),
+            view.leadingAnchor.constraint(equalTo: leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: trailingAnchor),
             view.heightAnchor.constraint(equalToConstant: 135)
         ])
     }

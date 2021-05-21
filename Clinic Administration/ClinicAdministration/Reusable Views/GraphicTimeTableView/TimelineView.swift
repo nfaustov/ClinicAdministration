@@ -10,9 +10,7 @@ import UIKit
 final class TimelineView: UIView {
     var tableView: GraphicTableView {
         didSet {
-            for subview in subviews {
-                subview.removeFromSuperview()
-            }
+            subviews.forEach { $0.removeFromSuperview() }
             configure()
         }
     }
@@ -28,7 +26,7 @@ final class TimelineView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure() {
+    private func configure() {
         guard let closeHour = tableView.close.hour,
               let openingHour = tableView.opening.hour else { return }
 

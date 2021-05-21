@@ -8,7 +8,7 @@
 import Foundation
 
 final class TimeTablePresenter<V, I>: PresenterInteractor<V, I>,
-    TimeTableModule where V: TimeTableDisplaying, I: TimeTableInteraction {
+                                      TimeTableModule where V: TimeTableDisplaying, I: TimeTableInteraction {
     weak var coordinator: (CalendarSubscription & GraphicTimeTableSubscription & CreateScheduleSubscription)?
 
     var didFinish: ((Date) -> Void)?
@@ -29,7 +29,6 @@ final class TimeTablePresenter<V, I>: PresenterInteractor<V, I>,
 
 extension TimeTablePresenter: TimeTablePresentation {
     func didSelected(_ schedule: DoctorSchedule) {
-        view?.date = schedule.startingTime
         view?.doctorSnapshot(schedule: prepareIfNeeded(schedule))
     }
 
@@ -43,11 +42,8 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func pickDateInCalendar() {
-        coordinator?.routeToCalendar { [weak self] date in
-            self?.view?.sidePicked(date: date)
-            if let date = date {
-                self?.didSelected(date: date)
-            }
+        coordinator?.routeToCalendar { [view] date in
+            view?.sidePicked(date: date)
         }
     }
 
@@ -59,11 +55,8 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func switchToGraphicScreen(onDate date: Date) {
-        coordinator?.routeToGraphicTimeTable(onDate: date) { [weak self] selectedDate in
-            if selectedDate != date {
-                self?.view?.sidePicked(date: selectedDate)
-                self?.didSelected(date: selectedDate ?? Date())
-            }
+        coordinator?.routeToGraphicTimeTable(onDate: date) { [view] selectedDate in
+            view?.sidePicked(date: selectedDate)
         }
     }
 }
@@ -76,7 +69,6 @@ extension TimeTablePresenter: TimeTableInteractorDelegate {
             var preparedSchedules = schedules
             preparedSchedules.remove(at: 0)
             preparedSchedules.insert(prepareIfNeeded(firstSchedule), at: 0)
-
             view?.daySnapshot(schedules: preparedSchedules)
         } else {
             view?.daySnapshot(schedules: [])

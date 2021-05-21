@@ -13,7 +13,6 @@ final class DatePicker: UIView {
         case tomorrow = "Завтра"
         case afterTomorrow = "Послезавтра"
         case calendar
-        case none
     }
 
     private let today = Date()
@@ -39,6 +38,7 @@ final class DatePicker: UIView {
 
     private var selectedDate: Date {
         didSet {
+            if calendar.isDate(selectedDate, inSameDayAs: oldValue) { return }
             configureLabels()
             dateAction?(selectedDate)
         }

@@ -70,20 +70,9 @@ final class DoctorScheduleView: UIView {
 
         layer.shadowColor = Design.Color.brown.cgColor
         layer.cornerRadius = Design.CornerRadius.large
+
         checkState()
-
-        nameLabel.text = "\(schedule.secondName)\n\(schedule.firstName)\n\(schedule.patronymicName)"
-        nameLabel.numberOfLines = 0
-        nameLabel.textAlignment = .center
-        nameLabel.font = Design.Font.robotoFont(ofSize: 13, weight: .medium)
-        nameLabel.sizeToFit()
-        addSubview(nameLabel)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-
+        configureNameLabel()
         configureGestureAreas()
     }
 
@@ -97,6 +86,22 @@ final class DoctorScheduleView: UIView {
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.large).cgPath
     }
 
+    private func configureNameLabel() {
+        nameLabel.text = "\(schedule.secondName)\n\(schedule.firstName)\n\(schedule.patronymicName)"
+        nameLabel.numberOfLines = 0
+        nameLabel.textAlignment = .center
+        nameLabel.font = Design.Font.robotoFont(ofSize: 13, weight: .medium)
+        nameLabel.sizeToFit()
+        addSubview(nameLabel)
+
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+
     private func configureGestureAreas() {
         let topPan = UIPanGestureRecognizer(target: self, action: #selector(handleTopPanGesture(_:)))
         let bottomPan = UIPanGestureRecognizer(target: self, action: #selector(handleBottomPanGesture(_:)))
@@ -106,12 +111,10 @@ final class DoctorScheduleView: UIView {
         bottomResizingPoint.addGestureRecognizer(bottomPan)
         addGestureRecognizer(longPress)
 
-        addSubview(topResizingPoint)
-        addSubview(transformArea)
-        addSubview(bottomResizingPoint)
-
         for view in [topResizingPoint, transformArea, bottomResizingPoint] {
+            addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
+            view.isUserInteractionEnabled = false
         }
 
         NSLayoutConstraint.activate([
@@ -130,10 +133,6 @@ final class DoctorScheduleView: UIView {
             bottomResizingPoint.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomResizingPoint.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1)
         ])
-
-        topResizingPoint.isUserInteractionEnabled = false
-        transformArea.isUserInteractionEnabled = false
-        bottomResizingPoint.isUserInteractionEnabled = false
     }
 
     func checkState() {

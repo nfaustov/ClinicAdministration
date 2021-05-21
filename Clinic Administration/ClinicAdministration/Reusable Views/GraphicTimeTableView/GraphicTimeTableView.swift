@@ -23,8 +23,8 @@ final class GraphicTimeTableView: UIView {
         timelineHeight + tableView.quarterHourHeight
     }
     private var tableViewWidth: CGFloat {
-        GraphicTableView.Size.timelineWidth
-            + (UIScreen.main.bounds.width - GraphicTableView.Size.timelineWidth) / 3 * CGFloat(Settings.cabinets)
+        GraphicTableView.Size.timelineWidth + (UIScreen.main.bounds.width - GraphicTableView.Size.timelineWidth) /
+            3 * CGFloat(Settings.cabinets)
     }
 
     private var hScrollViewHeightConstraint = NSLayoutConstraint()
@@ -40,15 +40,16 @@ final class GraphicTimeTableView: UIView {
         self.date = date
         super.init(frame: .zero)
 
-        tableView = GraphicTableView(date: date, transformAction: scheduleTransform(doctorView:))
-        timelineView = TimelineView(respectiveTo: tableView)
-
-        addSubview(vScrollView)
         vScrollView.showsVerticalScrollIndicator = false
         hScrollView.showsHorizontalScrollIndicator = false
         hScrollView.isPagingEnabled = true
         hScrollView.bounces = false
         hScrollView.delegate = self
+
+        tableView = GraphicTableView(date: date, transformAction: scheduleTransform(doctorView:))
+        timelineView = TimelineView(respectiveTo: tableView)
+
+        addSubview(vScrollView)
         hScrollView.addSubview(tableView)
         vScrollView.addSubview(hScrollView)
         vScrollView.addSubview(timelineView)

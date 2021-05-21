@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CustomPresentationController: UIPresentationController {
-    let blurEffectView: UIVisualEffectView!
+final class CustomPresentationController: UIPresentationController {
+    private let blurEffectView: UIVisualEffectView!
 
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         let blurEffect = UIBlurEffect(style: .dark)
@@ -53,7 +53,7 @@ class CustomPresentationController: UIPresentationController {
         blurEffectView.frame = containerView?.bounds ?? .zero
     }
 
-    @objc func dismiss() {
+    @objc private func dismiss() {
         self.presentedViewController.dismiss(animated: true, completion: nil)
     }
 }

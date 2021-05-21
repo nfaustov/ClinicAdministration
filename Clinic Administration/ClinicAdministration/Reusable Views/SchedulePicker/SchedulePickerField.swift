@@ -8,10 +8,6 @@
 import UIKit
 
 final class SchedulePickerField: UIView {
-    enum ImageType {
-        case custom, standard
-    }
-
     let fieldNameLabel: UILabel = {
         let label = UILabel()
         label.font = Design.Font.robotoFont(ofSize: 13, weight: .regular)
@@ -95,17 +91,15 @@ final class SchedulePickerField: UIView {
         let day = "\(splitDate[1])"
         let weekday = "\(splitDate[2])"
 
-        monthLabel.text = month
-        monthLabel.textColor = Design.Color.white
-        monthLabel.font = Design.Font.robotoFont(ofSize: 18, weight: .medium)
+        configureDateLabel(monthLabel, text: month, fontWeight: .medium)
+        configureDateLabel(dayLabel, text: day, fontWeight: .regular)
+        configureDateLabel(weekdayLabel, text: weekday, fontWeight: .light)
+    }
 
-        dayLabel.text = day
-        dayLabel.textColor = Design.Color.white
-        dayLabel.font = Design.Font.robotoFont(ofSize: 18, weight: .regular)
-
-        weekdayLabel.text = weekday
-        weekdayLabel.textColor = Design.Color.white
-        weekdayLabel.font = Design.Font.robotoFont(ofSize: 18, weight: .light)
+    private func configureDateLabel(_ label: UILabel, text: String, fontWeight: Design.RobotoFontWeight) {
+        label.text = text
+        label.textColor = Design.Color.white
+        label.font = Design.Font.robotoFont(ofSize: 18, weight: fontWeight)
     }
 
     private func setupConstaints(dynamicView: UIView) {

@@ -10,15 +10,15 @@ import UIKit
 final class DatePickerHeader: UICollectionReusableView {
     static let reuseIdentifier = "DatePickerHeader"
 
-    func configure(with date: Date, datePicker: DatePicker) {
+    func configure(with datePicker: DatePicker) {
         addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             datePicker.topAnchor.constraint(equalTo: topAnchor),
-            datePicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            datePicker.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            datePicker.heightAnchor.constraint(equalToConstant: 90)
+            datePicker.leadingAnchor.constraint(equalTo: leadingAnchor),
+            datePicker.trailingAnchor.constraint(equalTo: trailingAnchor),
+            datePicker.heightAnchor.constraint(equalTo: heightAnchor)
         ])
     }
 }

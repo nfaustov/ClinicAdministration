@@ -31,11 +31,10 @@ class DoctorPlaceholder: UICollectionViewCell, TimeTableCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        addSubview(messageLabel)
-        addSubview(addFirstScheduleButton)
-
-        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        addFirstScheduleButton.translatesAutoresizingMaskIntoConstraints = false
+        [messageLabel, addFirstScheduleButton].forEach { view in
+            addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
 
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 40),

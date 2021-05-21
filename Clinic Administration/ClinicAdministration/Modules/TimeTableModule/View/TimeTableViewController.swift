@@ -30,7 +30,7 @@ final class TimeTableViewController: UIViewController {
 
     private var actionList: [TimeTableAction] = [.showNextSchedule, .showAllSchedules, .editSchedule]
 
-    private lazy var controlItem: [DoctorControl] = [
+    private lazy var controlItem = [
         DoctorControl(
             target: self,
             addAction: #selector(addNewSchedule),
@@ -38,7 +38,7 @@ final class TimeTableViewController: UIViewController {
         )
     ]
 
-    private lazy var doctorSectionPlaceHolder: [DoctorSectionPlaceholder] = [
+    private lazy var doctorSectionPlaceHolder = [
         DoctorSectionPlaceholder(
             message: "НА ЭТОТ ДЕНЬ НЕТ РАСПИСАНИЙ ВРАЧЕЙ",
             buttonTitle: "СОЗДАТЬ РАСПИСАНИЕ",
@@ -137,16 +137,16 @@ final class TimeTableViewController: UIViewController {
     }
 
     private func createSupplementaryViews() {
-        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            guard let self = self else { return nil }
-
+        dataSource?.supplementaryViewProvider = { [datePicker] collectionView, kind, indexPath in
             if kind == ElementKind.patientSectionHeader,
                let patientSectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: DatePickerHeader.reuseIdentifier,
                 for: indexPath
             ) as? DatePickerHeader {
-                patientSectionHeader.configure(with: self.date, datePicker: self.datePicker)
+                guard let datePicker = datePicker else { return nil }
+
+                patientSectionHeader.configure(with: datePicker)
 
                 return patientSectionHeader
             } else if kind == ElementKind.actionListFooter,
@@ -165,7 +165,7 @@ final class TimeTableViewController: UIViewController {
     private func createCompositionalLayout(withSchedules: Bool, count: Int = 0) -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             guard let section = Section(rawValue: sectionIndex) else {
-                fatalError("This section doesn't exist")
+                fatalError("Unknown section type.")
             }
 
             let timeTableLayout = TimeTableCollectionViewLayout(
@@ -243,12 +243,7 @@ extension TimeTableViewController: TimeTableDisplaying {
             snapshot.appendSections([.doctor, .patient])
             snapshot.appendItems(doctorSectionPlaceHolder, toSection: .doctor)
             snapshot.appendItems(
-                [
-                    PatientAppointment(scheduledTime: nil, duration: 0, patient: nil),
-                    PatientAppointment(scheduledTime: nil, duration: 1, patient: nil),
-                    PatientAppointment(scheduledTime: nil, duration: 2, patient: nil),
-                    PatientAppointment(scheduledTime: nil, duration: 3, patient: nil)
-                ],
+                (0...3).map { PatientAppointment(scheduledTime: nil, duration: Double($0), patient: nil) },
                 toSection: .patient
             )
             dataSource?.apply(snapshot, animatingDifferences: false)

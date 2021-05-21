@@ -8,9 +8,9 @@
 import UIKit
 
 class PickerViewController<Model: Hashable>: UIViewController,
-                                   UIPickerViewDataSource,
-                                   UIPickerViewDelegate,
-                                   UIViewControllerTransitioningDelegate {
+                                             UIPickerViewDataSource,
+                                             UIPickerViewDelegate,
+                                             UIViewControllerTransitioningDelegate {
     private let pickerView = UIPickerView()
     private let button = UIButton()
     private let separator = UIView()
@@ -48,7 +48,6 @@ class PickerViewController<Model: Hashable>: UIViewController,
         if let indexOfModel = data.firstIndex(where: { $0 == model }) {
             pickerView.selectRow(indexOfModel, inComponent: 0, animated: false)
         }
-
         if let indexOfModel1 = data1?.firstIndex(where: { $0 == model1 }) {
             pickerView.selectRow(indexOfModel1, inComponent: 1, animated: false)
         }

@@ -28,7 +28,7 @@ class DoctorControlCell: UICollectionViewCell, TimeTableCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        for button in [plusButton, deleteButton] {
+        [plusButton, deleteButton].forEach { button in
             addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
         }

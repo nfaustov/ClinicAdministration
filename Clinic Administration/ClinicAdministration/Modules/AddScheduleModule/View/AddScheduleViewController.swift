@@ -48,6 +48,10 @@ class AddScheduleViewController: UIViewController {
         confirmButton.addGestureRecognizer(tap)
 
         setupConstraints()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         presenter.didSelected(date: date)
     }
