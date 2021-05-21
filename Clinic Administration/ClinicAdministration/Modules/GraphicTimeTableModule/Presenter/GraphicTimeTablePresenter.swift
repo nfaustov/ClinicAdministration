@@ -27,11 +27,8 @@ extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
     }
 
     func pickDateInCalendar() {
-        coordinator?.routeToCalendar { [weak self] date in
-            self?.view?.calendarPicked(date: date)
-            if let date = date {
-                self?.didSelected(date: date)
-            }
+        coordinator?.routeToCalendar { date in
+            self.view?.calendarPicked(date: date)
         }
     }
 }

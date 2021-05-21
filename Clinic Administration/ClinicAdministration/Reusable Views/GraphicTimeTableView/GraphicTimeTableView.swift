@@ -20,7 +20,7 @@ final class GraphicTimeTableView: UIView {
         return CGFloat(tableViewCloseHour - tableViewOpeningHour) * tableView.hourHeight + tableView.quarterHourHeight
     }
     private var tableViewHeight: CGFloat {
-        timelineHeight + tableView.quarterHourHeight
+        timelineHeight + 10
     }
     private var tableViewWidth: CGFloat {
         GraphicTableView.Size.timelineWidth + (UIScreen.main.bounds.width - GraphicTableView.Size.timelineWidth) /
@@ -39,6 +39,9 @@ final class GraphicTimeTableView: UIView {
     init(date: Date) {
         self.date = date
         super.init(frame: .zero)
+
+        backgroundColor = Design.Color.white
+        layer.cornerRadius = Design.CornerRadius.large
 
         vScrollView.showsVerticalScrollIndicator = false
         hScrollView.showsHorizontalScrollIndicator = false

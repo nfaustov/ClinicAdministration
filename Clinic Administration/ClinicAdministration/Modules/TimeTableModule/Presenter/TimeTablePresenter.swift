@@ -42,8 +42,8 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func pickDateInCalendar() {
-        coordinator?.routeToCalendar { [view] date in
-            view?.sidePicked(date: date)
+        coordinator?.routeToCalendar { date in
+            self.view?.sidePicked(date: date)
         }
     }
 
@@ -55,8 +55,8 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func switchToGraphicScreen(onDate date: Date) {
-        coordinator?.routeToGraphicTimeTable(onDate: date) { [view] selectedDate in
-            view?.sidePicked(date: selectedDate)
+        coordinator?.routeToGraphicTimeTable(onDate: date) { selectedDate in
+            self.view?.sidePicked(date: selectedDate)
         }
     }
 }
