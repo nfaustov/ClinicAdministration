@@ -111,11 +111,6 @@ class PickerViewController<Model: Hashable>: UIViewController,
         presenting: UIViewController?,
         source: UIViewController
     ) -> UIPresentationController? {
-        let presentationController = CustomPresentationController(
-            presentedViewController: presented,
-            presenting: presenting ?? source
-        )
-
-        return presentationController
+        CustomPresentationController(presentedViewController: presented, presenting: presenting ?? source)
     }
 }

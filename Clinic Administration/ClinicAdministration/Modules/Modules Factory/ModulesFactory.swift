@@ -27,6 +27,7 @@ final class ModulesFactory: Modules {
         let view = GraphicTimeTableViewController()
         view.date = date
         let interactor = GraphicTimeTableInteractor()
+        interactor.database = dependencies.doctorsDatabase
         let presenter = GraphicTimeTablePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
