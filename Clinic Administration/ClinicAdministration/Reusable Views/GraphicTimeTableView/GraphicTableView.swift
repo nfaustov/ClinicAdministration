@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol GraphicTableViewDelegate: AnyObject {
+    func scheduleDidChanged(_ schedule: DoctorSchedule)
+}
+
 final class GraphicTableView: UIView {
     private let calendar = Calendar.current
 
@@ -23,6 +27,8 @@ final class GraphicTableView: UIView {
     private var transformAction: ((DoctorScheduleView) -> Void)?
 
     private var schedules: [DoctorSchedule]?
+
+    weak var delegate: GraphicTableViewDelegate?
 
     init(date: Date, transformAction: @escaping (DoctorScheduleView) -> Void) {
         self.transformAction = transformAction
@@ -121,7 +127,7 @@ final class GraphicTableView: UIView {
                 x: Size.timelineWidth + cabinetViewWidth * CGFloat(cabinet),
                 y: Size.headerHeight,
                 width: cabinetViewWidth,
-                height: bounds.height - quarterHourHeight * 2 + 1
+                height: bounds.height - quarterHourHeight - 10 + 1
             )
         }
 
@@ -192,15 +198,18 @@ final class GraphicTableView: UIView {
             schedule,
             minuteHeight: Size.minuteHeight,
             intersectionDetection: detectIntersection(for:),
-            moveToFrontAction: { [weak self] doctorView in
-                self?.cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
+//            moveToFrontAction: { [weak self] doctorView in
+//                self?.cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
+//            }
+            scheduleDidChanged: { [delegate] schedule in
+                delegate?.scheduleDidChanged(schedule)
             }
         )
+        cabinetViews[schedule.cabinet - 1].addSubview(doctorView)
+        doctorViews.append(doctorView)
 
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         doctorView.transformArea.addGestureRecognizer(pan)
-        cabinetViews[schedule.cabinet - 1].addSubview(doctorView)
-        doctorViews.append(doctorView)
     }
 
     private func detectIntersection(for schedule: DoctorSchedule) -> Bool {

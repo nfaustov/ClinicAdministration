@@ -23,4 +23,8 @@ extension GraphicTimeTableInteractor: GraphicTimeTableInteraction {
         let schedules = schedulesEntities.compactMap { DoctorSchedule(entity: $0) }
         delegate?.schedulesDidRecieved(schedules)
     }
+
+    func updateSchedule(_ schedule: DoctorSchedule) {
+        database?.updateSchedule(schedule)
+    }
 }

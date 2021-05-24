@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol GraphicTimeTableViewDelegate: AnyObject {
+    func scheduleDidChanged(_ schedule: DoctorSchedule)
+}
+
 final class GraphicTimeTableView: UIView {
     private let vScrollView = UIScrollView()
     private let hScrollView = UIScrollView()
@@ -34,6 +38,8 @@ final class GraphicTimeTableView: UIView {
     private var tableView: GraphicTableView!
     private var timelineView: TimelineView!
 
+    weak var delegate: GraphicTimeTableViewDelegate?
+
     var date: Date
 
     init(date: Date) {
@@ -50,6 +56,7 @@ final class GraphicTimeTableView: UIView {
         hScrollView.delegate = self
 
         tableView = GraphicTableView(date: date, transformAction: scheduleTransform(doctorView:))
+        tableView.delegate = self
         timelineView = TimelineView(respectiveTo: tableView)
 
         addSubview(vScrollView)
@@ -176,6 +183,14 @@ final class GraphicTimeTableView: UIView {
         )
 
         vScrollView.scrollRectToVisible(rectToVisible, animated: false)
+    }
+}
+
+// MARK: - GraphicTableViewDelegate
+
+extension GraphicTimeTableView: GraphicTableViewDelegate {
+    func scheduleDidChanged(_ schedule: DoctorSchedule) {
+        delegate?.scheduleDidChanged(schedule)
     }
 }
 

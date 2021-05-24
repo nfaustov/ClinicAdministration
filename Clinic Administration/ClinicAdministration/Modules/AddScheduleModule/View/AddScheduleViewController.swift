@@ -41,6 +41,7 @@ class AddScheduleViewController: UIViewController {
         view.backgroundColor = Design.Color.lightGray
 
         graphicTimeTableView = GraphicTimeTableView(date: date)
+        graphicTimeTableView.delegate = self
         view.addSubview(graphicTimeTableView)
         view.addSubview(confirmButton)
 
@@ -75,6 +76,18 @@ class AddScheduleViewController: UIViewController {
 
     @objc private func confirmSchedule() {
         presenter.addSchedule(newSchedule)
+    }
+}
+
+// MARK: - GraphicTimeTableViewDelegate
+
+extension AddScheduleViewController: GraphicTimeTableViewDelegate {
+    func scheduleDidChanged(_ schedule: DoctorSchedule) {
+        if schedule.id == newSchedule.id {
+            presenter.updateNewSchedule(schedule)
+        } else {
+            presenter.scheduleDidUpdated(schedule)
+        }
     }
 }
 

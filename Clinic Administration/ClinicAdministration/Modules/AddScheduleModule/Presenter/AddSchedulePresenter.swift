@@ -21,6 +21,17 @@ extension AddSchedulePresenter: AddSchedulePresentation {
         didFinish?()
     }
 
+    func updateNewSchedule(_ schedule: DoctorSchedule) {
+        view?.newSchedule.startingTime = schedule.startingTime
+        view?.newSchedule.endingTime = schedule.endingTime
+    }
+
+    func scheduleDidUpdated(_ schedule: DoctorSchedule) {
+        var updatedSchedule = schedule
+        updatedSchedule.updateAppointments()
+        interactor.updateSchedule(updatedSchedule)
+    }
+
     func didSelected(date: Date) {
         interactor.getSchedules(for: date)
     }

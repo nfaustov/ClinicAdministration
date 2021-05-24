@@ -108,7 +108,7 @@ final class TimeTableViewController: UIViewController {
             + selectedSchedule.patronymicName
         let alertViewController = UIAlertController(
             title: "Удаление расписания",
-            message: "Вы уверены, что хотите удалить расписание врача \(doctorNameString)?",
+            message: "Вы уверены, что хотите удалить расписание врача: \(doctorNameString)?",
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(title: "ДА", style: .destructive) { _ in

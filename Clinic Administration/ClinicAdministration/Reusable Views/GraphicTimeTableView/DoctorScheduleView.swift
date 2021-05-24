@@ -9,7 +9,8 @@ import UIKit
 
 final class DoctorScheduleView: UIView {
     private enum Mode {
-        case editing, viewing
+        case editing
+        case viewing
 
         var change: Mode {
             switch self {
@@ -50,22 +51,26 @@ final class DoctorScheduleView: UIView {
         }
     }
 
+    private var hasChanges = false
+
     private(set) var schedule: DoctorSchedule
 
     private var intersectionDetection: ((DoctorSchedule) -> Bool)?
-
-    private var moveToFrontAction: ((DoctorScheduleView) -> Void)?
+    private var scheduleDidChanged: ((DoctorSchedule) -> Void)?
+//    private var moveToFrontAction: ((DoctorScheduleView) -> Void)?
 
     init(
         _ schedule: DoctorSchedule,
         minuteHeight: CGFloat,
         intersectionDetection: @escaping (DoctorSchedule) -> Bool,
-        moveToFrontAction: @escaping (DoctorScheduleView) -> Void
+        scheduleDidChanged: @escaping (DoctorSchedule) -> Void
+//        moveToFrontAction: @escaping (DoctorScheduleView) -> Void
     ) {
         self.schedule = schedule
         self.minuteHeight = minuteHeight
         self.intersectionDetection = intersectionDetection
-        self.moveToFrontAction = moveToFrontAction
+        self.scheduleDidChanged = scheduleDidChanged
+//        self.moveToFrontAction = moveToFrontAction
         super.init(frame: .zero)
 
         layer.shadowColor = Design.Color.brown.cgColor
@@ -135,6 +140,13 @@ final class DoctorScheduleView: UIView {
         ])
     }
 
+    private func checkChanges() {
+        if hasChanges {
+            scheduleDidChanged?(schedule)
+            hasChanges = false
+        }
+    }
+
     func checkState() {
         switch mode {
         case .editing:
@@ -144,7 +156,7 @@ final class DoctorScheduleView: UIView {
             layer.shadowOpacity = 0
             nameLabel.textColor = Design.Color.chocolate.withAlphaComponent(0.6)
             transform = .init(scaleX: 1.1, y: 1)
-            moveToFrontAction?(self)
+//            moveToFrontAction?(self)
         case .viewing:
             nameLabel.textColor = Design.Color.chocolate
             transform = .identity
@@ -155,7 +167,7 @@ final class DoctorScheduleView: UIView {
                 layer.shadowOffset = CGSize(width: 0, height: 6)
                 layer.shadowRadius = 12
                 layer.shadowOpacity = 0.15
-                moveToFrontAction?(self)
+//                moveToFrontAction?(self)
             } else {
                 layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.75).cgColor
                 layer.borderColor = Design.Color.darkGray.cgColor
@@ -168,16 +180,21 @@ final class DoctorScheduleView: UIView {
     }
 
     func editSchedule(options: Set<ScheduleEditOption>, by timeInterval: TimeInterval) {
+        guard timeInterval != 0 else { return }
+
         if options.contains(.startingTime) {
             schedule.startingTime.addTimeInterval(timeInterval)
         }
         if options.contains(.endingTime) {
             schedule.endingTime.addTimeInterval(timeInterval)
         }
+
+        hasChanges = true
     }
 
     @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         let generator = UINotificationFeedbackGenerator()
+
         gesture.minimumPressDuration = 0.7
 
         switch gesture.state {
@@ -191,6 +208,7 @@ final class DoctorScheduleView: UIView {
                 options: .curveEaseOut
             ) {
                 self.checkState()
+                if self.mode == .viewing { self.checkChanges() }
                 generator.notificationOccurred(.success)
             }
         default: break

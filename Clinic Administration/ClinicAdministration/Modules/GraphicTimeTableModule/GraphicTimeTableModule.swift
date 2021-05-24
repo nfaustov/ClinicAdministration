@@ -22,11 +22,13 @@ protocol GraphicTimeTableDisplaying: View {
 protocol GraphicTimeTablePresentation: AnyObject {
     func didSelected(date: Date)
     func pickDateInCalendar()
+    func scheduleDidUpdated(_ schedule: DoctorSchedule)
     func didFinish(with date: Date)
 }
 
 protocol GraphicTimeTableInteraction: Interactor {
     func getSchedules(for date: Date)
+    func updateSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol GraphicTimeTableInteractorDelegate: AnyObject {

@@ -75,7 +75,7 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         }
     }
 
-    mutating func createAppointments() {
+    private mutating func createAppointments() {
         var appointmentTime = startingTime
 
         repeat {
@@ -87,5 +87,10 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
             patientAppointments.append(appointment)
             appointmentTime.addTimeInterval(serviceDuration)
         } while appointmentTime < endingTime
+    }
+
+    mutating func updateAppointments() {
+        patientAppointments.removeAll()
+        createAppointments()
     }
 }

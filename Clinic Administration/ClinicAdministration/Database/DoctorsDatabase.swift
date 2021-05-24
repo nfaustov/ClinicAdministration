@@ -222,6 +222,21 @@ final class DoctorsDatabase: Database {
         }
     }
 
+    func updateSchedule(_ schedule: DoctorSchedule) {
+        print(schedule)
+        guard let idString = schedule.id?.uuidString else { return }
+
+        let request: NSFetchRequest = DoctorScheduleEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", idString)
+
+        guard let scheduleEntity = try? context.fetch(request).first else { return }
+
+        update {
+            scheduleEntity.startingTime = schedule.startingTime
+            scheduleEntity.endingTime = schedule.endingTime
+        }
+    }
+
     // MARK: - Delete
 
     func delete(object: DoctorEntity) {

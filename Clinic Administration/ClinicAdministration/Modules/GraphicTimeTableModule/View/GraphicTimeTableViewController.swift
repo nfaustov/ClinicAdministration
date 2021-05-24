@@ -35,6 +35,7 @@ final class GraphicTimeTableViewController: UIViewController {
             calendarAction: presenter.pickDateInCalendar
         )
         graphicTimeTableView = GraphicTimeTableView(date: date)
+        graphicTimeTableView.delegate = self
 
         view.addSubview(datePicker)
         view.addSubview(graphicTimeTableView)
@@ -74,6 +75,14 @@ final class GraphicTimeTableViewController: UIViewController {
     private func changeDate(to newDate: Date) {
         date = newDate
         presenter.didSelected(date: date)
+    }
+}
+
+// MARK: - GraphicTimeTableViewDelegate
+
+extension GraphicTimeTableViewController: GraphicTimeTableViewDelegate {
+    func scheduleDidChanged(_ schedule: DoctorSchedule) {
+        presenter.scheduleDidUpdated(schedule)
     }
 }
 

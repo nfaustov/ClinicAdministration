@@ -27,4 +27,8 @@ extension AddScheduleInteractor: AddScheduleInteraction {
     func addSchedule(_ schedule: DoctorSchedule) {
         database?.createDoctorSchedule(schedule)
     }
+
+    func updateSchedule(_ schedule: DoctorSchedule) {
+        database?.updateSchedule(schedule)
+    }
 }

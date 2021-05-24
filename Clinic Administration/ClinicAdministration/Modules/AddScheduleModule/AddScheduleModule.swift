@@ -12,7 +12,7 @@ protocol AddScheduleModule: AnyObject {
 }
 
 protocol AddScheduleDisplaying: View {
-    var newSchedule: DoctorSchedule! { get }
+    var newSchedule: DoctorSchedule! { get set }
 
     func applySchedules(_ schedules: [DoctorSchedule])
 }
@@ -20,11 +20,14 @@ protocol AddScheduleDisplaying: View {
 protocol AddSchedulePresentation: AnyObject {
     func didSelected(date: Date)
     func addSchedule(_ schedule: DoctorSchedule)
+    func updateNewSchedule(_ schedule: DoctorSchedule)
+    func scheduleDidUpdated(_ schedule: DoctorSchedule)
 }
 
 protocol AddScheduleInteraction: Interactor {
     func getSchedules(for date: Date)
     func addSchedule(_ schedule: DoctorSchedule)
+    func updateSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol AddScheduleInteractorDelegate: AnyObject {

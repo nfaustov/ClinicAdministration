@@ -31,6 +31,12 @@ extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
             self.view?.calendarPicked(date: date)
         }
     }
+
+    func scheduleDidUpdated(_ schedule: DoctorSchedule) {
+        var updatedSchedule = schedule
+        updatedSchedule.updateAppointments()
+        interactor.updateSchedule(updatedSchedule)
+    }
 }
 
 // MARK: - GraphicTimeTableInteractorDelegate
