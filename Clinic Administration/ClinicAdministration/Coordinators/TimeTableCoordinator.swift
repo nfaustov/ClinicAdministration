@@ -58,7 +58,8 @@ extension TimeTableCoordinator: GraphicTimeTableSubscription {
 extension TimeTableCoordinator: AddScheduleSubscription {
     func routeToAddSchedule(_ schedule: DoctorSchedule) {
         let (viewController, module) = modules.addSchedule(schedule)
-        module.didFinish = { self.navigationController.popToRootViewController(animated: true)
+        module.didFinish = { [navigationController] in
+            navigationController.popToRootViewController(animated: true)
         }
         navigationController.pushViewController(viewController, animated: true)
     }

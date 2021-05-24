@@ -30,22 +30,9 @@ final class TimeTableViewController: UIViewController {
 
     private var actionList: [TimeTableAction] = [.showNextSchedule, .showAllSchedules, .editSchedule]
 
-    private lazy var controlItem = [
-        DoctorControl(
-            target: self,
-            addAction: #selector(addNewSchedule),
-            deleteAction: #selector(deleteSchedule)
-        )
-    ]
+    private var controlItem: [DoctorControl] = []
 
-    private lazy var doctorSectionPlaceHolder = [
-        DoctorSectionPlaceholder(
-            message: "НА ЭТОТ ДЕНЬ НЕТ РАСПИСАНИЙ ВРАЧЕЙ",
-            buttonTitle: "СОЗДАТЬ РАСПИСАНИЕ",
-            target: self,
-            action: #selector(addNewSchedule)
-        )
-    ]
+    private var doctorSectionPlaceHolder: [DoctorSectionPlaceholder] = []
 
     private var selectedSchedule: DoctorSchedule?
 
@@ -70,6 +57,19 @@ final class TimeTableViewController: UIViewController {
             dateAction: presenter.didSelected,
             calendarAction: presenter.pickDateInCalendar
         )
+
+        controlItem = [
+            DoctorControl(target: self, addAction: #selector(addNewSchedule), deleteAction: #selector(deleteSchedule))
+        ]
+
+        doctorSectionPlaceHolder = [
+            DoctorSectionPlaceholder(
+                message: "НА ЭТОТ ДЕНЬ НЕТ РАСПИСАНИЙ ВРАЧЕЙ",
+                buttonTitle: "СОЗДАТЬ РАСПИСАНИЕ",
+                target: self,
+                action: #selector(addNewSchedule)
+            )
+        ]
 
         collectionView = UICollectionView(
             frame: view.bounds,
@@ -102,7 +102,27 @@ final class TimeTableViewController: UIViewController {
     @objc private func deleteSchedule() {
         guard let selectedSchedule = selectedSchedule else { return }
 
-        presenter.removeDoctorSchedule(selectedSchedule)
+        let doctorNameString =
+            selectedSchedule.secondName + " "
+            + selectedSchedule.firstName + " "
+            + selectedSchedule.patronymicName
+        let alertViewController = UIAlertController(
+            title: "Удаление расписания",
+            message: "Вы уверены, что хотите удалить расписание врача \(doctorNameString)?",
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(title: "ДА", style: .destructive) { _ in
+            alertViewController.dismiss(animated: true) {
+                self.presenter.removeDoctorSchedule(selectedSchedule)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "ОТМЕНА", style: .cancel) { _ in
+            alertViewController.dismiss(animated: true)
+        }
+        alertViewController.addAction(confirmAction)
+        alertViewController.addAction(cancelAction)
+
+        present(alertViewController, animated: true)
     }
 
     private func registerViews() {
@@ -233,6 +253,7 @@ extension TimeTableViewController: TimeTableDisplaying {
             snapshot.appendItems(firstSchedule.patientAppointments, toSection: .patient)
             snapshot.appendItems(actionList, toSection: .actionList)
             dataSource?.apply(snapshot, animatingDifferences: false)
+            collectionView.layoutIfNeeded()
 
             let indexPath = dataSource?.indexPath(for: firstSchedule)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
@@ -247,6 +268,9 @@ extension TimeTableViewController: TimeTableDisplaying {
                 toSection: .patient
             )
             dataSource?.apply(snapshot, animatingDifferences: false)
+            collectionView.layoutIfNeeded()
+
+            selectedSchedule = nil
         }
     }
 

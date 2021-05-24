@@ -113,9 +113,7 @@ final class DoctorsDatabase: Database {
 //    ]
 //
 //    init() {
-//        doctors.forEach { doctor in
-//            create(objectWithModel: doctor)
-//        }
+//        doctors.forEach { create(objectWithModel: $0) }
 //    }
 
     // MARK: - Create
@@ -228,6 +226,18 @@ final class DoctorsDatabase: Database {
 
     func delete(object: DoctorEntity) {
         context.delete(object)
+        update()
+    }
+
+    func deleteSchedule(_ schedule: DoctorSchedule) {
+        guard let idString = schedule.id?.uuidString else { return }
+
+        let request: NSFetchRequest = DoctorScheduleEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", idString)
+
+        guard let scheduleEntity = try? context.fetch(request).first else { return }
+
+        context.delete(scheduleEntity)
         update()
     }
 }

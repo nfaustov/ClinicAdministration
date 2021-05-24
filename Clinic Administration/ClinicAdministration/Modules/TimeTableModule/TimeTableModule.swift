@@ -31,6 +31,7 @@ protocol TimeTablePresentation: AnyObject {
 
 protocol TimeTableInteraction: Interactor {
     func getSchedules(for date: Date)
+    func deleteSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol TimeTableInteractorDelegate: AnyObject {

@@ -23,4 +23,8 @@ extension TimeTableInteractor: TimeTableInteraction {
         let schedules = schedulesEntities.compactMap { DoctorSchedule(entity: $0) }
         delegate?.schedulesDidRecieved(schedules)
     }
+
+    func deleteSchedule(_ schedule: DoctorSchedule) {
+        database?.deleteSchedule(schedule)
+    }
 }
