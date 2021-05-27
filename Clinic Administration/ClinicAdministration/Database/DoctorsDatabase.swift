@@ -141,7 +141,7 @@ final class DoctorsDatabase: Database {
             forEntityName: "DoctorSchedule",
             into: context
         ) as? DoctorScheduleEntity {
-            scheduleEntity.id = UUID()
+            scheduleEntity.id = schedule.id
             scheduleEntity.cabinet = Int16(schedule.cabinet)
             scheduleEntity.startingTime = schedule.startingTime
             scheduleEntity.endingTime = schedule.endingTime
@@ -223,7 +223,6 @@ final class DoctorsDatabase: Database {
     }
 
     func updateSchedule(_ schedule: DoctorSchedule) {
-        print(schedule)
         guard let idString = schedule.id?.uuidString else { return }
 
         let request: NSFetchRequest = DoctorScheduleEntity.fetchRequest()

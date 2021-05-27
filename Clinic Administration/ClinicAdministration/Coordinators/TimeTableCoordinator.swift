@@ -20,7 +20,7 @@ final class TimeTableCoordinator: Coordinator {
     }
 
     func start() {
-        let (viewController, module) = modules.timeTable()
+        let (viewController, module) = modules.timeTable(selectedSchedule: nil)
         module.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
     }
@@ -58,8 +58,13 @@ extension TimeTableCoordinator: GraphicTimeTableSubscription {
 extension TimeTableCoordinator: AddScheduleSubscription {
     func routeToAddSchedule(_ schedule: DoctorSchedule) {
         let (viewController, module) = modules.addSchedule(schedule)
-        module.didFinish = { [navigationController] in
-            navigationController.popToRootViewController(animated: true)
+        module.didFinish = { [weak self] newSchedule in
+            guard let self = self, let newSchedule = newSchedule else { return }
+
+            let (viewController, module) = self.modules.timeTable(selectedSchedule: newSchedule)
+            module.coordinator = self
+            self.navigationController.viewControllers.insert(viewController, at: 0)
+            self.navigationController.popToRootViewController(animated: true)
         }
         navigationController.pushViewController(viewController, animated: true)
     }

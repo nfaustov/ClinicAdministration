@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AddScheduleModule: AnyObject {
-    var didFinish: (() -> Void)? { get set }
+    var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 
 protocol AddScheduleDisplaying: View {

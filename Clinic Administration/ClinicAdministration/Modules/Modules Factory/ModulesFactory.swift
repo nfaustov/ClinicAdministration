@@ -14,8 +14,12 @@ final class ModulesFactory: Modules {
         self.dependencies = dependencies
     }
 
-    func timeTable() -> (UIViewController, TimeTableModule) {
+    func timeTable(selectedSchedule: DoctorSchedule?) -> (UIViewController, TimeTableModule) {
         let view = TimeTableViewController()
+        if let selectedSchedule = selectedSchedule {
+            view.newSchedule = selectedSchedule
+            view.date = selectedSchedule.startingTime
+        }
         let interactor = TimeTableInteractor()
         interactor.database = dependencies.doctorsDatabase
         let presenter = TimeTablePresenter(view: view, interactor: interactor)

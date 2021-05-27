@@ -14,8 +14,10 @@ protocol TimeTableModule: AnyObject {
 
 protocol TimeTableDisplaying: View {
     var date: Date { get set }
+    var newSchedule: DoctorSchedule? { get }
 
-    func daySnapshot(schedules: [DoctorSchedule])
+    func daySnapshot(schedules: [DoctorSchedule], selectedSchedule: DoctorSchedule)
+    func emptyDaySnapshot()
     func doctorSnapshot(schedule: DoctorSchedule)
     func sidePicked(date: Date?)
 }

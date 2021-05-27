@@ -10,7 +10,7 @@ import Foundation
 final class AddSchedulePresenter<V, I>: PresenterInteractor<V, I>,
                                         AddScheduleModule where V: AddScheduleDisplaying,
                                                                 I: AddScheduleInteractor {
-    var didFinish: (() -> Void)?
+    var didFinish: ((DoctorSchedule?) -> Void)?
 }
 
 // MARK: - AddSchedulePresentation
@@ -18,7 +18,7 @@ final class AddSchedulePresenter<V, I>: PresenterInteractor<V, I>,
 extension AddSchedulePresenter: AddSchedulePresentation {
     func addSchedule(_ schedule: DoctorSchedule) {
         interactor.addSchedule(schedule)
-        didFinish?()
+        didFinish?(schedule)
     }
 
     func updateNewSchedule(_ schedule: DoctorSchedule) {

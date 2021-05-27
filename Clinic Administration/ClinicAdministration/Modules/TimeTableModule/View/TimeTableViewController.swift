@@ -38,6 +38,8 @@ final class TimeTableViewController: UIViewController {
 
     private var datePicker: DatePicker!
 
+    var newSchedule: DoctorSchedule?
+
     var date = Date()
 
     override func viewDidLoad() {
@@ -89,6 +91,13 @@ final class TimeTableViewController: UIViewController {
         super.viewWillAppear(animated)
 
         presenter.didSelected(date: date)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        selectedSchedule = nil
+        newSchedule = nil
     }
 
     @objc private func switchToGraphicScreen() {
@@ -241,37 +250,42 @@ extension TimeTableViewController: UICollectionViewDelegate {
 // MARK: - TimeTableDisplaying
 
 extension TimeTableViewController: TimeTableDisplaying {
-    func daySnapshot(schedules: [DoctorSchedule]) {
+    func daySnapshot(schedules: [DoctorSchedule], selectedSchedule: DoctorSchedule) {
+        assert(
+            !schedules.isEmpty,
+            "'schedules' cannot be an empty array in this method. Use emptyDaySnapshot() instead."
+        )
+
+        collectionView.collectionViewLayout = createCompositionalLayout(withSchedules: true, count: schedules.count)
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        snapshot.deleteSections([.doctor, .patient, .actionList])
+        snapshot.appendSections([.doctor, .patient, .actionList])
+        snapshot.appendItems(controlItem, toSection: .doctor)
+        snapshot.appendItems(schedules, toSection: .doctor)
+        snapshot.appendItems(selectedSchedule.patientAppointments, toSection: .patient)
+        snapshot.appendItems(actionList, toSection: .actionList)
+        dataSource?.apply(snapshot, animatingDifferences: false)
+        collectionView.layoutIfNeeded()
 
-        if let firstSchedule = schedules.first {
-            collectionView.collectionViewLayout = createCompositionalLayout(withSchedules: true, count: schedules.count)
-            snapshot.deleteSections([.doctor, .patient, .actionList])
-            snapshot.appendSections([.doctor, .patient, .actionList])
-            snapshot.appendItems(controlItem, toSection: .doctor)
-            snapshot.appendItems(schedules, toSection: .doctor)
-            snapshot.appendItems(firstSchedule.patientAppointments, toSection: .patient)
-            snapshot.appendItems(actionList, toSection: .actionList)
-            dataSource?.apply(snapshot, animatingDifferences: false)
-            collectionView.layoutIfNeeded()
+        let indexPath = dataSource?.indexPath(for: selectedSchedule)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+        self.selectedSchedule = selectedSchedule
+    }
 
-            let indexPath = dataSource?.indexPath(for: firstSchedule)
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
-            selectedSchedule = firstSchedule
-        } else {
-            collectionView.collectionViewLayout = createCompositionalLayout(withSchedules: false)
-            snapshot.deleteSections([.doctor, .patient, .actionList])
-            snapshot.appendSections([.doctor, .patient])
-            snapshot.appendItems(doctorSectionPlaceHolder, toSection: .doctor)
-            snapshot.appendItems(
-                (0...3).map { PatientAppointment(scheduledTime: nil, duration: Double($0), patient: nil) },
-                toSection: .patient
-            )
-            dataSource?.apply(snapshot, animatingDifferences: false)
-            collectionView.layoutIfNeeded()
+    func emptyDaySnapshot() {
+        collectionView.collectionViewLayout = createCompositionalLayout(withSchedules: false)
+        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        snapshot.deleteSections([.doctor, .patient, .actionList])
+        snapshot.appendSections([.doctor, .patient])
+        snapshot.appendItems(doctorSectionPlaceHolder, toSection: .doctor)
+        snapshot.appendItems(
+            (0...3).map { PatientAppointment(scheduledTime: nil, duration: Double($0), patient: nil) },
+            toSection: .patient
+        )
+        dataSource?.apply(snapshot, animatingDifferences: false)
+        collectionView.layoutIfNeeded()
 
-            selectedSchedule = nil
-        }
+        selectedSchedule = nil
     }
 
     func doctorSnapshot(schedule: DoctorSchedule) {
