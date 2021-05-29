@@ -59,7 +59,7 @@ extension TimeTableCoordinator: AddScheduleSubscription {
     func routeToAddSchedule(_ schedule: DoctorSchedule) {
         let (viewController, module) = modules.addSchedule(schedule)
         module.didFinish = { [weak self] newSchedule in
-            guard let self = self, let newSchedule = newSchedule else { return }
+            guard let self = self else { return }
 
             let (viewController, module) = self.modules.timeTable(selectedSchedule: newSchedule)
             module.coordinator = self

@@ -111,27 +111,12 @@ final class TimeTableViewController: UIViewController {
     @objc private func deleteSchedule() {
         guard let selectedSchedule = selectedSchedule else { return }
 
-        let doctorNameString =
-            selectedSchedule.secondName + " "
-            + selectedSchedule.firstName + " "
-            + selectedSchedule.patronymicName
-        let alertViewController = UIAlertController(
-            title: "Удаление расписания",
-            message: "Вы уверены, что хотите удалить расписание врача: \(doctorNameString)?",
-            preferredStyle: .alert
+        let alert = AlertsFactory.makeRemoveSchedule(
+            selectedSchedule,
+            confirmAction: presenter.removeDoctorSchedule(_:)
         )
-        let confirmAction = UIAlertAction(title: "ДА", style: .destructive) { _ in
-            alertViewController.dismiss(animated: true) {
-                self.presenter.removeDoctorSchedule(selectedSchedule)
-            }
-        }
-        let cancelAction = UIAlertAction(title: "ОТМЕНА", style: .cancel) { _ in
-            alertViewController.dismiss(animated: true)
-        }
-        alertViewController.addAction(confirmAction)
-        alertViewController.addAction(cancelAction)
 
-        present(alertViewController, animated: true)
+        present(alert, animated: true)
     }
 
     private func registerViews() {

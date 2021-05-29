@@ -68,7 +68,7 @@
 		8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */; };
 		8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */; };
 		8B843668256DB0D1006057EF /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843667256DB0D1006057EF /* Doctor.swift */; };
-		8B92DFF12657A91D00B3D6B3 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF02657A91D00B3D6B3 /* Dependencies.swift */; };
+		8B92DFF12657A91D00B3D6B3 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */; };
 		8B92DFF32657A96400B3D6B3 /* HttpServiceDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF22657A96400B3D6B3 /* HttpServiceDependencies.swift */; };
 		8B92DFF52657A98A00B3D6B3 /* DatabaseDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */; };
 		8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */; };
@@ -105,6 +105,7 @@
 		8BF23AA326371103009D9A7A /* DoctorControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF23AA226371103009D9A7A /* DoctorControlCell.swift */; };
 		8BF23AA726371A03009D9A7A /* DoctorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF23AA626371A03009D9A7A /* DoctorControl.swift */; };
 		8BFE342A25B378150058F42F /* ClinicAdministrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFE342925B378150058F42F /* ClinicAdministrationTests.swift */; };
+		8BFEE593266257CA00D27064 /* AlertsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFEE592266257CA00D27064 /* AlertsFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,7 +179,7 @@
 		8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetViewController.swift; sourceTree = "<group>"; };
 		8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetPresenter.swift; sourceTree = "<group>"; };
 		8B843667256DB0D1006057EF /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
-		8B92DFF02657A91D00B3D6B3 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		8B92DFF22657A96400B3D6B3 /* HttpServiceDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpServiceDependencies.swift; sourceTree = "<group>"; };
 		8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDependencies.swift; sourceTree = "<group>"; };
 		8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorPlaceholder.swift; sourceTree = "<group>"; };
@@ -219,6 +220,7 @@
 		8BFE342725B378150058F42F /* ClinicAdministrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClinicAdministrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFE342925B378150058F42F /* ClinicAdministrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicAdministrationTests.swift; sourceTree = "<group>"; };
 		8BFE342B25B378150058F42F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BFEE592266257CA00D27064 /* AlertsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 		8B20CE0D262995910007C20A /* Reusable Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BFEE591266257B500D27064 /* AlertsFactory */,
 				8B10E3952625D0B100476862 /* GraphicTimeTableView */,
 				8B303B06263BE23100DD343A /* PickerViewController */,
 				8B5E5556263ADA2D002E54FF /* CustomPresentationController */,
@@ -659,14 +662,14 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		8B92DFEF2657A90C00B3D6B3 /* Deps */ = {
+		8B92DFEF2657A90C00B3D6B3 /* DependencyContainer */ = {
 			isa = PBXGroup;
 			children = (
-				8B92DFF02657A91D00B3D6B3 /* Dependencies.swift */,
+				8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */,
 				8B92DFF22657A96400B3D6B3 /* HttpServiceDependencies.swift */,
 				8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */,
 			);
-			path = Deps;
+			path = DependencyContainer;
 			sourceTree = "<group>";
 		};
 		8BAE4749264270B6008B0B28 /* AddScheduleModule */ = {
@@ -727,7 +730,7 @@
 			children = (
 				8BCAB7AF2559D4D5001A93D0 /* Application */,
 				8B20CE0026298DCE0007C20A /* Coordinators */,
-				8B92DFEF2657A90C00B3D6B3 /* Deps */,
+				8B92DFEF2657A90C00B3D6B3 /* DependencyContainer */,
 				8BE80C39264AA0DA00CCA7F7 /* Database */,
 				8BCCE8132649966F00BC416F /* Services */,
 				8B5D15B82627561F003450F6 /* Modules */,
@@ -801,6 +804,14 @@
 				8BFE342B25B378150058F42F /* Info.plist */,
 			);
 			path = ClinicAdministrationTests;
+			sourceTree = "<group>";
+		};
+		8BFEE591266257B500D27064 /* AlertsFactory */ = {
+			isa = PBXGroup;
+			children = (
+				8BFEE592266257CA00D27064 /* AlertsFactory.swift */,
+			);
+			path = AlertsFactory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1020,7 +1031,8 @@
 				8B38A1BC260D13DD00CA01A0 /* TimeTableInteraction.swift in Sources */,
 				8B303B08263BE24700DD343A /* PickerViewController.swift in Sources */,
 				8BB450BA2630491700C143A4 /* CalendarSubscription.swift in Sources */,
-				8B92DFF12657A91D00B3D6B3 /* Dependencies.swift in Sources */,
+				8B92DFF12657A91D00B3D6B3 /* DependencyContainer.swift in Sources */,
+				8BFEE593266257CA00D27064 /* AlertsFactory.swift in Sources */,
 				8BB450BE2630495D00C143A4 /* GraphicTimeTableSubscription.swift in Sources */,
 				8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */,
 				8B188983259CCA4E000B0077 /* Settings.swift in Sources */,
