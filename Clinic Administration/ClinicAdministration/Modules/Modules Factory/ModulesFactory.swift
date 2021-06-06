@@ -54,11 +54,11 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func pickDoctor(from doctors: [Doctor], selected doctor: Doctor?) -> (UIViewController, PickDoctorModule) {
-        let view = PickDoctorViewController()
-        view.doctors = doctors
-        view.selectedDoctor = doctor
-        let presenter = PickDoctorPresenter(view: view)
+    func doctorsSearch() -> (UIViewController, DoctorsSearchModule) {
+        let view = DoctorsSearchViewController()
+        let interactor = DoctorsSearchInteractor()
+        interactor.database = dependencies.doctorsDatabase
+        let presenter = DoctorsSearchPresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }

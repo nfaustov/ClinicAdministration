@@ -25,6 +25,13 @@ final class TimeTableCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
 
+    private func doctorsSearchCoordinator() {
+        let child = DoctorsSearchCoordinator(navigationController: navigationController, modules: modules)
+        child.parentCoordinator = self
+        childCoordinators.append(child)
+        child.start()
+    }
+
     private func customPresent(_ viewController: UIViewController, animated: Bool = true) {
         viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
         viewController.modalPresentationStyle = .custom
@@ -53,6 +60,14 @@ extension TimeTableCoordinator: GraphicTimeTableSubscription {
     }
 }
 
+// MARK: - DoctorsSearchSubsciption
+
+extension TimeTableCoordinator: DoctorsSearchSubscription {
+    func routeToDoctorsSearch() {
+        doctorsSearchCoordinator()
+    }
+}
+
 // MARK: - AddScheduleSubscription
 
 extension TimeTableCoordinator: AddScheduleSubscription {
@@ -77,20 +92,6 @@ extension TimeTableCoordinator: CreateScheduleSubscription {
         let (viewController, module) = modules.createSchedule(with: date)
         module.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
-    }
-}
-
-// MARK: - PickDoctorSubscription
-
-extension TimeTableCoordinator: PickDoctorSubscription {
-    func routeToPickDoctor(
-        from doctors: [Doctor],
-        previouslyPicked: Doctor?,
-        didFinish: @escaping ((Doctor?) -> Void)
-    ) {
-        let (viewController, module) = modules.pickDoctor(from: doctors, selected: previouslyPicked)
-        module.didFinish = didFinish
-        customPresent(viewController)
     }
 }
 

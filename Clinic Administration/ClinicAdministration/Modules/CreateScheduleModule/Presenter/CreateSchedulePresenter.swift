@@ -11,7 +11,6 @@ final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
                                            CreateScheduleModule where V: CreateScheduleDisplaying,
                                                                       I: CreateScheduleInteraction {
     weak var coordinator: (CalendarSubscription &
-                           PickDoctorSubscription &
                            PickTimeIntervalSubscription &
                            PickCabinetSubscription &
                            AddScheduleSubscription)?
@@ -27,14 +26,6 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
             guard let date = date else { return }
 
             self.view?.date = date
-        }
-    }
-
-    func pickDoctor(from doctors: [Doctor], selected: Doctor?) {
-        coordinator?.routeToPickDoctor(from: doctors, previouslyPicked: selected) { doctor in
-            guard let doctor = doctor else { return }
-
-            self.view?.pickedDoctor(doctor)
         }
     }
 

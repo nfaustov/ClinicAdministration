@@ -9,7 +9,6 @@ import Foundation
 
 protocol CreateScheduleModule: AnyObject {
     var coordinator: (CalendarSubscription &
-                      PickDoctorSubscription &
                       PickTimeIntervalSubscription &
                       PickCabinetSubscription &
                       AddScheduleSubscription)? { get set }
@@ -27,7 +26,6 @@ protocol CreateScheduleDisplaying: View {
 
 protocol CreateSchedulePresentation: AnyObject {
     func pickDateInCalendar()
-    func pickDoctor(from: [Doctor], selected: Doctor?)
     func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?)
     func pickCabinet(selected: Int?)
     func addSchedule(_ schedule: DoctorSchedule)

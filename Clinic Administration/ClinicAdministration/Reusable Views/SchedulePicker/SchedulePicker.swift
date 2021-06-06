@@ -9,7 +9,6 @@ import UIKit
 
 protocol SchedulePickerDelegate: AnyObject {
     func pickDate()
-    func pickDoctor(selected: Doctor?)
     func pickTimeInterval(selected: (Date, Date)?)
     func pickCabinet(selected: Int?)
 }
@@ -28,7 +27,6 @@ final class SchedulePicker: UIView {
         return formatter
     }
 
-    private var doctorField: SchedulePickerField!
     private var dateField: SchedulePickerField!
     private var intervalField: SchedulePickerField!
     private var cabinetField: SchedulePickerField!
@@ -38,14 +36,6 @@ final class SchedulePicker: UIView {
             guard let cabinet = cabinet else { return }
 
             cabinetField.text = "\(cabinet)"
-        }
-    }
-    var doctor: Doctor! {
-        didSet {
-            guard let firstNameLetter = doctor.firstName.first,
-                  let patronymicNameLetter = doctor.patronymicName.first else { return }
-
-            doctorField.text = "\(doctor.secondName) \(firstNameLetter).\(patronymicNameLetter)."
         }
     }
     var interval: (Date, Date)! {
@@ -68,10 +58,6 @@ final class SchedulePicker: UIView {
         layer.cornerRadius = 15
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
-        doctorField = SchedulePickerField(name: "Врач", placeholder: "Выберите врача")
-        let doctorTap = UITapGestureRecognizer(target: self, action: #selector(pickDoctor))
-        doctorField.addGestureRecognizer(doctorTap)
-
         dateField = SchedulePickerField(name: "Дата", date: date)
         let dateTap = UITapGestureRecognizer(target: self, action: #selector(pickDate))
         dateField.addGestureRecognizer(dateTap)
@@ -84,7 +70,6 @@ final class SchedulePicker: UIView {
         let cabinetTap = UITapGestureRecognizer(target: self, action: #selector(pickCabinet))
         cabinetField.addGestureRecognizer(cabinetTap)
 
-        configureHorizontalFieldsStack(fields: [doctorField, dateField], position: .top)
         configureHorizontalFieldsStack(fields: [intervalField, cabinetField], position: .bottom)
         configureHorizontalSeparator()
     }
@@ -137,10 +122,6 @@ final class SchedulePicker: UIView {
 
     @objc private func pickDate() {
         delegate?.pickDate()
-    }
-
-    @objc private func pickDoctor() {
-        delegate?.pickDoctor(selected: doctor)
     }
 
     @objc private func pickInterval() {

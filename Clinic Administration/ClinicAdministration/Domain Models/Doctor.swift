@@ -26,6 +26,10 @@ struct Doctor: Codable, Hashable {
     var monthlySalary: Double
     var agentSalary: Double
 
+    var fullName: String {
+        secondName + " " + firstName + " " + patronymicName
+    }
+
     init(
         id: UUID?,
         secondName: String,

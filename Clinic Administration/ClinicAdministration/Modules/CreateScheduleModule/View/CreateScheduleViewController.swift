@@ -103,24 +103,23 @@ final class CreateScheduleViewController: UIViewController {
     }
 
     @objc private func addDoctroSchedule() {
-        guard let doctor = schedulePicker.doctor,
-              let cabinet = schedulePicker.cabinet,
-              let interval = schedulePicker.interval else { return }
+//        guard let cabinet = schedulePicker.cabinet,
+//              let interval = schedulePicker.interval else { return }
 
-        let schedule = DoctorSchedule(
-            id: UUID(),
-            secondName: doctor.secondName,
-            firstName: doctor.firstName,
-            patronymicName: doctor.patronymicName,
-            phoneNumber: doctor.phoneNumber,
-            specialization: doctor.specialization,
-            cabinet: cabinet,
-            startingTime: interval.0,
-            endingTime: interval.1,
-            serviceDuration: doctor.serviceDuration
-        )
+//        let schedule = DoctorSchedule(
+//            id: UUID(),
+//            secondName: doctor.secondName,
+//            firstName: doctor.firstName,
+//            patronymicName: doctor.patronymicName,
+//            phoneNumber: doctor.phoneNumber,
+//            specialization: doctor.specialization,
+//            cabinet: cabinet,
+//            startingTime: interval.0,
+//            endingTime: interval.1,
+//            serviceDuration: doctor.serviceDuration
+//        )
 
-        presenter.addSchedule(schedule)
+//        presenter.addSchedule(schedule)
     }
 
     @objc private func cancelDoctorSchedule() {
@@ -132,10 +131,6 @@ final class CreateScheduleViewController: UIViewController {
 extension CreateScheduleViewController: SchedulePickerDelegate {
     func pickDate() {
         presenter.pickDateInCalendar()
-    }
-
-    func pickDoctor(selected doctor: Doctor?) {
-        presenter.pickDoctor(from: doctorsList, selected: doctor)
     }
 
     func pickTimeInterval(selected interval: (Date, Date)?) {
@@ -151,7 +146,6 @@ extension CreateScheduleViewController: SchedulePickerDelegate {
 
 extension CreateScheduleViewController: CreateScheduleDisplaying {
     func pickedDoctor(_ doctor: Doctor) {
-        schedulePicker.doctor = doctor
     }
 
     func pickedInterval(_ interval: (Date, Date)) {
