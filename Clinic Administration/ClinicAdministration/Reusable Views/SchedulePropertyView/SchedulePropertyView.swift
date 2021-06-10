@@ -75,6 +75,10 @@ class SchedulePropertyView: UIView {
     private func configureHierarchy(with valueView: UIView) {
         layer.backgroundColor = Design.Color.white.cgColor
         layer.cornerRadius = Design.CornerRadius.large
+        layer.shadowColor = Design.Color.brown.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 0.1
+        layer.shadowRadius = 8
 
         [titleLabel, valueView, imageView].forEach { view in
             addSubview(view)
@@ -95,13 +99,6 @@ class SchedulePropertyView: UIView {
             imageView.leadingAnchor.constraint(greaterThanOrEqualTo: valueView.trailingAnchor, constant: 8),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
-    }
-
-    private func configureShadow() {
-        layer.shadowColor = Design.Color.brown.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowOpacity = 0.1
-        layer.shadowRadius = 8
     }
 
     private func configureDateLabels(with date: Date) {

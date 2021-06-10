@@ -40,15 +40,15 @@ final class CreateScheduleViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard doctor == nil else { return }
-
-        presenter.pickDoctor()
+        if doctor == nil {
+            presenter.pickDoctor()
+        }
     }
 
     private func configureHierarchy() {
         guard let doctor = doctor else { return }
 
-        doctorView = DoctorView(doctor: doctor)
+        doctorView = DoctorView(doctor: doctor, pickDoctorAction: presenter.pickDoctor)
 
         var defaultCabinetText: String
 
