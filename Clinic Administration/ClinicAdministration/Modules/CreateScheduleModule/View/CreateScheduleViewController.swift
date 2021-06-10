@@ -11,15 +11,22 @@ final class CreateScheduleViewController: UIViewController {
     typealias PresenterType = CreateSchedulePresentation
     var presenter: PresenterType!
 
-    private var schedulePicker: SchedulePicker!
+    private var doctorView: DoctorView!
+
+    private var scheduleDateView: SchedulePropertyView!
+    private var scheduleCabinetView: SchedulePropertyView!
 
     var date = Date() {
         didSet {
-            schedulePicker?.date = date
+            scheduleDateView.date = date
         }
     }
 
-    var doctor: Doctor?
+    var doctor: Doctor? {
+        didSet {
+            configureHierarchy()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,34 +35,55 @@ final class CreateScheduleViewController: UIViewController {
         navigationItem.title = "Расписание врача"
 
         view.backgroundColor = Design.Color.lightGray
-
-        configurePicker()
-        configureConfirmation()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        guard doctor == nil else { return }
+
+        presenter.pickDoctor()
     }
 
-    private func configurePicker() {
-        schedulePicker = SchedulePicker(date: date)
-        schedulePicker.delegate = self
-        view.addSubview(schedulePicker)
+    private func configureHierarchy() {
+        guard let doctor = doctor else { return }
 
-        schedulePicker.translatesAutoresizingMaskIntoConstraints = false
+        doctorView = DoctorView(doctor: doctor)
+
+        var defaultCabinetText: String
+
+        if let cabinet = doctor.defaultCabinet {
+            defaultCabinetText = "\(cabinet) (По умолчанию)"
+        } else {
+            defaultCabinetText = "--"
+        }
+        scheduleDateView = SchedulePropertyView(title: "Дата", date: date)
+        scheduleCabinetView = SchedulePropertyView(title: "Кабинет", valuePlaceholder: defaultCabinetText)
+
+        [doctorView, scheduleDateView, scheduleCabinetView].compactMap { $0 }.forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
 
         NSLayoutConstraint.activate([
-            schedulePicker.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            schedulePicker.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            schedulePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            schedulePicker.heightAnchor.constraint(equalToConstant: 100)
+            doctorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            doctorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            doctorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            doctorView.heightAnchor.constraint(equalToConstant: 330),
+
+            scheduleDateView.topAnchor.constraint(equalTo: doctorView.bottomAnchor, constant: 30),
+            scheduleDateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scheduleDateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scheduleDateView.heightAnchor.constraint(equalToConstant: 60),
+
+            scheduleCabinetView.topAnchor.constraint(equalTo: scheduleDateView.bottomAnchor, constant: 30),
+            scheduleCabinetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scheduleCabinetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scheduleCabinetView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 
-    private func configureConfirmation() {
-    }
-
-    @objc private func addDoctroSchedule() {
+    @objc private func addDoctorSchedule() {
 //        guard let cabinet = schedulePicker.cabinet,
 //              let interval = schedulePicker.interval else { return }
 
@@ -74,25 +102,6 @@ final class CreateScheduleViewController: UIViewController {
 
 //        presenter.addSchedule(schedule)
     }
-
-    @objc private func cancelDoctorSchedule() {
-    }
-}
-
-// MARK: - SchedulePickerDelegate
-
-extension CreateScheduleViewController: SchedulePickerDelegate {
-    func pickDate() {
-        presenter.pickDateInCalendar()
-    }
-
-    func pickTimeInterval(selected interval: (Date, Date)?) {
-        presenter.pickTimeInterval(availableOnDate: date, selected: interval)
-    }
-
-    func pickCabinet(selected cabinet: Int?) {
-        presenter.pickCabinet(selected: cabinet)
-    }
 }
 
 // MARK: - CreateScheduleDisplaying
@@ -102,10 +111,9 @@ extension CreateScheduleViewController: CreateScheduleDisplaying {
     }
 
     func pickedInterval(_ interval: (Date, Date)) {
-        schedulePicker.interval = interval
     }
 
     func pickedCabinet(_ cabinet: Int) {
-        schedulePicker.cabinet = cabinet
+        scheduleCabinetView.value = "\(cabinet)"
     }
 }

@@ -22,6 +22,7 @@ struct Doctor: Hashable {
     var specialization: String
     var basicService: String
     var serviceDuration: TimeInterval
+    var defaultCabinet: Int?
     var info: String?
     var imageData: Data?
     var salaryType: SalaryType
@@ -42,6 +43,7 @@ struct Doctor: Hashable {
         specialization: String,
         basicService: String,
         serviceDuration: TimeInterval,
+        defaultCabinet: Int?,
         info: String?,
         imageData: Data?,
         salaryType: SalaryType,
@@ -57,6 +59,7 @@ struct Doctor: Hashable {
         self.specialization = specialization
         self.basicService = basicService
         self.serviceDuration = serviceDuration
+        self.defaultCabinet = defaultCabinet
         self.info = info
         self.imageData = imageData
         self.salaryType = salaryType
@@ -80,6 +83,7 @@ struct Doctor: Hashable {
         specialization = entitySpecialization
         basicService = ""
         serviceDuration = entity.serviceDuration
+        defaultCabinet = Int(entity.defaultCabinet)
         info = entity.info
         imageData = entity.imageData
         salaryType = SalaryType(rawValue: entity.salaryType ?? "") ?? .fixedSalary

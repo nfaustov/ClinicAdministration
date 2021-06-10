@@ -52,6 +52,8 @@ class DoctorView: UIView {
         self.doctor = doctor
         super.init(frame: .zero)
 
+        backgroundColor = Design.Color.white
+
         configureImageView()
         configureShortInfoStack()
         configureInfoLabel()
@@ -79,7 +81,7 @@ class DoctorView: UIView {
             image.topAnchor.constraint(equalTo: topAnchor, constant: 30),
             image.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             image.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.33),
-            image.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 5 / 3)
+            image.heightAnchor.constraint(equalTo: image.widthAnchor, multiplier: 4 / 3)
         ])
     }
 

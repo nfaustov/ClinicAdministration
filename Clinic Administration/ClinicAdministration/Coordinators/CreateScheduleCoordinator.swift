@@ -37,7 +37,10 @@ final class CreateScheduleCoordinator: Coordinator {
 extension CreateScheduleCoordinator: DoctorsSearchSubscription {
     func routeToDoctorsSearch(didFinish: @escaping (Doctor?) -> Void) {
         let (viewController, module) = modules.doctorsSearch()
-        module.didFinish = didFinish
+        module.didFinish = { [navigationController] doctor in
+            didFinish(doctor)
+            navigationController.popViewController(animated: true)
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
 }

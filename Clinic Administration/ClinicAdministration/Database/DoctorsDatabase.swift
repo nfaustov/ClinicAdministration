@@ -127,6 +127,7 @@ final class DoctorsDatabase: Database {
         doctor.phoneNumber = model.phoneNumber
         doctor.birthDate = model.birthDate
         doctor.specialization = model.specialization
+        if let cabinet = model.defaultCabinet { doctor.defaultCabinet = Int16(cabinet) }
         doctor.serviceDuration = model.serviceDuration
         doctor.salaryType = model.salaryType.rawValue
         doctor.monthlySalary = model.monthlySalary

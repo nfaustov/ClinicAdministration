@@ -143,8 +143,6 @@ extension DoctorsSearchViewController: UICollectionViewDelegate {
               let doctor = dataSource.itemIdentifier(for: indexPath) else { return }
 
         presenter.didFinish(with: doctor)
-
-        dismiss(animated: true)
     }
 }
 
