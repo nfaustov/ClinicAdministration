@@ -8,8 +8,7 @@
 import Foundation
 
 protocol DoctorsSearchModule: AnyObject {
-    var coordinator: DoctorsSearchCoordinator? { get set }
-    var didFinish: ((Doctor) -> Void)? { get set }
+    var didFinish: ((Doctor?) -> Void)? { get set }
 }
 
 protocol DoctorsSearchDisplaying: View {
@@ -21,7 +20,7 @@ protocol DoctorsSearchDisplaying: View {
 protocol DoctorsSearchPresentation: AnyObject {
     func doctorsRequest()
     func performQuery(with filter: String)
-    func didFinish(with doctor: Doctor)
+    func didFinish(with: Doctor?)
 }
 
 protocol DoctorsSearchInteraction: Interactor {

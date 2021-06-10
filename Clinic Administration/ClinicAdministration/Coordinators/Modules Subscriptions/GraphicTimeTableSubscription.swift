@@ -8,5 +8,5 @@
 import Foundation
 
 protocol GraphicTimeTableSubscription: AnyObject {
-    func routeToGraphicTimeTable(onDate: Date, didFinish: @escaping ((Date?) -> Void))
+    func routeToGraphicTimeTable(onDate: Date, didFinish: @escaping (Date?) -> Void)
 }

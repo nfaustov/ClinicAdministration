@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DoctorsSearchSubscription: AnyObject {
-    func routeToDoctorsSearch()
+    func routeToDoctorsSearch(didFinish: @escaping (Doctor?) -> Void)
 }

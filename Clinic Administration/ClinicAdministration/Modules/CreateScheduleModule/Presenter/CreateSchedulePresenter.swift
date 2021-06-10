@@ -13,6 +13,7 @@ final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
     weak var coordinator: (CalendarSubscription &
                            PickTimeIntervalSubscription &
                            PickCabinetSubscription &
+                           DoctorsSearchSubscription &
                            AddScheduleSubscription)?
 
     var didFinish: (() -> Void)?
@@ -21,6 +22,14 @@ final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
 // MARK: - CreateSchedulePresentation
 
 extension CreateSchedulePresenter: CreateSchedulePresentation {
+    func pickDoctor() {
+        coordinator?.routeToDoctorsSearch { doctor in
+            guard let doctor = doctor else { return }
+
+            self.view?.doctor = doctor
+        }
+    }
+
     func pickDateInCalendar() {
         coordinator?.routeToCalendar { date in
             guard let date = date else { return }
@@ -49,16 +58,9 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
     func addSchedule(_ schedule: DoctorSchedule) {
         coordinator?.routeToAddSchedule(schedule)
     }
-
-    func getDoctors() {
-        interactor.getDoctors()
-    }
 }
 
 // MARK: - CreateScheduleInteractorDelegate
 
 extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
-    func doctorsDidRecieved(_ doctors: [Doctor]) {
-        view?.doctorsList = doctors
-    }
 }

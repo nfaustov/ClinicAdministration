@@ -142,8 +142,9 @@ extension DoctorsSearchViewController: UICollectionViewDelegate {
         guard let dataSource = dataSource,
               let doctor = dataSource.itemIdentifier(for: indexPath) else { return }
 
-        print(doctor)
-        // TODO: route to doctors card
+        presenter.didFinish(with: doctor)
+
+        dismiss(animated: true)
     }
 }
 

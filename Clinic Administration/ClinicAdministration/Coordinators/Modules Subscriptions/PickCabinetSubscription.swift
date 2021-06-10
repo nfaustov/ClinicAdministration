@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PickCabinetSubscription: AnyObject {
-    func routeToPickCabinet(previouslyPicked: Int?, didFinish: @escaping ((Int?) -> Void))
+    func routeToPickCabinet(previouslyPicked: Int?, didFinish: @escaping (Int?) -> Void)
 }

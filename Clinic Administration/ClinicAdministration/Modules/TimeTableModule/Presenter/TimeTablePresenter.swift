@@ -48,7 +48,7 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func addNewDoctorSchedule(onDate date: Date) {
-        coordinator?.routeToCreateSchedule(date: date)
+        coordinator?.routeToCreateSchedule()
     }
 
     func removeDoctorSchedule(_ schedule: DoctorSchedule) {

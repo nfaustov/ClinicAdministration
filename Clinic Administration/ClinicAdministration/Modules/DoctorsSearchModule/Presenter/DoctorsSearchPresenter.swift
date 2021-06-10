@@ -10,9 +10,7 @@ import Foundation
 final class DoctorsSearchPresenter<V, I>: PresenterInteractor<V, I>,
                                           DoctorsSearchModule where V: DoctorsSearchDisplaying,
                                                                     I: DoctorsSearchInteraction {
-    var coordinator: DoctorsSearchCoordinator?
-
-    var didFinish: ((Doctor) -> Void)?
+    var didFinish: ((Doctor?) -> Void)?
 }
 
 // MARK: - DoctorsSearchPresentation
@@ -35,7 +33,7 @@ extension DoctorsSearchPresenter: DoctorsSearchPresentation {
         view?.doctorsSnapshot(filteredDoctors)
     }
 
-    func didFinish(with doctor: Doctor) {
+    func didFinish(with doctor: Doctor?) {
         didFinish?(doctor)
     }
 }

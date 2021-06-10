@@ -44,9 +44,8 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func createSchedule(with date: Date) -> (UIViewController, CreateScheduleModule) {
+    func createSchedule() -> (UIViewController, CreateScheduleModule) {
         let view = CreateScheduleViewController()
-        view.date = date
         let interactor = CreateScheduleInteractor()
         interactor.database = dependencies.doctorsDatabase
         let presenter = CreateSchedulePresenter(view: view, interactor: interactor)
