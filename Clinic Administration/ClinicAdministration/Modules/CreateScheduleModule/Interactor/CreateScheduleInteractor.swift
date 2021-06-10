@@ -17,4 +17,7 @@ final class CreateScheduleInteractor {
 // MARK: - CreateScheduleInteraction
 
 extension CreateScheduleInteractor: CreateScheduleInteraction {
+    func createSchedule(_ schedule: DoctorSchedule) {
+        database?.createDoctorSchedule(schedule)
+    }
 }

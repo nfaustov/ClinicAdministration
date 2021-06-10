@@ -14,9 +14,9 @@ final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
                            PickTimeIntervalSubscription &
                            PickCabinetSubscription &
                            DoctorsSearchSubscription &
-                           AddScheduleSubscription)?
+                           GraphicTimeTablePreviewSubscription)?
 
-    var didFinish: (() -> Void)?
+    var didFinish: ((DoctorSchedule?) -> Void)?
 }
 
 // MARK: - CreateSchedulePresentation
@@ -55,12 +55,21 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func addSchedule(_ schedule: DoctorSchedule) {
-        coordinator?.routeToAddSchedule(schedule)
+    func schedulePreview(_ schedule: DoctorSchedule) {
+        coordinator?.routeToGraphicTimeTablePreview(schedule) { editedSchedule in
+            self.view?.pickedInterval((editedSchedule.startingTime, editedSchedule.endingTime))
+        }
+    }
+
+    func createSchedule(_ schedule: DoctorSchedule) {
+        interactor.createSchedule(schedule)
     }
 }
 
 // MARK: - CreateScheduleInteractorDelegate
 
 extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
+    func scheduleDidCreated(_ schedule: DoctorSchedule) {
+        didFinish?(schedule)
+    }
 }

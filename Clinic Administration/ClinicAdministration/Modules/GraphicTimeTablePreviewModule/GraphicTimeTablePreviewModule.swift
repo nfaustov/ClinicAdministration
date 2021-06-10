@@ -1,5 +1,5 @@
 //
-//  AddScheduleModule.swift
+//  GraphicTimeTablePreviewModule.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 05.05.2021.
@@ -7,29 +7,28 @@
 
 import Foundation
 
-protocol AddScheduleModule: AnyObject {
-    var didFinish: ((DoctorSchedule?) -> Void)? { get set }
+protocol GraphicTimeTablePreviewModule: AnyObject {
+    var didFinish: ((DoctorSchedule) -> Void)? { get set }
 }
 
-protocol AddScheduleDisplaying: View {
+protocol GraphicTimeTablePreviewDisplaying: View {
     var newSchedule: DoctorSchedule! { get set }
 
     func applySchedules(_ schedules: [DoctorSchedule])
 }
 
-protocol AddSchedulePresentation: AnyObject {
-    func didSelected(date: Date)
-    func addSchedule(_ schedule: DoctorSchedule)
+protocol GraphicTimeTablePreviewPresentation: AnyObject {
+    func didFinish(with schedule: DoctorSchedule)
     func updateNewSchedule(_ schedule: DoctorSchedule)
     func scheduleDidUpdated(_ schedule: DoctorSchedule)
+    func didSelected(date: Date)
 }
 
-protocol AddScheduleInteraction: Interactor {
+protocol GraphicTimeTablePreviewInteraction: Interactor {
     func getSchedules(for date: Date)
-    func addSchedule(_ schedule: DoctorSchedule)
     func updateSchedule(_ schedule: DoctorSchedule)
 }
 
-protocol AddScheduleInteractorDelegate: AnyObject {
+protocol GraphicTimeTablePreviewInteractorDelegate: AnyObject {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule])
 }

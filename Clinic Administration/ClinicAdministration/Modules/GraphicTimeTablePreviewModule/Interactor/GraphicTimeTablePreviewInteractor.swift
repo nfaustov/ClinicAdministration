@@ -1,5 +1,5 @@
 //
-//  AddScheduleInteractor.swift
+//  GraphicTimeTablePreviewInteractor.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 05.05.2021.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class AddScheduleInteractor {
-    typealias Delegate = AddScheduleInteractorDelegate
+final class GraphicTimeTablePreviewInteractor {
+    typealias Delegate = GraphicTimeTablePreviewInteractorDelegate
     weak var delegate: Delegate?
 
     var database: DoctorsDatabase?
@@ -16,16 +16,12 @@ final class AddScheduleInteractor {
 
 // MARK: - AddScheduleInteraction
 
-extension AddScheduleInteractor: AddScheduleInteraction {
+extension GraphicTimeTablePreviewInteractor: GraphicTimeTablePreviewInteraction {
     func getSchedules(for date: Date) {
         guard let doctorScheduleEntities = database?.readSchedules(for: date) else { return }
 
         let schedules = doctorScheduleEntities.compactMap { DoctorSchedule(entity: $0) }
         delegate?.schedulesDidRecieved(schedules)
-    }
-
-    func addSchedule(_ schedule: DoctorSchedule) {
-        database?.createDoctorSchedule(schedule)
     }
 
     func updateSchedule(_ schedule: DoctorSchedule) {

@@ -82,12 +82,12 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func addSchedule(_ schedule: DoctorSchedule) -> (UIViewController, AddScheduleModule) {
-        let view = AddScheduleViewController()
+    func graphicTimeTablePreview(_ schedule: DoctorSchedule) -> (UIViewController, GraphicTimeTablePreviewModule) {
+        let view = GraphicTimeTablePreviewViewController()
         view.newSchedule = schedule
-        let interactor = AddScheduleInteractor()
+        let interactor = GraphicTimeTablePreviewInteractor()
         interactor.database = dependencies.doctorsDatabase
-        let presenter = AddSchedulePresenter(view: view, interactor: interactor)
+        let presenter = GraphicTimeTablePreviewPresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }

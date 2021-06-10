@@ -76,21 +76,12 @@ extension CreateScheduleCoordinator: PickCabinetSubscription {
     }
 }
 
-// MARK: - AddScheduleSubscription
-//
-extension CreateScheduleCoordinator: AddScheduleSubscription {
-    func routeToAddSchedule(_ schedule: DoctorSchedule) {
-//        let (viewController, module) = modules.addSchedule(schedule)
-//        module.didFinish = { [weak self] _ in
-//            guard let self = self else { return }
-//
-//            let (viewController, module) = self.modules.timeTable(selectedSchedule: newSchedule)
-//            module.coordinator = self
-//            self.navigationController.viewControllers.insert(viewController, at: 0)
-//            self.navigationController.popToRootViewController(animated: true)
-//        }
-//        navigationController.pushViewController(viewController, animated: true)
+// MARK: - GraphicTimeTablePreviewSubscription
+
+extension CreateScheduleCoordinator: GraphicTimeTablePreviewSubscription {
+    func routeToGraphicTimeTablePreview(_ schedule: DoctorSchedule, didFinish: @escaping (DoctorSchedule) -> Void) {
+        let (viewController, module) = modules.graphicTimeTablePreview(schedule)
+        module.didFinish = didFinish
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
-
-
