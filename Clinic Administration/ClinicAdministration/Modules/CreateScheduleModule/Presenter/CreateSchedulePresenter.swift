@@ -32,7 +32,7 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         coordinator?.routeToCalendar { date in
             guard let date = date else { return }
 
-            self.view?.date = date
+            self.view?.pickedDate(date)
         }
     }
 

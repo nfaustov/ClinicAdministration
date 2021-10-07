@@ -30,12 +30,15 @@ final class CreateScheduleViewController: UIViewController {
             ),
             ScheduleOption(
                 title: "Кабинет",
-                placeholder: "\(currentDoctor?.defaultCabinet ?? 1) (по умолчанию)",
+                placeholder: selectedCabinet == currentDoctor?.defaultCabinet ?
+                "\(selectedCabinet ?? 1) (по умолчанию)": "\(selectedCabinet ?? 1)",
                 icon: UIImage(named: "chevron_down"),
                 date: nil
             )
         ]
     }
+
+    private var selectedCabinet: Int?
 
     var date = Date()
     var currentDoctor: Doctor?
@@ -46,6 +49,8 @@ final class CreateScheduleViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Расписание врача"
+
+        selectedCabinet = currentDoctor?.defaultCabinet
 
         configureHierarchy()
         registerViews()
@@ -131,6 +136,15 @@ final class CreateScheduleViewController: UIViewController {
 
 extension CreateScheduleViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let option = dataSource?.itemIdentifier(for: indexPath) as? ScheduleOption {
+            switch option.title {
+            case "Дата":
+                presenter.pickDateInCalendar()
+            case "Кабинет":
+                presenter.pickCabinet(selected: selectedCabinet)
+            default: break
+            }
+        }
     }
 }
 
@@ -144,5 +158,12 @@ extension CreateScheduleViewController: CreateScheduleDisplaying {
     }
 
     func pickedCabinet(_ cabinet: Int) {
+        selectedCabinet = cabinet
+        initialSnapshot()
+    }
+
+    func pickedDate(_ date: Date) {
+        self.date = date
+        initialSnapshot()
     }
 }
