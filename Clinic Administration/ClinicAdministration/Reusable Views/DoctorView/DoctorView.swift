@@ -39,48 +39,31 @@ class DoctorView: UIView {
         return label
     }()
 
-    private let button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Выбрать другого врача", for: .normal)
-        button.setTitleColor(Design.Color.chocolate, for: .normal)
-        button.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .medium)
-        button.backgroundColor = Design.Color.white
-        button.layer.cornerRadius = Design.CornerRadius.small
-        button.layer.shadowColor = Design.Color.brown.cgColor
-        button.layer.shadowOffset = CGSize(width: 0, height: 2)
-        button.layer.shadowRadius = 10
-        button.layer.shadowOpacity = 0.2
-        return button
-    }()
+    var doctor: Doctor {
+        didSet {
+            subviews.forEach { $0.removeFromSuperview() }
+            applyDoctor()
+            layoutIfNeeded()
+        }
+    }
 
-    private var doctor: Doctor
-
-    private var pickDoctorAction: (() -> Void)?
-
-    init(doctor: Doctor, pickDoctorAction: @escaping () -> Void) {
+    init(doctor: Doctor) {
         self.doctor = doctor
-        self.pickDoctorAction = pickDoctorAction
         super.init(frame: .zero)
 
         backgroundColor = Design.Color.white
 
-        configureImageView()
-        configureShortInfoStack()
-        configureInfoLabel()
-        configureButton()
+        applyDoctor()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        button.layer.shadowPath = UIBezierPath(
-            roundedRect: button.bounds,
-            cornerRadius: button.layer.cornerRadius
-        ).cgPath
+    private func applyDoctor() {
+        configureImageView()
+        configureShortInfoStack()
+        configureInfoLabel()
     }
 
     private func configureImageView() {
@@ -155,22 +138,5 @@ class DoctorView: UIView {
             infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             infoLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -70)
         ])
-    }
-
-    private func configureButton() {
-        button.addTarget(self, action: #selector(pickDoctor), for: .touchUpInside)
-        addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            button.centerXAnchor.constraint(equalTo: centerXAnchor),
-            button.widthAnchor.constraint(equalToConstant: 200),
-            button.heightAnchor.constraint(equalToConstant: 30)
-        ])
-    }
-
-    @objc private func pickDoctor() {
-        pickDoctorAction?()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SchedulePropetyView.swift
+//  ScheduleOptionView.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 10.06.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SchedulePropertyView: UIView {
+class ScheduleOptionView: UIView {
     private let imageView = UIImageView()
     private let dateStack = UIStackView()
 
@@ -24,6 +24,7 @@ class SchedulePropertyView: UIView {
     private let valueLabel: UILabel = {
         let label = UILabel()
         label.font = Design.Font.robotoFont(ofSize: 18, weight: .regular)
+        label.textColor = Design.Color.white
         return label
     }()
 
@@ -46,7 +47,7 @@ class SchedulePropertyView: UIView {
 
         titleLabel.text = title
         valueLabel.text = valuePlaceholder
-        imageView.image = UIImage(named: "chevron_down")?.withTintColor(Design.Color.brown)
+        imageView.image = UIImage(named: "chevron_down")?.withTintColor(Design.Color.lightGray)
 
         configureHierarchy(with: valueLabel)
     }
@@ -56,7 +57,7 @@ class SchedulePropertyView: UIView {
         super.init(frame: .zero)
 
         titleLabel.text = title
-        imageView.image = UIImage(named: "calendar")?.withTintColor(Design.Color.brown)
+        imageView.image = UIImage(named: "calendar")?.withTintColor(Design.Color.lightGray)
 
         configureHierarchy(with: dateStack)
         configureDateLabels(with: date)
@@ -73,11 +74,11 @@ class SchedulePropertyView: UIView {
     }
 
     private func configureHierarchy(with valueView: UIView) {
-        layer.backgroundColor = Design.Color.white.cgColor
+        layer.backgroundColor = Design.Color.chocolate.cgColor
         layer.cornerRadius = Design.CornerRadius.large
         layer.shadowColor = Design.Color.brown.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowOpacity = 0.1
+        layer.shadowOpacity = 0.2
         layer.shadowRadius = 8
 
         [titleLabel, valueView, imageView].forEach { view in
@@ -102,7 +103,7 @@ class SchedulePropertyView: UIView {
     }
 
     private func configureDateLabels(with date: Date) {
-        DateFormatter.shared.dateFormat = "LLLL d EE"
+        DateFormatter.shared.dateFormat = "LLLL d EEEE"
         let stringDate = DateFormatter.shared.string(from: date)
         let splitDate = stringDate.split(separator: " ")
         let month = "\(splitDate[0].capitalized.replacingOccurrences(of: ".", with: ""))"
@@ -121,7 +122,7 @@ class SchedulePropertyView: UIView {
 
     private func configureDateLabel(_ label: UILabel, text: String, fontWeight: Design.RobotoFontWeight) {
         label.text = text
-        label.textColor = Design.Color.chocolate
+        label.textColor = Design.Color.white
         label.font = Design.Font.robotoFont(ofSize: 18, weight: fontWeight)
     }
 }

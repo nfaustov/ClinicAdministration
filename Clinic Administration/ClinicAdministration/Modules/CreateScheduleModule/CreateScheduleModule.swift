@@ -18,7 +18,7 @@ protocol CreateScheduleModule: AnyObject {
 
 protocol CreateScheduleDisplaying: View {
     var date: Date { get set }
-    var doctor: Doctor? { get set }
+    var currentDoctor: Doctor? { get set }
 
     func pickedInterval(_ interval: (Date, Date))
     func pickedCabinet(_ cabinet: Int)

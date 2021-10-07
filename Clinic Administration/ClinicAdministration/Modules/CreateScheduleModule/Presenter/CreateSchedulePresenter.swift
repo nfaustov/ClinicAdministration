@@ -7,9 +7,8 @@
 
 import Foundation
 
-final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
-                                           CreateScheduleModule where V: CreateScheduleDisplaying,
-                                                                      I: CreateScheduleInteraction {
+final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>, CreateScheduleModule
+where V: CreateScheduleDisplaying, I: CreateScheduleInteraction {
     weak var coordinator: (CalendarSubscription &
                            PickTimeIntervalSubscription &
                            PickCabinetSubscription &
@@ -26,7 +25,7 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         coordinator?.routeToDoctorsSearch { doctor in
             guard let doctor = doctor else { return }
 
-            self.view?.doctor = doctor
+            self.view?.currentDoctor = doctor
         }
     }
 

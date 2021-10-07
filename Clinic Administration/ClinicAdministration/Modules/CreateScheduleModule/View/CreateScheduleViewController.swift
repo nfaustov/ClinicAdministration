@@ -11,22 +11,35 @@ final class CreateScheduleViewController: UIViewController {
     typealias PresenterType = CreateSchedulePresentation
     var presenter: PresenterType!
 
-    private var doctorView: DoctorView!
-
-    private var scheduleDateView: SchedulePropertyView!
-    private var scheduleCabinetView: SchedulePropertyView!
-
-    var date = Date() {
-        didSet {
-            scheduleDateView.date = date
-        }
+    private enum Section: Int {
+        case doctor
+        case options
+        case intervals
     }
 
-    var doctor: Doctor? {
-        didSet {
-            configureHierarchy()
-        }
+    private var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
+
+    private var options: [ScheduleOption] {
+        [
+            ScheduleOption(
+                title: "Дата",
+                placeholder: "",
+                icon: UIImage(named: "calendar"),
+                date: date
+            ),
+            ScheduleOption(
+                title: "Кабинет",
+                placeholder: "\(currentDoctor?.defaultCabinet ?? 1) (по умолчанию)",
+                icon: UIImage(named: "chevron_down"),
+                date: nil
+            )
+        ]
     }
+    private var intervals: [ScheduleInterval] = [.defaultInterval]
+
+    var date = Date()
+    var currentDoctor: Doctor?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,53 +47,52 @@ final class CreateScheduleViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Расписание врача"
 
-        view.backgroundColor = Design.Color.lightGray
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if doctor == nil {
-            presenter.pickDoctor()
-        }
+        configureHierarchy()
+        registerViews()
+        configureDataSource()
+        initialSnapshot()
     }
 
     private func configureHierarchy() {
-        guard let doctor = doctor else { return }
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = Design.Color.lightGray
+        collectionView.delegate = self
+        view.addSubview(collectionView)
+    }
 
-        doctorView = DoctorView(doctor: doctor, pickDoctorAction: presenter.pickDoctor)
+    private func registerViews() {
+        collectionView.register(DoctorViewCell.self, forCellWithReuseIdentifier: DoctorViewCell.reuseIndentifier)
+        collectionView.register(OptionCell.self, forCellWithReuseIdentifier: OptionCell.reuseIndentifier)
+    }
 
-        var defaultCabinetText: String
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(
+            collectionView: collectionView
+        ) { collectionView, indexPath, item in
+            let factory = CreateScheduleCellFactory(collectionView: collectionView)
+            let cell = factory.getCell(with: item, for: indexPath)
 
-        if let cabinet = doctor.defaultCabinet {
-            defaultCabinetText = "\(cabinet) (По умолчанию)"
-        } else {
-            defaultCabinetText = "--"
+            return cell
         }
-        scheduleDateView = SchedulePropertyView(title: "Дата", date: date)
-        scheduleCabinetView = SchedulePropertyView(title: "Кабинет", valuePlaceholder: defaultCabinetText)
+    }
 
-        [doctorView, scheduleDateView, scheduleCabinetView].compactMap { $0 }.forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
+    private func createCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+            guard let section = Section(rawValue: sectionIndex) else {
+                fatalError("Unknown section type.")
+            }
+
+            let createScheduleLayout = CreateScheduleCollectionViewLayout()
+
+            switch section {
+            case .doctor: return createScheduleLayout.createDoctorSection()
+            case .options: return createScheduleLayout.createOptionsSection()
+            case .intervals: return createScheduleLayout.createIntervalsSection()
+            }
         }
 
-        NSLayoutConstraint.activate([
-            doctorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            doctorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            doctorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            doctorView.heightAnchor.constraint(equalToConstant: 330),
-
-            scheduleDateView.topAnchor.constraint(equalTo: doctorView.bottomAnchor, constant: 30),
-            scheduleDateView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            scheduleDateView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            scheduleDateView.heightAnchor.constraint(equalToConstant: 60),
-
-            scheduleCabinetView.topAnchor.constraint(equalTo: scheduleDateView.bottomAnchor, constant: 30),
-            scheduleCabinetView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            scheduleCabinetView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            scheduleCabinetView.heightAnchor.constraint(equalToConstant: 60)
-        ])
+        return layout
     }
 
     @objc private func addDoctorSchedule() {
@@ -102,6 +114,24 @@ final class CreateScheduleViewController: UIViewController {
 
 //        presenter.addSchedule(schedule)
     }
+
+    private func initialSnapshot() {
+        guard let currentDoctor = currentDoctor else { return }
+
+        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        snapshot.appendSections([.doctor, .options, .intervals])
+        snapshot.appendItems([currentDoctor], toSection: .doctor)
+        snapshot.appendItems(options, toSection: .options)
+        snapshot.appendItems(intervals, toSection: .intervals)
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension CreateScheduleViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    }
 }
 
 // MARK: - CreateScheduleDisplaying
@@ -114,6 +144,5 @@ extension CreateScheduleViewController: CreateScheduleDisplaying {
     }
 
     func pickedCabinet(_ cabinet: Int) {
-        scheduleCabinetView.value = "\(cabinet)"
     }
 }
