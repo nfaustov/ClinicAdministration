@@ -8,7 +8,10 @@
 import Foundation
 
 protocol TimeTableModule: AnyObject {
-    var coordinator: (CalendarSubscription & GraphicTimeTableSubscription & CreateScheduleSubscription)? { get set }
+    var coordinator: (CalendarSubscription &
+                      GraphicTimeTableSubscription &
+                      CreateScheduleSubscription &
+                      DoctorsSearchSubscription)? { get set }
     var didFinish: ((_ date: Date) -> Void)? { get set }
 }
 

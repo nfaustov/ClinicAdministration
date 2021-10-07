@@ -9,7 +9,6 @@ import Foundation
 
 protocol CreateScheduleModule: AnyObject {
     var coordinator: (CalendarSubscription &
-                      PickTimeIntervalSubscription &
                       PickCabinetSubscription &
                       DoctorsSearchSubscription &
                       GraphicTimeTablePreviewSubscription)? { get set }

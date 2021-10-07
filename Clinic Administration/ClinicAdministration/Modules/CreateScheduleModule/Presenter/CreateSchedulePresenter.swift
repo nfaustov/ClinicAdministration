@@ -10,7 +10,6 @@ import Foundation
 final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>, CreateScheduleModule
 where V: CreateScheduleDisplaying, I: CreateScheduleInteraction {
     weak var coordinator: (CalendarSubscription &
-                           PickTimeIntervalSubscription &
                            PickCabinetSubscription &
                            DoctorsSearchSubscription &
                            GraphicTimeTablePreviewSubscription)?
@@ -38,12 +37,12 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
     }
 
     func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?) {
-        coordinator?.routeToPickTimeInterval(date: date, previouslyPicked: selected) { starting, ending in
-            guard let starting = starting,
-                  let ending = ending else { return }
-
-            self.view?.pickedInterval((starting, ending))
-        }
+//        coordinator?.routeToPickTimeInterval(date: date, previouslyPicked: selected) { starting, ending in
+//            guard let starting = starting,
+//                  let ending = ending else { return }
+//
+//            self.view?.pickedInterval((starting, ending))
+//        }
     }
 
     func pickCabinet(selected: Int?) {

@@ -36,10 +36,10 @@ final class CreateScheduleViewController: UIViewController {
             )
         ]
     }
-    private var intervals: [ScheduleInterval] = [.defaultInterval]
 
     var date = Date()
     var currentDoctor: Doctor?
+    var intervals: [ScheduleInterval] = [.defaultInterval]
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B0317E8267009BA002A62C5 /* CreateScheduleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0317E7267009BA002A62C5 /* CreateScheduleCoordinator.swift */; };
 		8B0F77412631EDEF00D68B43 /* CalendarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F77402631EDEF00D68B43 /* CalendarModule.swift */; };
 		8B0F774D2631FF7F00D68B43 /* GraphicTimeTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F774C2631FF7F00D68B43 /* GraphicTimeTableModule.swift */; };
 		8B10E2FD26382158006022BB /* CreateScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E2FC26382158006022BB /* CreateScheduleModule.swift */; };
@@ -130,7 +129,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B0317E7267009BA002A62C5 /* CreateScheduleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleCoordinator.swift; sourceTree = "<group>"; };
 		8B0F77402631EDEF00D68B43 /* CalendarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModule.swift; sourceTree = "<group>"; };
 		8B0F774C2631FF7F00D68B43 /* GraphicTimeTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableModule.swift; sourceTree = "<group>"; };
 		8B10E2FC26382158006022BB /* CreateScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModule.swift; sourceTree = "<group>"; };
@@ -364,7 +362,6 @@
 				8B20CE0326298F630007C20A /* Coordinator.swift */,
 				8B20CE0726298FCE0007C20A /* MainCoordinator.swift */,
 				8BB450AF263017CD00C143A4 /* TimeTableCoordinator.swift */,
-				8B0317E7267009BA002A62C5 /* CreateScheduleCoordinator.swift */,
 				8B556BD9263303870018E0C6 /* Modules Subscriptions */,
 			);
 			path = Coordinators;
@@ -1045,7 +1042,6 @@
 				8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */,
 				8B20CE5E2629998F0007C20A /* DateFormatterExtension.swift in Sources */,
 				8BF026D8267386C6002B0C39 /* ScheduleInterval.swift in Sources */,
-				8B0317E8267009BA002A62C5 /* CreateScheduleCoordinator.swift in Sources */,
 				8B33A65726696F720003631A /* DoctorsSearchInteractor.swift in Sources */,
 				8B7F8B10263AF1C800B75324 /* PickTimeIntervalPresenter.swift in Sources */,
 				8BCB050A267576EB0062F396 /* CreateScheduleCollectionViewLayout.swift in Sources */,

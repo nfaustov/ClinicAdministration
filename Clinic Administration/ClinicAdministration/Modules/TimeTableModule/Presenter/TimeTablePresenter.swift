@@ -9,7 +9,10 @@ import Foundation
 
 final class TimeTablePresenter<V, I>: PresenterInteractor<V, I>,
                                       TimeTableModule where V: TimeTableDisplaying, I: TimeTableInteraction {
-    weak var coordinator: (CalendarSubscription & GraphicTimeTableSubscription & CreateScheduleSubscription)?
+    weak var coordinator: (CalendarSubscription &
+                           GraphicTimeTableSubscription &
+                           CreateScheduleSubscription &
+                           DoctorsSearchSubscription)?
 
     var didFinish: ((Date) -> Void)?
 
@@ -48,7 +51,11 @@ extension TimeTablePresenter: TimeTablePresentation {
     }
 
     func addNewDoctorSchedule(onDate date: Date) {
-        coordinator?.routeToCreateSchedule()
+        coordinator?.routeToDoctorsSearch(didFinish: { doctor in
+            guard let doctor = doctor else { return }
+
+            self.createSchedule(for: doctor, onDate: date, with: [])
+        })
     }
 
     func removeDoctorSchedule(_ schedule: DoctorSchedule) {
@@ -59,6 +66,12 @@ extension TimeTablePresenter: TimeTablePresentation {
     func switchToGraphicScreen(onDate date: Date) {
         coordinator?.routeToGraphicTimeTable(onDate: date) { selectedDate in
             self.view?.sidePicked(date: selectedDate)
+        }
+    }
+
+    private func createSchedule(for doctor: Doctor, onDate date: Date, with intervals: [ScheduleInterval]) {
+        coordinator?.routeToCreateSchedule(for: doctor, onDate: date, with: []) { schedule in
+            guard schedule != nil else { return }
         }
     }
 }
