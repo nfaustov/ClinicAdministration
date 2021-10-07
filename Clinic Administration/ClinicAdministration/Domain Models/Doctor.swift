@@ -34,7 +34,7 @@ struct Doctor: Hashable {
     }
 
     init(
-        id: UUID?,
+        id: UUID? = UUID(),
         secondName: String,
         firstName: String,
         patronymicName: String,
@@ -43,9 +43,9 @@ struct Doctor: Hashable {
         specialization: String,
         basicService: String,
         serviceDuration: TimeInterval,
-        defaultCabinet: Int?,
-        info: String?,
-        imageData: Data?,
+        defaultCabinet: Int? = nil,
+        info: String? = nil,
+        imageData: Data? = nil,
         salaryType: SalaryType,
         monthlySalary: Double = 0,
         agentSalary: Double = 0

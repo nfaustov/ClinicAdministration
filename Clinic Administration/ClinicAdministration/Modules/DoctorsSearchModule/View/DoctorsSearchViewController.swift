@@ -25,6 +25,9 @@ final class DoctorsSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.title = "Выберите врача"
+
         configureHierarchy()
         configureDataSource()
     }
@@ -36,6 +39,7 @@ final class DoctorsSearchViewController: UIViewController {
     }
 
     func configureHierarchy() {
+        view.backgroundColor = Design.Color.white
         let doctorsCollectionView = UICollectionView(
             frame: view.bounds,
             collectionViewLayout: createLayout()

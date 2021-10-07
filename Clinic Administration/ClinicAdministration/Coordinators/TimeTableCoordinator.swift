@@ -66,8 +66,8 @@ extension TimeTableCoordinator: DoctorsSearchSubscription {
     func routeToDoctorsSearch(didFinish: @escaping (Doctor?) -> Void) {
         let (viewController, module) = modules.doctorsSearch()
         module.didFinish = { [navigationController] doctor in
-            didFinish(doctor)
             navigationController.popViewController(animated: true)
+            didFinish(doctor)
         }
         navigationController.pushViewController(viewController, animated: true)
     }
