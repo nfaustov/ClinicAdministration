@@ -101,13 +101,8 @@ final class DoctorsSearchViewController: UIViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, Doctor>(
             collectionView: collectionView
         ) { collectionView, indexPath, doctor in
-            guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: DoctorItemCell.reuseIdentifier, for: indexPath
-            ) as? DoctorItemCell else {
-                fatalError("Unable to dequeue cell.")
-            }
-
-            cell.label.text = doctor.fullName
+            let factory = CellFactory(collectionView: collectionView)
+            let cell = factory.configureCell(DoctorItemCell.self, with: doctor, for: indexPath)
 
             return cell
         }

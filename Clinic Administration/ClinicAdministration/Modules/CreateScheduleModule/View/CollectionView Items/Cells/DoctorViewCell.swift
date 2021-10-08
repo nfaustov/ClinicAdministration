@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class DoctorViewCell: UICollectionViewCell, CreateScheduleCell {
-    static let reuseIndentifier: String = "DoctorViewCell"
+final class DoctorViewCell: UICollectionViewCell, SelfConfiguredCell {
+    static let reuseIdentifier: String = "DoctorViewCell"
 
     func configure(with doctor: Doctor) {
         let doctorView = DoctorView(doctor: doctor)

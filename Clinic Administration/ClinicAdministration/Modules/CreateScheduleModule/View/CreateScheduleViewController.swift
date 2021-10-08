@@ -69,9 +69,9 @@ final class CreateScheduleViewController: UIViewController {
     }
 
     private func registerViews() {
-        collectionView.register(DoctorViewCell.self, forCellWithReuseIdentifier: DoctorViewCell.reuseIndentifier)
-        collectionView.register(OptionCell.self, forCellWithReuseIdentifier: OptionCell.reuseIndentifier)
-        collectionView.register(IntervalCell.self, forCellWithReuseIdentifier: IntervalCell.reuseIndentifier)
+        collectionView.register(DoctorViewCell.self, forCellWithReuseIdentifier: DoctorViewCell.reuseIdentifier)
+        collectionView.register(OptionCell.self, forCellWithReuseIdentifier: OptionCell.reuseIdentifier)
+        collectionView.register(IntervalCell.self, forCellWithReuseIdentifier: IntervalCell.reuseIdentifier)
     }
 
     private func configureDataSource() {
@@ -79,7 +79,7 @@ final class CreateScheduleViewController: UIViewController {
             collectionView: collectionView
         ) { collectionView, indexPath, item in
             let factory = CreateScheduleCellFactory(collectionView: collectionView)
-            let cell = factory.getCell(with: item, for: indexPath)
+            let cell = factory.makeCell(with: item, for: indexPath)
 
             return cell
         }

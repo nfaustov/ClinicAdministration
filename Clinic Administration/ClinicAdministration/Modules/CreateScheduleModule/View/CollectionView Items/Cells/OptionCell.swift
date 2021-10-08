@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class OptionCell: UICollectionViewCell, CreateScheduleCell {
-    static var reuseIndentifier: String = "OptionCell"
+final class OptionCell: UICollectionViewCell, SelfConfiguredCell {
+    static var reuseIdentifier: String = "OptionCell"
 
     private var scheduleOptionView: ScheduleOptionView!
 

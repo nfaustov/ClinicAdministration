@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DoctorPlaceholder: UICollectionViewCell, TimeTableCell {
+class DoctorPlaceholder: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "DoctorPlaceholder"
 
     let messageLabel: UILabel = {

@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class IntervalCell: UICollectionViewCell, CreateScheduleCell {
-    static let reuseIndentifier: String = "IntervalCell"
+final class IntervalCell: UICollectionViewCell, SelfConfiguredCell {
+    static let reuseIdentifier: String = "IntervalCell"
 
     private let startingLabel = UILabel()
     private let endingLabel = UILabel()

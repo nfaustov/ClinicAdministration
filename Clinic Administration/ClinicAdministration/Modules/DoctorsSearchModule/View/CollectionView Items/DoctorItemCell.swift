@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DoctorItemCell: UICollectionViewCell {
+final class DoctorItemCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "DoctorItemCell"
 
     let label: UILabel = {
@@ -48,5 +48,9 @@ class DoctorItemCell: UICollectionViewCell {
         super.layoutSubviews()
 
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.small).cgPath
+    }
+
+    func configure(with doctor: Doctor) {
+        label.text = doctor.fullName
     }
 }

@@ -46,7 +46,6 @@
 		8B3E1635267792260070BDAF /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E1634267792260070BDAF /* OptionCell.swift */; };
 		8B41FE7F261E3D4B009ED53E /* TimeTableCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */; };
 		8B433A3C2643EC7E000FB7DC /* GraphicTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B433A3B2643EC7E000FB7DC /* GraphicTimeTableView.swift */; };
-		8B49426A2625790B00275057 /* TimeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4942692625790B00275057 /* TimeTableCell.swift */; };
 		8B4FC4F82632B2AF00D7627A /* TimeTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4FC4F72632B2AF00D7627A /* TimeTableModule.swift */; };
 		8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */; };
 		8B5E5553263ACEB7002E54FF /* PickTimeIntervalSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5E5552263ACEB7002E54FF /* PickTimeIntervalSubscription.swift */; };
@@ -74,6 +73,7 @@
 		8B92DFF32657A96400B3D6B3 /* HttpServiceDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF22657A96400B3D6B3 /* HttpServiceDependencies.swift */; };
 		8B92DFF52657A98A00B3D6B3 /* DatabaseDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */; };
 		8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */; };
+		8BA383BF2710E8E400E21179 /* CellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA383BE2710E8E400E21179 /* CellFactory.swift */; };
 		8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA602F8260DA36700DF686B /* DoctorCell.swift */; };
 		8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA60308260DDBCA00DF686B /* PatientCell.swift */; };
 		8BA6030D260DDF8300DF686B /* TimeTablePatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6030C260DDF8300DF686B /* TimeTablePatientView.swift */; };
@@ -109,7 +109,6 @@
 		8BE26CEA2616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE26CE92616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift */; };
 		8BE80C38264AA0A300CCA7F7 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE80C37264AA0A300CCA7F7 /* Database.swift */; };
 		8BF026D6267383C3002B0C39 /* ScheduleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF026D5267383C3002B0C39 /* ScheduleOption.swift */; };
-		8BF026DC26738765002B0C39 /* CreateScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF026DB26738765002B0C39 /* CreateScheduleCell.swift */; };
 		8BF026DE2673881B002B0C39 /* DoctorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF026DD2673881B002B0C39 /* DoctorViewCell.swift */; };
 		8BF23AA326371103009D9A7A /* DoctorControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF23AA226371103009D9A7A /* DoctorControlCell.swift */; };
 		8BF23AA726371A03009D9A7A /* DoctorControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF23AA626371A03009D9A7A /* DoctorControl.swift */; };
@@ -166,7 +165,6 @@
 		8B3E1634267792260070BDAF /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		8B41FE7E261E3D4B009ED53E /* TimeTableCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCellFactory.swift; sourceTree = "<group>"; };
 		8B433A3B2643EC7E000FB7DC /* GraphicTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableView.swift; sourceTree = "<group>"; };
-		8B4942692625790B00275057 /* TimeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableCell.swift; sourceTree = "<group>"; };
 		8B4FC4F72632B2AF00D7627A /* TimeTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableModule.swift; sourceTree = "<group>"; };
 		8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSectionPlaceholder.swift; sourceTree = "<group>"; };
 		8B5E5552263ACEB7002E54FF /* PickTimeIntervalSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickTimeIntervalSubscription.swift; sourceTree = "<group>"; };
@@ -194,6 +192,7 @@
 		8B92DFF22657A96400B3D6B3 /* HttpServiceDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpServiceDependencies.swift; sourceTree = "<group>"; };
 		8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDependencies.swift; sourceTree = "<group>"; };
 		8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorPlaceholder.swift; sourceTree = "<group>"; };
+		8BA383BE2710E8E400E21179 /* CellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFactory.swift; sourceTree = "<group>"; };
 		8BA602F8260DA36700DF686B /* DoctorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorCell.swift; sourceTree = "<group>"; };
 		8BA60308260DDBCA00DF686B /* PatientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
 		8BA6030C260DDF8300DF686B /* TimeTablePatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTablePatientView.swift; sourceTree = "<group>"; };
@@ -231,7 +230,6 @@
 		8BE26CE92616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientSectionBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		8BE80C37264AA0A300CCA7F7 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8BF026D5267383C3002B0C39 /* ScheduleOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleOption.swift; sourceTree = "<group>"; };
-		8BF026DB26738765002B0C39 /* CreateScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleCell.swift; sourceTree = "<group>"; };
 		8BF026DD2673881B002B0C39 /* DoctorViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewCell.swift; sourceTree = "<group>"; };
 		8BF23AA226371103009D9A7A /* DoctorControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorControlCell.swift; sourceTree = "<group>"; };
 		8BF23AA626371A03009D9A7A /* DoctorControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorControl.swift; sourceTree = "<group>"; };
@@ -542,14 +540,6 @@
 			path = CreateScheduleModule;
 			sourceTree = "<group>";
 		};
-		8B494268262578FB00275057 /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				8B4942692625790B00275057 /* TimeTableCell.swift */,
-			);
-			path = Interface;
-			sourceTree = "<group>";
-		};
 		8B556BD9263303870018E0C6 /* Modules Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,7 +566,6 @@
 		8B56D54F261FAC5400389955 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8B494268262578FB00275057 /* Interface */,
 				8BA602F8260DA36700DF686B /* DoctorCell.swift */,
 				8BA60308260DDBCA00DF686B /* PatientCell.swift */,
 				8BA6030C260DDF8300DF686B /* TimeTablePatientView.swift */,
@@ -717,6 +706,14 @@
 			path = DependencyContainer;
 			sourceTree = "<group>";
 		};
+		8BA383BD2710E8BC00E21179 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8BA383BE2710E8E400E21179 /* CellFactory.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		8BAE4749264270B6008B0B28 /* GraphicTimeTablePreviewModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -774,6 +771,7 @@
 			isa = PBXGroup;
 			children = (
 				8BCAB7AF2559D4D5001A93D0 /* Application */,
+				8BA383BD2710E8BC00E21179 /* Components */,
 				8B20CE0026298DCE0007C20A /* Coordinators */,
 				8B92DFEF2657A90C00B3D6B3 /* DependencyContainer */,
 				8BE80C39264AA0DA00CCA7F7 /* Database */,
@@ -864,20 +862,11 @@
 		8BF026D92673873C002B0C39 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8BF026DA26738750002B0C39 /* Interface */,
 				8BF026DD2673881B002B0C39 /* DoctorViewCell.swift */,
 				8B3E1634267792260070BDAF /* OptionCell.swift */,
 				8BCD1ACD270F5F3700D91D3C /* IntervalCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		8BF026DA26738750002B0C39 /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				8BF026DB26738765002B0C39 /* CreateScheduleCell.swift */,
-			);
-			path = Interface;
 			sourceTree = "<group>";
 		};
 		8BFE342825B378150058F42F /* ClinicAdministrationTests */ = {
@@ -1080,6 +1069,7 @@
 				8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */,
 				8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */,
 				8BA701D9264BE64B008C80ED /* DoctorModel.xcdatamodeld in Sources */,
+				8BA383BF2710E8E400E21179 /* CellFactory.swift in Sources */,
 				8BAE4752264275A3008B0B28 /* GraphicTimeTablePreviewInteractor.swift in Sources */,
 				8B38A1D8260D16E600CA01A0 /* Patient.swift in Sources */,
 				8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */,
@@ -1100,10 +1090,8 @@
 				8B20CE2A262997B30007C20A /* MonthHeader.swift in Sources */,
 				8B10E2FF263822C5006022BB /* CreateScheduleViewController.swift in Sources */,
 				8B7A12622631DCA7007BC1AB /* ModulesFactory.swift in Sources */,
-				8B49426A2625790B00275057 /* TimeTableCell.swift in Sources */,
 				8BB450B0263017CD00C143A4 /* TimeTableCoordinator.swift in Sources */,
 				8B20CE2C262997B30007C20A /* ConfirmationView.swift in Sources */,
-				8BF026DC26738765002B0C39 /* CreateScheduleCell.swift in Sources */,
 				8B10E30326382314006022BB /* CreateScheduleInteractor.swift in Sources */,
 				8B33A6492668E1160003631A /* DoctorsSearchModule.swift in Sources */,
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,

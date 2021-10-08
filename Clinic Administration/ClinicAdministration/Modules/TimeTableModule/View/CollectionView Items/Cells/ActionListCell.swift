@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ActionListCell: UICollectionViewCell, TimeTableCell {
+class ActionListCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "ActionListCell"
 
     private let nameLabel: UILabel = {
