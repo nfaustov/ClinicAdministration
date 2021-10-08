@@ -13,7 +13,7 @@ final class IntervalCell: UICollectionViewCell, CreateScheduleCell {
     private let startingLabel = UILabel()
     private let endingLabel = UILabel()
 
-    func configure(with interval: ScheduleInterval) {
+    func configure(with interval: DateInterval) {
         layer.backgroundColor = Design.Color.white.cgColor
         layer.cornerRadius = Design.CornerRadius.medium
         layer.shadowColor = Design.Color.brown.cgColor
@@ -26,9 +26,9 @@ final class IntervalCell: UICollectionViewCell, CreateScheduleCell {
             label.textColor = Design.Color.brown
         }
 
-        DateFormatter.shared.dateFormat = "h:MM"
-        startingLabel.text = DateFormatter.shared.string(from: interval.starting)
-        endingLabel.text = DateFormatter.shared.string(from: interval.ending)
+        DateFormatter.shared.dateFormat = "H:mm"
+        startingLabel.text = DateFormatter.shared.string(from: interval.start)
+        endingLabel.text = DateFormatter.shared.string(from: interval.end)
 
         let separator = UIView()
         separator.backgroundColor = Design.Color.lightGray

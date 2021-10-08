@@ -31,18 +31,18 @@ final class CreateScheduleViewController: UIViewController {
             ScheduleOption(
                 title: "Кабинет",
                 placeholder: selectedCabinet == currentDoctor?.defaultCabinet ?
-                "\(selectedCabinet ?? 1) (по умолчанию)": "\(selectedCabinet ?? 1)",
+                "\(selectedCabinet) (по умолчанию)": "\(selectedCabinet)",
                 icon: UIImage(named: "chevron_down"),
                 date: nil
             )
         ]
     }
 
-    private var selectedCabinet: Int?
+    private var selectedCabinet = 1
 
     var date = Date()
     var currentDoctor: Doctor?
-    var intervals: [ScheduleInterval] = [.defaultInterval]
+    var intervals: [DateInterval] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,9 @@ final class CreateScheduleViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Расписание врача"
 
-        selectedCabinet = currentDoctor?.defaultCabinet
+        if let cabinet = currentDoctor?.defaultCabinet {
+            selectedCabinet = cabinet
+        }
 
         configureHierarchy()
         registerViews()
@@ -69,6 +71,7 @@ final class CreateScheduleViewController: UIViewController {
     private func registerViews() {
         collectionView.register(DoctorViewCell.self, forCellWithReuseIdentifier: DoctorViewCell.reuseIndentifier)
         collectionView.register(OptionCell.self, forCellWithReuseIdentifier: OptionCell.reuseIndentifier)
+        collectionView.register(IntervalCell.self, forCellWithReuseIdentifier: IntervalCell.reuseIndentifier)
     }
 
     private func configureDataSource() {
@@ -123,6 +126,8 @@ final class CreateScheduleViewController: UIViewController {
     private func initialSnapshot() {
         guard let currentDoctor = currentDoctor else { return }
 
+        presenter.makeIntervals(onDate: date, forCabinet: selectedCabinet)
+
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.doctor, .options, .intervals])
         snapshot.appendItems([currentDoctor], toSection: .doctor)
@@ -152,6 +157,10 @@ extension CreateScheduleViewController: UICollectionViewDelegate {
 
 extension CreateScheduleViewController: CreateScheduleDisplaying {
     func pickedDoctor(_ doctor: Doctor) {
+    }
+
+    func createdIntervals(_ intervals: [DateInterval]) {
+        self.intervals = intervals
     }
 
     func pickedInterval(_ interval: (Date, Date)) {

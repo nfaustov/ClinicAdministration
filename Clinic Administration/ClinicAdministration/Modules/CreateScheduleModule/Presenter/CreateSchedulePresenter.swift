@@ -20,6 +20,10 @@ where V: CreateScheduleDisplaying, I: CreateScheduleInteraction {
 // MARK: - CreateSchedulePresentation
 
 extension CreateSchedulePresenter: CreateSchedulePresentation {
+    func makeIntervals(onDate date: Date, forCabinet cabinet: Int) {
+        interactor.getSchedules(onDate: date, forCabinet: cabinet)
+    }
+
     func pickDoctor() {
         coordinator?.routeToDoctorsSearch { doctor in
             guard let doctor = doctor else { return }
@@ -67,6 +71,56 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
 // MARK: - CreateScheduleInteractorDelegate
 
 extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
+    func schedulesDidRecieved(_ schedules: [DoctorSchedule], date: Date) {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.weekday], from: date)
+        var opening = dateComponents
+        var close = dateComponents
+
+        switch dateComponents.weekday {
+        case 1:
+            opening.hour = 9
+            close.hour = 15
+        case 7:
+            opening.hour = 9
+            close.hour = 18
+        default:
+            opening.hour = 8
+            close.hour = 19
+        }
+
+        guard let openingDate = calendar.date(from: opening),
+              let closeDate = calendar.date(from: close) else { return }
+
+        var intervals = [DateInterval]()
+        if schedules.isEmpty {
+            view?.createdIntervals([DateInterval(start: openingDate, end: closeDate)])
+            return
+        } else if schedules.count > 1 {
+            for index in 1..<schedules.count {
+                let previousSchedule = schedules[index - 1]
+                let currentSchedule = schedules[index]
+                let freeInterval = DateInterval(
+                    start: previousSchedule.endingTime,
+                    end: currentSchedule.startingTime
+                )
+                intervals.append(freeInterval)
+            }
+        }
+        let firstInterval = DateInterval(
+            start: openingDate,
+            end: schedules.first?.startingTime ?? Date()
+        )
+        let lastInterval = DateInterval(
+            start: schedules.last?.endingTime ?? Date(),
+            end: closeDate
+        )
+        intervals.insert(firstInterval, at: 0)
+        intervals.append(lastInterval)
+
+        view?.createdIntervals(intervals.filter { $0.duration >= 900 })
+    }
+
     func scheduleDidCreated(_ schedule: DoctorSchedule) {
         didFinish?(schedule)
     }

@@ -76,13 +76,8 @@ extension TimeTableCoordinator: DoctorsSearchSubscription {
 // MARK: - CreateScheduleSubscription
 
 extension TimeTableCoordinator: CreateScheduleSubscription {
-    func routeToCreateSchedule(
-        for doctor: Doctor,
-        onDate date: Date,
-        with intervals: [ScheduleInterval],
-        didFinish: @escaping(DoctorSchedule?) -> Void
-    ) {
-        let (viewController, module) = modules.createSchedule(for: doctor, onDate: date, with: intervals)
+    func routeToCreateSchedule(for doctor: Doctor, onDate date: Date, didFinish: @escaping(DoctorSchedule?) -> Void) {
+        let (viewController, module) = modules.createSchedule(for: doctor, onDate: date)
         module.coordinator = self
         module.didFinish = didFinish
         navigationController.pushViewController(viewController, animated: true)

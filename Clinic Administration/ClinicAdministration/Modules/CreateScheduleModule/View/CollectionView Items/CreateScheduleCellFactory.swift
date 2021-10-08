@@ -19,6 +19,8 @@ final class CreateScheduleCellFactory {
             return configureCell(DoctorViewCell.self, with: doctor, for: indexPath)
         } else if let option = model as? ScheduleOption {
             return configureCell(OptionCell.self, with: option, for: indexPath)
+        } else if let interval = model as? DateInterval {
+            return configureCell(IntervalCell.self, with: interval, for: indexPath)
         } else {
             fatalError("Unknown model type")
         }

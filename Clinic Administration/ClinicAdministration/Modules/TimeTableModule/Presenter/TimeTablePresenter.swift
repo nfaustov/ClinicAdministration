@@ -54,7 +54,7 @@ extension TimeTablePresenter: TimeTablePresentation {
         coordinator?.routeToDoctorsSearch(didFinish: { doctor in
             guard let doctor = doctor else { return }
 
-            self.createSchedule(for: doctor, onDate: date, with: [])
+            self.createSchedule(for: doctor, onDate: date)
         })
     }
 
@@ -69,8 +69,8 @@ extension TimeTablePresenter: TimeTablePresentation {
         }
     }
 
-    private func createSchedule(for doctor: Doctor, onDate date: Date, with intervals: [ScheduleInterval]) {
-        coordinator?.routeToCreateSchedule(for: doctor, onDate: date, with: []) { schedule in
+    private func createSchedule(for doctor: Doctor, onDate date: Date) {
+        coordinator?.routeToCreateSchedule(for: doctor, onDate: date) { schedule in
             guard schedule != nil else { return }
         }
     }
