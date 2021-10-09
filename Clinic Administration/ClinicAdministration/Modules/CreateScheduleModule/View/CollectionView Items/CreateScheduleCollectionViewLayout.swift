@@ -55,14 +55,15 @@ final class CreateScheduleCollectionViewLayout {
         )
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
         let layoutGroupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.5),
+            widthDimension: .fractionalWidth(0.33),
             heightDimension: .absolute(250)
         )
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitem: layoutItem, count: 2)
-        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30)
-        layoutGroup.interItemSpacing = .flexible(30)
+        layoutGroup.interItemSpacing = .fixed(30)
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 35, leading: 0, bottom: 35, trailing: 0)
+        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 30, bottom: 30, trailing: 30)
+        layoutSection.interGroupSpacing = 40
 
         return layoutSection
     }

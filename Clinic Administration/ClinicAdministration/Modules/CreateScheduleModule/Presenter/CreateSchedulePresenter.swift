@@ -73,7 +73,7 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
 extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule], date: Date) {
         let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.weekday], from: date)
+        let dateComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
         var opening = dateComponents
         var close = dateComponents
 
