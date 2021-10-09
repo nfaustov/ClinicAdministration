@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PickTimeIntervalPresenter<V>: PresenterView<V>, PickTimeIntervalModule where V: PickTimeIntervalDisplaying {
+final class PickTimeIntervalPresenter<V>: Presenter<V>, PickTimeIntervalModule where V: PickTimeIntervalDisplaying {
     var didFinish: ((Date?, Date?) -> Void)?
 }
 
