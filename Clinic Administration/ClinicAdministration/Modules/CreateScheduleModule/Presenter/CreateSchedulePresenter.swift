@@ -72,29 +72,11 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
 
 extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule], date: Date) {
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
-        var opening = dateComponents
-        var close = dateComponents
-
-        switch dateComponents.weekday {
-        case 1:
-            opening.hour = 9
-            close.hour = 15
-        case 7:
-            opening.hour = 9
-            close.hour = 18
-        default:
-            opening.hour = 8
-            close.hour = 19
-        }
-
-        guard let openingDate = calendar.date(from: opening),
-              let closeDate = calendar.date(from: close) else { return }
+        let workingHours = WorkingHours(date: date)
 
         var intervals = [DateInterval]()
         if schedules.isEmpty {
-            view?.createdIntervals([DateInterval(start: openingDate, end: closeDate)])
+            view?.createdIntervals([DateInterval(start: workingHours.opening, end: workingHours.close)])
             return
         } else if schedules.count > 1 {
             for index in 1..<schedules.count {
@@ -108,12 +90,12 @@ extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
             }
         }
         let firstInterval = DateInterval(
-            start: openingDate,
+            start: workingHours.opening,
             end: schedules.first?.startingTime ?? Date()
         )
         let lastInterval = DateInterval(
             start: schedules.last?.endingTime ?? Date(),
-            end: closeDate
+            end: workingHours.close
         )
         intervals.insert(firstInterval, at: 0)
         intervals.append(lastInterval)

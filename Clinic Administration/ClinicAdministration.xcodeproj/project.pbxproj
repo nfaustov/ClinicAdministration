@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0856BE271465A8001B0F11 /* WorkingHours.swift */; };
 		8B0F77412631EDEF00D68B43 /* CalendarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F77402631EDEF00D68B43 /* CalendarModule.swift */; };
 		8B0F774D2631FF7F00D68B43 /* GraphicTimeTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F774C2631FF7F00D68B43 /* GraphicTimeTableModule.swift */; };
 		8B10E2FD26382158006022BB /* CreateScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E2FC26382158006022BB /* CreateScheduleModule.swift */; };
@@ -127,6 +128,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B0856BE271465A8001B0F11 /* WorkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHours.swift; sourceTree = "<group>"; };
 		8B0F77402631EDEF00D68B43 /* CalendarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModule.swift; sourceTree = "<group>"; };
 		8B0F774C2631FF7F00D68B43 /* GraphicTimeTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableModule.swift; sourceTree = "<group>"; };
 		8B10E2FC26382158006022BB /* CreateScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModule.swift; sourceTree = "<group>"; };
@@ -266,6 +268,22 @@
 			path = DoctorView;
 			sourceTree = "<group>";
 		};
+		8B0856BC271464A4001B0F11 /* CellFactory */ = {
+			isa = PBXGroup;
+			children = (
+				8BA383BE2710E8E400E21179 /* CellFactory.swift */,
+			);
+			path = CellFactory;
+			sourceTree = "<group>";
+		};
+		8B0856BD27146563001B0F11 /* WorkingHours */ = {
+			isa = PBXGroup;
+			children = (
+				8B0856BE271465A8001B0F11 /* WorkingHours.swift */,
+			);
+			path = WorkingHours;
+			sourceTree = "<group>";
+		};
 		8B0F5BC9255D49F400894410 /* Domain Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,7 +385,6 @@
 			isa = PBXGroup;
 			children = (
 				8B070B03266D3DD800F4D45F /* DoctorView */,
-				8BFEE591266257B500D27064 /* AlertsFactory */,
 				8B10E3952625D0B100476862 /* GraphicTimeTableView */,
 				8B303B06263BE23100DD343A /* PickerViewController */,
 				8B5E5556263ADA2D002E54FF /* CustomPresentationController */,
@@ -709,7 +726,9 @@
 		8BA383BD2710E8BC00E21179 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8BA383BE2710E8E400E21179 /* CellFactory.swift */,
+				8B0856BD27146563001B0F11 /* WorkingHours */,
+				8BFEE591266257B500D27064 /* AlertsFactory */,
+				8B0856BC271464A4001B0F11 /* CellFactory */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1096,6 +1115,7 @@
 				8B33A6492668E1160003631A /* DoctorsSearchModule.swift in Sources */,
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,
 				8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */,
+				8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */,
 				8B29975F267261A90050C5E1 /* ScheduleOptionView.swift in Sources */,
 				8B20CE2B262997B30007C20A /* DayLabel.swift in Sources */,
 				8BCAB7B22559D564001A93D0 /* GraphicTimeTableViewController.swift in Sources */,

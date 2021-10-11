@@ -36,7 +36,7 @@ final class GraphicTableView: UIView {
 
         backgroundColor = Design.Color.white
 
-        setTimeTable(date)
+        setWorkingHours(date)
         addCabinets()
 
         // moveIntersectionsToFront()
@@ -101,7 +101,7 @@ final class GraphicTableView: UIView {
     }
 
     func reload(with date: Date, schedules: [DoctorSchedule]) {
-        setTimeTable(date)
+        setWorkingHours(date)
         reloadData(schedules)
         setNeedsDisplay()
     }
@@ -166,23 +166,10 @@ final class GraphicTableView: UIView {
         }
     }
 
-    private func setTimeTable(_ date: Date) {
-        let dateComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
-
-        opening = dateComponents
-        close = dateComponents
-
-        switch dateComponents.weekday {
-        case 1:
-            opening.hour = 9
-            close.hour = 15
-        case 7:
-            opening.hour = 9
-            close.hour = 18
-        default:
-            opening.hour = 8
-            close.hour = 19
-        }
+    private func setWorkingHours(_ date: Date) {
+        let workingHours = WorkingHours(date: date)
+        opening = calendar.dateComponents([.year, .month, .day, .weekday], from: workingHours.opening)
+        close = calendar.dateComponents([.year, .month, .day, .weekday], from: workingHours.close)
     }
 
     private func addCabinets() {
