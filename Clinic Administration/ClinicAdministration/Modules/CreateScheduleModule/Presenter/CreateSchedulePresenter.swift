@@ -7,43 +7,36 @@
 
 import Foundation
 
-final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>,
-                                           CreateScheduleModule where V: CreateScheduleDisplaying,
-                                                                      I: CreateScheduleInteraction {
+final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>, CreateScheduleModule
+where V: CreateScheduleDisplaying, I: CreateScheduleInteraction {
     weak var coordinator: (CalendarSubscription &
-                           PickDoctorSubscription &
-                           PickTimeIntervalSubscription &
                            PickCabinetSubscription &
-                           AddScheduleSubscription)?
+                           DoctorsSearchSubscription &
+                           GraphicTimeTablePreviewSubscription)?
 
-    var didFinish: (() -> Void)?
+    var didFinish: ((DoctorSchedule?) -> Void)?
 }
 
 // MARK: - CreateSchedulePresentation
 
 extension CreateSchedulePresenter: CreateSchedulePresentation {
+    func makeIntervals(onDate date: Date, forCabinet cabinet: Int) {
+        interactor.getSchedules(onDate: date, forCabinet: cabinet)
+    }
+
+    func pickDoctor() {
+        coordinator?.routeToDoctorsSearch { doctor in
+            guard let doctor = doctor else { return }
+
+            self.view?.currentDoctor = doctor
+        }
+    }
+
     func pickDateInCalendar() {
         coordinator?.routeToCalendar { date in
             guard let date = date else { return }
 
-            self.view?.date = date
-        }
-    }
-
-    func pickDoctor(from doctors: [Doctor], selected: Doctor?) {
-        coordinator?.routeToPickDoctor(from: doctors, previouslyPicked: selected) { doctor in
-            guard let doctor = doctor else { return }
-
-            self.view?.pickedDoctor(doctor)
-        }
-    }
-
-    func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?) {
-        coordinator?.routeToPickTimeInterval(date: date, previouslyPicked: selected) { starting, ending in
-            guard let starting = starting,
-                  let ending = ending else { return }
-
-            self.view?.pickedInterval((starting, ending))
+            self.view?.pickedDate(date)
         }
     }
 
@@ -55,19 +48,45 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func addSchedule(_ schedule: DoctorSchedule) {
-        coordinator?.routeToAddSchedule(schedule)
-    }
-
-    func getDoctors() {
-        interactor.getDoctors()
+    func schedulePreview(_ schedule: DoctorSchedule) {
+        coordinator?.routeToGraphicTimeTablePreview(schedule) { editedSchedule in
+            self.didFinish?(editedSchedule)
+        }
     }
 }
 
 // MARK: - CreateScheduleInteractorDelegate
 
 extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
-    func doctorsDidRecieved(_ doctors: [Doctor]) {
-        view?.doctorsList = doctors
+    func schedulesDidRecieved(_ schedules: [DoctorSchedule], date: Date) {
+        let workingHours = WorkingHours(date: date)
+
+        var intervals = [DateInterval]()
+        if schedules.isEmpty {
+            view?.createdIntervals([DateInterval(start: workingHours.opening, end: workingHours.close)])
+            return
+        } else if schedules.count > 1 {
+            for index in 1..<schedules.count {
+                let previousSchedule = schedules[index - 1]
+                let currentSchedule = schedules[index]
+                let freeInterval = DateInterval(
+                    start: previousSchedule.endingTime,
+                    end: currentSchedule.startingTime
+                )
+                intervals.append(freeInterval)
+            }
+        }
+        let firstInterval = DateInterval(
+            start: workingHours.opening,
+            end: schedules.first?.startingTime ?? Date()
+        )
+        let lastInterval = DateInterval(
+            start: schedules.last?.endingTime ?? Date(),
+            end: workingHours.close
+        )
+        intervals.insert(firstInterval, at: 0)
+        intervals.append(lastInterval)
+
+        view?.createdIntervals(intervals.filter { $0.duration >= 900 })
     }
 }

@@ -127,6 +127,7 @@ final class DoctorsDatabase: Database {
         doctor.phoneNumber = model.phoneNumber
         doctor.birthDate = model.birthDate
         doctor.specialization = model.specialization
+        if let cabinet = model.defaultCabinet { doctor.defaultCabinet = Int16(cabinet) }
         doctor.serviceDuration = model.serviceDuration
         doctor.salaryType = model.salaryType.rawValue
         doctor.monthlySalary = model.monthlySalary
@@ -233,6 +234,16 @@ final class DoctorsDatabase: Database {
         update {
             scheduleEntity.startingTime = schedule.startingTime
             scheduleEntity.endingTime = schedule.endingTime
+            schedule.patientAppointments.forEach { appointment in
+                if let patientAppointmentEntity = NSEntityDescription.insertNewObject(
+                    forEntityName: "PatientAppointment",
+                    into: self.context
+                ) as? PatientAppointmentEntity {
+                    patientAppointmentEntity.sheduledTime = appointment.scheduledTime
+                    patientAppointmentEntity.duration = appointment.duration
+                    patientAppointmentEntity.schedule = scheduleEntity
+                }
+            }
         }
     }
 

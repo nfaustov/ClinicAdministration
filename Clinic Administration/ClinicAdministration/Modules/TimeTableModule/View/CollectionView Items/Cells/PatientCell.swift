@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PatientCell: UICollectionViewCell, TimeTableCell {
+final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "PatientCell"
 
     private let timeLabel: UILabel = {

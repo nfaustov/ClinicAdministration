@@ -9,35 +9,32 @@ import Foundation
 
 protocol CreateScheduleModule: AnyObject {
     var coordinator: (CalendarSubscription &
-                      PickDoctorSubscription &
-                      PickTimeIntervalSubscription &
                       PickCabinetSubscription &
-                      AddScheduleSubscription)? { get set }
-    var didFinish: (() -> Void)? { get set }
+                      DoctorsSearchSubscription &
+                      GraphicTimeTablePreviewSubscription)? { get set }
+    var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 
 protocol CreateScheduleDisplaying: View {
-    var date: Date { get set }
-    var doctorsList: [Doctor] { get set }
+    var currentDoctor: Doctor? { get set }
 
-    func pickedDoctor(_ doctor: Doctor)
-    func pickedInterval(_ interval: (Date, Date))
+    func createdIntervals(_ intervals: [DateInterval])
     func pickedCabinet(_ cabinet: Int)
+    func pickedDate(_ date: Date)
 }
 
 protocol CreateSchedulePresentation: AnyObject {
+    func makeIntervals(onDate: Date, forCabinet: Int)
+    func pickDoctor()
     func pickDateInCalendar()
-    func pickDoctor(from: [Doctor], selected: Doctor?)
-    func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?)
     func pickCabinet(selected: Int?)
-    func addSchedule(_ schedule: DoctorSchedule)
-    func getDoctors()
+    func schedulePreview(_ schedule: DoctorSchedule)
 }
 
 protocol CreateScheduleInteraction: Interactor {
-    func getDoctors()
+    func getSchedules(onDate: Date, forCabinet: Int)
 }
 
 protocol CreateScheduleInteractorDelegate: AnyObject {
-    func doctorsDidRecieved(_ doctors: [Doctor])
+    func schedulesDidRecieved(_ schedules: [DoctorSchedule], date: Date)
 }

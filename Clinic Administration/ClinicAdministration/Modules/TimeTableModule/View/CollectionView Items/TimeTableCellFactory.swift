@@ -7,14 +7,8 @@
 
 import UIKit
 
-final class TimeTableCellFactory {
-    private let collectionView: UICollectionView
-
-    init(collectionView: UICollectionView) {
-        self.collectionView = collectionView
-    }
-
-    func getCell(with model: AnyHashable, for indexPath: IndexPath) -> UICollectionViewCell {
+final class TimeTableCellFactory: CellFactory {
+    override func makeCell(with model: AnyHashable, for indexPath: IndexPath) -> UICollectionViewCell {
         if let schedule = model as? DoctorSchedule {
             return configureCell(DoctorCell.self, with: schedule, for: indexPath)
         } else if let patient = model as? PatientAppointment {
@@ -28,22 +22,5 @@ final class TimeTableCellFactory {
         } else {
             fatalError("Unknown model type")
         }
-    }
-
-    private func configureCell<T>(
-        _ cellType: T.Type,
-        with model: T.Model,
-        for indexPath: IndexPath
-    ) -> T where T: TimeTableCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: cellType.reuseIdentifier,
-            for: indexPath
-        ) as? T else {
-            fatalError("Unable to dequeue cell")
-        }
-
-        cell.configure(with: model)
-
-        return cell
     }
 }

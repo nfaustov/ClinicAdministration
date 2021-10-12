@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum SalaryType: String, Codable {
+enum SalaryType: String, Hashable, Equatable {
     case fixedSalary = "fixed"
     case piecerateSalary = "piecerate"
 }
 
-struct Doctor: Codable, Hashable {
+struct Doctor: Hashable {
     var id: UUID?
     var secondName: String
     var firstName: String
@@ -22,12 +22,19 @@ struct Doctor: Codable, Hashable {
     var specialization: String
     var basicService: String
     var serviceDuration: TimeInterval
+    var defaultCabinet: Int?
+    var info: String?
+    var imageData: Data?
     var salaryType: SalaryType
     var monthlySalary: Double
     var agentSalary: Double
 
+    var fullName: String {
+        secondName + " " + firstName + " " + patronymicName
+    }
+
     init(
-        id: UUID?,
+        id: UUID? = UUID(),
         secondName: String,
         firstName: String,
         patronymicName: String,
@@ -36,6 +43,9 @@ struct Doctor: Codable, Hashable {
         specialization: String,
         basicService: String,
         serviceDuration: TimeInterval,
+        defaultCabinet: Int? = nil,
+        info: String? = nil,
+        imageData: Data? = nil,
         salaryType: SalaryType,
         monthlySalary: Double = 0,
         agentSalary: Double = 0
@@ -49,6 +59,9 @@ struct Doctor: Codable, Hashable {
         self.specialization = specialization
         self.basicService = basicService
         self.serviceDuration = serviceDuration
+        self.defaultCabinet = defaultCabinet
+        self.info = info
+        self.imageData = imageData
         self.salaryType = salaryType
         self.monthlySalary = monthlySalary
         self.agentSalary = agentSalary
@@ -70,6 +83,9 @@ struct Doctor: Codable, Hashable {
         specialization = entitySpecialization
         basicService = ""
         serviceDuration = entity.serviceDuration
+        defaultCabinet = Int(entity.defaultCabinet)
+        info = entity.info
+        imageData = entity.imageData
         salaryType = SalaryType(rawValue: entity.salaryType ?? "") ?? .fixedSalary
         monthlySalary = entity.monthlySalary
         agentSalary = entity.agentSalary

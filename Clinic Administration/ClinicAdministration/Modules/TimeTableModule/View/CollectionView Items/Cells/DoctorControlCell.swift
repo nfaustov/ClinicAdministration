@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DoctorControlCell: UICollectionViewCell, TimeTableCell {
+class DoctorControlCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "DoctorHeader"
 
     let plusButton: UIButton = {

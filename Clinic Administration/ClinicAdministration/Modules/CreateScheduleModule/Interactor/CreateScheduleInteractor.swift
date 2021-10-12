@@ -17,10 +17,13 @@ final class CreateScheduleInteractor {
 // MARK: - CreateScheduleInteraction
 
 extension CreateScheduleInteractor: CreateScheduleInteraction {
-    func getDoctors() {
-        guard let doctorsEntities = database?.readDoctors() else { return }
+    func getSchedules(onDate date: Date, forCabinet cabinet: Int) {
+        guard let schedulesEntities = database?.readSchedules(for: date) else { return }
 
-        let doctors = doctorsEntities.compactMap({ Doctor(entity: $0) })
-        delegate?.doctorsDidRecieved(doctors)
+        let schedules = schedulesEntities
+            .compactMap { DoctorSchedule(entity: $0) }
+            .filter { $0.cabinet == cabinet }
+            .sorted(by: { $0.startingTime < $1.startingTime })
+        delegate?.schedulesDidRecieved(schedules, date: date)
     }
 }

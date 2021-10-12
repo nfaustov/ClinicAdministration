@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DoctorCell: UICollectionViewCell, TimeTableCell {
+final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "DoctorCell"
 
     private let nameLabel: UILabel = {

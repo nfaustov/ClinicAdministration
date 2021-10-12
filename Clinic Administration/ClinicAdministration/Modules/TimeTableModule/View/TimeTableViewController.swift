@@ -144,7 +144,7 @@ final class TimeTableViewController: UIViewController {
             collectionView: collectionView
         ) { collectionView, indexPath, item in
             let factory = TimeTableCellFactory(collectionView: collectionView)
-            let cell = factory.getCell(with: item, for: indexPath)
+            let cell = factory.makeCell(with: item, for: indexPath)
 
             return cell
         }

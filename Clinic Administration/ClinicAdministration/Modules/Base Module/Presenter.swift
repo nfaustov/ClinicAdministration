@@ -7,29 +7,7 @@
 
 import Foundation
 
-class PresenterInteractor<V: View, I: Interactor> {
-    weak var view: V?
-    var interactor: I
-
-    init(view: V, interactor: I) {
-        self.view = view
-        self.interactor = interactor
-
-        if let presenter = self as? V.PresenterType {
-            view.presenter = presenter
-        } else {
-            fatalError("Unrelated view type: \(V.self)")
-        }
-
-        if let presenter = self as? I.Delegate {
-            interactor.delegate = presenter
-        } else {
-            fatalError("Unrelated interactor type: \(I.self)")
-        }
-    }
-}
-
-class PresenterView<V: View> {
+class Presenter<V: View> {
     weak var view: V?
 
     init(view: V) {
@@ -39,6 +17,21 @@ class PresenterView<V: View> {
             view.presenter = presenter
         } else {
             fatalError("Unrelated view type: \(V.self)")
+        }
+    }
+}
+
+class PresenterInteractor<V: View, I: Interactor>: Presenter<V> {
+    var interactor: I
+
+    init(view: V, interactor: I) {
+        self.interactor = interactor
+        super.init(view: view)
+
+        if let presenter = self as? I.Delegate {
+            interactor.delegate = presenter
+        } else {
+            fatalError("Unrelated interactor type: \(I.self)")
         }
     }
 }

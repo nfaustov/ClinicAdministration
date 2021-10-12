@@ -35,7 +35,7 @@ final class TimeTableCoordinator: Coordinator {
 // MARK: - CalendarSubscription
 
 extension TimeTableCoordinator: CalendarSubscription {
-    func routeToCalendar(didFinish: @escaping ((Date?) -> Void)) {
+    func routeToCalendar(didFinish: @escaping (Date?) -> Void) {
         let (viewController, module) = modules.calendar()
         module.didFinish = didFinish
         navigationController.present(viewController, animated: true)
@@ -45,7 +45,7 @@ extension TimeTableCoordinator: CalendarSubscription {
 // MARK: - GraphicTimeTableSubscription
 
 extension TimeTableCoordinator: GraphicTimeTableSubscription {
-    func routeToGraphicTimeTable(onDate: Date, didFinish: @escaping ((Date?) -> Void)) {
+    func routeToGraphicTimeTable(onDate: Date, didFinish: @escaping (Date?) -> Void) {
         let (viewController, module) = modules.graphicTimeTable(onDate)
         module.coordinator = self
         module.didFinish = didFinish
@@ -53,18 +53,14 @@ extension TimeTableCoordinator: GraphicTimeTableSubscription {
     }
 }
 
-// MARK: - AddScheduleSubscription
+// MARK: - DoctorsSearchSubscription
 
-extension TimeTableCoordinator: AddScheduleSubscription {
-    func routeToAddSchedule(_ schedule: DoctorSchedule) {
-        let (viewController, module) = modules.addSchedule(schedule)
-        module.didFinish = { [weak self] newSchedule in
-            guard let self = self else { return }
-
-            let (viewController, module) = self.modules.timeTable(selectedSchedule: newSchedule)
-            module.coordinator = self
-            self.navigationController.viewControllers.insert(viewController, at: 0)
-            self.navigationController.popToRootViewController(animated: true)
+extension TimeTableCoordinator: DoctorsSearchSubscription {
+    func routeToDoctorsSearch(didFinish: @escaping (Doctor?) -> Void) {
+        let (viewController, module) = modules.doctorsSearch()
+        module.didFinish = { [navigationController] doctor in
+            navigationController.popViewController(animated: true)
+            didFinish(doctor)
         }
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -73,47 +69,36 @@ extension TimeTableCoordinator: AddScheduleSubscription {
 // MARK: - CreateScheduleSubscription
 
 extension TimeTableCoordinator: CreateScheduleSubscription {
-    func routeToCreateSchedule(date: Date) {
-        let (viewController, module) = modules.createSchedule(with: date)
+    func routeToCreateSchedule(for doctor: Doctor, onDate date: Date, didFinish: @escaping(DoctorSchedule?) -> Void) {
+        let (viewController, module) = modules.createSchedule(for: doctor, onDate: date)
         module.coordinator = self
+        module.didFinish = { [navigationController] schedule in
+            navigationController.popViewController(animated: true)
+            didFinish(schedule)
+        }
         navigationController.pushViewController(viewController, animated: true)
-    }
-}
-
-// MARK: - PickDoctorSubscription
-
-extension TimeTableCoordinator: PickDoctorSubscription {
-    func routeToPickDoctor(
-        from doctors: [Doctor],
-        previouslyPicked: Doctor?,
-        didFinish: @escaping ((Doctor?) -> Void)
-    ) {
-        let (viewController, module) = modules.pickDoctor(from: doctors, selected: previouslyPicked)
-        module.didFinish = didFinish
-        customPresent(viewController)
-    }
-}
-
-// MARK: - PickTimeIntervalSubscription
-
-extension TimeTableCoordinator: PickTimeIntervalSubscription {
-    func routeToPickTimeInterval(
-        date: Date,
-        previouslyPicked: (Date, Date)?,
-        didFinish: @escaping ((Date?, Date?) -> Void)
-    ) {
-        let (viewController, module) = modules.pickTimeInterval(availableOnDate: date, selected: previouslyPicked)
-        module.didFinish = didFinish
-        customPresent(viewController)
     }
 }
 
 // MARK: - PickCabinetSubscription
 
 extension TimeTableCoordinator: PickCabinetSubscription {
-    func routeToPickCabinet(previouslyPicked: Int?, didFinish: @escaping ((Int?) -> Void)) {
+    func routeToPickCabinet(previouslyPicked: Int?, didFinish: @escaping (Int?) -> Void) {
         let (viewController, module) = modules.pickCabinet(selected: previouslyPicked)
         module.didFinish = didFinish
         customPresent(viewController)
+    }
+}
+
+// MARK: - GraphicTimeTablePreviewSubscription
+
+extension TimeTableCoordinator: GraphicTimeTablePreviewSubscription {
+    func routeToGraphicTimeTablePreview(_ schedule: DoctorSchedule, didFinish: @escaping (DoctorSchedule) -> Void) {
+        let (viewController, module) = modules.graphicTimeTablePreview(schedule)
+        module.didFinish = { [navigationController] schedule in
+            navigationController.popViewController(animated: true)
+            didFinish(schedule)
+        }
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

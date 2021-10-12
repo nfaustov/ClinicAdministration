@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CreateScheduleSubscription: AnyObject {
-    func routeToCreateSchedule(date: Date)
+    func routeToCreateSchedule(for: Doctor, onDate: Date, didFinish: @escaping (DoctorSchedule?) -> Void)
 }

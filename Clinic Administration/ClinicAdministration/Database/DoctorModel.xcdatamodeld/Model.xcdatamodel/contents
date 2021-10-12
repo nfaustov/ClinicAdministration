@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E241" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Doctor" representedClassName=".DoctorEntity" syncable="YES" codeGenerationType="class">
         <attribute name="agentSalary" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="defaultCabinet" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="firstName" attributeType="String" defaultValueString=""/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="info" optional="YES" attributeType="String"/>
         <attribute name="monthlySalary" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="patronymicName" attributeType="String" defaultValueString=""/>
         <attribute name="phoneNumber" attributeType="String" defaultValueString=""/>
@@ -37,7 +40,7 @@
         <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DoctorSchedule" inverseName="patientAppointments" inverseEntity="DoctorSchedule"/>
     </entity>
     <elements>
-        <element name="Doctor" positionX="-694.1411743164062" positionY="-195.401611328125" width="128" height="223"/>
+        <element name="Doctor" positionX="-694.1411743164062" positionY="-195.401611328125" width="128" height="254"/>
         <element name="DoctorSchedule" positionX="-480.5201416015625" positionY="-74.5311279296875" width="128" height="119"/>
         <element name="Patient" positionX="-207.376953125" positionY="32.4600830078125" width="128" height="119"/>
         <element name="PatientAppointment" positionX="-420.9577026367188" positionY="109.4419860839844" width="128" height="89"/>
