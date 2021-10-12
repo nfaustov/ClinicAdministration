@@ -15,4 +15,5 @@ protocol Modules {
     func doctorsSearch() -> (UIViewController, DoctorsSearchModule)
     func pickCabinet(selected: Int?) -> (UIViewController, PickCabinetModule)
     func graphicTimeTablePreview(_ schedule: DoctorSchedule) -> (UIViewController, GraphicTimeTablePreviewModule)
+    func schedulesList(for doctor: Doctor) -> (UIViewController, SchedulesListModule)
 }

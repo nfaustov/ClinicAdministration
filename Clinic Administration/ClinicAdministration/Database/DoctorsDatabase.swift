@@ -211,6 +211,17 @@ final class DoctorsDatabase: Database {
         return schedules
     }
 
+    func readSchedules(for doctor: Doctor) -> [DoctorScheduleEntity] {
+        let request: NSFetchRequest = DoctorScheduleEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "phoneNumber = $@", doctor.phoneNumber)
+
+        guard let schedules = try? context.fetch(request) else {
+            return []
+        }
+
+        return schedules
+    }
+
     // MARK: - Update
 
     func update(changes: (() -> Void)? = nil) {
