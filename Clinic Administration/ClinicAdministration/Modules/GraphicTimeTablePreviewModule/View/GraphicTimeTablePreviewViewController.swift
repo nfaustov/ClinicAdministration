@@ -76,8 +76,6 @@ class GraphicTimeTablePreviewViewController: UIViewController {
 
     @objc private func confirmSchedule() {
         presenter.didFinish(with: newSchedule)
-
-        dismiss(animated: true)
     }
 }
 

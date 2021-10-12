@@ -16,7 +16,9 @@ where V: GraphicTimeTablePreviewDisplaying, I: GraphicTimeTablePreviewInteractor
 
 extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewPresentation {
     func didFinish(with schedule: DoctorSchedule) {
-        didFinish?(schedule)
+        var newSchedule = schedule
+        newSchedule.updateAppointments()
+        interactor.createSchedule(newSchedule)
     }
 
     func updateNewSchedule(_ schedule: DoctorSchedule) {
@@ -44,5 +46,9 @@ extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewInteractorDel
         var updatedSchedules = schedules
         updatedSchedules.append(newSchedule)
         view?.applySchedules(updatedSchedules)
+    }
+
+    func scheduleDidCreated(_ schedule: DoctorSchedule) {
+        didFinish?(schedule)
     }
 }

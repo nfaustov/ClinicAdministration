@@ -13,7 +13,6 @@ protocol Modules {
     func calendar() -> (UIViewController, CalendarModule)
     func createSchedule(for: Doctor, onDate: Date) -> (UIViewController, CreateScheduleModule)
     func doctorsSearch() -> (UIViewController, DoctorsSearchModule)
-    func pickTimeInterval(availableOnDate: Date, selected: (Date, Date)?) -> (UIViewController, PickTimeIntervalModule)
     func pickCabinet(selected: Int?) -> (UIViewController, PickCabinetModule)
     func graphicTimeTablePreview(_ schedule: DoctorSchedule) -> (UIViewController, GraphicTimeTablePreviewModule)
 }

@@ -21,7 +21,7 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
     var patientAppointments: [PatientAppointment]
 
     init(
-        id: UUID?,
+        id: UUID? = UUID(),
         secondName: String,
         firstName: String,
         patronymicName: String,
@@ -43,6 +43,31 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         self.startingTime = startingTime
         self.endingTime = endingTime
         self.serviceDuration = serviceDuration
+        self.patientAppointments = patientAppointments
+
+        if self.patientAppointments.isEmpty {
+            createAppointments()
+        }
+    }
+
+    init(
+        id: UUID? = UUID(),
+        doctor: Doctor,
+        startingTime: Date,
+        endingTime: Date,
+        cabinet: Int,
+        patientAppointments: [PatientAppointment]
+    ) {
+        self.id = id
+        self.secondName = doctor.secondName
+        self.firstName = doctor.firstName
+        self.patronymicName = doctor.patronymicName
+        self.phoneNumber = doctor.phoneNumber
+        self.specialization = doctor.specialization
+        self.cabinet = cabinet
+        self.startingTime = startingTime
+        self.endingTime = endingTime
+        self.serviceDuration = doctor.serviceDuration
         self.patientAppointments = patientAppointments
 
         if self.patientAppointments.isEmpty {

@@ -168,8 +168,8 @@ final class GraphicTableView: UIView {
 
     private func setWorkingHours(_ date: Date) {
         let workingHours = WorkingHours(date: date)
-        opening = calendar.dateComponents([.year, .month, .day, .weekday], from: workingHours.opening)
-        close = calendar.dateComponents([.year, .month, .day, .weekday], from: workingHours.close)
+        opening = calendar.dateComponents([.year, .month, .day, .weekday, .hour], from: workingHours.opening)
+        close = calendar.dateComponents([.year, .month, .day, .weekday, .hour], from: workingHours.close)
     }
 
     private func addCabinets() {

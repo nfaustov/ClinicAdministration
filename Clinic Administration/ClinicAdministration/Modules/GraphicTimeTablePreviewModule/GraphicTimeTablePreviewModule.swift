@@ -27,8 +27,10 @@ protocol GraphicTimeTablePreviewPresentation: AnyObject {
 protocol GraphicTimeTablePreviewInteraction: Interactor {
     func getSchedules(for date: Date)
     func updateSchedule(_ schedule: DoctorSchedule)
+    func createSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol GraphicTimeTablePreviewInteractorDelegate: AnyObject {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule])
+    func scheduleDidCreated(_ schedule: DoctorSchedule)
 }

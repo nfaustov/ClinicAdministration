@@ -38,11 +38,10 @@ final class CreateScheduleViewController: UIViewController {
         ]
     }
 
-    private var selectedCabinet = 1
-
     var date = Date()
     var currentDoctor: Doctor?
-    var intervals: [DateInterval] = []
+    private var intervals: [DateInterval] = []
+    private var selectedCabinet = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,26 +102,6 @@ final class CreateScheduleViewController: UIViewController {
         return layout
     }
 
-    @objc private func addDoctorSchedule() {
-//        guard let cabinet = schedulePicker.cabinet,
-//              let interval = schedulePicker.interval else { return }
-
-//        let schedule = DoctorSchedule(
-//            id: UUID(),
-//            secondName: doctor.secondName,
-//            firstName: doctor.firstName,
-//            patronymicName: doctor.patronymicName,
-//            phoneNumber: doctor.phoneNumber,
-//            specialization: doctor.specialization,
-//            cabinet: cabinet,
-//            startingTime: interval.0,
-//            endingTime: interval.1,
-//            serviceDuration: doctor.serviceDuration
-//        )
-
-//        presenter.addSchedule(schedule)
-    }
-
     private func initialSnapshot() {
         guard let currentDoctor = currentDoctor else { return }
 
@@ -149,6 +128,17 @@ extension CreateScheduleViewController: UICollectionViewDelegate {
                 presenter.pickCabinet(selected: selectedCabinet)
             default: break
             }
+        } else if let interval = dataSource.itemIdentifier(for: indexPath) as? DateInterval {
+            guard let doctor = currentDoctor else { return }
+
+            let doctorSchedule = DoctorSchedule(
+                doctor: doctor,
+                startingTime: interval.start,
+                endingTime: interval.start.addingTimeInterval(1800),
+                cabinet: selectedCabinet,
+                patientAppointments: []
+            )
+            presenter.schedulePreview(doctorSchedule)
         }
     }
 }
@@ -156,14 +146,8 @@ extension CreateScheduleViewController: UICollectionViewDelegate {
 // MARK: - CreateScheduleDisplaying
 
 extension CreateScheduleViewController: CreateScheduleDisplaying {
-    func pickedDoctor(_ doctor: Doctor) {
-    }
-
     func createdIntervals(_ intervals: [DateInterval]) {
         self.intervals = intervals
-    }
-
-    func pickedInterval(_ interval: (Date, Date)) {
     }
 
     func pickedCabinet(_ cabinet: Int) {

@@ -40,15 +40,6 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
         }
     }
 
-    func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?) {
-//        coordinator?.routeToPickTimeInterval(date: date, previouslyPicked: selected) { starting, ending in
-//            guard let starting = starting,
-//                  let ending = ending else { return }
-//
-//            self.view?.pickedInterval((starting, ending))
-//        }
-    }
-
     func pickCabinet(selected: Int?) {
         coordinator?.routeToPickCabinet(previouslyPicked: selected) { cabinet in
             guard let cabinet = cabinet else { return }
@@ -59,12 +50,8 @@ extension CreateSchedulePresenter: CreateSchedulePresentation {
 
     func schedulePreview(_ schedule: DoctorSchedule) {
         coordinator?.routeToGraphicTimeTablePreview(schedule) { editedSchedule in
-            self.view?.pickedInterval((editedSchedule.startingTime, editedSchedule.endingTime))
+            self.didFinish?(editedSchedule)
         }
-    }
-
-    func createSchedule(_ schedule: DoctorSchedule) {
-        interactor.createSchedule(schedule)
     }
 }
 
@@ -101,9 +88,5 @@ extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
         intervals.append(lastInterval)
 
         view?.createdIntervals(intervals.filter { $0.duration >= 900 })
-    }
-
-    func scheduleDidCreated(_ schedule: DoctorSchedule) {
-        didFinish?(schedule)
     }
 }

@@ -27,4 +27,9 @@ extension GraphicTimeTablePreviewInteractor: GraphicTimeTablePreviewInteraction 
     func updateSchedule(_ schedule: DoctorSchedule) {
         database?.updateSchedule(schedule)
     }
+
+    func createSchedule(_ schedule: DoctorSchedule) {
+        database?.createDoctorSchedule(schedule)
+        delegate?.scheduleDidCreated(schedule)
+    }
 }

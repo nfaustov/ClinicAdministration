@@ -25,13 +25,6 @@ final class TimeTableCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
 
-//    private func addCreateScheduleCoordinator() {
-//        let child = CreateScheduleCoordinator(navigationController: navigationController, modules: modules)
-//        child.parentCoordinator = self
-//        childCoordinators.append(child)
-//        child.start()
-//    }
-
     private func customPresent(_ viewController: UIViewController, animated: Bool = true) {
         viewController.transitioningDelegate = viewController as? UIViewControllerTransitioningDelegate
         viewController.modalPresentationStyle = .custom
@@ -79,7 +72,10 @@ extension TimeTableCoordinator: CreateScheduleSubscription {
     func routeToCreateSchedule(for doctor: Doctor, onDate date: Date, didFinish: @escaping(DoctorSchedule?) -> Void) {
         let (viewController, module) = modules.createSchedule(for: doctor, onDate: date)
         module.coordinator = self
-        module.didFinish = didFinish
+        module.didFinish = { [navigationController] schedule in
+            navigationController.popViewController(animated: true)
+            didFinish(schedule)
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
 }
@@ -99,7 +95,10 @@ extension TimeTableCoordinator: PickCabinetSubscription {
 extension TimeTableCoordinator: GraphicTimeTablePreviewSubscription {
     func routeToGraphicTimeTablePreview(_ schedule: DoctorSchedule, didFinish: @escaping (DoctorSchedule) -> Void) {
         let (viewController, module) = modules.graphicTimeTablePreview(schedule)
-        module.didFinish = didFinish
+        module.didFinish = { [navigationController] schedule in
+            navigationController.popViewController(animated: true)
+            didFinish(schedule)
+        }
         navigationController.pushViewController(viewController, animated: true)
     }
 }

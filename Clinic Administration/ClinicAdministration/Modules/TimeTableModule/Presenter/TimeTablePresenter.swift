@@ -72,6 +72,8 @@ extension TimeTablePresenter: TimeTablePresentation {
     private func createSchedule(for doctor: Doctor, onDate date: Date) {
         coordinator?.routeToCreateSchedule(for: doctor, onDate: date) { schedule in
             guard schedule != nil else { return }
+
+            self.view?.newSchedule = schedule
         }
     }
 }

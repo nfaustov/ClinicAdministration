@@ -19,7 +19,6 @@ protocol CreateScheduleDisplaying: View {
     var currentDoctor: Doctor? { get set }
 
     func createdIntervals(_ intervals: [DateInterval])
-    func pickedInterval(_ interval: (Date, Date))
     func pickedCabinet(_ cabinet: Int)
     func pickedDate(_ date: Date)
 }
@@ -28,18 +27,14 @@ protocol CreateSchedulePresentation: AnyObject {
     func makeIntervals(onDate: Date, forCabinet: Int)
     func pickDoctor()
     func pickDateInCalendar()
-    func pickTimeInterval(availableOnDate date: Date, selected: (Date, Date)?)
     func pickCabinet(selected: Int?)
     func schedulePreview(_ schedule: DoctorSchedule)
-    func createSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol CreateScheduleInteraction: Interactor {
     func getSchedules(onDate: Date, forCabinet: Int)
-    func createSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol CreateScheduleInteractorDelegate: AnyObject {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule], date: Date)
-    func scheduleDidCreated(_ schedule: DoctorSchedule)
 }

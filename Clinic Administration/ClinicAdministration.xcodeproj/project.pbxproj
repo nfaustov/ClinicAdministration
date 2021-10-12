@@ -49,7 +49,6 @@
 		8B433A3C2643EC7E000FB7DC /* GraphicTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B433A3B2643EC7E000FB7DC /* GraphicTimeTableView.swift */; };
 		8B4FC4F82632B2AF00D7627A /* TimeTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4FC4F72632B2AF00D7627A /* TimeTableModule.swift */; };
 		8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */; };
-		8B5E5553263ACEB7002E54FF /* PickTimeIntervalSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5E5552263ACEB7002E54FF /* PickTimeIntervalSubscription.swift */; };
 		8B5E5555263ACF02002E54FF /* PickCabinetSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5E5554263ACF02002E54FF /* PickCabinetSubscription.swift */; };
 		8B5E5558263ADA60002E54FF /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5E5557263ADA60002E54FF /* CustomPresentationController.swift */; };
 		8B62D6242615CB7A006A78F4 /* DatePickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */; };
@@ -63,9 +62,6 @@
 		8B7A126B2631E063007BC1AB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A126A2631E063007BC1AB /* View.swift */; };
 		8B7A12712631E077007BC1AB /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12702631E077007BC1AB /* Interactor.swift */; };
 		8B7A12752631E084007BC1AB /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12742631E084007BC1AB /* Presenter.swift */; };
-		8B7F8B0E263AF10E00B75324 /* PickTimeIntervalModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B0D263AF10E00B75324 /* PickTimeIntervalModule.swift */; };
-		8B7F8B10263AF1C800B75324 /* PickTimeIntervalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B0F263AF1C800B75324 /* PickTimeIntervalPresenter.swift */; };
-		8B7F8B12263AF2DD00B75324 /* PickTimeIntervalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B11263AF2DD00B75324 /* PickTimeIntervalViewController.swift */; };
 		8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */; };
 		8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */; };
 		8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */; };
@@ -169,7 +165,6 @@
 		8B433A3B2643EC7E000FB7DC /* GraphicTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableView.swift; sourceTree = "<group>"; };
 		8B4FC4F72632B2AF00D7627A /* TimeTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableModule.swift; sourceTree = "<group>"; };
 		8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSectionPlaceholder.swift; sourceTree = "<group>"; };
-		8B5E5552263ACEB7002E54FF /* PickTimeIntervalSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickTimeIntervalSubscription.swift; sourceTree = "<group>"; };
 		8B5E5554263ACF02002E54FF /* PickCabinetSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetSubscription.swift; sourceTree = "<group>"; };
 		8B5E5557263ADA60002E54FF /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerHeader.swift; sourceTree = "<group>"; };
@@ -183,9 +178,6 @@
 		8B7A126A2631E063007BC1AB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		8B7A12702631E077007BC1AB /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		8B7A12742631E084007BC1AB /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
-		8B7F8B0D263AF10E00B75324 /* PickTimeIntervalModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickTimeIntervalModule.swift; sourceTree = "<group>"; };
-		8B7F8B0F263AF1C800B75324 /* PickTimeIntervalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickTimeIntervalPresenter.swift; sourceTree = "<group>"; };
-		8B7F8B11263AF2DD00B75324 /* PickTimeIntervalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickTimeIntervalViewController.swift; sourceTree = "<group>"; };
 		8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetModule.swift; sourceTree = "<group>"; };
 		8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetViewController.swift; sourceTree = "<group>"; };
 		8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetPresenter.swift; sourceTree = "<group>"; };
@@ -563,7 +555,6 @@
 				8BB450B92630491700C143A4 /* CalendarSubscription.swift */,
 				8BB450BD2630495D00C143A4 /* GraphicTimeTableSubscription.swift */,
 				8B10E30426383C6D006022BB /* CreateScheduleSubscription.swift */,
-				8B5E5552263ACEB7002E54FF /* PickTimeIntervalSubscription.swift */,
 				8B5E5554263ACF02002E54FF /* PickCabinetSubscription.swift */,
 				8BAE47532642799B008B0B28 /* GraphicTimeTablePreviewSubscription.swift */,
 				8B33A651266968340003631A /* DoctorsSearchSubscription.swift */,
@@ -614,7 +605,6 @@
 				8B38A1A3260D12B600CA01A0 /* TimeTableModule */,
 				8B419ACD2636C2530083741F /* CreateScheduleModule */,
 				8B33A6442668E0AB0003631A /* DoctorsSearchModule */,
-				8B7F8B0A263AF0AB00B75324 /* PickTimeIntervalModule */,
 				8B7F8B13263AF55800B75324 /* PickCabinetModule */,
 				8BAE4749264270B6008B0B28 /* GraphicTimeTablePreviewModule */,
 			);
@@ -659,32 +649,6 @@
 				8B7A12702631E077007BC1AB /* Interactor.swift */,
 			);
 			path = "Base Module";
-			sourceTree = "<group>";
-		};
-		8B7F8B0A263AF0AB00B75324 /* PickTimeIntervalModule */ = {
-			isa = PBXGroup;
-			children = (
-				8B7F8B0B263AF0ED00B75324 /* View */,
-				8B7F8B0C263AF0F700B75324 /* Presenter */,
-				8B7F8B0D263AF10E00B75324 /* PickTimeIntervalModule.swift */,
-			);
-			path = PickTimeIntervalModule;
-			sourceTree = "<group>";
-		};
-		8B7F8B0B263AF0ED00B75324 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8B7F8B11263AF2DD00B75324 /* PickTimeIntervalViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		8B7F8B0C263AF0F700B75324 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				8B7F8B0F263AF1C800B75324 /* PickTimeIntervalPresenter.swift */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		8B7F8B13263AF55800B75324 /* PickCabinetModule */ = {
@@ -1038,7 +1002,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B7F8B12263AF2DD00B75324 /* PickTimeIntervalViewController.swift in Sources */,
 				8BA6030D260DDF8300DF686B /* TimeTablePatientView.swift in Sources */,
 				8B3E1635267792260070BDAF /* OptionCell.swift in Sources */,
 				8B7A12662631DCF9007BC1AB /* Modules.swift in Sources */,
@@ -1047,7 +1010,6 @@
 				8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */,
 				8B20CE5E2629998F0007C20A /* DateFormatterExtension.swift in Sources */,
 				8B33A65726696F720003631A /* DoctorsSearchInteractor.swift in Sources */,
-				8B7F8B10263AF1C800B75324 /* PickTimeIntervalPresenter.swift in Sources */,
 				8BCB050A267576EB0062F396 /* CreateScheduleCollectionViewLayout.swift in Sources */,
 				8B62D6242615CB7A006A78F4 /* DatePickerHeader.swift in Sources */,
 				8BF026D6267383C3002B0C39 /* ScheduleOption.swift in Sources */,
@@ -1061,7 +1023,6 @@
 				8B10E301263822FC006022BB /* CreateSchedulePresenter.swift in Sources */,
 				8BF026DE2673881B002B0C39 /* DoctorViewCell.swift in Sources */,
 				8BF23AA726371A03009D9A7A /* DoctorControl.swift in Sources */,
-				8B5E5553263ACEB7002E54FF /* PickTimeIntervalSubscription.swift in Sources */,
 				8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */,
 				8B6B0F87261CA56700F416D1 /* TimeTableAction.swift in Sources */,
 				8B38A1AA260D133500CA01A0 /* TimeTableViewController.swift in Sources */,
@@ -1079,7 +1040,6 @@
 				8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */,
 				8B5E5558263ADA60002E54FF /* CustomPresentationController.swift in Sources */,
 				8B20CE2D262997B30007C20A /* DayOfWeekRow.swift in Sources */,
-				8B7F8B0E263AF10E00B75324 /* PickTimeIntervalModule.swift in Sources */,
 				8B10E3882625CF4200476862 /* GraphicTimeTablePresenter.swift in Sources */,
 				8BAE475026427536008B0B28 /* GraphicTimeTablePreviewPresenter.swift in Sources */,
 				8B10E2FD26382158006022BB /* CreateScheduleModule.swift in Sources */,

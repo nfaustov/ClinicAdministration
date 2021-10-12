@@ -64,18 +64,6 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func pickTimeInterval(
-        availableOnDate date: Date,
-        selected interval: (Date, Date)?
-    ) -> (UIViewController, PickTimeIntervalModule) {
-        let view = PickTimeIntervalViewController()
-        view.date = date
-        view.selectedInterval = interval
-        let presenter = PickTimeIntervalPresenter(view: view)
-
-        return (view, presenter)
-    }
-
     func pickCabinet(selected cabinet: Int?) -> (UIViewController, PickCabinetModule) {
         let view = PickCabinetViewController()
         view.selectedCabinet = cabinet
