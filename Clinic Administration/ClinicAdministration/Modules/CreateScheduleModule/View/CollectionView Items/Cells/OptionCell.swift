@@ -12,6 +12,21 @@ final class OptionCell: UICollectionViewCell, SelfConfiguredCell {
 
     private var scheduleOptionView: ScheduleOptionView!
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        layer.cornerRadius = Design.CornerRadius.large
+        layer.shadowColor = Design.Color.brown.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 0.35
+        layer.shadowRadius = 8
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func configure(with option: ScheduleOption) {
         if let date = option.date {
             scheduleOptionView = ScheduleOptionView(title: option.title, date: date)

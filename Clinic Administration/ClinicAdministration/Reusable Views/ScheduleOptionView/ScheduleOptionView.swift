@@ -67,19 +67,9 @@ class ScheduleOptionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-    }
-
     private func configureHierarchy(with valueView: UIView) {
         layer.backgroundColor = Design.Color.chocolate.cgColor
         layer.cornerRadius = Design.CornerRadius.large
-        layer.shadowColor = Design.Color.brown.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowOpacity = 0.2
-        layer.shadowRadius = 8
 
         [titleLabel, valueView, imageView].forEach { view in
             addSubview(view)

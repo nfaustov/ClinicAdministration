@@ -14,6 +14,7 @@ final class IntervalCell: UICollectionViewCell, SelfConfiguredCell {
     private let endingLabel = UILabel()
 
     func configure(with interval: DateInterval) {
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
         layer.backgroundColor = Design.Color.white.cgColor
         layer.cornerRadius = Design.CornerRadius.medium
         layer.shadowColor = Design.Color.brown.cgColor
