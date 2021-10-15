@@ -62,6 +62,7 @@
 		8B7A126B2631E063007BC1AB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A126A2631E063007BC1AB /* View.swift */; };
 		8B7A12712631E077007BC1AB /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12702631E077007BC1AB /* Interactor.swift */; };
 		8B7A12752631E084007BC1AB /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12742631E084007BC1AB /* Presenter.swift */; };
+		8B7C90EF2718A5FF00CA11F8 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C90EE2718A5FF00CA11F8 /* ScheduleCell.swift */; };
 		8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */; };
 		8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */; };
 		8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */; };
@@ -183,6 +184,7 @@
 		8B7A126A2631E063007BC1AB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		8B7A12702631E077007BC1AB /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		8B7A12742631E084007BC1AB /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		8B7C90EE2718A5FF00CA11F8 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetModule.swift; sourceTree = "<group>"; };
 		8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetViewController.swift; sourceTree = "<group>"; };
 		8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetPresenter.swift; sourceTree = "<group>"; };
@@ -460,6 +462,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		8B2589FC27161FF900CDD29E /* CollectionView Items */ = {
+			isa = PBXGroup;
+			children = (
+				8B7C90EE2718A5FF00CA11F8 /* ScheduleCell.swift */,
+			);
+			path = "CollectionView Items";
+			sourceTree = "<group>";
+		};
 		8B303B06263BE23100DD343A /* PickerViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -720,6 +730,7 @@
 			isa = PBXGroup;
 			children = (
 				8B83BAA92715F6B5007E9C71 /* SchedulesListViewController.swift */,
+				8B2589FC27161FF900CDD29E /* CollectionView Items */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1083,6 +1094,7 @@
 				8B4FC4F82632B2AF00D7627A /* TimeTableModule.swift in Sources */,
 				8B33A650266906D80003631A /* DoctorItemCell.swift in Sources */,
 				8BA701D6264BD9E1008C80ED /* DoctorsDatabase.swift in Sources */,
+				8B7C90EF2718A5FF00CA11F8 /* ScheduleCell.swift in Sources */,
 				8B7A126B2631E063007BC1AB /* View.swift in Sources */,
 				8B10E3922625D04A00476862 /* GraphicTimeTableInteractor.swift in Sources */,
 				8B10E30526383C6D006022BB /* CreateScheduleSubscription.swift in Sources */,

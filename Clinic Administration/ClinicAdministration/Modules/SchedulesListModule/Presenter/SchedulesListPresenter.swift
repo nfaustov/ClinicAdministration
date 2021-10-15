@@ -15,6 +15,10 @@ where V: SchedulesListDisplaying, I: SchedulesListInteractor {
 // MARK: - SchedulesListPresentation
 
 extension SchedulesListPresenter: SchedulesListPresentation {
+    func getSchedules(for doctor: Doctor) {
+        interactor.getSchedules(for: doctor)
+    }
+
     func didFinish(with schedule: DoctorSchedule) {
         didFinish?(schedule)
     }
