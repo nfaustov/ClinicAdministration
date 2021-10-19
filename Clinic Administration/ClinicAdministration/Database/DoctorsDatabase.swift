@@ -36,85 +36,85 @@ final class DoctorsDatabase: Database {
     }
 
     // MARK: - Mock data
-//
-//    let doctors = [
-//        Doctor(
-//            id: UUID(uuidString: "9bc68b57-bdac-4452-b80a-8dc116311486"),
-//            secondName: "Рошаль",
-//            firstName: "Леонид",
-//            patronymicName: "Михайлович",
-//            phoneNumber: "8-999-999-9999",
-//            birthDate: Date(),
-//            specialization: "Травматолог",
-//            basicService: "",
-//            serviceDuration: 1800,
-//            salaryType: .fixedSalary
-//        ),
-//        Doctor(
-//            id: UUID(uuidString: "7e5ad74f-0427-449c-9b77-74ce5266b825"),
-//            secondName: "Перельман",
-//            firstName: "Михаил",
-//            patronymicName: "Израйлевич",
-//            phoneNumber: "8-000-000-0000",
-//            birthDate: Date(),
-//            specialization: "Физиопульмонолог",
-//            basicService: "",
-//            serviceDuration: 1800,
-//            salaryType: .piecerateSalary
-//        ),
-//        Doctor(
-//            id: UUID(uuidString: "5f88e55f-608e-4ba6-b1a9-977014323814"),
-//            secondName: "Бокерия",
-//            firstName: "Лео",
-//            patronymicName: "Антонович",
-//            phoneNumber: "8-999-222-3344",
-//            birthDate: Date(),
-//            specialization: "Сосудистый хирург",
-//            basicService: "",
-//            serviceDuration: 1800,
-//            salaryType: .fixedSalary
-//        ),
-//        Doctor(
-//            id: UUID(uuidString: "9f07c865-af8e-4155-9977-e268a6ea1010"),
-//            secondName: "Аншина",
-//            firstName: "Маргарита",
-//            patronymicName: "Бениаминовна",
-//            phoneNumber: "8-999-999-0000",
-//            birthDate: Date(),
-//            specialization: "Гинеколог-эндокринолог",
-//            basicService: "",
-//            serviceDuration: 1800,
-//            salaryType: .fixedSalary
-//        ),
-//        Doctor(
-//            id: UUID(uuidString: "04a934b9-6168-4ae7-94cb-a8a6a84abbf8"),
-//            secondName: "Разумовский",
-//            firstName: "Александр",
-//            patronymicName: "Юрьевич",
-//            phoneNumber: "8-888-999-2222",
-//            birthDate: Date(),
-//            specialization: "Детский хирург",
-//            basicService: "",
-//            serviceDuration: 1800,
-//            salaryType: .piecerateSalary
-//        ),
-//        Doctor(
-//            id: UUID(uuidString: "620a4fe9-9828-487c-925c-3c5d422dfbde"),
-//            secondName: "Дземешкевич",
-//            firstName: "Сергей",
-//            patronymicName: "Леонидович",
-//            phoneNumber: "8-000-999-0000",
-//            birthDate: Date(),
-//            specialization: "Кардиохирург",
-//            basicService: "",
-//            serviceDuration: 1800,
-//            salaryType: .fixedSalary
-//        )
-//    ]
-//
-//    init() {
-//        doctors.forEach { create(objectWithModel: $0) }
-//    }
+
+    let doctors = [
+        Doctor(
+            id: UUID(uuidString: "9bc68b57-bdac-4452-b80a-8dc116311486"),
+            secondName: "Рошаль",
+            firstName: "Леонид",
+            patronymicName: "Михайлович",
+            phoneNumber: "8-999-999-9999",
+            birthDate: Date(),
+            specialization: "Травматолог",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .fixedSalary
+        ),
+        Doctor(
+            id: UUID(uuidString: "7e5ad74f-0427-449c-9b77-74ce5266b825"),
+            secondName: "Перельман",
+            firstName: "Михаил",
+            patronymicName: "Израйлевич",
+            phoneNumber: "8-000-000-0000",
+            birthDate: Date(),
+            specialization: "Физиопульмонолог",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .piecerateSalary
+        ),
+        Doctor(
+            id: UUID(uuidString: "5f88e55f-608e-4ba6-b1a9-977014323814"),
+            secondName: "Бокерия",
+            firstName: "Лео",
+            patronymicName: "Антонович",
+            phoneNumber: "8-999-222-3344",
+            birthDate: Date(),
+            specialization: "Сосудистый хирург",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .fixedSalary
+        ),
+        Doctor(
+            id: UUID(uuidString: "9f07c865-af8e-4155-9977-e268a6ea1010"),
+            secondName: "Аншина",
+            firstName: "Маргарита",
+            patronymicName: "Бениаминовна",
+            phoneNumber: "8-999-999-0000",
+            birthDate: Date(),
+            specialization: "Гинеколог-эндокринолог",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .fixedSalary
+        ),
+        Doctor(
+            id: UUID(uuidString: "04a934b9-6168-4ae7-94cb-a8a6a84abbf8"),
+            secondName: "Разумовский",
+            firstName: "Александр",
+            patronymicName: "Юрьевич",
+            phoneNumber: "8-888-999-2222",
+            birthDate: Date(),
+            specialization: "Детский хирург",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .piecerateSalary
+        ),
+        Doctor(
+            id: UUID(uuidString: "620a4fe9-9828-487c-925c-3c5d422dfbde"),
+            secondName: "Дземешкевич",
+            firstName: "Сергей",
+            patronymicName: "Леонидович",
+            phoneNumber: "8-000-999-0000",
+            birthDate: Date(),
+            specialization: "Кардиохирург",
+            basicService: "",
+            serviceDuration: 1800,
+            salaryType: .fixedSalary
+        )
+    ]
+
+    init() {
+        doctors.forEach { create(objectWithModel: $0) }
+    }
 
     // MARK: - Create
 
@@ -177,7 +177,7 @@ final class DoctorsDatabase: Database {
 
     func readDoctor(for schedule: DoctorSchedule) -> DoctorEntity {
         let request: NSFetchRequest = DoctorEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "phoneNumber = %@", schedule.phoneNumber)
+        request.predicate = NSPredicate(format: "phoneNumber = %@", schedule.doctor.phoneNumber)
 
         guard let doctor = try? context.fetch(request).first else {
             fatalError("There is no doctor for this schedule.")
@@ -212,8 +212,10 @@ final class DoctorsDatabase: Database {
     }
 
     func readSchedules(for doctor: Doctor) -> [DoctorScheduleEntity] {
+        guard let id = doctor.id else { return [] }
+
         let request: NSFetchRequest = DoctorScheduleEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "phoneNumber = $@", doctor.phoneNumber)
+        request.predicate = NSPredicate(format: "doctor.id == %@", id as CVarArg)
 
         guard let schedules = try? context.fetch(request) else {
             return []

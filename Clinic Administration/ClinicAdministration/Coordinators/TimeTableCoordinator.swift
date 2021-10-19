@@ -106,7 +106,7 @@ extension TimeTableCoordinator: GraphicTimeTablePreviewSubscription {
 // MARK: - SchedulesListSubscription
 
 extension TimeTableCoordinator: SchedulesListSubscription {
-    func routeToSchedulesList(for doctor: Doctor, didFinish: @escaping (DoctorSchedule) -> Void) {
+    func routeToSchedulesList(for doctor: Doctor, didFinish: @escaping (DoctorSchedule?) -> Void) {
         let (viewController, module) = modules.schedulesList(for: doctor)
         module.didFinish = { [navigationController] schedule in
             navigationController.popViewController(animated: true)

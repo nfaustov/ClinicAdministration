@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum SalaryType: String, Hashable, Equatable {
+enum SalaryType: String, Hashable, Equatable, Codable {
     case fixedSalary = "fixed"
     case piecerateSalary = "piecerate"
 }
 
-struct Doctor: Hashable {
+struct Doctor: Codable, Hashable {
     var id: UUID?
     var secondName: String
     var firstName: String

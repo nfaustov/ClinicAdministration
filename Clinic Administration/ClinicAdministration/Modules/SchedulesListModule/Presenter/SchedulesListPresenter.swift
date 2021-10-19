@@ -23,3 +23,10 @@ extension SchedulesListPresenter: SchedulesListPresentation {
         didFinish?(schedule)
     }
 }
+
+// MARK: - SchedulesListInteractorDelegate
+
+extension SchedulesListPresenter: SchedulesListInteractorDelegate {
+    func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
+    }
+}
