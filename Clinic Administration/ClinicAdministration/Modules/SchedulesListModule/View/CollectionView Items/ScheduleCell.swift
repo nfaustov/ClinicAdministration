@@ -31,16 +31,23 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
 
     func configure(with schedule: DoctorSchedule) {
         let formatter = DateFormatter.shared
-        formatter.dateFormat = "M d"
+        formatter.dateFormat = "LLLL d"
+        dateLabel.numberOfLines = 2
+        dateLabel.adjustsFontSizeToFitWidth = true
+        dateLabel.textAlignment = .center
         dateLabel.text = formatter.string(from: schedule.startingTime)
         dateLabel.textColor = Design.Color.white
-        formatter.dateFormat = "H:dd"
+        dateLabel.font = Design.Font.robotoFont(ofSize: 17, weight: .regular)
+        formatter.dateFormat = "H:mm"
         let startingTime = formatter.string(from: schedule.startingTime)
         let endingTime = formatter.string(from: schedule.endingTime)
         intervalLabel.text = "\(startingTime) - \(endingTime)"
         intervalLabel.textColor = Design.Color.chocolate
+        intervalLabel.font = Design.Font.robotoFont(ofSize: 20, weight: .medium)
 
-        dateView.backgroundColor = Design.Color.gray
+        dateView.backgroundColor = Design.Color.darkGray
+        dateView.layer.cornerRadius = layer.cornerRadius
+        dateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
         addSubview(dateView)
         dateView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -62,8 +69,8 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
             ),
 
             intervalLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            intervalLabel.leadingAnchor.constraint(equalTo: dateView.trailingAnchor, constant: 8),
-            intervalLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -8)
+            intervalLabel.leadingAnchor.constraint(equalTo: dateView.trailingAnchor, constant: 20),
+            intervalLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20)
         ])
     }
 }

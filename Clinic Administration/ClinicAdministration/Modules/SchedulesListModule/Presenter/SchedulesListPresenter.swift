@@ -28,5 +28,6 @@ extension SchedulesListPresenter: SchedulesListPresentation {
 
 extension SchedulesListPresenter: SchedulesListInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
+        view?.schedulesSnapshot(schedules)
     }
 }

@@ -24,6 +24,7 @@ final class SchedulesListViewController: UIViewController {
         super.viewDidLoad()
 
         configureHierarchy()
+        configureDataSource()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -33,8 +34,8 @@ final class SchedulesListViewController: UIViewController {
     }
 
     private func configureHierarchy() {
-        view.backgroundColor = Design.Color.lightGray
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        collectionView.backgroundColor = Design.Color.lightGray
         view.addSubview(collectionView)
         collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         collectionView.delegate = self
@@ -79,6 +80,10 @@ final class SchedulesListViewController: UIViewController {
 
 extension SchedulesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let dataSource = dataSource,
+              let schedule = dataSource.itemIdentifier(for: indexPath) else { return }
+
+        presenter.didFinish(with: schedule)
     }
 }
 
