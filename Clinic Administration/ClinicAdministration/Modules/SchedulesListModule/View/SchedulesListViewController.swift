@@ -55,6 +55,7 @@ final class SchedulesListViewController: UIViewController {
             let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
             let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
             layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 30, trailing: 20)
+            layoutSection.interGroupSpacing = 1
 
             return layoutSection
         }
@@ -70,6 +71,16 @@ final class SchedulesListViewController: UIViewController {
         ) { collectionView, indexPath, schedule in
             let factory = CellFactory(collectionView: collectionView)
             let cell = factory.configureCell(ScheduleCell.self, with: schedule, for: indexPath)
+
+            switch indexPath.item {
+            case 0:
+                cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            case indexPath.count - 1:
+                cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            default: cell.layer.maskedCorners = []
+            }
+
+            cell.layer.cornerRadius = Design.CornerRadius.medium
 
             return cell
         }

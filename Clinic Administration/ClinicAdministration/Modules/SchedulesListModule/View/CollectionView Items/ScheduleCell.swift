@@ -18,7 +18,7 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
         super.init(frame: frame)
 
         backgroundColor = Design.Color.white
-        layer.cornerRadius = Design.CornerRadius.medium
+        layer.masksToBounds = true
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowColor = Design.Color.darkGray.cgColor
         layer.shadowOpacity = 0.2
@@ -45,9 +45,7 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
         intervalLabel.textColor = Design.Color.chocolate
         intervalLabel.font = Design.Font.robotoFont(ofSize: 20, weight: .medium)
 
-        dateView.backgroundColor = Design.Color.darkGray
-        dateView.layer.cornerRadius = layer.cornerRadius
-        dateView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
+        dateView.layer.backgroundColor = Design.Color.darkGray.cgColor
         addSubview(dateView)
         dateView.translatesAutoresizingMaskIntoConstraints = false
 
