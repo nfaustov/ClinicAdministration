@@ -50,7 +50,6 @@
 		8B4FC4F82632B2AF00D7627A /* TimeTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4FC4F72632B2AF00D7627A /* TimeTableModule.swift */; };
 		8B52D7FA2727534900C7DD1E /* CalendarControlMonthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */; };
 		8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */; };
-		8B58AFA62723034400121258 /* CalendarControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58AFA52723034400121258 /* CalendarControl.swift */; };
 		8B58AFA92723354C00121258 /* CalendarControlDayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58AFA82723354C00121258 /* CalendarControlDayLabel.swift */; };
 		8B58AFAB272336E700121258 /* CalendarControlDayOfWeekRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B58AFAA272336E700121258 /* CalendarControlDayOfWeekRow.swift */; };
 		8B5E5555263ACF02002E54FF /* PickCabinetSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5E5554263ACF02002E54FF /* PickCabinetSubscription.swift */; };
@@ -176,7 +175,6 @@
 		8B4FC4F72632B2AF00D7627A /* TimeTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableModule.swift; sourceTree = "<group>"; };
 		8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlMonthHeader.swift; sourceTree = "<group>"; };
 		8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSectionPlaceholder.swift; sourceTree = "<group>"; };
-		8B58AFA52723034400121258 /* CalendarControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControl.swift; sourceTree = "<group>"; };
 		8B58AFA82723354C00121258 /* CalendarControlDayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlDayLabel.swift; sourceTree = "<group>"; };
 		8B58AFAA272336E700121258 /* CalendarControlDayOfWeekRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlDayOfWeekRow.swift; sourceTree = "<group>"; };
 		8B5E5554263ACF02002E54FF /* PickCabinetSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetSubscription.swift; sourceTree = "<group>"; };
@@ -396,7 +394,6 @@
 		8B20CE0D262995910007C20A /* Reusable Views */ = {
 			isa = PBXGroup;
 			children = (
-				8B58AFA4272302F200121258 /* CalendarControl */,
 				8B070B03266D3DD800F4D45F /* DoctorView */,
 				8B10E3952625D0B100476862 /* GraphicTimeTableView */,
 				8B303B06263BE23100DD343A /* PickerViewController */,
@@ -625,25 +622,6 @@
 			path = Supplementaries;
 			sourceTree = "<group>";
 		};
-		8B58AFA4272302F200121258 /* CalendarControl */ = {
-			isa = PBXGroup;
-			children = (
-				8B58AFA52723034400121258 /* CalendarControl.swift */,
-				8B58AFA7272303B800121258 /* Subviews */,
-			);
-			path = CalendarControl;
-			sourceTree = "<group>";
-		};
-		8B58AFA7272303B800121258 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				8B58AFA82723354C00121258 /* CalendarControlDayLabel.swift */,
-				8B58AFAA272336E700121258 /* CalendarControlDayOfWeekRow.swift */,
-				8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */,
-			);
-			path = Subviews;
-			sourceTree = "<group>";
-		};
 		8B5D15B82627561F003450F6 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -758,6 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				8B83BAA92715F6B5007E9C71 /* SchedulesListViewController.swift */,
+				8BC2178A2734532100E860B4 /* Subviews */,
 				8B2589FC27161FF900CDD29E /* CollectionView Items */,
 			);
 			path = View;
@@ -816,6 +795,16 @@
 				8BAE4751264275A3008B0B28 /* GraphicTimeTablePreviewInteractor.swift */,
 			);
 			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8BC2178A2734532100E860B4 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				8B58AFA82723354C00121258 /* CalendarControlDayLabel.swift */,
+				8B58AFAA272336E700121258 /* CalendarControlDayOfWeekRow.swift */,
+				8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		8BCAB78D2559D4A4001A93D0 = {
@@ -1168,7 +1157,6 @@
 				8B58AFA92723354C00121258 /* CalendarControlDayLabel.swift in Sources */,
 				8B33A6492668E1160003631A /* DoctorsSearchModule.swift in Sources */,
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,
-				8B58AFA62723034400121258 /* CalendarControl.swift in Sources */,
 				8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */,
 				8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */,
 				8B29975F267261A90050C5E1 /* ScheduleOptionView.swift in Sources */,

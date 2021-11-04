@@ -19,6 +19,12 @@ extension SchedulesListPresenter: SchedulesListPresentation {
         interactor.getSchedules(for: doctor)
     }
 
+    func getSchedules(for doctor: Doctor, for date: Date) {
+    }
+
+    func getSchedules(for doctor: Doctor, for dateRange: DateInterval) {
+    }
+
     func didFinish(with schedule: DoctorSchedule) {
         didFinish?(schedule)
     }

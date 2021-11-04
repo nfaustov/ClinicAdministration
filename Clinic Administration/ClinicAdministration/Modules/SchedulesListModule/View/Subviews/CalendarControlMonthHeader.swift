@@ -24,6 +24,7 @@ struct CalendarControlMonthHeader: CalendarItemViewRepresentable {
         label.font = invariantViewProperties.font
         label.textColor = invariantViewProperties.textColor
         label.backgroundColor = invariantViewProperties.backgroundColor
+        label.textAlignment = .center
 
         return label
     }
