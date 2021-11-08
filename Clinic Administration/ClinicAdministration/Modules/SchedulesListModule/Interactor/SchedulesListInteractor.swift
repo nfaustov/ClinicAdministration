@@ -17,7 +17,7 @@ final class SchedulesListInteractor {
 // MARK: - SchedulesListInteraction
 
 extension SchedulesListInteractor: SchedulesListInteraction {
-    func getSchedules(for doctor: Doctor, filteredBy filter: SchedulesListFilter?) {
+    func getSchedules(for doctor: Doctor, onDate date: Date?) {
         guard let schedulesEntities = database?.readSchedules(for: doctor) else { return }
 
         let schedules = schedulesEntities
@@ -25,28 +25,16 @@ extension SchedulesListInteractor: SchedulesListInteraction {
             .filter { $0.startingTime > Date() }
             .sorted(by: { $0.startingTime > $1.startingTime })
 
-        guard let filter = filter else {
+        guard let date = date else {
             delegate?.schedulesDidRecieved(schedules)
             return
         }
 
-        switch filter {
-        case .date(let date):
-            let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
-            delegate?.schedulesDidRecieved(
-                schedules.filter {
-                    Calendar.current.dateComponents([.year, .month, .day], from: $0.startingTime) == dateComponents
-                }
-            )
-        case .dateRange(let dateRange):
-            delegate?.schedulesDidRecieved(
-                schedules.filter { $0.startingTime > dateRange.start && $0.startingTime < dateRange.end }
-            )
-        }
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        delegate?.schedulesDidRecieved(
+            schedules.filter {
+                Calendar.current.dateComponents([.year, .month, .day], from: $0.startingTime) == dateComponents
+            }
+        )
     }
-}
-
-enum SchedulesListFilter {
-    case date(Date)
-    case dateRange(DateInterval)
 }

@@ -17,11 +17,11 @@ protocol SchedulesListDisplaying: View {
 
 protocol SchedulesListPresentation: AnyObject {
     func didFinish(with schedule: DoctorSchedule)
-    func getSchedules(for doctor: Doctor, filteredBy filter: SchedulesListFilter?)
+    func getSchedules(for doctor: Doctor, onDate: Date?)
 }
 
 protocol SchedulesListInteraction: Interactor {
-    func getSchedules(for doctor: Doctor, filteredBy filter: SchedulesListFilter?)
+    func getSchedules(for doctor: Doctor, onDate: Date?)
 }
 
 protocol SchedulesListInteractorDelegate: AnyObject {

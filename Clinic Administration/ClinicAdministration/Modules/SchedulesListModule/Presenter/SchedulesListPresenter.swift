@@ -15,8 +15,8 @@ where V: SchedulesListDisplaying, I: SchedulesListInteractor {
 // MARK: - SchedulesListPresentation
 
 extension SchedulesListPresenter: SchedulesListPresentation {
-    func getSchedules(for doctor: Doctor, filteredBy filter: SchedulesListFilter?) {
-        interactor.getSchedules(for: doctor, filteredBy: filter)
+    func getSchedules(for doctor: Doctor, onDate date: Date?) {
+        interactor.getSchedules(for: doctor, onDate: date)
     }
 
     func didFinish(with schedule: DoctorSchedule) {
