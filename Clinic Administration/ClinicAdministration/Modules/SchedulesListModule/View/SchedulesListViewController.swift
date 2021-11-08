@@ -38,7 +38,7 @@ final class SchedulesListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        presenter.getSchedules(for: doctor)
+        presenter.getSchedules(for: doctor, filteredBy: nil)
     }
 
     private func configureHierarchy() {
@@ -58,7 +58,7 @@ final class SchedulesListViewController: UIViewController {
                 guard let components = self.selectedDay?.components,
                       let pickedDate = self.calendar.date(from: components) else { return }
 
-                self.presenter.getSchedules(for: self.doctor, for: pickedDate)
+                self.presenter.getSchedules(for: self.doctor, filteredBy: .date(pickedDate))
             }
 
             let newContent = self.makeContent()
@@ -239,11 +239,5 @@ extension SchedulesListViewController: SchedulesListDisplaying {
         snapshot.appendSections([.main])
         snapshot.appendItems(schedules)
         dataSource.apply(snapshot, animatingDifferences: false)
-    }
-
-    func dateSnapshot(_ schedules: [DoctorSchedule]) {
-    }
-
-    func dateRangeSnapshot(_ schedules: [DoctorSchedule]) {
     }
 }
