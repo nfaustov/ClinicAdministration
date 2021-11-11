@@ -13,6 +13,7 @@ struct CalendarControlDayLabel: CalendarItemViewRepresentable {
         let font: UIFont
         var textColor: UIColor
         var backgroundColor: UIColor
+        var borderColor: UIColor
     }
 
     struct ViewModel: Equatable {
@@ -25,6 +26,8 @@ struct CalendarControlDayLabel: CalendarItemViewRepresentable {
         label.font = invariantViewProperties.font
         label.textColor = invariantViewProperties.textColor
         label.backgroundColor = invariantViewProperties.backgroundColor
+        label.layer.borderColor = invariantViewProperties.borderColor.cgColor
+        label.layer.borderWidth = 1
 
         label.textAlignment = .center
         label.clipsToBounds = true

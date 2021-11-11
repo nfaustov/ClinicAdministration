@@ -19,6 +19,7 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
 
         backgroundColor = Design.Color.white
         layer.masksToBounds = true
+        layer.cornerRadius = Design.CornerRadius.small
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowColor = Design.Color.darkGray.cgColor
         layer.shadowOpacity = 0.2

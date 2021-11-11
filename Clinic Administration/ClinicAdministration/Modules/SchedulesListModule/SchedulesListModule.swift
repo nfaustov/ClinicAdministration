@@ -12,6 +12,7 @@ protocol SchedulesListModule: AnyObject {
 }
 
 protocol SchedulesListDisplaying: View {
+    var workingDays: [Date] { get set }
     func schedulesSnapshot(_ schedules: [DoctorSchedule])
 }
 

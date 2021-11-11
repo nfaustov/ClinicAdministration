@@ -29,5 +29,11 @@ extension SchedulesListPresenter: SchedulesListPresentation {
 extension SchedulesListPresenter: SchedulesListInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
         view?.schedulesSnapshot(schedules)
+
+        guard let view = view else { return }
+
+        if view.workingDays.isEmpty {
+            view.workingDays = schedules.map { $0.startingTime }
+        }
     }
 }

@@ -18,9 +18,12 @@ final class SchedulesListViewController: UIViewController {
 
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, DoctorSchedule>!
+    private var calendarControl: CalendarView!
 
     private var calendar = Calendar.current
     private var selectedDay: Day?
+
+    var workingDays = [Date]()
 
     var doctor: Doctor!
 
@@ -33,12 +36,32 @@ final class SchedulesListViewController: UIViewController {
 
         configureHierarchy()
         configureDataSource()
+
+        calendarControl.daySelectionHandler = { [weak self] day in
+            guard let self = self else { return }
+
+            if self.compareToNow(day) != .orderedAscending, day != self.selectedDay {
+                self.selectedDay = day
+
+                guard let components = self.selectedDay?.components,
+                      let pickedDate = self.calendar.date(from: components) else { return }
+
+                self.presenter.getSchedules(for: self.doctor, onDate: pickedDate)
+            } else if day == self.selectedDay {
+                self.selectedDay = nil
+                self.presenter.getSchedules(for: self.doctor, onDate: nil)
+            }
+
+            let newContent = self.makeContent()
+            self.calendarControl.setContent(newContent)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         presenter.getSchedules(for: doctor, onDate: nil)
+        calendarControl.setContent(makeContent())
     }
 
     private func configureHierarchy() {
@@ -49,22 +72,6 @@ final class SchedulesListViewController: UIViewController {
         view.addSubview(calendarView)
         calendarView.translatesAutoresizingMaskIntoConstraints = false
 
-        calendarView.daySelectionHandler = { [weak self] day in
-            guard let self = self else { return }
-
-            if self.compareToNow(day) != .orderedAscending {
-                self.selectedDay = day
-
-                guard let components = self.selectedDay?.components,
-                      let pickedDate = self.calendar.date(from: components) else { return }
-
-                self.presenter.getSchedules(for: self.doctor, onDate: pickedDate)
-            }
-
-            let newContent = self.makeContent()
-            calendarView.setContent(newContent)
-        }
-
         let schedulesCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         schedulesCollectionView.backgroundColor = .clear
         view.addSubview(schedulesCollectionView)
@@ -72,11 +79,11 @@ final class SchedulesListViewController: UIViewController {
         schedulesCollectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         schedulesCollectionView.delegate = self
 
-        let views = ["cv": schedulesCollectionView, "calendarControl": calendarView]
+        let views = ["schedulesCollectionView": schedulesCollectionView, "calendarControl": calendarView]
         var constraints = [NSLayoutConstraint]()
         constraints.append(
             contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat: "H:|[cv]|",
+                withVisualFormat: "H:|[schedulesCollectionView]|",
                 options: [],
                 metrics: nil,
                 views: views
@@ -84,7 +91,7 @@ final class SchedulesListViewController: UIViewController {
         )
         constraints.append(
             contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|[calendarControl]-[cv]|",
+                withVisualFormat: "V:|[calendarControl]-[schedulesCollectionView]|",
                 options: [],
                 metrics: nil,
                 views: views
@@ -95,14 +102,13 @@ final class SchedulesListViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
 
         collectionView = schedulesCollectionView
+        calendarControl = calendarView
     }
 
     // MARK: - CalendarViewContent
 
     private func makeContent() -> CalendarViewContent {
-        let selectedDay = self.selectedDay
-
-        return CalendarViewContent(
+        CalendarViewContent(
             calendar: calendar,
             visibleDateRange: Date()...Date(timeInterval: 60 * 60 * 24 * 365, since: Date()),
             monthsLayout: .horizontal(
@@ -118,25 +124,7 @@ final class SchedulesListViewController: UIViewController {
             )
         )
             .withDayItemModelProvider { day in
-                var invariantViewProperties = CalendarControlDayLabel.InvariantViewProperties(
-                    font: Design.Font.robotoFont(ofSize: 18, weight: .regular),
-                    textColor: Design.Color.gray,
-                    backgroundColor: .clear
-                )
-
-                if day == selectedDay {
-                    invariantViewProperties.textColor = Design.Color.brown
-                    invariantViewProperties.backgroundColor = Design.Color.lightGray
-                }
-
-                if self.compareToNow(day) == .orderedAscending {
-                    invariantViewProperties.textColor = Design.Color.darkGray
-                }
-
-                return CalendarItemModel<CalendarControlDayLabel>(
-                    invariantViewProperties: invariantViewProperties,
-                    viewModel: .init(day: day)
-                )
+                self.customizeDay(day)
             }
             .withMonthHeaderItemModelProvider { month in
                 CalendarItemModel<CalendarControlMonthHeader>(
@@ -160,6 +148,39 @@ final class SchedulesListViewController: UIViewController {
             }
             .withVerticalDayMargin(6)
             .withHorizontalDayMargin(6)
+    }
+
+    private func customizeDay(_ day: Day) -> CalendarItemModel<CalendarControlDayLabel> {
+        let workingDaysComponents = workingDays.map { calendar.dateComponents([.era, .year, .month, .day], from: $0) }
+
+        var invariantViewProperties = CalendarControlDayLabel.InvariantViewProperties(
+            font: Design.Font.robotoFont(ofSize: 18, weight: .regular),
+            textColor: Design.Color.gray,
+            backgroundColor: .clear,
+            borderColor: .clear
+        )
+
+        // customize marked days
+        workingDaysComponents.forEach { components in
+            if day.components == components {
+                invariantViewProperties.borderColor = Design.Color.darkGray
+            }
+        }
+        // customize selection
+        if day == selectedDay {
+            invariantViewProperties.textColor = Design.Color.brown
+            invariantViewProperties.backgroundColor = Design.Color.lightGray
+        }
+
+        // customize past days
+        if compareToNow(day) == .orderedAscending {
+            invariantViewProperties.textColor = Design.Color.darkGray
+        }
+
+        return CalendarItemModel<CalendarControlDayLabel>(
+            invariantViewProperties: invariantViewProperties,
+            viewModel: .init(day: day)
+        )
     }
 
     private func compareToNow(_ day: Day) -> ComparisonResult? {
@@ -204,16 +225,6 @@ final class SchedulesListViewController: UIViewController {
         ) { collectionView, indexPath, schedule in
             let factory = CellFactory(collectionView: collectionView)
             let cell = factory.configureCell(ScheduleCell.self, with: schedule, for: indexPath)
-
-            switch indexPath.item {
-            case 0:
-                cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            case indexPath.count - 1:
-                cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-            default: cell.layer.maskedCorners = []
-            }
-
-            cell.layer.cornerRadius = Design.CornerRadius.medium
 
             return cell
         }

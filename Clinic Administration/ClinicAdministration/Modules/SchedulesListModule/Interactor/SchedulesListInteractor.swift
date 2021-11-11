@@ -22,7 +22,7 @@ extension SchedulesListInteractor: SchedulesListInteraction {
 
         let schedules = schedulesEntities
             .compactMap { DoctorSchedule(entity: $0)}
-            .filter { $0.startingTime > Date() }
+            .filter { Calendar.current.compare($0.startingTime, to: Date(), toGranularity: .day) != .orderedAscending }
             .sorted(by: { $0.startingTime > $1.startingTime })
 
         guard let date = date else {
