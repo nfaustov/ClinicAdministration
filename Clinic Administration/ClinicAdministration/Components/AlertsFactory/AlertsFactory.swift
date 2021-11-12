@@ -13,9 +13,9 @@ final class AlertsFactory {
         confirmAction: @escaping (DoctorSchedule) -> Void
     ) -> UIAlertController {
         let doctorNameString =
-            schedule.secondName + " "
-            + schedule.firstName + " "
-            + schedule.patronymicName
+        schedule.doctor.secondName + " "
+        + schedule.doctor.firstName + " "
+        + schedule.doctor.patronymicName
         let alertViewController = UIAlertController(
             title: "Удаление расписания",
             message: "Вы уверены, что хотите удалить расписание врача: \(doctorNameString)?",

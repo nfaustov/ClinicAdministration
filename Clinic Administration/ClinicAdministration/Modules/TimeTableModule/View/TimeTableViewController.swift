@@ -218,17 +218,25 @@ final class TimeTableViewController: UIViewController {
 
 extension TimeTableViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let dataSource = dataSource,
-              let doctorSchedule = dataSource.itemIdentifier(for: indexPath) as? DoctorSchedule else { return }
+        guard let dataSource = dataSource else { return }
 
-        presenter.didSelected(doctorSchedule)
+        if let doctorSchedule = dataSource.itemIdentifier(for: indexPath) as? DoctorSchedule {
+            presenter.didSelected(doctorSchedule)
 
-        collectionView.selectItem(
-            at: indexPath,
-            animated: true,
-            scrollPosition: indexPath.row == 1 ? .left : .centeredHorizontally
-        )
-        selectedSchedule = doctorSchedule
+            collectionView.selectItem(
+                at: indexPath,
+                animated: true,
+                scrollPosition: indexPath.row == 1 ? .left : .centeredHorizontally
+            )
+            selectedSchedule = doctorSchedule
+        } else if let action = dataSource.itemIdentifier(for: indexPath) as? TimeTableAction,
+                  let selectedSchedule = selectedSchedule {
+            switch action {
+            case .showAllSchedules:
+                presenter.showDoctorsSchedulesList(selectedSchedule.doctor)
+            default: ()
+            }
+        }
     }
 }
 

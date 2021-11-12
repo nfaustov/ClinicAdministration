@@ -36,7 +36,7 @@ final class DoctorsDatabase: Database {
     }
 
     // MARK: - Mock data
-//
+
 //    let doctors = [
 //        Doctor(
 //            id: UUID(uuidString: "9bc68b57-bdac-4452-b80a-8dc116311486"),
@@ -177,7 +177,7 @@ final class DoctorsDatabase: Database {
 
     func readDoctor(for schedule: DoctorSchedule) -> DoctorEntity {
         let request: NSFetchRequest = DoctorEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "phoneNumber = %@", schedule.phoneNumber)
+        request.predicate = NSPredicate(format: "phoneNumber = %@", schedule.doctor.phoneNumber)
 
         guard let doctor = try? context.fetch(request).first else {
             fatalError("There is no doctor for this schedule.")
@@ -203,6 +203,19 @@ final class DoctorsDatabase: Database {
             format: "startingTime > %@ AND startingTime < %@",
             argumentArray: [comparedDate, comparedDayAfterDate]
         )
+
+        guard let schedules = try? context.fetch(request) else {
+            return []
+        }
+
+        return schedules
+    }
+
+    func readSchedules(for doctor: Doctor) -> [DoctorScheduleEntity] {
+        guard let id = doctor.id else { return [] }
+
+        let request: NSFetchRequest = DoctorScheduleEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "doctor.id == %@", id as CVarArg)
 
         guard let schedules = try? context.fetch(request) else {
             return []

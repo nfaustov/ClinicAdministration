@@ -79,7 +79,11 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
     }
 
     func configure(with schedule: DoctorSchedule) {
-        specializationLabel.text = "\(schedule.specialization)"
-        nameLabel.text = "\(schedule.secondName)\n\(schedule.firstName)\n\(schedule.patronymicName)"
+        specializationLabel.text = "\(schedule.doctor.specialization)"
+        nameLabel.text = """
+        \(schedule.doctor.secondName)
+        \(schedule.doctor.firstName)
+        \(schedule.doctor.patronymicName)
+        """
     }
 }

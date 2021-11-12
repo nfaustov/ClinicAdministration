@@ -12,7 +12,8 @@ final class TimeTablePresenter<V, I>: PresenterInteractor<V, I>,
     weak var coordinator: (CalendarSubscription &
                            GraphicTimeTableSubscription &
                            CreateScheduleSubscription &
-                           DoctorsSearchSubscription)?
+                           DoctorsSearchSubscription &
+                           SchedulesListSubscription)?
 
     var didFinish: ((Date) -> Void)?
 
@@ -66,6 +67,16 @@ extension TimeTablePresenter: TimeTablePresentation {
     func switchToGraphicScreen(onDate date: Date) {
         coordinator?.routeToGraphicTimeTable(onDate: date) { selectedDate in
             self.view?.sidePicked(date: selectedDate)
+        }
+    }
+
+    func showDoctorsSchedulesList(_ doctor: Doctor) {
+        coordinator?.routeToSchedulesList(for: doctor) { schedule in
+            guard let schedule = schedule else { return }
+
+            self.interactor.getSchedules(for: schedule.startingTime)
+            self.view?.date = schedule.startingTime
+            self.view?.doctorSnapshot(schedule: schedule)
         }
     }
 

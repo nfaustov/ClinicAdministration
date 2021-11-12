@@ -9,46 +9,12 @@ import Foundation
 
 struct DoctorSchedule: Codable, Equatable, Hashable {
     let id: UUID?
-    let secondName: String
-    let firstName: String
-    let patronymicName: String
-    let phoneNumber: String
-    let specialization: String
+    let doctor: Doctor
     var cabinet: Int
     var startingTime: Date
     var endingTime: Date
     var serviceDuration: TimeInterval
     var patientAppointments: [PatientAppointment]
-
-    init(
-        id: UUID? = UUID(),
-        secondName: String,
-        firstName: String,
-        patronymicName: String,
-        phoneNumber: String,
-        specialization: String,
-        cabinet: Int,
-        startingTime: Date,
-        endingTime: Date,
-        serviceDuration: TimeInterval,
-        patientAppointments: [PatientAppointment] = []
-    ) {
-        self.id = id
-        self.secondName = secondName
-        self.firstName = firstName
-        self.patronymicName = patronymicName
-        self.phoneNumber = phoneNumber
-        self.specialization = specialization
-        self.cabinet = cabinet
-        self.startingTime = startingTime
-        self.endingTime = endingTime
-        self.serviceDuration = serviceDuration
-        self.patientAppointments = patientAppointments
-
-        if self.patientAppointments.isEmpty {
-            createAppointments()
-        }
-    }
 
     init(
         id: UUID? = UUID(),
@@ -59,11 +25,7 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         patientAppointments: [PatientAppointment]
     ) {
         self.id = id
-        self.secondName = doctor.secondName
-        self.firstName = doctor.firstName
-        self.patronymicName = doctor.patronymicName
-        self.phoneNumber = doctor.phoneNumber
-        self.specialization = doctor.specialization
+        self.doctor = doctor
         self.cabinet = cabinet
         self.startingTime = startingTime
         self.endingTime = endingTime
@@ -84,11 +46,7 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
                 as? [PatientAppointmentEntity] else { return nil }
 
         id = entity.id
-        secondName = doctor.secondName
-        firstName = doctor.firstName
-        patronymicName = doctor.patronymicName
-        phoneNumber = doctor.phoneNumber
-        specialization = doctor.specialization
+        self.doctor = doctor
         cabinet = Int(entity.cabinet)
         startingTime = entityStartingTime
         endingTime = entityEndingTime

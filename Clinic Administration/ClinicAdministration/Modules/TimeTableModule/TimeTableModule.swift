@@ -11,7 +11,8 @@ protocol TimeTableModule: AnyObject {
     var coordinator: (CalendarSubscription &
                       GraphicTimeTableSubscription &
                       CreateScheduleSubscription &
-                      DoctorsSearchSubscription)? { get set }
+                      DoctorsSearchSubscription &
+                      SchedulesListSubscription)? { get set }
     var didFinish: ((_ date: Date) -> Void)? { get set }
 }
 
@@ -32,6 +33,7 @@ protocol TimeTablePresentation: AnyObject {
     func addNewDoctorSchedule(onDate: Date)
     func removeDoctorSchedule(_ schedule: DoctorSchedule)
     func switchToGraphicScreen(onDate: Date)
+    func showDoctorsSchedulesList(_ doctor: Doctor)
 }
 
 protocol TimeTableInteraction: Interactor {

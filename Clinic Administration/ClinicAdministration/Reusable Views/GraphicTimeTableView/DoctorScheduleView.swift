@@ -92,7 +92,11 @@ final class DoctorScheduleView: UIView {
     }
 
     private func configureNameLabel() {
-        nameLabel.text = "\(schedule.secondName)\n\(schedule.firstName)\n\(schedule.patronymicName)"
+        nameLabel.text = """
+        \(schedule.doctor.secondName)
+        \(schedule.doctor.firstName)
+        \(schedule.doctor.patronymicName)
+        """
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
         nameLabel.font = Design.Font.robotoFont(ofSize: 13, weight: .medium)

@@ -81,4 +81,14 @@ final class ModulesFactory: Modules {
 
         return (view, presenter)
     }
+
+    func schedulesList(for doctor: Doctor) -> (UIViewController, SchedulesListModule) {
+        let view = SchedulesListViewController()
+        view.doctor = doctor
+        let interactor = SchedulesListInteractor()
+        interactor.database = dependencies.doctorsDatabase
+        let presenter = SchedulesListPresenter(view: view, interactor: interactor)
+
+        return (view, presenter)
+    }
 }
