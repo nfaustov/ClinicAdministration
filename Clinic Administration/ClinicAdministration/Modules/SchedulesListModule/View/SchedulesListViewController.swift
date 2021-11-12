@@ -146,8 +146,10 @@ final class SchedulesListViewController: UIViewController {
                     viewModel: .init(dayOfWeekIndex: dayOfWeekIndex)
                 )
             }
-            .withVerticalDayMargin(6)
-            .withHorizontalDayMargin(6)
+            .withMonthDayInsets(.init(top: 0, left: 0, bottom: 12, right: 12))
+            .withDaysOfTheWeekRowSeparator(options: .init(height: 1, color: Design.Color.darkGray))
+            .withVerticalDayMargin(8)
+            .withHorizontalDayMargin(8)
     }
 
     private func customizeDay(_ day: Day) -> CalendarItemModel<CalendarControlDayLabel> {
@@ -160,13 +162,13 @@ final class SchedulesListViewController: UIViewController {
             borderColor: .clear
         )
 
-        // customize marked days
+        // customize marked working days
         workingDaysComponents.forEach { components in
             if day.components == components {
                 invariantViewProperties.borderColor = Design.Color.darkGray
             }
         }
-        // customize selection
+        // customize selected day
         if day == selectedDay {
             invariantViewProperties.textColor = Design.Color.brown
             invariantViewProperties.backgroundColor = Design.Color.lightGray
