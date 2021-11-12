@@ -45,6 +45,7 @@ final class TimeTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationBar.tintColor = Design.Color.chocolate
         let switchToGraphicImage = UIImage(named: "dashboard")
         let rightBarButton = UIBarButtonItem(
             image: switchToGraphicImage,

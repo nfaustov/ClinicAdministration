@@ -74,8 +74,7 @@ extension TimeTablePresenter: TimeTablePresentation {
         coordinator?.routeToSchedulesList(for: doctor) { schedule in
             guard let schedule = schedule else { return }
 
-            self.interactor.getSchedules(for: schedule.startingTime)
-            self.view?.date = schedule.startingTime
+            self.view?.sidePicked(date: schedule.startingTime)
             self.view?.doctorSnapshot(schedule: schedule)
         }
     }
