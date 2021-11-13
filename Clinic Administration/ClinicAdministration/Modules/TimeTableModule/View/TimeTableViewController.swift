@@ -233,8 +233,10 @@ extension TimeTableViewController: UICollectionViewDelegate {
         } else if let action = dataSource.itemIdentifier(for: indexPath) as? TimeTableAction,
                   let selectedSchedule = selectedSchedule {
             switch action {
+            case .showNextSchedule:
+                presenter.showDoctorsNextSchedule(after: selectedSchedule)
             case .showAllSchedules:
-                presenter.showDoctorsSchedulesList(selectedSchedule.doctor)
+                presenter.showSchedulesList(for: selectedSchedule.doctor)
             default: ()
             }
         }
@@ -293,7 +295,15 @@ extension TimeTableViewController: TimeTableDisplaying {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
-    func sidePicked(date: Date?) {
-        datePicker.sidePicked(date: date)
+    func changeDate(_ date: Date?) {
+        datePicker.changeDate(date)
+    }
+
+    func noNextScheduleAlert() {
+        guard let doctor = selectedSchedule?.doctor else { return }
+
+        let alert = AlertsFactory.makeNoNextSchedule(for: doctor, createAction: presenter.createSchedule)
+
+        present(alert, animated: true)
     }
 }

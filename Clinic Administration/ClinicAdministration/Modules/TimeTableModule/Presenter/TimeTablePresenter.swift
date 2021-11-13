@@ -47,7 +47,7 @@ extension TimeTablePresenter: TimeTablePresentation {
 
     func pickDateInCalendar() {
         coordinator?.routeToCalendar { date in
-            self.view?.sidePicked(date: date)
+            self.view?.changeDate(date)
         }
     }
 
@@ -59,6 +59,14 @@ extension TimeTablePresenter: TimeTablePresentation {
         })
     }
 
+    func createSchedule(for doctor: Doctor, onDate date: Date) {
+        coordinator?.routeToCreateSchedule(for: doctor, onDate: date) { schedule in
+            guard schedule != nil else { return }
+
+            self.view?.newSchedule = schedule
+        }
+    }
+
     func removeDoctorSchedule(_ schedule: DoctorSchedule) {
         interactor.deleteSchedule(schedule)
         interactor.getSchedules(for: schedule.startingTime)
@@ -66,24 +74,20 @@ extension TimeTablePresenter: TimeTablePresentation {
 
     func switchToGraphicScreen(onDate date: Date) {
         coordinator?.routeToGraphicTimeTable(onDate: date) { selectedDate in
-            self.view?.sidePicked(date: selectedDate)
+            self.view?.changeDate(selectedDate)
         }
     }
 
-    func showDoctorsSchedulesList(_ doctor: Doctor) {
+    func showDoctorsNextSchedule(after currentSchedule: DoctorSchedule) {
+        interactor.getDoctorsNextSchedule(after: currentSchedule)
+    }
+
+    func showSchedulesList(for doctor: Doctor) {
         coordinator?.routeToSchedulesList(for: doctor) { schedule in
             guard let schedule = schedule else { return }
 
-            self.view?.sidePicked(date: schedule.startingTime)
+            self.view?.changeDate(schedule.startingTime)
             self.view?.doctorSnapshot(schedule: schedule)
-        }
-    }
-
-    private func createSchedule(for doctor: Doctor, onDate date: Date) {
-        coordinator?.routeToCreateSchedule(for: doctor, onDate: date) { schedule in
-            guard schedule != nil else { return }
-
-            self.view?.newSchedule = schedule
         }
     }
 }
@@ -101,6 +105,15 @@ extension TimeTablePresenter: TimeTableInteractorDelegate {
             view?.daySnapshot(schedules: preparedSchedules, selectedSchedule: preparedSchedule)
         } else {
             view?.emptyDaySnapshot()
+        }
+    }
+
+    func scheduleDidRecieved(_ schedule: DoctorSchedule?) {
+        if let schedule = schedule {
+            view?.changeDate(schedule.startingTime)
+            view?.doctorSnapshot(schedule: schedule)
+        } else {
+            view?.noNextScheduleAlert()
         }
     }
 }

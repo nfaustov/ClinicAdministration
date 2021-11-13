@@ -12,26 +12,45 @@ final class AlertsFactory {
         _ schedule: DoctorSchedule,
         confirmAction: @escaping (DoctorSchedule) -> Void
     ) -> UIAlertController {
-        let doctorNameString =
-        schedule.doctor.secondName + " "
-        + schedule.doctor.firstName + " "
-        + schedule.doctor.patronymicName
-        let alertViewController = UIAlertController(
+        let alertController = UIAlertController(
             title: "Удаление расписания",
-            message: "Вы уверены, что хотите удалить расписание врача: \(doctorNameString)?",
+            message: "Вы уверены, что хотите удалить расписание врача: \(schedule.doctor.fullName)?",
             preferredStyle: .alert
         )
         let confirmAction = UIAlertAction(title: "ДА", style: .destructive) { _ in
-            alertViewController.dismiss(animated: true) {
+            alertController.dismiss(animated: true) {
                 confirmAction(schedule)
             }
         }
         let cancelAction = UIAlertAction(title: "ОТМЕНА", style: .cancel) { _ in
-            alertViewController.dismiss(animated: true)
+            alertController.dismiss(animated: true)
         }
-        alertViewController.addAction(confirmAction)
-        alertViewController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
 
-        return alertViewController
+        return alertController
+    }
+
+    static func makeNoNextSchedule(
+        for doctor: Doctor,
+        createAction: @escaping (Doctor, Date) -> Void
+    ) -> UIAlertController {
+        let alertController = UIAlertController(
+            title: "Нет будущих расписаний",
+            message: "Создать новое расписание врача: \(doctor.fullName)?",
+            preferredStyle: .alert
+        )
+        let createAction = UIAlertAction(title: "ДА", style: .default) { _ in
+            alertController.dismiss(animated: true) {
+                createAction(doctor, Date())
+            }
+        }
+        let cancelAction = UIAlertAction(title: "НЕТ", style: .cancel) { _ in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(createAction)
+
+        return alertController
     }
 }

@@ -70,7 +70,7 @@ final class DatePicker: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func sidePicked(date: Date?) {
+    func changeDate(_ date: Date?) {
         if let date = date {
             selectedDate = date
         }

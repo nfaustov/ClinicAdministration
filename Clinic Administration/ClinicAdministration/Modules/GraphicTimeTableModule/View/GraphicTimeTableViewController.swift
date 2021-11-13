@@ -99,6 +99,6 @@ extension GraphicTimeTableViewController: GraphicTimeTableDisplaying {
     }
 
     func calendarPicked(date: Date?) {
-        datePicker.sidePicked(date: date)
+        datePicker.changeDate(date)
     }
 }

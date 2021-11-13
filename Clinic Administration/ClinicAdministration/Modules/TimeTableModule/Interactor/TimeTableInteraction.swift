@@ -26,6 +26,17 @@ extension TimeTableInteractor: TimeTableInteraction {
         delegate?.schedulesDidRecieved(schedules)
     }
 
+    func getDoctorsNextSchedule(after currentSchedule: DoctorSchedule) {
+        guard let schedulesEntities = database?.readSchedules(for: currentSchedule.doctor) else { return }
+
+        let schedules = schedulesEntities
+            .compactMap { DoctorSchedule(entity: $0) }
+            .filter { $0.startingTime > currentSchedule.startingTime }
+            .sorted(by: { $0.startingTime < $1.startingTime })
+
+        delegate?.scheduleDidRecieved(schedules.first)
+    }
+
     func deleteSchedule(_ schedule: DoctorSchedule) {
         database?.deleteSchedule(schedule)
     }

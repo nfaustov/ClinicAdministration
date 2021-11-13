@@ -23,7 +23,8 @@ protocol TimeTableDisplaying: View {
     func daySnapshot(schedules: [DoctorSchedule], selectedSchedule: DoctorSchedule)
     func emptyDaySnapshot()
     func doctorSnapshot(schedule: DoctorSchedule)
-    func sidePicked(date: Date?)
+    func changeDate(_ date: Date?)
+    func noNextScheduleAlert()
 }
 
 protocol TimeTablePresentation: AnyObject {
@@ -31,16 +32,20 @@ protocol TimeTablePresentation: AnyObject {
     func didSelected(date: Date)
     func pickDateInCalendar()
     func addNewDoctorSchedule(onDate: Date)
+    func createSchedule(for doctor: Doctor, onDate: Date)
     func removeDoctorSchedule(_ schedule: DoctorSchedule)
     func switchToGraphicScreen(onDate: Date)
-    func showDoctorsSchedulesList(_ doctor: Doctor)
+    func showDoctorsNextSchedule(after currentSchedule: DoctorSchedule)
+    func showSchedulesList(for doctor: Doctor)
 }
 
 protocol TimeTableInteraction: Interactor {
     func getSchedules(for date: Date)
+    func getDoctorsNextSchedule(after currentSchedule: DoctorSchedule)
     func deleteSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol TimeTableInteractorDelegate: AnyObject {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule])
+    func scheduleDidRecieved(_ schedule: DoctorSchedule?)
 }
