@@ -46,6 +46,7 @@ final class CreateScheduleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationBar.tintColor = Design.Color.chocolate
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Расписание врача"
 

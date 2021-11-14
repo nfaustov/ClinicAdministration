@@ -45,7 +45,6 @@ final class TimeTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.navigationBar.tintColor = Design.Color.chocolate
         let switchToGraphicImage = UIImage(named: "dashboard")
         let rightBarButton = UIBarButtonItem(
             image: switchToGraphicImage,
@@ -90,6 +89,8 @@ final class TimeTableViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.tintColor = Design.Color.chocolate
 
         presenter.didSelected(date: date)
     }
