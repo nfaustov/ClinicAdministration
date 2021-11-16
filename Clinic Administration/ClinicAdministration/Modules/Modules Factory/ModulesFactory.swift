@@ -92,10 +92,9 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func patientAppointment(date: Date, doctor: Doctor) -> (UIViewController, PatientAppointmentModule) {
+    func patientAppointment(schedule: DoctorSchedule) -> (UIViewController, PatientAppointmentModule) {
         let view = PatientAppointmentViewController()
-        view.date = date
-        view.doctor = doctor
+        view.schedule = schedule
         let interactor = PatientAppointmentInteractor()
         let presenter = PatientAppointmentPresenter(view: view, interactor: interactor)
 

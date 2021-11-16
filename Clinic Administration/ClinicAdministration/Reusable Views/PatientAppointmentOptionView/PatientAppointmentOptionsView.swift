@@ -27,17 +27,12 @@ final class PatientAppointmentOptionsView: UIView {
     private var durationField: PatientAppointmentOptionField!
     private var timeField: PatientAppointmentOptionField!
 
-    private let date: Date
-    private let doctor: Doctor
-
     private var pickTimeAction: (() -> Void)?
     private var pickDurationAction: (() -> Void)?
 
     init(date: Date, doctor: Doctor, pickTimeAction: @escaping () -> Void, pickDurationAction: @escaping () -> Void) {
         self.pickTimeAction = pickTimeAction
         self.pickDurationAction = pickDurationAction
-        self.date = date
-        self.doctor = doctor
         super.init(frame: .zero)
 
         layer.backgroundColor = Design.Color.chocolate.cgColor

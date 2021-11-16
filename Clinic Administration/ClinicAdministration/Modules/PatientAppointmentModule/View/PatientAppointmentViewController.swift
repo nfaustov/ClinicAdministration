@@ -11,8 +11,11 @@ final class PatientAppointmentViewController: UIViewController {
     typealias PresenterType = PatientAppointmentPresentation
     var presenter: PresenterType!
 
-    var doctor: Doctor!
-    var date: Date!
+    var schedule: DoctorSchedule!
+
+    private var date: Date! {
+        schedule.startingTime
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,7 @@ import Foundation
 final class PatientAppointmentPresenter<V, I>: PresenterInteractor<V, I>, PatientAppointmentModule
 where V: PatientAppointmentView, I: PatientAppointmentInteraction {
     weak var coordinator: TimeTableCoordinator?
-    var didFinish: ((PatientAppointment) -> Void)?
+    var didFinish: ((DoctorSchedule?) -> Void)?
 }
 
 // MARK: - PatientAppointmentPresentation

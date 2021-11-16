@@ -11,7 +11,7 @@ final class PatientAppointmentOptionField: UIView {
     enum ImageType {
         case custom, standard
     }
-    
+
     let fieldNameLabel: UILabel = {
         let label = UILabel()
         label.font = Design.Font.robotoFont(ofSize: 13, weight: .regular)

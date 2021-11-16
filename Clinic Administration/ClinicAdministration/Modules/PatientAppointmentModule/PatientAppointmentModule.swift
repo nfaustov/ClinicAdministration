@@ -9,7 +9,7 @@ import Foundation
 
 protocol PatientAppointmentModule: AnyObject {
     var coordinator: TimeTableCoordinator? { get set }
-    var didFinish: ((PatientAppointment) -> Void)? { get set }
+    var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 
 protocol PatientAppointmentView: View {
