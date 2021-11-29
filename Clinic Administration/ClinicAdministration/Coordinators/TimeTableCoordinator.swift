@@ -115,3 +115,16 @@ extension TimeTableCoordinator: SchedulesListSubscription {
         navigationController.pushViewController(viewController, animated: true)
     }
 }
+
+// MARK: - PatientAppointmentSubscription
+
+extension TimeTableCoordinator: PatientAppointmentSubscription {
+    func routeToPatientAppointment(schedule: DoctorSchedule, didFinish: @escaping (DoctorSchedule?) -> Void) {
+        let (viewController, module) = modules.patientAppointment(schedule: schedule)
+        module.didFinish = { [navigationController] schedule in
+            navigationController.popViewController(animated: true)
+            didFinish(schedule)
+        }
+        navigationController.pushViewController(viewController, animated: true)
+    }
+}

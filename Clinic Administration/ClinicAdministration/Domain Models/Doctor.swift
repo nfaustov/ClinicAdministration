@@ -33,6 +33,13 @@ struct Doctor: Codable, Hashable {
         secondName + " " + firstName + " " + patronymicName
     }
 
+    var initials: String {
+        guard let firstNameLetter = firstName.first,
+              let patronymicNameLetter = patronymicName.first else { return "" }
+
+        return "\(secondName) \(firstNameLetter).\(patronymicNameLetter)"
+    }
+
     init(
         id: UUID? = UUID(),
         secondName: String,
