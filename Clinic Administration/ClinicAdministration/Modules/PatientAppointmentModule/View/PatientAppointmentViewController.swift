@@ -13,12 +13,16 @@ final class PatientAppointmentViewController: UIViewController {
 
     var schedule: DoctorSchedule!
 
-    private var date: Date! {
+    private var date: Date {
         schedule.startingTime
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let patientDataInput = PatientDataView()
+        view.addSubview(patientDataInput)
+        patientDataInput.frame = CGRect(x: 20, y: 100, width: view.bounds.width - 40, height: 200)
     }
 }
 
