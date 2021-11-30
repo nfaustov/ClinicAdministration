@@ -231,6 +231,8 @@ extension TimeTableViewController: UICollectionViewDelegate {
                 scrollPosition: indexPath.row == 1 ? .left : .centeredHorizontally
             )
             selectedSchedule = doctorSchedule
+        } else if let patientAppointment = dataSource.itemIdentifier(for: indexPath) as? PatientAppointment {
+            presenter.createPatientAppointment(schedule: selectedSchedule, selectedAppointment: patientAppointment)
         } else if let action = dataSource.itemIdentifier(for: indexPath) as? TimeTableAction,
                   let selectedSchedule = selectedSchedule {
             switch action {

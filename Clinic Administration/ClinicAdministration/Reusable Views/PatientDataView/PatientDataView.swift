@@ -26,6 +26,8 @@ final class PatientDataView: UIView {
         let fieldsStack = UIStackView(arrangedSubviews: [
             firstNameTextField, secondNameTextField, patronymicNameTextField, phoneNumberTextField
         ])
+        fieldsStack.axis = .vertical
+        fieldsStack.distribution = .fillEqually
         fieldsStack.spacing = 10
         addSubview(fieldsStack)
         fieldsStack.translatesAutoresizingMaskIntoConstraints = false

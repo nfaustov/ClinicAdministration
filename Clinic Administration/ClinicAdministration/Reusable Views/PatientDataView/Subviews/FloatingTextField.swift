@@ -11,12 +11,12 @@ final class FloatingTextField: UIView {
     private let textField = UITextField()
     private let placeholderLabel = UILabel()
 
-    private var scale: CGFloat {
-        escapedPlaceholderSize / placeholderSize
+    private var escapedPlaceholderFont: UIFont {
+        Design.Font.robotoFont(ofSize: 13, weight: .light)
     }
-
-    private var escapedPlaceholderSize: CGFloat = 14
-    private var placeholderSize: CGFloat = 17
+    private var placeholderFont: UIFont {
+        Design.Font.robotoFont(ofSize: 17, weight: .light)
+    }
 
     private var placeholderTopConstraint = NSLayoutConstraint()
 
@@ -47,7 +47,7 @@ final class FloatingTextField: UIView {
     }
 
     private func configureHierarchy() {
-        textField.font = Design.Font.robotoFont(ofSize: placeholderSize, weight: .regular)
+        textField.font = Design.Font.robotoFont(ofSize: 17, weight: .regular)
         textField.textColor = Design.Color.chocolate
         textField.borderStyle = .none
         textField.autocapitalizationType = .words
@@ -57,7 +57,7 @@ final class FloatingTextField: UIView {
 
         placeholderLabel.text = placeholder
         placeholderLabel.textColor = Design.Color.darkGray
-        placeholderLabel.font = Design.Font.robotoFont(ofSize: placeholderSize, weight: .light)
+        placeholderLabel.font = placeholderFont
         textField.addSubview(placeholderLabel)
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -76,24 +76,22 @@ final class FloatingTextField: UIView {
 
             placeholderTopConstraint,
             placeholderLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            placeholderLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            placeholderLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             placeholderLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor),
 
             underline.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             underline.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
-            underline.bottomAnchor.constraint(equalTo: textField.bottomAnchor, constant: 1),
-            underline.widthAnchor.constraint(equalToConstant: 1)
+            underline.bottomAnchor.constraint(equalTo: textField.bottomAnchor),
+            underline.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 
     @objc private func textRecognizer() {
         let isActive = textField.isFirstResponder || !isEmpty
 
-        let transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-
-        UIView.animate(withDuration: 0.2) {
-            self.placeholderLabel.transform = isActive ? transform : .identity
-            self.placeholderTopConstraint.constant = 0
+        UIView.animate(withDuration: 0.15) {
+            self.placeholderLabel.font = isActive ? self.escapedPlaceholderFont : self.placeholderFont
+            self.placeholderTopConstraint.constant = isActive ? 0 : 10
             self.layoutIfNeeded()
         }
     }

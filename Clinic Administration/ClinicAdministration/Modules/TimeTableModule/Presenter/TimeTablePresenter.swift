@@ -13,7 +13,8 @@ final class TimeTablePresenter<V, I>: PresenterInteractor<V, I>,
                            GraphicTimeTableSubscription &
                            CreateScheduleSubscription &
                            DoctorsSearchSubscription &
-                           SchedulesListSubscription)?
+                           SchedulesListSubscription &
+                           PatientAppointmentSubscription)?
 
     var didFinish: ((Date) -> Void)?
 
@@ -88,6 +89,13 @@ extension TimeTablePresenter: TimeTablePresentation {
 
             self.view?.changeDate(schedule.startingTime)
             self.view?.doctorSnapshot(schedule: schedule)
+        }
+    }
+
+    func createPatientAppointment(schedule: DoctorSchedule?, selectedAppointment: PatientAppointment) {
+        guard let schedule = schedule else { return }
+
+        coordinator?.routeToPatientAppointment(schedule: schedule, appointment: selectedAppointment) { _ in
         }
     }
 }
