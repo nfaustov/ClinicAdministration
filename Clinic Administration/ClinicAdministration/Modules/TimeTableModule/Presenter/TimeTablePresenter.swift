@@ -98,6 +98,9 @@ extension TimeTablePresenter: TimeTablePresentation {
         coordinator?.routeToPatientAppointment(schedule: schedule, appointment: selectedAppointment) { _ in
         }
     }
+
+    func showPatientCard(_ patient: Patient) {
+    }
 }
 
 // MARK: - TimeTableInteractorDelegate
