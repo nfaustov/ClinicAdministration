@@ -16,6 +16,13 @@ where V: PatientAppointmentView, I: PatientAppointmentInteraction {
 // MARK: - PatientAppointmentPresentation
 
 extension PatientAppointmentPresenter: PatientAppointmentPresentation {
+    func updateSchedule(with newApointment: PatientAppointment) {
+        view?.schedule.updateAppointments(with: newApointment) { errorMessage in
+            guard let errorMessage = errorMessage else { return }
+
+            print(errorMessage)
+        }
+    }
 }
 
 // MARK: - PatientAppointmentInteractorDelegate

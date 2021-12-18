@@ -72,8 +72,45 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         } while appointmentTime < endingTime
     }
 
+    /// This method updates number of patient appointments when doctor schedule was changed.
+    /// You can use it only if appointments not contains scheduled patients.
     mutating func updateAppointments() {
+        let patients = patientAppointments.compactMap { $0.patient }
+        assert(patients.isEmpty, "You can use this method only when appointments not contains scheduled patients.")
+
         patientAppointments.removeAll()
         createAppointments()
+    }
+
+    /// This method replace appointment with new appointment at the same scheduled time.
+    /// Also it delete next  appointments if they are crossed in time interval
+    /// only if they are not contains scheduled patients, in this case it send error message in completion.
+    /// - Parameters:
+    ///   - newAppointment: New appointment to replace
+    ///   - completion: Possible error message.
+    mutating func updateAppointments(with newAppointment: PatientAppointment, completion: @escaping (String?) -> Void) {
+        guard let index = patientAppointments.firstIndex(where: { $0.scheduledTime == newAppointment.scheduledTime }),
+              let ending = newAppointment.scheduledTime?.addingTimeInterval(newAppointment.duration) else {
+                  completion("Cannot find corresponding appointment.")
+            return
+        }
+
+        if newAppointment.duration == patientAppointments[index].duration {
+            patientAppointments.remove(at: index)
+            patientAppointments.insert(newAppointment, at: index)
+        } else {
+            let crossedAppointments = patientAppointments.filter { ending > $0.scheduledTime ?? Date() }
+
+            guard crossedAppointments.compactMap({ $0.patient }).isEmpty else {
+                completion(
+                    "Couldn't change duration of appointment. Schedule already has patients at this time interval."
+                )
+                return
+            }
+
+            for appointment in crossedAppointments {
+                patientAppointments.removeAll(where: { $0.scheduledTime == appointment.scheduledTime })
+            }
+        }
     }
 }

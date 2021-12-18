@@ -13,12 +13,15 @@ protocol PatientAppointmentModule: AnyObject {
 }
 
 protocol PatientAppointmentView: View {
+    var schedule: DoctorSchedule! { get set }
 }
 
 protocol PatientAppointmentPresentation: AnyObject {
+    func updateSchedule(with newApointment: PatientAppointment)
 }
 
 protocol PatientAppointmentInteraction: Interactor {
+    func updateSchedule(_ schedule: DoctorSchedule)
 }
 
 protocol PatientAppointmentInteractorDelegate: AnyObject {
