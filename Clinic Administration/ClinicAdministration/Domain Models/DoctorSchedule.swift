@@ -84,9 +84,9 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
 
     /// This method replace appointment with new appointment at the same scheduled time.
     /// Also it delete next  appointments if they are crossed in time interval
-    /// only if they are not contains scheduled patients, in this case it send error message in completion.
+    /// only if they are not contains scheduled patients, otherwise it sends error message in completion.
     /// - Parameters:
-    ///   - newAppointment: New appointment to replace
+    ///   - newAppointment: New appointment to insert
     ///   - completion: Possible error message.
     mutating func updateAppointments(with newAppointment: PatientAppointment, completion: @escaping (String?) -> Void) {
         guard let index = patientAppointments.firstIndex(where: { $0.scheduledTime == newAppointment.scheduledTime }),
