@@ -56,4 +56,46 @@ enum Design {
         case bold = "Roboto-Bold"
         case black = "Roboto-Black"
     }
+
+    /// An object that generates labels
+    enum Label {
+        /// Creates date label from specified date
+        /// - Parameters:
+        ///   - date: date
+        ///   - size: text size
+        ///   - textColor: text color
+        /// - Returns: label with attributed text
+        static func dateLabel(_ date: Date, ofSize size: CGFloat, textColor: UIColor) -> UILabel {
+            let label = UILabel()
+
+            DateFormatter.shared.dateFormat = "LLLL d EEEE"
+            let stringDate = DateFormatter.shared.string(from: date)
+            let splitDate = stringDate.split(separator: " ")
+            let month = "\(splitDate[0].capitalized.replacingOccurrences(of: ".", with: ""))"
+            let day = "\(splitDate[1])"
+            let weekday = "\(splitDate[2])"
+
+            let attributedDate = NSMutableAttributedString(
+                string: "\(month) \(day) \(weekday)",
+                attributes: [.foregroundColor: textColor]
+            )
+            attributedDate
+                .addAttributes(
+                    [.font: Font.robotoFont(ofSize: size, weight: .medium)],
+                    range: NSRange(location: 0, length: month.count)
+                )
+            attributedDate.addAttributes(
+                [.font: Font.robotoFont(ofSize: size, weight: .regular)],
+                range: NSRange(location: month.count + 1, length: day.count)
+            )
+            attributedDate.addAttributes(
+                [.font: Font.robotoFont(ofSize: size, weight: .light)],
+                range: NSRange(location: month.count + day.count + 2, length: weekday.count)
+            )
+
+            label.attributedText = attributedDate
+
+            return label
+        }
+    }
 }
