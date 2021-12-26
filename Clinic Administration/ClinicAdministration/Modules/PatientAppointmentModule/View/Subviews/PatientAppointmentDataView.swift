@@ -18,9 +18,6 @@ final class PatientAppointmentDataView: UIView {
         self.scheduledTime = scheduledTime
         super.init(frame: .zero)
 
-        layer.cornerRadius = Design.CornerRadius.large
-        layer.masksToBounds = true
-
         configureHierarchy()
     }
 

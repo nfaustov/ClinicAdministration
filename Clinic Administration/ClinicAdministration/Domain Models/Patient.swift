@@ -34,7 +34,7 @@ struct Patient: Codable, Hashable {
     var patronymicName: String
     var phoneNumber: String
 
-    init(id: UUID?, secondName: String, firstName: String, patronymicName: String, phoneNumber: String) {
+    init(id: UUID? = UUID(), secondName: String, firstName: String, patronymicName: String, phoneNumber: String) {
         self.id = id
         self.secondName = secondName
         self.firstName = firstName

@@ -20,7 +20,7 @@ extension PatientAppointmentPresenter: PatientAppointmentPresentation {
         view?.schedule.updateAppointments(with: newApointment) { errorMessage in
             guard let errorMessage = errorMessage else { return }
 
-            print(errorMessage)
+            self.view?.showError(message: errorMessage)
         }
     }
 }
