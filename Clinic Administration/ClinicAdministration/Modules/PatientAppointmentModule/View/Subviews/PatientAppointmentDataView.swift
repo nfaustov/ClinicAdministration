@@ -12,12 +12,46 @@ final class PatientAppointmentDataView: UIView {
     private let date: Date
     private let scheduledTime: Date
 
-    init(doctor: Doctor, date: Date, scheduledTime: Date) {
+    private var serviceDuration: Float
+
+    private var dateTitleLabel = UILabel()
+    private var timeTitleLabel = UILabel()
+    private var doctorTitleLabel = UILabel()
+    private var durationTitleLabel = UILabel()
+    private var durationLabel = UILabel()
+    private var doctorLabel = UILabel()
+    private var timeLabel = UILabel()
+    private var dateLabel: UILabel {
+        Design.Label.dateLabel(date, ofSize: 18, textColor: Design.Color.lightGray)
+    }
+
+    private var durationSlider = UISlider()
+
+    private var hoursTitle: String {
+        let remainder = Int(durationSlider.value) / 60 % 10
+
+        switch remainder {
+        case 1: return "час"
+        case 2, 3, 4: return "часа"
+        default: return "часов"
+        }
+    }
+
+    init(doctor: Doctor, date: Date, scheduledTime: Date, serviceDuration: Float? = nil) {
         self.doctor = doctor
         self.date = date
         self.scheduledTime = scheduledTime
+
+        if let serviceDuration = serviceDuration {
+            self.serviceDuration = serviceDuration
+        } else {
+            self.serviceDuration = Float(doctor.serviceDuration / 60)
+        }
+
         super.init(frame: .zero)
 
+        configureLabels()
+        configureSlider()
         configureHierarchy()
     }
 
@@ -25,17 +59,8 @@ final class PatientAppointmentDataView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configureHierarchy() {
-        backgroundColor = Design.Color.chocolate
-
-        let dateTitleLabel = UILabel()
-        let timeTitleLabel = UILabel()
-        let doctorTitleLabel = UILabel()
-        let doctorLabel = UILabel()
-        let timeLabel = UILabel()
-        let dateLabel = Design.Label.dateLabel(date, ofSize: 18, textColor: Design.Color.lightGray)
-
-        [dateTitleLabel, timeTitleLabel, doctorTitleLabel].forEach { label in
+    private func configureLabels() {
+        [dateTitleLabel, timeTitleLabel, doctorTitleLabel, durationTitleLabel].forEach { label in
             label.font = Design.Font.robotoFont(ofSize: 13, weight: .regular)
             label.textColor = Design.Color.darkGray
         }
@@ -43,8 +68,9 @@ final class PatientAppointmentDataView: UIView {
         dateTitleLabel.text = "Дата"
         timeTitleLabel.text = "Время"
         doctorTitleLabel.text = "Врач"
+        durationTitleLabel.text = "Длительность"
 
-        [doctorLabel, timeLabel].forEach { label in
+        [doctorLabel, timeLabel, durationLabel].forEach { label in
             label.font = Design.Font.robotoFont(ofSize: 18, weight: .regular)
             label.textColor = Design.Color.lightGray
         }
@@ -52,6 +78,36 @@ final class PatientAppointmentDataView: UIView {
         doctorLabel.text = "\(doctor.fullName)"
         DateFormatter.shared.dateFormat = "H:mm"
         timeLabel.text = DateFormatter.shared.string(from: scheduledTime)
+        durationLabel.text = "\(Int(serviceDuration)) минут"
+    }
+
+    private func configureSlider() {
+        durationSlider.minimumTrackTintColor = Design.Color.lightGray
+        durationSlider.maximumTrackTintColor = Design.Color.brown
+        durationSlider.thumbTintColor = Design.Color.white
+        durationSlider.minimumValue = 10
+        durationSlider.maximumValue = 120
+        durationSlider.setValue(serviceDuration, animated: true)
+        durationSlider.addTarget(self, action: #selector(slide), for: .valueChanged)
+    }
+
+    @objc private func slide() {
+        let step: Float = 5
+        let newStep = roundf(durationSlider.value / step)
+        durationSlider.value = newStep * step
+
+        let hours = Int(durationSlider.value) / 60
+        let minutes = Int(durationSlider.value) % 60
+
+        if hours >= 1 {
+            durationLabel.text = minutes == 0 ? "\(hours) \(hoursTitle)" : "\(hours) \(hoursTitle) \(minutes) минут"
+        } else {
+            durationLabel.text = "\(minutes) минут"
+        }
+    }
+
+    private func configureHierarchy() {
+        backgroundColor = Design.Color.chocolate
 
         let doctorSeparator = UIView()
         doctorSeparator.backgroundColor = Design.Color.brown
@@ -66,8 +122,9 @@ final class PatientAppointmentDataView: UIView {
         let doctorStack = UIStackView(arrangedSubviews: [doctorTitleLabel, doctorLabel])
         let dateStack = UIStackView(arrangedSubviews: [dateTitleLabel, dateLabel])
         let timeStack = UIStackView(arrangedSubviews: [timeTitleLabel, timeLabel])
+        let durationStack = UIStackView(arrangedSubviews: [durationTitleLabel, durationLabel, durationSlider])
 
-        [doctorStack, dateStack, timeStack].forEach { stack in
+        [doctorStack, dateStack, timeStack, durationStack].forEach { stack in
             stack.axis = .vertical
             stack.spacing = 5
             addSubview(stack)
@@ -88,13 +145,18 @@ final class PatientAppointmentDataView: UIView {
             dateStack.leadingAnchor.constraint(equalTo: doctorStack.leadingAnchor),
 
             timeStack.topAnchor.constraint(equalTo: dateStack.topAnchor),
-            timeStack.leadingAnchor.constraint(equalTo: dateStack.trailingAnchor, constant: 30),
+            timeStack.leadingAnchor.constraint(equalTo: dateStack.trailingAnchor, constant: 60),
             timeStack.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -20),
 
             dateSeparator.topAnchor.constraint(equalTo: dateStack.bottomAnchor, constant: 5),
             dateSeparator.leadingAnchor.constraint(equalTo: dateStack.leadingAnchor),
             dateSeparator.widthAnchor.constraint(equalTo: doctorSeparator.widthAnchor),
-            dateSeparator.heightAnchor.constraint(equalToConstant: 1)
+            dateSeparator.heightAnchor.constraint(equalToConstant: 1),
+
+            durationStack.topAnchor.constraint(equalTo: dateSeparator.bottomAnchor, constant: 10),
+            durationStack.leadingAnchor.constraint(equalTo: doctorStack.leadingAnchor),
+            durationStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            durationStack.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -20)
         ])
     }
 }
