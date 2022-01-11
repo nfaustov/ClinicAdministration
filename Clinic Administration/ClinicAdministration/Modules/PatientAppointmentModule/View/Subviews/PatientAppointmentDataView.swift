@@ -37,6 +37,10 @@ final class PatientAppointmentDataView: UIView {
         }
     }
 
+    var duration: Double {
+        Double(durationSlider.value)
+    }
+
     init(doctor: Doctor, date: Date, scheduledTime: Date, serviceDuration: Float? = nil) {
         self.doctor = doctor
         self.date = date
@@ -87,7 +91,7 @@ final class PatientAppointmentDataView: UIView {
         durationSlider.thumbTintColor = Design.Color.white
         durationSlider.minimumValue = 10
         durationSlider.maximumValue = 120
-        durationSlider.setValue(serviceDuration, animated: true)
+        durationSlider.value = serviceDuration
         durationSlider.addTarget(self, action: #selector(slide), for: .valueChanged)
     }
 

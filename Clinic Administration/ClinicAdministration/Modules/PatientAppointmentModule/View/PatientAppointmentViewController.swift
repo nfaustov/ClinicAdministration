@@ -13,6 +13,8 @@ final class PatientAppointmentViewController: UIViewController {
 
     private let patientDataInput = PatientDataView()
 
+    private var appointmentView: PatientAppointmentDataView!
+
     var schedule: DoctorSchedule!
     var appointment: PatientAppointment!
 
@@ -29,15 +31,15 @@ final class PatientAppointmentViewController: UIViewController {
         view.addSubview(patientDataInput)
         patientDataInput.translatesAutoresizingMaskIntoConstraints = false
 
-        let patientApointmentDataView = PatientAppointmentDataView(
+        appointmentView = PatientAppointmentDataView(
             doctor: schedule.doctor,
             date: schedule.startingTime,
             scheduledTime: appointment.scheduledTime ?? Date()
         )
-        patientApointmentDataView.layer.cornerRadius = Design.CornerRadius.large
-        patientApointmentDataView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.addSubview(patientApointmentDataView)
-        patientApointmentDataView.translatesAutoresizingMaskIntoConstraints = false
+        appointmentView.layer.cornerRadius = Design.CornerRadius.large
+        appointmentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.addSubview(appointmentView)
+        appointmentView.translatesAutoresizingMaskIntoConstraints = false
 
         let buttonView = UIView()
         buttonView.backgroundColor = Design.Color.white
@@ -53,12 +55,12 @@ final class PatientAppointmentViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            patientApointmentDataView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            patientApointmentDataView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            patientApointmentDataView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            patientApointmentDataView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            appointmentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            appointmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            appointmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            appointmentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
 
-            patientDataInput.topAnchor.constraint(equalTo: patientApointmentDataView.bottomAnchor),
+            patientDataInput.topAnchor.constraint(equalTo: appointmentView.bottomAnchor),
             patientDataInput.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             patientDataInput.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             patientDataInput.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),
@@ -78,7 +80,7 @@ final class PatientAppointmentViewController: UIViewController {
     @objc private func addPatient() {
         let patientAppointment = PatientAppointment(
             scheduledTime: appointment.scheduledTime,
-            duration: 0,
+            duration: appointmentView.duration,
             patient: patientDataInput.patientData
         )
         presenter.updateSchedule(with: patientAppointment)
