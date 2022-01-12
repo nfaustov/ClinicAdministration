@@ -33,7 +33,7 @@ final class PatientDataView: UIView {
         }
 
         let fieldsStack = UIStackView(arrangedSubviews: [
-            firstNameTextField, secondNameTextField, patronymicNameTextField, phoneNumberTextField
+            secondNameTextField, firstNameTextField, patronymicNameTextField, phoneNumberTextField
         ])
         fieldsStack.axis = .vertical
         fieldsStack.distribution = .fillEqually

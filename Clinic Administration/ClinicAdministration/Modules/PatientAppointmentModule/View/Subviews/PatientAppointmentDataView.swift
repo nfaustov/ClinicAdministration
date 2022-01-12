@@ -14,13 +14,14 @@ final class PatientAppointmentDataView: UIView {
 
     private var serviceDuration: Float
 
-    private var dateTitleLabel = UILabel()
-    private var timeTitleLabel = UILabel()
-    private var doctorTitleLabel = UILabel()
-    private var durationTitleLabel = UILabel()
-    private var durationLabel = UILabel()
-    private var doctorLabel = UILabel()
-    private var timeLabel = UILabel()
+    private var dateTitleLabel = Design.Label.titleLabel("Дата")
+    private var timeTitleLabel = Design.Label.titleLabel("Время")
+    private var doctorTitleLabel = Design.Label.titleLabel("Врач")
+    private var durationTitleLabel = Design.Label.titleLabel("Длительность")
+
+    private var durationLabel = Design.Label.valueLabel()
+    private var doctorLabel = Design.Label.valueLabel()
+    private var timeLabel = Design.Label.valueLabel()
     private var dateLabel: UILabel {
         Design.Label.dateLabel(date, ofSize: 18, textColor: Design.Color.lightGray)
     }
@@ -64,21 +65,6 @@ final class PatientAppointmentDataView: UIView {
     }
 
     private func configureLabels() {
-        [dateTitleLabel, timeTitleLabel, doctorTitleLabel, durationTitleLabel].forEach { label in
-            label.font = Design.Font.robotoFont(ofSize: 13, weight: .regular)
-            label.textColor = Design.Color.darkGray
-        }
-
-        dateTitleLabel.text = "Дата"
-        timeTitleLabel.text = "Время"
-        doctorTitleLabel.text = "Врач"
-        durationTitleLabel.text = "Длительность"
-
-        [doctorLabel, timeLabel, durationLabel].forEach { label in
-            label.font = Design.Font.robotoFont(ofSize: 18, weight: .regular)
-            label.textColor = Design.Color.lightGray
-        }
-
         doctorLabel.text = "\(doctor.fullName)"
         DateFormatter.shared.dateFormat = "H:mm"
         timeLabel.text = DateFormatter.shared.string(from: scheduledTime)

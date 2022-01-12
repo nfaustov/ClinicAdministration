@@ -79,8 +79,7 @@ enum Design {
                 string: "\(month) \(day) \(weekday)",
                 attributes: [.foregroundColor: textColor]
             )
-            attributedDate
-                .addAttributes(
+            attributedDate.addAttributes(
                     [.font: Font.robotoFont(ofSize: size, weight: .medium)],
                     range: NSRange(location: 0, length: month.count)
                 )
@@ -94,6 +93,28 @@ enum Design {
             )
 
             label.attributedText = attributedDate
+
+            return label
+        }
+        
+        /// Creates title label
+        /// - Parameter title: label title
+        /// - Returns: label with specified title, roboto font of size 13, regular weight, dark gray text color
+        static func titleLabel(_ title: String) -> UILabel {
+            let label = UILabel()
+            label.text = title
+            label.font = Design.Font.robotoFont(ofSize: 13, weight: .regular)
+            label.textColor = Color.darkGray
+
+            return label
+        }
+        
+        /// Creates value label
+        /// - Returns: label with roboto font of size 18, regular weight, light gray text color
+        static func valueLabel() -> UILabel {
+            let label = UILabel()
+            label.font = Design.Font.robotoFont(ofSize: 18, weight: .regular)
+            label.textColor = Design.Color.lightGray
 
             return label
         }
