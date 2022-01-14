@@ -24,6 +24,8 @@ final class FloatingTextField: UIView {
         textField.text?.isEmpty ?? true
     }
 
+    private let keyboardType: UIKeyboardType?
+
     private var placeholder: String
 
     var text: String? {
@@ -35,8 +37,9 @@ final class FloatingTextField: UIView {
         }
     }
 
-    init(placeholder: String) {
+    init(placeholder: String, keyboardType: UIKeyboardType? = nil) {
         self.placeholder = placeholder
+        self.keyboardType = keyboardType
         super.init(frame: .zero)
 
         configureHierarchy()
@@ -51,6 +54,7 @@ final class FloatingTextField: UIView {
         textField.textColor = Design.Color.chocolate
         textField.borderStyle = .none
         textField.autocapitalizationType = .words
+        textField.keyboardType = keyboardType ?? .default
         addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.addTarget(self, action: #selector(textRecognizer), for: .allEditingEvents)

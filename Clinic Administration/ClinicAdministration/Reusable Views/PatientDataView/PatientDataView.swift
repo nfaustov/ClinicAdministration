@@ -11,7 +11,7 @@ final class PatientDataView: UIView {
     private let firstNameTextField = FloatingTextField(placeholder: "Имя")
     private let secondNameTextField = FloatingTextField(placeholder: "Фамилия")
     private let patronymicNameTextField = FloatingTextField(placeholder: "Отчество")
-    private let phoneNumberTextField = FloatingTextField(placeholder: "Номер телефона")
+    private let phoneNumberTextField = FloatingTextField(placeholder: "Номер телефона", keyboardType: .numberPad)
 
     var patientData: Patient? {
         Patient(

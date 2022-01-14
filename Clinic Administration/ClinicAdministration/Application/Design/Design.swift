@@ -96,7 +96,7 @@ enum Design {
 
             return label
         }
-        
+
         /// Creates title label
         /// - Parameter title: label title
         /// - Returns: label with specified title, roboto font of size 13, regular weight, dark gray text color
@@ -108,7 +108,7 @@ enum Design {
 
             return label
         }
-        
+
         /// Creates value label
         /// - Returns: label with roboto font of size 18, regular weight, light gray text color
         static func valueLabel() -> UILabel {
