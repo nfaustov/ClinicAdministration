@@ -12,8 +12,13 @@ final class PatientAppointmentViewController: UIViewController {
     var presenter: PresenterType!
 
     private let patientDataInput = PatientDataView()
+    private let buttonView = UIView()
+    private let button = UIButton(type: .custom)
+    private let bottomView = UIView()
 
     private var appointmentView: PatientAppointmentDataView!
+
+    private var patientDataInputTopConstraint = NSLayoutConstraint()
 
     var schedule: DoctorSchedule!
     var appointment: PatientAppointment!
@@ -24,13 +29,10 @@ final class PatientAppointmentViewController: UIViewController {
         view.backgroundColor = Design.Color.lightGray
 
         configureHierarchy()
+        configureNotifications()
     }
 
     private func configureHierarchy() {
-        patientDataInput.backgroundColor = Design.Color.white
-        view.addSubview(patientDataInput)
-        patientDataInput.translatesAutoresizingMaskIntoConstraints = false
-
         appointmentView = PatientAppointmentDataView(
             doctor: schedule.doctor,
             date: schedule.startingTime,
@@ -41,9 +43,11 @@ final class PatientAppointmentViewController: UIViewController {
         view.addSubview(appointmentView)
         appointmentView.translatesAutoresizingMaskIntoConstraints = false
 
-        let buttonView = UIView()
+        patientDataInput.backgroundColor = Design.Color.white
+        view.addSubview(patientDataInput)
+        patientDataInput.translatesAutoresizingMaskIntoConstraints = false
+
         buttonView.backgroundColor = Design.Color.white
-        let button = UIButton(type: .custom)
         button.backgroundColor = Design.Color.red
         button.setTitle("ЗАПИСАТЬ", for: .normal)
         button.setTitleColor(Design.Color.white, for: .normal)
@@ -54,27 +58,11 @@ final class PatientAppointmentViewController: UIViewController {
         view.addSubview(buttonView)
         button.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            appointmentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            appointmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            appointmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            appointmentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+        bottomView.backgroundColor = buttonView.backgroundColor
+        view.addSubview(bottomView)
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
 
-            patientDataInput.topAnchor.constraint(equalTo: appointmentView.bottomAnchor),
-            patientDataInput.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            patientDataInput.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            patientDataInput.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),
-
-            buttonView.topAnchor.constraint(equalTo: patientDataInput.bottomAnchor),
-            buttonView.leadingAnchor.constraint(equalTo: patientDataInput.leadingAnchor),
-            buttonView.trailingAnchor.constraint(equalTo: patientDataInput.trailingAnchor),
-            buttonView.heightAnchor.constraint(equalToConstant: 70),
-
-            button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor),
-            button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
-            button.widthAnchor.constraint(equalToConstant: 180),
-            button.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        setupConstraints()
     }
 
     @objc private func addPatient() {
@@ -84,6 +72,65 @@ final class PatientAppointmentViewController: UIViewController {
             patient: patientDataInput.patientData
         )
         presenter.updateSchedule(with: patientAppointment)
+    }
+
+    private func setupConstraints() {
+        patientDataInputTopConstraint = patientDataInput.topAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.topAnchor,
+            constant: view.frame.height * 0.3
+        )
+
+        NSLayoutConstraint.activate([
+            appointmentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            appointmentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            appointmentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            appointmentView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+
+            patientDataInputTopConstraint,
+            patientDataInput.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            patientDataInput.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            patientDataInput.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+
+            buttonView.topAnchor.constraint(equalTo: patientDataInput.bottomAnchor),
+            buttonView.leadingAnchor.constraint(equalTo: patientDataInput.leadingAnchor),
+            buttonView.trailingAnchor.constraint(equalTo: patientDataInput.trailingAnchor),
+            buttonView.heightAnchor.constraint(equalToConstant: 70),
+
+            button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor),
+            button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
+            button.widthAnchor.constraint(equalToConstant: 180),
+            button.heightAnchor.constraint(equalToConstant: 50),
+
+            bottomView.topAnchor.constraint(equalTo: buttonView.bottomAnchor, constant: 5),
+            bottomView.leadingAnchor.constraint(equalTo: patientDataInput.leadingAnchor),
+            bottomView.trailingAnchor.constraint(equalTo: patientDataInput.trailingAnchor),
+            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    private func configureNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        patientDataInputTopConstraint.constant = 0
+        view.layoutIfNeeded()
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        patientDataInputTopConstraint.constant = appointmentView.frame.height
+        view.layoutIfNeeded()
     }
 }
 
