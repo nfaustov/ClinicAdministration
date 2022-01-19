@@ -29,7 +29,19 @@ final class PatientAppointmentViewController: UIViewController {
         view.backgroundColor = Design.Color.lightGray
 
         configureHierarchy()
-        configureNotifications()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adjustForKeyboard(notification:)),
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(adjustForKeyboard(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 
     private func configureHierarchy() {
@@ -40,12 +52,8 @@ final class PatientAppointmentViewController: UIViewController {
         )
         appointmentView.layer.cornerRadius = Design.CornerRadius.large
         appointmentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.addSubview(appointmentView)
-        appointmentView.translatesAutoresizingMaskIntoConstraints = false
 
         patientDataInput.backgroundColor = Design.Color.white
-        view.addSubview(patientDataInput)
-        patientDataInput.translatesAutoresizingMaskIntoConstraints = false
 
         buttonView.backgroundColor = Design.Color.white
         button.backgroundColor = Design.Color.red
@@ -54,13 +62,14 @@ final class PatientAppointmentViewController: UIViewController {
         button.layer.cornerRadius = Design.CornerRadius.medium
         button.addTarget(self, action: #selector(addPatient), for: .touchUpInside)
         buttonView.addSubview(button)
-        buttonView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(buttonView)
         button.translatesAutoresizingMaskIntoConstraints = false
 
         bottomView.backgroundColor = buttonView.backgroundColor
-        view.addSubview(bottomView)
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
+
+        for subview in [appointmentView, patientDataInput, buttonView, bottomView].compactMap({ $0 }) {
+            view.addSubview(subview)
+            subview.translatesAutoresizingMaskIntoConstraints = false
+        }
 
         setupConstraints()
     }
@@ -108,29 +117,14 @@ final class PatientAppointmentViewController: UIViewController {
         ])
     }
 
-    private func configureNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow(notification:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(notification:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-    }
-
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        patientDataInputTopConstraint.constant = 0
-        view.layoutIfNeeded()
-    }
-
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        patientDataInputTopConstraint.constant = appointmentView.frame.height
-        view.layoutIfNeeded()
+    @objc private func adjustForKeyboard(notification: Notification) {
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            patientDataInputTopConstraint.constant = appointmentView.frame.height
+            view.layoutIfNeeded()
+        } else {
+            patientDataInputTopConstraint.constant = 0
+            view.layoutIfNeeded()
+        }
     }
 }
 
