@@ -117,13 +117,35 @@ final class PatientAppointmentViewController: UIViewController {
         ])
     }
 
+    private func animateWithKeyboard(
+        notification: Notification,
+        animations: (() -> Void)?
+    ) {
+        let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
+        let curveKey = UIResponder.keyboardAnimationCurveUserInfoKey
+
+        guard let duration = notification.userInfo?[durationKey] as? Double,
+              let curveValue = notification.userInfo?[curveKey] as? Int,
+              let curve = UIView.AnimationCurve(rawValue: curveValue) else { return }
+
+        let animator = UIViewPropertyAnimator(duration: duration, curve: curve) {
+            animations?()
+        }
+
+        animator.startAnimation()
+    }
+
     @objc private func adjustForKeyboard(notification: Notification) {
         if notification.name == UIResponder.keyboardWillHideNotification {
-            patientDataInputTopConstraint.constant = appointmentView.frame.height
-            view.layoutIfNeeded()
+            animateWithKeyboard(notification: notification) {
+                self.patientDataInputTopConstraint.constant = self.appointmentView.frame.height
+                self.view.layoutIfNeeded()
+            }
         } else {
-            patientDataInputTopConstraint.constant = 0
-            view.layoutIfNeeded()
+            animateWithKeyboard(notification: notification) {
+                self.patientDataInputTopConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }
         }
     }
 }
