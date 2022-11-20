@@ -54,4 +54,8 @@ struct Patient: Codable, Hashable {
         patronymicName = entityPatronymicName
         phoneNumber = entityPhoneNumber
     }
+
+    var fullName: String {
+        secondName + " " + firstName + " " + patronymicName
+    }
 }

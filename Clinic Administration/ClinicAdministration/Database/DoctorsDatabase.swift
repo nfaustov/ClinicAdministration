@@ -255,6 +255,20 @@ final class DoctorsDatabase: Database {
                     patientAppointmentEntity.sheduledTime = appointment.scheduledTime
                     patientAppointmentEntity.duration = appointment.duration
                     patientAppointmentEntity.schedule = scheduleEntity
+                    if let patientEntity = NSEntityDescription.insertNewObject(
+                        forEntityName: "Patient",
+                        into: self.context
+                    ) as? PatientEntity {
+                        guard let patient = appointment.patient else { return }
+
+                        patientEntity.id = patient.id
+                        patientEntity.secondName = patient.secondName
+                        patientEntity.firstName = patient.firstName
+                        patientEntity.patronymicName = patient.patronymicName
+                        patientEntity.phoneNumber = patient.phoneNumber
+
+                        patientAppointmentEntity.patient = patientEntity
+                    }
                 }
             }
         }

@@ -16,12 +16,17 @@ where V: PatientAppointmentView, I: PatientAppointmentInteraction {
 // MARK: - PatientAppointmentPresentation
 
 extension PatientAppointmentPresenter: PatientAppointmentPresentation {
-    func updateSchedule(with newApointment: PatientAppointment) {
-        view?.schedule.updateAppointments(with: newApointment) { errorMessage in
+    func updateSchedule(with newAppointment: PatientAppointment) {
+        view?.schedule.updateAppointments(with: newAppointment) { errorMessage in
             guard let errorMessage = errorMessage else { return }
 
             self.view?.showError(message: errorMessage)
         }
+
+        guard let schedule = view?.schedule else { return }
+
+        interactor.updateSchedule(schedule)
+        didFinish?(schedule)
     }
 }
 

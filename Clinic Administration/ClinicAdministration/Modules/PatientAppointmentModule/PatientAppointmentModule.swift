@@ -18,7 +18,7 @@ protocol PatientAppointmentView: View {
 }
 
 protocol PatientAppointmentPresentation: AnyObject {
-    func updateSchedule(with newApointment: PatientAppointment)
+    func updateSchedule(with newAppointment: PatientAppointment)
 }
 
 protocol PatientAppointmentInteraction: Interactor {

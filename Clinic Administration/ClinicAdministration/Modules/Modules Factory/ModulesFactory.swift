@@ -100,6 +100,7 @@ final class ModulesFactory: Modules {
         view.schedule = schedule
         view.appointment = appointment
         let interactor = PatientAppointmentInteractor()
+        interactor.database = dependencies.doctorsDatabase
         let presenter = PatientAppointmentPresenter(view: view, interactor: interactor)
 
         return (view, presenter)

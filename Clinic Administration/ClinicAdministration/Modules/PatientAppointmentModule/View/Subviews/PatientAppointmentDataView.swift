@@ -39,7 +39,7 @@ final class PatientAppointmentDataView: UIView {
     }
 
     var duration: Double {
-        Double(durationSlider.value)
+        Double(durationSlider.value * 60)
     }
 
     init(doctor: Doctor, date: Date, scheduledTime: Date, serviceDuration: Float? = nil) {
