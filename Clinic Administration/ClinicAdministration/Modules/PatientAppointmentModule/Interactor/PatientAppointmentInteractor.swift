@@ -10,9 +10,14 @@ import Foundation
 final class PatientAppointmentInteractor {
     typealias Delegate = PatientAppointmentInteractorDelegate
     weak var delegate: Delegate?
+
+    var database: DoctorsDatabase?
 }
 
 // MARK: - PatientAppointmentInteraction
 
 extension PatientAppointmentInteractor: PatientAppointmentInteraction {
+    func updateSchedule(_ schedule: DoctorSchedule) {
+        database?.updateSchedule(schedule)
+    }
 }

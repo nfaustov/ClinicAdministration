@@ -33,7 +33,6 @@ extension TimeTableInteractor: TimeTableInteraction {
             .compactMap { DoctorSchedule(entity: $0) }
             .filter { $0.startingTime > currentSchedule.startingTime }
             .sorted(by: { $0.startingTime < $1.startingTime })
-
         delegate?.scheduleDidRecieved(schedules.first)
     }
 

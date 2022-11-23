@@ -8,13 +8,22 @@
 import UIKit
 
 final class PatientDataView: UIView {
+    private let firstNameTextField = FloatingTextField(placeholder: "Имя")
+    private let secondNameTextField = FloatingTextField(placeholder: "Фамилия")
+    private let patronymicNameTextField = FloatingTextField(placeholder: "Отчество")
+    private let phoneNumberTextField = FloatingTextField(placeholder: "Номер телефона", keyboardType: .numberPad)
+
+    var patientData: Patient? {
+        Patient(
+            secondName: secondNameTextField.text ?? "",
+            firstName: firstNameTextField.text ?? "",
+            patronymicName: patronymicNameTextField.text ?? "",
+            phoneNumber: phoneNumberTextField.text ?? ""
+        )
+    }
+
     init(patient: Patient? = nil) {
         super.init(frame: .zero)
-
-        let firstNameTextField = FloatingTextField(placeholder: "Имя")
-        let secondNameTextField = FloatingTextField(placeholder: "Фамилия")
-        let patronymicNameTextField = FloatingTextField(placeholder: "Отчество")
-        let phoneNumberTextField = FloatingTextField(placeholder: "Номер телефона")
 
         if let patient = patient {
             firstNameTextField.text = patient.firstName
@@ -24,7 +33,7 @@ final class PatientDataView: UIView {
         }
 
         let fieldsStack = UIStackView(arrangedSubviews: [
-            firstNameTextField, secondNameTextField, patronymicNameTextField, phoneNumberTextField
+            secondNameTextField, firstNameTextField, patronymicNameTextField, phoneNumberTextField
         ])
         fieldsStack.axis = .vertical
         fieldsStack.distribution = .fillEqually
@@ -33,10 +42,10 @@ final class PatientDataView: UIView {
         fieldsStack.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            fieldsStack.topAnchor.constraint(equalTo: topAnchor),
-            fieldsStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            fieldsStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            fieldsStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+            fieldsStack.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            fieldsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            fieldsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            fieldsStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 

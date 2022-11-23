@@ -19,11 +19,14 @@ struct PatientAppointment: Codable, Hashable {
     }
 
     init?(entity: PatientAppointmentEntity) {
-        guard let entityPatient = entity.patient else { return nil }
-
         scheduledTime = entity.sheduledTime
         duration = entity.duration
-        patient = Patient(entity: entityPatient)
+
+        if let entityPatient = entity.patient {
+            patient = Patient(entity: entityPatient)
+        } else {
+            patient = nil
+        }
     }
 }
 
@@ -34,7 +37,7 @@ struct Patient: Codable, Hashable {
     var patronymicName: String
     var phoneNumber: String
 
-    init(id: UUID?, secondName: String, firstName: String, patronymicName: String, phoneNumber: String) {
+    init(id: UUID? = UUID(), secondName: String, firstName: String, patronymicName: String, phoneNumber: String) {
         self.id = id
         self.secondName = secondName
         self.firstName = firstName
@@ -53,5 +56,9 @@ struct Patient: Codable, Hashable {
         firstName = entityFirstName
         patronymicName = entityPatronymicName
         phoneNumber = entityPhoneNumber
+    }
+
+    var fullName: String {
+        secondName + " " + firstName + " " + patronymicName
     }
 }
