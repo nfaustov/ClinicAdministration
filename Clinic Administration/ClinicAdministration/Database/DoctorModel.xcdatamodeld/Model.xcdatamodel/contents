@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Doctor" representedClassName=".DoctorEntity" syncable="YES" codeGenerationType="class">
         <attribute name="agentSalary" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -39,10 +39,4 @@
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="appointment" inverseEntity="Patient"/>
         <relationship name="schedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DoctorSchedule" inverseName="patientAppointments" inverseEntity="DoctorSchedule"/>
     </entity>
-    <elements>
-        <element name="Doctor" positionX="-694.1411743164062" positionY="-195.401611328125" width="128" height="254"/>
-        <element name="DoctorSchedule" positionX="-480.5201416015625" positionY="-74.5311279296875" width="128" height="119"/>
-        <element name="Patient" positionX="-207.376953125" positionY="32.4600830078125" width="128" height="119"/>
-        <element name="PatientAppointment" positionX="-420.9577026367188" positionY="109.4419860839844" width="128" height="89"/>
-    </elements>
 </model>
