@@ -75,14 +75,14 @@ final class PatientAppointmentDataView: UIView {
         durationSlider.minimumTrackTintColor = Design.Color.lightGray
         durationSlider.maximumTrackTintColor = Design.Color.brown
         durationSlider.thumbTintColor = Design.Color.white
-        durationSlider.minimumValue = 10
+        durationSlider.minimumValue = Float(doctor.serviceDuration / 60)
         durationSlider.maximumValue = 120
         durationSlider.value = serviceDuration
         durationSlider.addTarget(self, action: #selector(slide), for: .valueChanged)
     }
 
     @objc private func slide() {
-        let step: Float = 5
+        let step = Float(doctor.serviceDuration / 60)
         let newStep = roundf(durationSlider.value / step)
         durationSlider.value = newStep * step
 
