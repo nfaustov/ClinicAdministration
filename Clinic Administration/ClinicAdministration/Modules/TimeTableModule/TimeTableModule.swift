@@ -19,7 +19,7 @@ protocol TimeTableModule: AnyObject {
 
 protocol TimeTableDisplaying: View {
     var date: Date { get set }
-    var newSchedule: DoctorSchedule? { get set }
+    var selectedSchedule: DoctorSchedule? { get set }
 
     func daySnapshot(schedules: [DoctorSchedule], selectedSchedule: DoctorSchedule)
     func emptyDaySnapshot()

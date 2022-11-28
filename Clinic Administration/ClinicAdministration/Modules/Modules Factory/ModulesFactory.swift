@@ -17,7 +17,7 @@ final class ModulesFactory: Modules {
     func timeTable(selectedSchedule: DoctorSchedule?) -> (UIViewController, TimeTableModule) {
         let view = TimeTableViewController()
         if let selectedSchedule = selectedSchedule {
-            view.newSchedule = selectedSchedule
+            view.selectedSchedule = selectedSchedule
             view.date = selectedSchedule.startingTime
         }
         let interactor = TimeTableInteractor()

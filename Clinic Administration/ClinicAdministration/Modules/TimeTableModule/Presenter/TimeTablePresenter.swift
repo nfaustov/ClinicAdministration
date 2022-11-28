@@ -64,7 +64,7 @@ extension TimeTablePresenter: TimeTablePresentation {
         coordinator?.routeToCreateSchedule(for: doctor, onDate: date) { schedule in
             guard schedule != nil else { return }
 
-            self.view?.newSchedule = schedule
+            self.view?.selectedSchedule = schedule
         }
     }
 
@@ -108,7 +108,7 @@ extension TimeTablePresenter: TimeTablePresentation {
 extension TimeTablePresenter: TimeTableInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
         if let firstSchedule = schedules.first,
-           let scheduleIndex = schedules.firstIndex(of: view?.newSchedule ?? firstSchedule) {
+           let scheduleIndex = schedules.firstIndex(of: view?.selectedSchedule ?? firstSchedule) {
             var preparedSchedules = schedules
             let preparedSchedule = prepareIfNeeded(schedules[scheduleIndex])
             preparedSchedules.remove(at: scheduleIndex)
@@ -121,8 +121,9 @@ extension TimeTablePresenter: TimeTableInteractorDelegate {
 
     func scheduleDidRecieved(_ schedule: DoctorSchedule?) {
         if let schedule = schedule {
+            view?.selectedSchedule = schedule
             view?.changeDate(schedule.startingTime)
-            view?.doctorSnapshot(schedule: schedule)
+            view?.doctorSnapshot(schedule: prepareIfNeeded(schedule))
         } else {
             view?.noNextScheduleAlert()
         }

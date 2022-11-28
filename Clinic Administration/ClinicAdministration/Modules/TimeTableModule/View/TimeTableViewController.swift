@@ -34,11 +34,9 @@ final class TimeTableViewController: UIViewController {
 
     private var doctorSectionPlaceHolder: [DoctorSectionPlaceholder] = []
 
-    private var selectedSchedule: DoctorSchedule?
-
     private var datePicker: DatePicker!
 
-    var newSchedule: DoctorSchedule?
+    var selectedSchedule: DoctorSchedule?
 
     var date = Date()
 
@@ -99,7 +97,6 @@ final class TimeTableViewController: UIViewController {
         super.viewDidDisappear(animated)
 
         selectedSchedule = nil
-        newSchedule = nil
     }
 
     @objc private func switchToGraphicScreen() {

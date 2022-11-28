@@ -1431,6 +1431,7 @@
 				DEVELOPMENT_TEAM = WQ6FU7ZZ8T;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ClinicAdministration/Application/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Clinic Administration";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1452,6 +1453,7 @@
 				DEVELOPMENT_TEAM = WQ6FU7ZZ8T;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ClinicAdministration/Application/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Clinic Administration";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
