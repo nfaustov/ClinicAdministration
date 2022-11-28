@@ -107,8 +107,8 @@ extension TimeTablePresenter: TimeTablePresentation {
 
 extension TimeTablePresenter: TimeTableInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
-        if let firstSchedule = schedules.first,
-           let scheduleIndex = schedules.firstIndex(of: view?.selectedSchedule ?? firstSchedule) {
+        if let firstSchedule = schedules.first {
+            let scheduleIndex = schedules.firstIndex(of: view?.selectedSchedule ?? firstSchedule) ?? 0
             var preparedSchedules = schedules
             let preparedSchedule = prepareIfNeeded(schedules[scheduleIndex])
             preparedSchedules.remove(at: scheduleIndex)
