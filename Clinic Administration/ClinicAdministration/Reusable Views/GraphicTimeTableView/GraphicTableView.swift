@@ -38,8 +38,6 @@ final class GraphicTableView: UIView {
 
         setWorkingHours(date)
         addCabinets()
-
-        // moveIntersectionsToFront()
     }
 
     required init?(coder: NSCoder) {
@@ -113,7 +111,6 @@ final class GraphicTableView: UIView {
         }
 
         addSchedules(schedules)
-        // moveIntersectionsToFront()
         setNeedsLayout()
     }
 
@@ -184,11 +181,7 @@ final class GraphicTableView: UIView {
         let doctorView = DoctorScheduleView(
             schedule,
             minuteHeight: Size.minuteHeight,
-            intersectionDetection: detectIntersection(for:),
-//            moveToFrontAction: { [weak self] doctorView in
-//                self?.cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
-//            }
-            scheduleDidChanged: { [delegate] schedule in
+            editingAction: { [delegate] schedule in
                 delegate?.scheduleDidChanged(schedule)
             }
         )
@@ -198,34 +191,6 @@ final class GraphicTableView: UIView {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         doctorView.transformArea.addGestureRecognizer(pan)
     }
-
-    private func detectIntersection(for schedule: DoctorSchedule) -> Bool {
-//        dataManager.updateSchedule(schedule, updated: { [weak self] in
-//            guard let self = self else { return }
-//
-//            let cabinetSchedules = self.schedules.filter({ $0.cabinet == schedule.cabinet })
-//            for doctorSchedule in cabinetSchedules {
-//                if doctorSchedule == schedule { continue }
-//                let doctorView = self.doctorViews.first(where: { $0.schedule == doctorSchedule })
-//
-//                doctorView?.checkState()
-//            }
-//        })
-//
-//        let intersectedSchedules = dataManager.intersectedSchedules(for: date)
-//            .filter({ $0.cabinet == schedule.cabinet })
-//
-//        return intersectedSchedules.contains(schedule)
-        false
-    }
-
-//    private func moveIntersectionsToFront() {
-//        for schedule in dataManager.intersectedSchedules(for: date) {
-//            if let doctorView = self.doctorViews.first(where: { $0.schedule == schedule }) {
-//                cabinetViews[schedule.cabinet - 1].bringSubviewToFront(doctorView)
-//            }
-//        }
-//    }
 
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: self)

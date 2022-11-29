@@ -37,12 +37,6 @@ final class DoctorScheduleView: UIView {
     private var originalHeight = CGFloat.zero
     private var minutesInterval = CGFloat.zero
 
-    private var isIntersected: Bool {
-        guard let intersection = intersectionDetection?(schedule) else { return false }
-
-        return intersection
-    }
-
     private var mode: Mode = .viewing {
         didSet {
             for view in [topResizingPoint, transformArea, bottomResizingPoint] {
@@ -55,22 +49,16 @@ final class DoctorScheduleView: UIView {
 
     private(set) var schedule: DoctorSchedule
 
-    private var intersectionDetection: ((DoctorSchedule) -> Bool)?
-    private var scheduleDidChanged: ((DoctorSchedule) -> Void)?
-//    private var moveToFrontAction: ((DoctorScheduleView) -> Void)?
+    private var editingAction: ((DoctorSchedule) -> Void)?
 
     init(
         _ schedule: DoctorSchedule,
         minuteHeight: CGFloat,
-        intersectionDetection: @escaping (DoctorSchedule) -> Bool,
-        scheduleDidChanged: @escaping (DoctorSchedule) -> Void
-//        moveToFrontAction: @escaping (DoctorScheduleView) -> Void
+        editingAction: @escaping (DoctorSchedule) -> Void
     ) {
         self.schedule = schedule
         self.minuteHeight = minuteHeight
-        self.intersectionDetection = intersectionDetection
-        self.scheduleDidChanged = scheduleDidChanged
-//        self.moveToFrontAction = moveToFrontAction
+        self.editingAction = editingAction
         super.init(frame: .zero)
 
         layer.shadowColor = Design.Color.brown.cgColor
@@ -146,7 +134,7 @@ final class DoctorScheduleView: UIView {
 
     private func checkChanges() {
         if hasChanges {
-            scheduleDidChanged?(schedule)
+            editingAction?(schedule)
             hasChanges = false
         }
     }
@@ -160,26 +148,15 @@ final class DoctorScheduleView: UIView {
             layer.shadowOpacity = 0
             nameLabel.textColor = Design.Color.chocolate.withAlphaComponent(0.6)
             transform = .init(scaleX: 1.1, y: 1)
-//            moveToFrontAction?(self)
         case .viewing:
             nameLabel.textColor = Design.Color.chocolate
             transform = .identity
-            if isIntersected {
-                layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.2).cgColor
-                layer.borderColor = Design.Color.red.cgColor
-                layer.borderWidth = 2
-                layer.shadowOffset = CGSize(width: 0, height: 6)
-                layer.shadowRadius = 12
-                layer.shadowOpacity = 0.15
-//                moveToFrontAction?(self)
-            } else {
-                layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.75).cgColor
-                layer.borderColor = Design.Color.darkGray.cgColor
-                layer.borderWidth = 1
-                layer.shadowOffset = CGSize(width: 0, height: 3)
-                layer.shadowRadius = 6
-                layer.shadowOpacity = 0.2
-            }
+            layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.75).cgColor
+            layer.borderColor = Design.Color.darkGray.cgColor
+            layer.borderWidth = 1
+            layer.shadowOffset = CGSize(width: 0, height: 3)
+            layer.shadowRadius = 6
+            layer.shadowOpacity = 0.2
         }
     }
 
