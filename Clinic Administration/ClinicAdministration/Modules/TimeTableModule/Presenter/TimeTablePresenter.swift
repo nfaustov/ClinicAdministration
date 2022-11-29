@@ -85,10 +85,7 @@ extension TimeTablePresenter: TimeTablePresentation {
 
     func showSchedulesList(for doctor: Doctor) {
         coordinator?.routeToSchedulesList(for: doctor) { schedule in
-            guard let schedule = schedule else { return }
-
-            self.view?.changeDate(schedule.startingTime)
-            self.view?.doctorSnapshot(schedule: schedule)
+            self.scheduleDidRecieved(schedule)
         }
     }
 
