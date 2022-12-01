@@ -229,13 +229,11 @@ extension TimeTableViewController: UICollectionViewDelegate {
             )
             selectedSchedule = doctorSchedule
         } else if let patientAppointment = dataSource.itemIdentifier(for: indexPath) as? PatientAppointment {
-            guard let patient = patientAppointment.patient else {
+            if let patient = patientAppointment.patient {
+                presenter.showPatientCard(patient)
+            } else if let selectedSchedule = selectedSchedule {
                 presenter.createPatientAppointment(schedule: selectedSchedule, selectedAppointment: patientAppointment)
-
-                return
             }
-
-            presenter.showPatientCard(patient)
         } else if let action = dataSource.itemIdentifier(for: indexPath) as? TimeTableAction,
                   let selectedSchedule = selectedSchedule {
             switch action {
