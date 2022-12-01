@@ -89,7 +89,7 @@ extension TimeTablePresenter: TimeTablePresentation {
         }
     }
 
-    func createPatientAppointment(schedule: DoctorSchedule, selectedAppointment: PatientAppointment) {
+    func registerPatient(schedule: DoctorSchedule, selectedAppointment: PatientAppointment) {
         coordinator?.routeToPatientAppointment(schedule: schedule, appointment: selectedAppointment) { editedSchedule in
             self.view?.selectedSchedule = editedSchedule
         }

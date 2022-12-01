@@ -232,7 +232,7 @@ extension TimeTableViewController: UICollectionViewDelegate {
             if let patient = patientAppointment.patient {
                 presenter.showPatientCard(patient)
             } else if let selectedSchedule = selectedSchedule {
-                presenter.createPatientAppointment(schedule: selectedSchedule, selectedAppointment: patientAppointment)
+                presenter.registerPatient(schedule: selectedSchedule, selectedAppointment: patientAppointment)
             }
         } else if let action = dataSource.itemIdentifier(for: indexPath) as? TimeTableAction,
                   let selectedSchedule = selectedSchedule {

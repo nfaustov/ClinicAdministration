@@ -38,7 +38,7 @@ protocol TimeTablePresentation: AnyObject {
     func switchToGraphicScreen(onDate: Date)
     func showDoctorsNextSchedule(after currentSchedule: DoctorSchedule)
     func showSchedulesList(for doctor: Doctor)
-    func createPatientAppointment(schedule: DoctorSchedule, selectedAppointment: PatientAppointment)
+    func registerPatient(schedule: DoctorSchedule, selectedAppointment: PatientAppointment)
     func showPatientCard(_ patient: Patient)
 }
 
