@@ -58,31 +58,21 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         }
     }
 
-    private mutating func createAppointments() {
-        var appointmentTime = startingTime
-
-        repeat {
-            let appointment = PatientAppointment(
-                scheduledTime: appointmentTime,
-                duration: serviceDuration,
-                patient: nil
-            )
-            patientAppointments.append(appointment)
-            appointmentTime.addTimeInterval(serviceDuration)
-        } while appointmentTime < endingTime
-    }
-
-    /// Updates number of patient appointments when doctor schedule was changed.
-    /// You can use it only if appointments not contains scheduled patients.
+    /// Updates number of patient appointments, excluding impact on already scheduled patients.
     mutating func updateAppointments() {
-        let patients = patientAppointments.compactMap { $0.patient }
-        precondition(
-            patients.isEmpty,
-            "You can use this method only when appointments not contains scheduled patients."
-        )
+        if patientAppointments.compactMap({ $0.patient }).isEmpty {
+            patientAppointments.removeAll()
+            createAppointments()
+        } else {
+            patientAppointments.removeAll(where: { $0.patient == nil })
+            editAppointments()
+            patientAppointments.sort { appointment0, appointment1 in
+                guard let scheduledTime0 = appointment0.scheduledTime,
+                      let scheduledTime1 = appointment1.scheduledTime else { return false }
 
-        patientAppointments.removeAll()
-        createAppointments()
+                return scheduledTime0 < scheduledTime1
+            }
+        }
     }
 
     /// Replace appointments with new appointment at the same scheduled time
@@ -121,6 +111,48 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
             completion(
                 "Длительность приема слишком маленькая, необходимо по крайней мере \(doctor.serviceDuration / 60) мин."
             )
+        }
+    }
+}
+
+// MARK: - Private methods
+
+extension DoctorSchedule {
+    private mutating func addingAppointmentIteration(_ appointmentTime: inout Date) {
+        let appointment = PatientAppointment(
+            scheduledTime: appointmentTime,
+            duration: serviceDuration,
+            patient: nil
+        )
+        patientAppointments.append(appointment)
+        appointmentTime.addTimeInterval(serviceDuration)
+    }
+
+    private mutating func createAppointments() {
+        var appointmentTime = startingTime
+
+        repeat {
+            addingAppointmentIteration(&appointmentTime)
+        } while appointmentTime < endingTime
+    }
+
+    private mutating func editAppointments() {
+        guard let firstPatientStarting = patientAppointments.first(where: { $0.patient != nil })?.scheduledTime,
+              let lastPatient = patientAppointments.last(where: { $0.patient != nil }),
+              let lastPatientEnding = lastPatient.scheduledTime?.addingTimeInterval(lastPatient.duration) else {
+            return
+        }
+
+        var appointmentTime = startingTime
+
+        while appointmentTime < firstPatientStarting {
+            addingAppointmentIteration(&appointmentTime)
+        }
+
+        appointmentTime = lastPatientEnding
+
+        while appointmentTime < endingTime {
+            addingAppointmentIteration(&appointmentTime)
         }
     }
 }
