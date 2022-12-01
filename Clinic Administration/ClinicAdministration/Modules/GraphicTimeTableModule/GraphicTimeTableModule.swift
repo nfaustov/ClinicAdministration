@@ -22,7 +22,7 @@ protocol GraphicTimeTableDisplaying: View {
 protocol GraphicTimeTablePresentation: AnyObject {
     func didSelected(date: Date)
     func pickDateInCalendar()
-    func scheduleDidUpdated(_ schedule: DoctorSchedule)
+    func updateSchedule(_ schedule: DoctorSchedule)
     func didFinish(with date: Date)
 }
 

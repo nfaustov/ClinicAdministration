@@ -86,7 +86,7 @@ extension GraphicTimeTablePreviewViewController: GraphicTimeTableViewDelegate {
         if schedule.id == newSchedule.id {
             presenter.updateNewSchedule(schedule)
         } else {
-            presenter.scheduleDidUpdated(schedule)
+            presenter.updateSchedule(schedule)
         }
     }
 }

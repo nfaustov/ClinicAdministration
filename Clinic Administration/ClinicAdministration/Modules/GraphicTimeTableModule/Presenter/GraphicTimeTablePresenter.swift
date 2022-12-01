@@ -32,7 +32,7 @@ extension GraphicTimeTablePresenter: GraphicTimeTablePresentation {
         }
     }
 
-    func scheduleDidUpdated(_ schedule: DoctorSchedule) {
+    func updateSchedule(_ schedule: DoctorSchedule) {
         var updatedSchedule = schedule
         updatedSchedule.updateAppointments()
         interactor.updateSchedule(updatedSchedule)

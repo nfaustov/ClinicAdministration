@@ -193,11 +193,12 @@ final class GraphicTableView: UIView {
     }
 
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        guard let doctorView = gesture.view?.superview as? DoctorScheduleView,
+              doctorView.schedule.patientAppointments.compactMap({ $0.patient }).isEmpty,
+              let cabinetView = doctorView.superview else { return }
+
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
-
-        guard let doctorView = gesture.view?.superview as? DoctorScheduleView,
-              let cabinetView = doctorView.superview else { return }
 
         switch gesture.state {
         case .began:

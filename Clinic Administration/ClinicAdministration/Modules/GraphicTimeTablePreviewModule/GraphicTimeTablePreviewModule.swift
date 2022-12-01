@@ -20,7 +20,7 @@ protocol GraphicTimeTablePreviewDisplaying: View {
 protocol GraphicTimeTablePreviewPresentation: AnyObject {
     func didFinish(with schedule: DoctorSchedule)
     func updateNewSchedule(_ schedule: DoctorSchedule)
-    func scheduleDidUpdated(_ schedule: DoctorSchedule)
+    func updateSchedule(_ schedule: DoctorSchedule)
     func didSelected(date: Date)
 }
 

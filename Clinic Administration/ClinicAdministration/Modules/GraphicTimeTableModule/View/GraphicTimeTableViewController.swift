@@ -82,7 +82,7 @@ final class GraphicTimeTableViewController: UIViewController {
 
 extension GraphicTimeTableViewController: GraphicTimeTableViewDelegate {
     func scheduleDidChanged(_ schedule: DoctorSchedule) {
-        presenter.scheduleDidUpdated(schedule)
+        presenter.updateSchedule(schedule)
     }
 }
 

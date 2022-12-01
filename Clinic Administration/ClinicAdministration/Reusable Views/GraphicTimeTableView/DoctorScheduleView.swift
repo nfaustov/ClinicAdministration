@@ -20,6 +20,18 @@ final class DoctorScheduleView: UIView {
         }
     }
 
+    private enum PanGestureKind {
+        case bottom
+        case top
+
+        var editingOptions: Set<ScheduleEditOption> {
+            switch self {
+            case .top: return [.startingTime]
+            case .bottom: return [.endingTime]
+            }
+        }
+    }
+
     enum ScheduleEditOption {
         case startingTime
         case endingTime
@@ -36,6 +48,10 @@ final class DoctorScheduleView: UIView {
     private var originalLocation = CGPoint.zero
     private var originalHeight = CGFloat.zero
     private var minutesInterval = CGFloat.zero
+
+    private var serviceDurationHeight: CGFloat {
+        schedule.serviceDuration / 60 * minuteHeight
+    }
 
     private var mode: Mode = .viewing {
         didSet {
@@ -87,7 +103,7 @@ final class DoctorScheduleView: UIView {
         """
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
-        nameLabel.font = Design.Font.robotoFont(ofSize: 13, weight: .medium)
+        nameLabel.font = Design.Font.robotoFont(ofSize: 11, weight: .medium)
         nameLabel.sizeToFit()
         addSubview(nameLabel)
 
@@ -173,6 +189,60 @@ final class DoctorScheduleView: UIView {
         hasChanges = true
     }
 
+    private func gestureChanged(_ gesture: UIPanGestureRecognizer, of kind: PanGestureKind) {
+        let translation = gesture.translation(in: self)
+        let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: serviceDurationHeight)
+
+        guard let cabinetView = superview else { return }
+
+        let minTY: CGFloat
+        let maxTY: CGFloat
+
+        switch kind {
+        case .bottom:
+            maxTY = cabinetView.frame.height - originalLocation.y - originalHeight - 1
+
+            if let appointment = schedule.patientAppointments.last(where: { $0.patient != nil }),
+               let appointmentEnding = appointment.scheduledTime?.addingTimeInterval(appointment.duration) {
+                let minutesInterval = schedule.endingTime.timeIntervalSince(appointmentEnding) / 60
+                minTY = -minutesInterval * minuteHeight
+            } else {
+                minTY = serviceDurationHeight - originalHeight
+            }
+
+            frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
+        case .top:
+            minTY = -originalLocation.y
+
+            if let appointment = schedule.patientAppointments.first(where: { $0.patient != nil }),
+               let appointmentStarting = appointment.scheduledTime {
+                let minutesInterval = appointmentStarting.timeIntervalSince(schedule.startingTime) / 60
+                maxTY = minutesInterval * minuteHeight
+            } else {
+                maxTY = originalHeight - serviceDurationHeight
+            }
+
+            frame.size.height = originalHeight - min(max(translationY, minTY), maxTY)
+            frame.origin.y = originalLocation.y + max(min(translationY, maxTY), minTY)
+        }
+
+        minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
+    }
+
+    private func panGesture(_ gesture: UIPanGestureRecognizer, ofKind kind: PanGestureKind) {
+        switch gesture.state {
+        case .began:
+            originalLocation.y = frame.origin.y
+            originalHeight = frame.height
+        case .changed:
+            gestureChanged(gesture, of: kind)
+        case .ended:
+            editSchedule(options: kind.editingOptions, by: TimeInterval(minutesInterval * 60))
+            setNeedsDisplay()
+        default: break
+        }
+    }
+
     @objc private func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
         let generator = UINotificationFeedbackGenerator()
 
@@ -197,45 +267,10 @@ final class DoctorScheduleView: UIView {
     }
 
     @objc private func handleBottomPanGesture(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: self)
-        let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: 5 * minuteHeight)
-
-        guard let cabinetView = superview else { return }
-
-        switch gesture.state {
-        case .began:
-            originalLocation.y = frame.origin.y
-            originalHeight = frame.height
-        case .changed:
-            let minTY = 15 * minuteHeight - originalHeight
-            let maxTY = cabinetView.frame.height - originalLocation.y - originalHeight - 1
-            frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
-            minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
-        case .ended:
-            editSchedule(options: [.endingTime], by: TimeInterval(minutesInterval * 60))
-            setNeedsDisplay()
-        default: break
-        }
+        panGesture(gesture, ofKind: .bottom)
     }
 
     @objc private func handleTopPanGesture(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: self)
-        let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: minuteHeight * 5)
-
-        switch gesture.state {
-        case .began:
-            originalLocation.y = frame.origin.y
-            originalHeight = frame.height
-        case .changed:
-            let minTY = -originalLocation.y
-            let maxTY = originalHeight - 15 * minuteHeight
-            frame.size.height = originalHeight - min(max(translationY, minTY), maxTY)
-            frame.origin.y = originalLocation.y + max(min(translationY, maxTY), minTY)
-            minutesInterval = max(min(translationY, maxTY), minTY) / minuteHeight
-        case .ended:
-            editSchedule(options: [.startingTime], by: TimeInterval(minutesInterval * 60))
-            setNeedsDisplay()
-        default: break
-        }
+        panGesture(gesture, ofKind: .top)
     }
 }

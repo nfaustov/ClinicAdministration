@@ -85,8 +85,7 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         createAppointments()
     }
 
-    /// Replace appointment with new appointment at the same scheduled time.
-    /// Also it delete next  appointments if they are crossed in time interval
+    /// Replace appointments with new appointment at the same scheduled time
     /// only if they are not contains scheduled patients, otherwise it sends error message in completion.
     /// - Parameters:
     ///   - newAppointment: New appointment to insert
