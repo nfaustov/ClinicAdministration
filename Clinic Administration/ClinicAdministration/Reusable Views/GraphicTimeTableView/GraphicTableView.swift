@@ -26,7 +26,7 @@ final class GraphicTableView: UIView {
 
     private var transformAction: ((DoctorScheduleView) -> Void)?
 
-    private var schedules: [DoctorSchedule]?
+    private var schedules = [DoctorSchedule]()
 
     weak var delegate: GraphicTableViewDelegate?
 
@@ -128,7 +128,7 @@ final class GraphicTableView: UIView {
             )
         }
 
-        guard let schedules = schedules else { return }
+        guard !schedules.isEmpty else { return }
 
         for index in schedules.indices {
             let scheduleStartingTime = calendar.dateComponents(
@@ -181,6 +181,7 @@ final class GraphicTableView: UIView {
         let doctorView = DoctorScheduleView(
             schedule,
             minuteHeight: Size.minuteHeight,
+            availableTranslationY: availableTranslationY(for:originalLocationY:),
             editingAction: { [delegate] schedule in
                 delegate?.scheduleDidChanged(schedule)
             }
@@ -192,10 +193,37 @@ final class GraphicTableView: UIView {
         doctorView.transformArea.addGestureRecognizer(pan)
     }
 
+    private func availableTranslationY(
+        for doctorView: DoctorScheduleView,
+        originalLocationY: CGFloat
+    ) -> (CGFloat, CGFloat) {
+        var (minTY, maxTY): (CGFloat, CGFloat) = (0, 0)
+
+        let cabinetDoctorViews = doctorViews
+            .filter { $0.schedule.cabinet == doctorView.schedule.cabinet }
+            .sorted(by: { $0.schedule.startingTime < $1.schedule.startingTime })
+
+        guard let index = cabinetDoctorViews.firstIndex(where: { $0 == doctorView }),
+              let cabinetView = doctorView.superview else { return (minTY, maxTY) }
+
+        if cabinetDoctorViews.count == 1 {
+            minTY = -originalLocationY
+            maxTY = cabinetView.frame.height - originalLocationY - doctorView.frame.height - 1
+        } else {
+            minTY = doctorView == cabinetDoctorViews.first ?
+            -originalLocationY :
+            cabinetDoctorViews[index - 1].frame.maxY - originalLocationY
+            maxTY = doctorView == cabinetDoctorViews.last ?
+            cabinetView.frame.height - originalLocationY - doctorView.frame.height - 1 :
+            cabinetDoctorViews[index + 1].frame.origin.y - originalLocationY - doctorView.frame.height
+        }
+
+        return (minTY, maxTY)
+    }
+
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         guard let doctorView = gesture.view?.superview as? DoctorScheduleView,
-              doctorView.schedule.patientAppointments.compactMap({ $0.patient }).isEmpty,
-              let cabinetView = doctorView.superview else { return }
+              doctorView.schedule.patientAppointments.compactMap({ $0.patient }).isEmpty else { return }
 
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: quarterHourHeight / 3)
@@ -204,8 +232,8 @@ final class GraphicTableView: UIView {
         case .began:
             originalLocation = doctorView.frame.origin
         case .changed:
-            let minTY = -originalLocation.y
-            let maxTY = cabinetView.frame.height - originalLocation.y - doctorView.frame.height - 1
+            let minTY = availableTranslationY(for: doctorView, originalLocationY: originalLocation.y).0
+            let maxTY = availableTranslationY(for: doctorView, originalLocationY: originalLocation.y).1
             doctorView.frame.origin.y = originalLocation.y + max(min(translationY, maxTY), minTY)
             minutesInterval = max(min(translationY, maxTY), minTY) / Size.minuteHeight
             transformAction?(doctorView)

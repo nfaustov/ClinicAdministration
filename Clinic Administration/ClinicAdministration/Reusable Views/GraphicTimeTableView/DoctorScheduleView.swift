@@ -66,14 +66,17 @@ final class DoctorScheduleView: UIView {
     private(set) var schedule: DoctorSchedule
 
     private var editingAction: ((DoctorSchedule) -> Void)?
+    private var availableTranslationY: ((DoctorScheduleView, CGFloat) -> (CGFloat, CGFloat))?
 
     init(
         _ schedule: DoctorSchedule,
         minuteHeight: CGFloat,
+        availableTranslationY: @escaping (DoctorScheduleView, CGFloat) -> (CGFloat, CGFloat),
         editingAction: @escaping (DoctorSchedule) -> Void
     ) {
         self.schedule = schedule
         self.minuteHeight = minuteHeight
+        self.availableTranslationY = availableTranslationY
         self.editingAction = editingAction
         super.init(frame: .zero)
 
@@ -193,31 +196,31 @@ final class DoctorScheduleView: UIView {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: serviceDurationHeight)
 
-        guard let cabinetView = superview else { return }
+        guard let availableTranslationY = availableTranslationY?(self, originalLocation.y) else { return }
 
         let minTY: CGFloat
         let maxTY: CGFloat
 
         switch kind {
         case .bottom:
-            maxTY = cabinetView.frame.height - originalLocation.y - originalHeight - 1
+            maxTY = availableTranslationY.1
 
             if let appointment = schedule.patientAppointments.last(where: { $0.patient != nil }),
-               let appointmentEnding = appointment.scheduledTime?.addingTimeInterval(appointment.duration) {
-                let minutesInterval = schedule.endingTime.timeIntervalSince(appointmentEnding) / 60
-                minTY = -minutesInterval * minuteHeight
+               let lastAppointmentEnding = appointment.scheduledTime?.addingTimeInterval(appointment.duration) {
+                let lastFreeMinutes = schedule.endingTime.timeIntervalSince(lastAppointmentEnding) / 60
+                minTY = -lastFreeMinutes * minuteHeight
             } else {
                 minTY = serviceDurationHeight - originalHeight
             }
 
             frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
         case .top:
-            minTY = -originalLocation.y
+            minTY = availableTranslationY.0
 
             if let appointment = schedule.patientAppointments.first(where: { $0.patient != nil }),
-               let appointmentStarting = appointment.scheduledTime {
-                let minutesInterval = appointmentStarting.timeIntervalSince(schedule.startingTime) / 60
-                maxTY = minutesInterval * minuteHeight
+               let firstAppointmentStarting = appointment.scheduledTime {
+                let firstFreeMinutes = firstAppointmentStarting.timeIntervalSince(schedule.startingTime) / 60
+                maxTY = firstFreeMinutes * minuteHeight
             } else {
                 maxTY = originalHeight - serviceDurationHeight
             }
