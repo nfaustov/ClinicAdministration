@@ -66,12 +66,12 @@ final class DoctorScheduleView: UIView {
     private(set) var schedule: DoctorSchedule
 
     private var editingAction: ((DoctorSchedule) -> Void)?
-    private var availableTranslationY: ((DoctorScheduleView, CGFloat) -> (CGFloat, CGFloat))?
+    private var availableTranslationY: ((DoctorScheduleView, CGFloat, CGFloat) -> (CGFloat, CGFloat))?
 
     init(
         _ schedule: DoctorSchedule,
         minuteHeight: CGFloat,
-        availableTranslationY: @escaping (DoctorScheduleView, CGFloat) -> (CGFloat, CGFloat),
+        availableTranslationY: @escaping (DoctorScheduleView, CGFloat, CGFloat) -> (CGFloat, CGFloat),
         editingAction: @escaping (DoctorSchedule) -> Void
     ) {
         self.schedule = schedule
@@ -196,15 +196,10 @@ final class DoctorScheduleView: UIView {
         let translation = gesture.translation(in: self)
         let translationY = translation.y - translation.y.truncatingRemainder(dividingBy: serviceDurationHeight)
 
-        guard let availableTranslationY = availableTranslationY?(self, originalLocation.y) else { return }
-
-        let minTY: CGFloat
-        let maxTY: CGFloat
+        var (minTY, maxTY) = availableTranslationY?(self, originalLocation.y, originalHeight) ?? (0, 0)
 
         switch kind {
         case .bottom:
-            maxTY = availableTranslationY.1
-
             if let appointment = schedule.patientAppointments.last(where: { $0.patient != nil }),
                let lastAppointmentEnding = appointment.scheduledTime?.addingTimeInterval(appointment.duration) {
                 let lastFreeMinutes = schedule.endingTime.timeIntervalSince(lastAppointmentEnding) / 60
@@ -215,8 +210,6 @@ final class DoctorScheduleView: UIView {
 
             frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
         case .top:
-            minTY = availableTranslationY.0
-
             if let appointment = schedule.patientAppointments.first(where: { $0.patient != nil }),
                let firstAppointmentStarting = appointment.scheduledTime {
                 let firstFreeMinutes = firstAppointmentStarting.timeIntervalSince(schedule.startingTime) / 60

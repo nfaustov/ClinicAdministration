@@ -181,7 +181,7 @@ final class GraphicTableView: UIView {
         let doctorView = DoctorScheduleView(
             schedule,
             minuteHeight: Size.minuteHeight,
-            availableTranslationY: availableTranslationY(for:originalLocationY:),
+            availableTranslationY: availableTranslationY(for:originalLocationY:originalHeight:),
             editingAction: { [delegate] schedule in
                 delegate?.scheduleDidChanged(schedule)
             }
@@ -195,7 +195,8 @@ final class GraphicTableView: UIView {
 
     private func availableTranslationY(
         for doctorView: DoctorScheduleView,
-        originalLocationY: CGFloat
+        originalLocationY: CGFloat,
+        originalHeight: CGFloat
     ) -> (CGFloat, CGFloat) {
         var (minTY, maxTY): (CGFloat, CGFloat) = (0, 0)
 
@@ -208,14 +209,14 @@ final class GraphicTableView: UIView {
 
         if cabinetDoctorViews.count == 1 {
             minTY = -originalLocationY
-            maxTY = cabinetView.frame.height - originalLocationY - doctorView.frame.height - 1
+            maxTY = cabinetView.frame.height - originalLocationY - originalHeight - 1
         } else {
             minTY = doctorView == cabinetDoctorViews.first ?
             -originalLocationY :
             cabinetDoctorViews[index - 1].frame.maxY - originalLocationY
             maxTY = doctorView == cabinetDoctorViews.last ?
-            cabinetView.frame.height - originalLocationY - doctorView.frame.height - 1 :
-            cabinetDoctorViews[index + 1].frame.origin.y - originalLocationY - doctorView.frame.height
+            cabinetView.frame.height - originalLocationY - originalHeight - 1 :
+            cabinetDoctorViews[index + 1].frame.origin.y - originalLocationY - originalHeight
         }
 
         return (minTY, maxTY)
@@ -232,8 +233,11 @@ final class GraphicTableView: UIView {
         case .began:
             originalLocation = doctorView.frame.origin
         case .changed:
-            let minTY = availableTranslationY(for: doctorView, originalLocationY: originalLocation.y).0
-            let maxTY = availableTranslationY(for: doctorView, originalLocationY: originalLocation.y).1
+            let (minTY, maxTY) = availableTranslationY(
+                for: doctorView,
+                originalLocationY: originalLocation.y,
+                originalHeight: doctorView.frame.height
+            )
             doctorView.frame.origin.y = originalLocation.y + max(min(translationY, maxTY), minTY)
             minutesInterval = max(min(translationY, maxTY), minTY) / Size.minuteHeight
             transformAction?(doctorView)
