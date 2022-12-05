@@ -153,9 +153,9 @@ extension DoctorsSearchViewController: UISearchBarDelegate {
     }
 }
 
-// MARK: - DoctorsSearchDisplaying
+// MARK: - DoctorsSearchView
 
-extension DoctorsSearchViewController: DoctorsSearchDisplaying {
+extension DoctorsSearchViewController: DoctorsSearchView {
     func doctorsSnapshot(_ doctors: [Doctor]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Doctor>()
         snapshot.appendSections([.main])

@@ -11,7 +11,7 @@ protocol DoctorsSearchModule: AnyObject {
     var didFinish: ((Doctor?) -> Void)? { get set }
 }
 
-protocol DoctorsSearchDisplaying: View {
+protocol DoctorsSearchView: View {
     var doctorsList: [Doctor] { get set }
 
     func doctorsSnapshot(_ doctors: [Doctor])

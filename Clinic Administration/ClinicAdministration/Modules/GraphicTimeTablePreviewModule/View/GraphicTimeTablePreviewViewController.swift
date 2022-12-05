@@ -91,9 +91,9 @@ extension GraphicTimeTablePreviewViewController: GraphicTimeTableViewDelegate {
     }
 }
 
-// MARK: - AddScheduleDisplaying
+// MARK: - GraphicTimeTablePreviewView
 
-extension GraphicTimeTablePreviewViewController: GraphicTimeTablePreviewDisplaying {
+extension GraphicTimeTablePreviewViewController: GraphicTimeTablePreviewView {
     func applySchedules(_ schedules: [DoctorSchedule]) {
         graphicTimeTableView.updateTable(with: schedules)
     }

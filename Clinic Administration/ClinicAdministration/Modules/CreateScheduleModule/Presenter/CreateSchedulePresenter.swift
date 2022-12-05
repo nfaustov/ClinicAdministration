@@ -8,7 +8,7 @@
 import Foundation
 
 final class CreateSchedulePresenter<V, I>: PresenterInteractor<V, I>, CreateScheduleModule
-where V: CreateScheduleDisplaying, I: CreateScheduleInteraction {
+where V: CreateScheduleView, I: CreateScheduleInteraction {
     weak var coordinator: (CalendarSubscription &
                            PickCabinetSubscription &
                            DoctorsSearchSubscription &

@@ -8,7 +8,7 @@
 import Foundation
 
 final class DoctorsSearchPresenter<V, I>: PresenterInteractor<V, I>,
-                                          DoctorsSearchModule where V: DoctorsSearchDisplaying,
+                                          DoctorsSearchModule where V: DoctorsSearchView,
                                                                     I: DoctorsSearchInteraction {
     var didFinish: ((Doctor?) -> Void)?
 }

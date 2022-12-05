@@ -14,7 +14,7 @@ final class GraphicTimeTablePreviewInteractor {
     var database: DoctorsDatabase?
 }
 
-// MARK: - AddScheduleInteraction
+// MARK: - GraphicTimeTablePreviewInteraction
 
 extension GraphicTimeTablePreviewInteractor: GraphicTimeTablePreviewInteraction {
     func getSchedules(for date: Date) {

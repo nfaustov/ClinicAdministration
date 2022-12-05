@@ -8,11 +8,11 @@
 import Foundation
 
 final class GraphicTimeTablePreviewPresenter<V, I>: PresenterInteractor<V, I>, GraphicTimeTablePreviewModule
-where V: GraphicTimeTablePreviewDisplaying, I: GraphicTimeTablePreviewInteractor {
+where V: GraphicTimeTablePreviewView, I: GraphicTimeTablePreviewInteractor {
     var didFinish: ((DoctorSchedule) -> Void)?
 }
 
-// MARK: - AddSchedulePresentation
+// MARK: - GraphicTimeTablePreviewPresentation
 
 extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewPresentation {
     func didFinish(with schedule: DoctorSchedule) {
@@ -37,7 +37,7 @@ extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewPresentation 
     }
 }
 
-// MARK: - AddScheduleInteractorDelegate
+// MARK: - GraphicTimeTablePreviewInteractorDelegate
 
 extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {

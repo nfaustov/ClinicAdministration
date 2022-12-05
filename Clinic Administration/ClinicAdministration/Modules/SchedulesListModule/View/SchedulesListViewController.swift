@@ -244,9 +244,9 @@ extension SchedulesListViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - SchedulesListDisplaying
+// MARK: - SchedulesListView
 
-extension SchedulesListViewController: SchedulesListDisplaying {
+extension SchedulesListViewController: SchedulesListView {
     func schedulesSnapshot(_ schedules: [DoctorSchedule]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, DoctorSchedule>()
         snapshot.appendSections([.main])

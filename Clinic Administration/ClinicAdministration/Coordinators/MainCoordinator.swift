@@ -19,11 +19,11 @@ final class MainCoordinator: Coordinator {
     }
 
     func start() {
-        timeTableCoordinator()
+        scheduleCoordinator()
     }
 
-    func timeTableCoordinator() {
-        let child = TimeTableCoordinator(navigationController: navigationController, modules: modules)
+    func scheduleCoordinator() {
+        let child = ScheduleCoordinator(navigationController: navigationController, modules: modules)
         child.parentCoordinator = self
         childCoordinators.append(child)
         child.start()

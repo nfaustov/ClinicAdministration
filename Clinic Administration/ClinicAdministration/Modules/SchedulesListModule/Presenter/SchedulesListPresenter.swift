@@ -8,7 +8,7 @@
 import Foundation
 
 final class SchedulesListPresenter<V, I>: PresenterInteractor<V, I>, SchedulesListModule
-where V: SchedulesListDisplaying, I: SchedulesListInteractor {
+where V: SchedulesListView, I: SchedulesListInteractor {
     var didFinish: ((DoctorSchedule) -> Void)?
 }
 

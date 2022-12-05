@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PatientAppointmentModule: AnyObject {
-    var coordinator: TimeTableCoordinator? { get set }
+    var coordinator: ScheduleCoordinator? { get set }
     var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 

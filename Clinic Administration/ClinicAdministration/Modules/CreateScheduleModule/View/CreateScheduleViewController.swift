@@ -144,9 +144,9 @@ extension CreateScheduleViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - CreateScheduleDisplaying
+// MARK: - CreateScheduleView
 
-extension CreateScheduleViewController: CreateScheduleDisplaying {
+extension CreateScheduleViewController: CreateScheduleView {
     func createdIntervals(_ intervals: [DateInterval]) {
         self.intervals = intervals
     }

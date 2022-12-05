@@ -11,7 +11,7 @@ protocol PickCabinetModule: AnyObject {
     var didFinish: ((Int?) -> Void)? { get set }
 }
 
-protocol PickCabinetDisplaying: View { }
+protocol PickCabinetView: View { }
 
 protocol PickCabinetPresentation: AnyObject {
     func didFinish(with cabinet: Int?)

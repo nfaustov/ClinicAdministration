@@ -11,7 +11,7 @@ protocol GraphicTimeTablePreviewModule: AnyObject {
     var didFinish: ((DoctorSchedule) -> Void)? { get set }
 }
 
-protocol GraphicTimeTablePreviewDisplaying: View {
+protocol GraphicTimeTablePreviewView: View {
     var newSchedule: DoctorSchedule! { get set }
 
     func applySchedules(_ schedules: [DoctorSchedule])

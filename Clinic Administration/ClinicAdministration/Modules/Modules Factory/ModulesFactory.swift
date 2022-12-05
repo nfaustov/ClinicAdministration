@@ -14,32 +14,32 @@ final class ModulesFactory: Modules {
         self.dependencies = dependencies
     }
 
-    func timeTable(selectedSchedule: DoctorSchedule?) -> (UIViewController, TimeTableModule) {
-        let view = TimeTableViewController()
+    func schedule(selectedSchedule: DoctorSchedule?) -> (UIViewController, ScheduleModule) {
+        let view = ScheduleViewController()
         if let selectedSchedule = selectedSchedule {
             view.selectedSchedule = selectedSchedule
             view.date = selectedSchedule.startingTime
         }
-        let interactor = TimeTableInteractor()
+        let interactor = ScheduleInteractor()
         interactor.database = dependencies.doctorsDatabase
-        let presenter = TimeTablePresenter(view: view, interactor: interactor)
+        let presenter = SchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }
 
-    func graphicTimeTable(_ date: Date) -> (UIViewController, GraphicTimeTableModule) {
-        let view = GraphicTimeTableViewController()
+    func graphicschedule(_ date: Date) -> (UIViewController, GraphicScheduleModule) {
+        let view = GraphicScheduleViewController()
         view.date = date
-        let interactor = GraphicTimeTableInteractor()
+        let interactor = GraphicScheduleInteractor()
         interactor.database = dependencies.doctorsDatabase
-        let presenter = GraphicTimeTablePresenter(view: view, interactor: interactor)
+        let presenter = GraphicSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }
 
-    func calendar() -> (UIViewController, CalendarModule) {
-        let view = CalendarViewController()
-        let presenter = CalendarPresenter(view: view)
+    func calendar() -> (UIViewController, CalendarTableModule) {
+        let view = CalendarTableViewController()
+        let presenter = CalendarTablePresenter(view: view)
 
         return (view, presenter)
     }

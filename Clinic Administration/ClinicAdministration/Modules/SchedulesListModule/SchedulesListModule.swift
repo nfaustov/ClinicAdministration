@@ -11,7 +11,7 @@ protocol SchedulesListModule: AnyObject {
     var didFinish: ((DoctorSchedule) -> Void)? { get set }
 }
 
-protocol SchedulesListDisplaying: View {
+protocol SchedulesListView: View {
     var workingDays: [Date] { get set }
     func schedulesSnapshot(_ schedules: [DoctorSchedule])
 }

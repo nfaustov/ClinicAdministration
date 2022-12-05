@@ -15,7 +15,7 @@ protocol CreateScheduleModule: AnyObject {
     var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 
-protocol CreateScheduleDisplaying: View {
+protocol CreateScheduleView: View {
     var currentDoctor: Doctor? { get set }
 
     func createdIntervals(_ intervals: [DateInterval])

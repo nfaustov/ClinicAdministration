@@ -8,9 +8,9 @@
 import UIKit
 
 protocol Modules {
-    func timeTable(selectedSchedule: DoctorSchedule?) -> (UIViewController, TimeTableModule)
-    func graphicTimeTable(_ date: Date) -> (UIViewController, GraphicTimeTableModule)
-    func calendar() -> (UIViewController, CalendarModule)
+    func schedule(selectedSchedule: DoctorSchedule?) -> (UIViewController, ScheduleModule)
+    func graphicschedule(_ date: Date) -> (UIViewController, GraphicScheduleModule)
+    func calendar() -> (UIViewController, CalendarTableModule)
     func createSchedule(for: Doctor, onDate: Date) -> (UIViewController, CreateScheduleModule)
     func doctorsSearch() -> (UIViewController, DoctorsSearchModule)
     func pickCabinet(selected: Int?) -> (UIViewController, PickCabinetModule)

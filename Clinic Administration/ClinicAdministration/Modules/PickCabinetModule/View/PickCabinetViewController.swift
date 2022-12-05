@@ -34,6 +34,6 @@ class PickCabinetViewController: PickerViewController<Int> {
     }
 }
 
-// MARK: - PickCabinetDisplaying
+// MARK: - PickCabinetView
 
-extension PickCabinetViewController: PickCabinetDisplaying { }
+extension PickCabinetViewController: PickCabinetView { }
