@@ -385,18 +385,34 @@
 			isa = PBXGroup;
 			children = (
 				8B433A3B2643EC7E000FB7DC /* GraphicTimeTableView.swift */,
+				8B140B82293DCA83005DE478 /* Subviews */,
+			);
+			path = GraphicTimeTableView;
+			sourceTree = "<group>";
+		};
+		8B140B81293DCA5C005DE478 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				8B17796227430BE900B1392E /* PatientAppointmentOptionField.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		8B140B82293DCA83005DE478 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
 				8BCAB7BA2559D5EF001A93D0 /* GraphicTableView.swift */,
 				8B29219D257930630058B51E /* TimelineView.swift */,
 				8BCAB7BD2559D608001A93D0 /* DoctorScheduleView.swift */,
 			);
-			path = GraphicTimeTableView;
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		8B17795F2742A3B200B1392E /* PatientAppointmentOptionView */ = {
 			isa = PBXGroup;
 			children = (
 				8B1779602742A3D600B1392E /* PatientAppointmentOptionsView.swift */,
-				8B17796227430BE900B1392E /* PatientAppointmentOptionField.swift */,
+				8B140B81293DCA5C005DE478 /* Subviews */,
 			);
 			path = PatientAppointmentOptionView;
 			sourceTree = "<group>";
@@ -420,7 +436,7 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		8B20CE0D262995910007C20A /* Reusable Views */ = {
+		8B20CE0D262995910007C20A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
 				8B7342A927443EB800E6707C /* PatientDataView */,
@@ -432,7 +448,7 @@
 				8B10E30926384D6F006022BB /* ScheduleOptionView */,
 				8B20CE14262996C00007C20A /* DatePicker */,
 			);
-			path = "Reusable Views";
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		8B20CE14262996C00007C20A /* DatePicker */ = {
@@ -921,7 +937,7 @@
 				8BE80C39264AA0DA00CCA7F7 /* Database */,
 				8BCCE8132649966F00BC416F /* Services */,
 				8B5D15B82627561F003450F6 /* Modules */,
-				8B20CE0D262995910007C20A /* Reusable Views */,
+				8B20CE0D262995910007C20A /* Custom Views */,
 				8B188985259CCA55000B0077 /* Settings */,
 				8B0F5BC9255D49F400894410 /* Domain Models */,
 			);
