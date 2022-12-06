@@ -46,7 +46,7 @@ final class CreateScheduleCollectionViewLayout {
         return layoutSection
     }
 
-    // MARK: - Intervals section
+    // MARK: - Intervals section & supplementary items
 
     func createIntervalsSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
@@ -64,7 +64,23 @@ final class CreateScheduleCollectionViewLayout {
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 0, bottom: 30, trailing: 0)
         layoutSection.interGroupSpacing = 30
+        let layoutSectionHeader = createIntervalsSectionHeader()
+        layoutSection.boundarySupplementaryItems = [layoutSectionHeader]
 
         return layoutSection
+    }
+
+    func createIntervalsSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let  layoutSectionHeaderSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(30)
+        )
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: layoutSectionHeaderSize,
+            elementKind: "intervals-header",
+            alignment: .top
+        )
+
+        return layoutSectionHeader
     }
 }

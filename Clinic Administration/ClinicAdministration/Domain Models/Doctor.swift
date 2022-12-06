@@ -35,7 +35,7 @@ struct Doctor: Codable, Hashable {
 
     var initials: String {
         guard let firstNameLetter = firstName.first,
-              let patronymicNameLetter = patronymicName.first else { return "" }
+              let patronymicNameLetter = patronymicName.first else { return secondName }
 
         return "\(secondName) \(firstNameLetter).\(patronymicNameLetter)"
     }

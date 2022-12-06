@@ -57,6 +57,7 @@ final class CreateScheduleViewController: UIViewController {
         configureHierarchy()
         registerViews()
         configureDataSource()
+        configureSupplementaryViews()
         initialSnapshot()
     }
 
@@ -72,6 +73,11 @@ final class CreateScheduleViewController: UIViewController {
         collectionView.register(DoctorViewCell.self, forCellWithReuseIdentifier: DoctorViewCell.reuseIdentifier)
         collectionView.register(OptionCell.self, forCellWithReuseIdentifier: OptionCell.reuseIdentifier)
         collectionView.register(IntervalCell.self, forCellWithReuseIdentifier: IntervalCell.reuseIdentifier)
+        collectionView.register(
+            IntervalsHeader.self,
+            forSupplementaryViewOfKind: "intervals-header",
+            withReuseIdentifier: IntervalsHeader.reuseIdentifier
+        )
     }
 
     private func configureDataSource() {
@@ -82,6 +88,20 @@ final class CreateScheduleViewController: UIViewController {
             let cell = factory.makeCell(with: item, for: indexPath)
 
             return cell
+        }
+    }
+
+    private func configureSupplementaryViews() {
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard let intervalsHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: IntervalsHeader.reuseIdentifier,
+                for: indexPath
+            ) as? IntervalsHeader else { return nil }
+
+            intervalsHeader.configure()
+
+            return intervalsHeader
         }
     }
 
@@ -136,8 +156,7 @@ extension CreateScheduleViewController: UICollectionViewDelegate {
                 doctor: doctor,
                 startingTime: interval.start,
                 endingTime: interval.start.addingTimeInterval(1800),
-                cabinet: selectedCabinet,
-                patientAppointments: []
+                cabinet: selectedCabinet
             )
             presenter.schedulePreview(doctorSchedule)
         }
