@@ -99,10 +99,8 @@ class PickerViewController<Model: Hashable>: UIViewController,
     // MARK: - UIPickerViewDelegate
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        "???"
+        "\(data[row])"
     }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) { }
 
     // MARK: - UIViewControllerTransitioningDelegate
 

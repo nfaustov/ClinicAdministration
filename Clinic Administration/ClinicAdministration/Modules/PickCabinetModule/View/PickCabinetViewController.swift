@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PickCabinetViewController: PickerViewController<Int> {
+final class PickCabinetViewController: PickerViewController<Int> {
     typealias PresenterType = PickCabinetPresentation
     var presenter: PresenterType!
 
@@ -27,10 +27,6 @@ class PickCabinetViewController: PickerViewController<Int> {
         super.viewDidDisappear(animated)
 
         presenter.didFinish(with: selectedItem0)
-    }
-
-    override func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        "\(data[row])"
     }
 }
 
