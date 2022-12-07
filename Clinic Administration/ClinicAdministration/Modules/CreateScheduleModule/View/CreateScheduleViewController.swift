@@ -155,7 +155,7 @@ extension CreateScheduleViewController: UICollectionViewDelegate {
             let doctorSchedule = DoctorSchedule(
                 doctor: doctor,
                 startingTime: interval.start,
-                endingTime: interval.start.addingTimeInterval(1800),
+                endingTime: interval.start.addingTimeInterval(doctor.serviceDuration),
                 cabinet: selectedCabinet
             )
             presenter.schedulePreview(doctorSchedule)
