@@ -12,14 +12,14 @@ protocol DoctorsSearchModule: AnyObject {
 }
 
 protocol DoctorsSearchView: View {
-    var doctorsList: [Doctor] { get set }
+    var resultList: [Doctor] { get set }
 
     func doctorsSnapshot(_ doctors: [Doctor])
 }
 
 protocol DoctorsSearchPresentation: AnyObject {
     func doctorsRequest()
-    func performQuery(with filter: String)
+    func performQuery(with text: String, specialization: String?)
     func didFinish(with: Doctor?)
 }
 

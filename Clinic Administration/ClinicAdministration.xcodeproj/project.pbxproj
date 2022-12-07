@@ -64,6 +64,7 @@
 		8B62D6242615CB7A006A78F4 /* DatePickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */; };
 		8B62D6282615ECC7006A78F4 /* CallButtonFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B62D6272615ECC7006A78F4 /* CallButtonFooter.swift */; };
 		8B687694293FC5B700C7D1C0 /* IntervalsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B687693293FC5B700C7D1C0 /* IntervalsHeader.swift */; };
+		8B687697293FE89F00C7D1C0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B687696293FE89F00C7D1C0 /* SearchViewController.swift */; };
 		8B6B0F87261CA56700F416D1 /* ScheduleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0F86261CA56700F416D1 /* ScheduleAction.swift */; };
 		8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */; };
 		8B733D0E256878070082784E /* TimeTableDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B733D0D256878070082784E /* TimeTableDataManager.swift */; };
@@ -76,6 +77,8 @@
 		8B7A12712631E077007BC1AB /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12702631E077007BC1AB /* Interactor.swift */; };
 		8B7A12752631E084007BC1AB /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12742631E084007BC1AB /* Presenter.swift */; };
 		8B7C90EF2718A5FF00CA11F8 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C90EE2718A5FF00CA11F8 /* ScheduleCell.swift */; };
+		8B7D5D6329407FD000B174E9 /* DoctorsSearchCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D5D6229407FD000B174E9 /* DoctorsSearchCellFactory.swift */; };
+		8B7D5D662940856100B174E9 /* SpecializationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D5D652940856100B174E9 /* SpecializationCell.swift */; };
 		8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */; };
 		8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */; };
 		8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */; };
@@ -200,6 +203,7 @@
 		8B62D6232615CB7A006A78F4 /* DatePickerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerHeader.swift; sourceTree = "<group>"; };
 		8B62D6272615ECC7006A78F4 /* CallButtonFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallButtonFooter.swift; sourceTree = "<group>"; };
 		8B687693293FC5B700C7D1C0 /* IntervalsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsHeader.swift; sourceTree = "<group>"; };
+		8B687696293FE89F00C7D1C0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8B6B0F86261CA56700F416D1 /* ScheduleAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAction.swift; sourceTree = "<group>"; };
 		8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		8B733D0D256878070082784E /* TimeTableDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableDataManager.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 		8B7A12702631E077007BC1AB /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		8B7A12742631E084007BC1AB /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		8B7C90EE2718A5FF00CA11F8 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
+		8B7D5D6229407FD000B174E9 /* DoctorsSearchCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsSearchCellFactory.swift; sourceTree = "<group>"; };
+		8B7D5D652940856100B174E9 /* SpecializationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecializationCell.swift; sourceTree = "<group>"; };
 		8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetModule.swift; sourceTree = "<group>"; };
 		8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetViewController.swift; sourceTree = "<group>"; };
 		8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetPresenter.swift; sourceTree = "<group>"; };
@@ -441,6 +447,7 @@
 		8B20CE0D262995910007C20A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				8B687695293FE88000C7D1C0 /* SearchViewController */,
 				8B7342A927443EB800E6707C /* PatientDataView */,
 				8B17795F2742A3B200B1392E /* PatientAppointmentOptionView */,
 				8B070B03266D3DD800F4D45F /* DoctorView */,
@@ -564,7 +571,8 @@
 		8B33A64E266906A80003631A /* CollectionView Items */ = {
 			isa = PBXGroup;
 			children = (
-				8B33A64F266906D80003631A /* DoctorItemCell.swift */,
+				8B7D5D6229407FD000B174E9 /* DoctorsSearchCellFactory.swift */,
+				8B7D5D642940853F00B174E9 /* Cells */,
 			);
 			path = "CollectionView Items";
 			sourceTree = "<group>";
@@ -754,6 +762,14 @@
 			path = Supplementaries;
 			sourceTree = "<group>";
 		};
+		8B687695293FE88000C7D1C0 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8B687696293FE89F00C7D1C0 /* SearchViewController.swift */,
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
 		8B6B0F85261CA54C00F416D1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,6 +805,15 @@
 				8B7A12702631E077007BC1AB /* Interactor.swift */,
 			);
 			path = "Base Module";
+			sourceTree = "<group>";
+		};
+		8B7D5D642940853F00B174E9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8B33A64F266906D80003631A /* DoctorItemCell.swift */,
+				8B7D5D652940856100B174E9 /* SpecializationCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		8B7F8B13263AF55800B75324 /* PickCabinetModule */ = {
@@ -1233,6 +1258,7 @@
 				8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */,
 				8BBEEF32261C968700A06B2D /* ActionListCell.swift in Sources */,
 				8B4FC4F82632B2AF00D7627A /* ScheduleModule.swift in Sources */,
+				8B7D5D662940856100B174E9 /* SpecializationCell.swift in Sources */,
 				8B33A650266906D80003631A /* DoctorItemCell.swift in Sources */,
 				8BA701D6264BD9E1008C80ED /* DoctorsDatabase.swift in Sources */,
 				8B52D7FA2727534900C7DD1E /* CalendarControlMonthHeader.swift in Sources */,
@@ -1267,6 +1293,7 @@
 				8B20CE23262997A70007C20A /* CalendarTableViewController.swift in Sources */,
 				8BADB070261623DF00DEC3AC /* ScheduleCollectionViewLayout.swift in Sources */,
 				8B58AFAB272336E700121258 /* CalendarControlDayOfWeekRow.swift in Sources */,
+				8B7D5D6329407FD000B174E9 /* DoctorsSearchCellFactory.swift in Sources */,
 				8B433A3C2643EC7E000FB7DC /* GraphicTimeTableView.swift in Sources */,
 				8BAC076D266D475F004AB1F3 /* DoctorView.swift in Sources */,
 				8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */,
@@ -1303,6 +1330,7 @@
 				8B7A12712631E077007BC1AB /* Interactor.swift in Sources */,
 				8B0F774D2631FF7F00D68B43 /* GraphicScheduleModule.swift in Sources */,
 				8B38A1BC260D13DD00CA01A0 /* ScheduleInteraction.swift in Sources */,
+				8B687697293FE89F00C7D1C0 /* SearchViewController.swift in Sources */,
 				8B33A64B2668E22C0003631A /* DoctorsSearchViewController.swift in Sources */,
 				8B303B08263BE24700DD343A /* PickerViewController.swift in Sources */,
 				8BB450BA2630491700C143A4 /* CalendarSubscription.swift in Sources */,

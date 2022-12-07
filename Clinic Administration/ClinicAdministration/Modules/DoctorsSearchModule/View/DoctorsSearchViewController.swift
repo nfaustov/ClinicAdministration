@@ -7,20 +7,11 @@
 
 import UIKit
 
-final class DoctorsSearchViewController: UIViewController {
+final class DoctorsSearchViewController: SearchViewController<Doctor> {
     typealias PresenterType = DoctorsSearchPresentation
     var presenter: PresenterType!
 
-    private enum Section {
-        case main
-    }
-
-    private var searchBar = UISearchBar()
-
-    private var collectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Doctor>!
-
-    var doctorsList = [Doctor]()
+    private var selectedSpecialization: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +19,12 @@ final class DoctorsSearchViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Выберите врача"
 
-        configureHierarchy()
+        view.backgroundColor = Design.Color.white
+        searchBar.tintColor = Design.Color.darkGray
+
+        searchBar.delegate = self
+        searchCollectionView.delegate = self
+
         configureDataSource()
     }
 
@@ -38,71 +34,20 @@ final class DoctorsSearchViewController: UIViewController {
         presenter.doctorsRequest()
     }
 
-    func configureHierarchy() {
-        view.backgroundColor = Design.Color.white
-        let doctorsCollectionView = UICollectionView(
-            frame: view.bounds,
-            collectionViewLayout: createLayout()
-        )
-        doctorsCollectionView.backgroundColor = Design.Color.white
-        view.addSubview(doctorsCollectionView)
-        doctorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        doctorsCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        doctorsCollectionView.delegate = self
-
-        searchBar.backgroundColor = Design.Color.white
-        searchBar.placeholder = "Поиск"
-        view.addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.delegate = self
-
-        let views = ["collectionView": doctorsCollectionView, "searchBar": searchBar]
-        var constraints = [NSLayoutConstraint]()
-        constraints.append(
-            contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat: "H:|[collectionView]|",
-                options: [],
-                metrics: nil,
-                views: views
-            )
-        )
-        constraints.append(
-            contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat: "H:|[searchBar]|",
-                options: [],
-                metrics: nil,
-                views: views
-            )
-        )
-        constraints.append(
-            contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat: "V:[searchBar]-[collectionView]|",
-                options: [],
-                metrics: nil,
-                views: views
-            )
-        )
-        constraints.append(
-            searchBar.topAnchor.constraint(
-                equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor,
-                multiplier: 1.0
-            )
-        )
-        NSLayoutConstraint.activate(constraints)
-
-        collectionView = doctorsCollectionView
-    }
-
     // MARK: - UICollectionViewDiffableDataSource
 
-    func configureDataSource() {
-        collectionView.register(DoctorItemCell.self, forCellWithReuseIdentifier: DoctorItemCell.reuseIdentifier)
+    private func configureDataSource() {
+        searchCollectionView.register(DoctorItemCell.self, forCellWithReuseIdentifier: DoctorItemCell.reuseIdentifier)
+        searchCollectionView.register(
+            SpecializationCell.self,
+            forCellWithReuseIdentifier: SpecializationCell.reuseIdentifier
+        )
 
-        dataSource = UICollectionViewDiffableDataSource<Section, Doctor>(
-            collectionView: collectionView
-        ) { collectionView, indexPath, doctor in
-            let factory = CellFactory(collectionView: collectionView)
-            let cell = factory.configureCell(DoctorItemCell.self, with: doctor, for: indexPath)
+        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(
+            collectionView: searchCollectionView
+        ) { collectionView, indexPath, item in
+            let factory = DoctorsSearchCellFactory(collectionView: collectionView)
+            let cell = factory.makeCell(with: item, for: indexPath)
 
             return cell
         }
@@ -110,27 +55,45 @@ final class DoctorsSearchViewController: UIViewController {
 
     // MARK: - UICollectionViewLayout
 
-    func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { _, _ in
-            let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(1)
-            )
-            let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-            let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(60)
-            )
-            let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: layoutItem, count: 2)
-            layoutGroup.interItemSpacing = .fixed(10)
-            let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-            layoutSection.interGroupSpacing = 20
-            layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+    override func createResultSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(60)
+        )
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: layoutItem, count: 2)
+        layoutGroup.interItemSpacing = .fixed(10)
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.interGroupSpacing = 20
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
 
-            return layoutSection
-        }
+        return layoutSection
+    }
 
-        return layout
+    override func createFilterSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layoutGroupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(140),
+            heightDimension: .absolute(50)
+        )
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(
+            layoutSize: layoutGroupSize,
+            subitems: [layoutItem]
+        )
+        layoutGroup.interItemSpacing = .fixed(10)
+        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.orthogonalScrollingBehavior = .continuous
+
+        return layoutSection
     }
 }
 
@@ -138,10 +101,20 @@ final class DoctorsSearchViewController: UIViewController {
 
 extension DoctorsSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let dataSource = dataSource,
-              let doctor = dataSource.itemIdentifier(for: indexPath) else { return }
+        guard let dataSource = dataSource else { return }
 
-        presenter.didFinish(with: doctor)
+        if let doctor = dataSource.itemIdentifier(for: indexPath) as? Doctor {
+            presenter.didFinish(with: doctor)
+        } else if let specialization = dataSource.itemIdentifier(for: indexPath) as? String {
+            if specialization == selectedSpecialization {
+                searchCollectionView.deselectItem(at: indexPath, animated: false)
+                selectedSpecialization = nil
+            } else {
+                selectedSpecialization = specialization
+            }
+
+            presenter.performQuery(with: searchBar.text ?? "", specialization: selectedSpecialization)
+        }
     }
 }
 
@@ -149,7 +122,24 @@ extension DoctorsSearchViewController: UICollectionViewDelegate {
 
 extension DoctorsSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.performQuery(with: searchText)
+        presenter.performQuery(with: searchText, specialization: selectedSpecialization)
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        selectedSpecialization = nil
+        searchBar.text = ""
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+        presenter.performQuery(with: "", specialization: selectedSpecialization)
     }
 }
 
@@ -157,9 +147,12 @@ extension DoctorsSearchViewController: UISearchBarDelegate {
 
 extension DoctorsSearchViewController: DoctorsSearchView {
     func doctorsSnapshot(_ doctors: [Doctor]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Doctor>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(doctors)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        let specializations = Array(Set(doctors.map { $0.specialization }))
+
+        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        snapshot.appendSections([.filter, .result])
+        snapshot.appendItems(specializations, toSection: .filter)
+        snapshot.appendItems(doctors, toSection: .result)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

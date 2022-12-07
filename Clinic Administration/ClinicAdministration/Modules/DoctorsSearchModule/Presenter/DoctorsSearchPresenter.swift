@@ -20,17 +20,24 @@ extension DoctorsSearchPresenter: DoctorsSearchPresentation {
         interactor.getDoctors()
     }
 
-    func performQuery(with filter: String) {
-        guard let doctors = view?.doctorsList else { return }
+    func performQuery(with text: String, specialization: String?) {
+        guard let doctors = view?.resultList else { return }
 
         let filteredDoctors = doctors.filter { doctor in
-            if filter.isEmpty { return true }
-            let lowercasedFilter = filter.lowercased()
+            if text.isEmpty { return true }
+            let lowercasedFilter = text.lowercased()
 
             return doctor.fullName.lowercased().contains(lowercasedFilter)
         }
 
-        view?.doctorsSnapshot(filteredDoctors)
+        guard let specialization = specialization else {
+            view?.doctorsSnapshot(filteredDoctors)
+            return
+        }
+
+        let specializationDoctors = filteredDoctors.filter { $0.specialization == specialization}
+
+        view?.doctorsSnapshot(specializationDoctors)
     }
 
     func didFinish(with doctor: Doctor?) {
@@ -42,7 +49,7 @@ extension DoctorsSearchPresenter: DoctorsSearchPresentation {
 
 extension DoctorsSearchPresenter: DoctorsSearchInteractorDelegate {
     func doctorsDidRecieved(_ doctors: [Doctor]) {
-        view?.doctorsList = doctors
+        view?.resultList = doctors
         view?.doctorsSnapshot(doctors)
     }
 }
