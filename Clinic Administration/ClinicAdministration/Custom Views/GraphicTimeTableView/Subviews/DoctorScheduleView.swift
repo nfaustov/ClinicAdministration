@@ -50,7 +50,7 @@ final class DoctorScheduleView: UIView {
     private var minutesInterval = CGFloat.zero
 
     private var serviceDurationHeight: CGFloat {
-        schedule.serviceDuration / 60 * minuteHeight
+        schedule.doctor.serviceDuration / 60 * minuteHeight
     }
 
     private var mode: Mode = .viewing {

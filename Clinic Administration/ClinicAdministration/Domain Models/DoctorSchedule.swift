@@ -13,7 +13,6 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
     var cabinet: Int
     var startingTime: Date
     var endingTime: Date
-    var serviceDuration: TimeInterval
     var patientAppointments: [PatientAppointment]
 
     init(
@@ -29,7 +28,6 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         self.cabinet = cabinet
         self.startingTime = startingTime
         self.endingTime = endingTime
-        self.serviceDuration = doctor.serviceDuration
         self.patientAppointments = patientAppointments
 
         if self.patientAppointments.isEmpty {
@@ -50,7 +48,6 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         cabinet = Int(entity.cabinet)
         startingTime = entityStartingTime
         endingTime = entityEndingTime
-        serviceDuration = doctor.serviceDuration
         patientAppointments = entityPatientAppointments.compactMap { PatientAppointment(entity: $0) }
 
         if self.patientAppointments.isEmpty {
@@ -121,11 +118,11 @@ extension DoctorSchedule {
     private mutating func addingAppointmentIteration(_ appointmentTime: inout Date) {
         let appointment = PatientAppointment(
             scheduledTime: appointmentTime,
-            duration: serviceDuration,
+            duration: doctor.serviceDuration,
             patient: nil
         )
         patientAppointments.append(appointment)
-        appointmentTime.addTimeInterval(serviceDuration)
+        appointmentTime.addTimeInterval(doctor.serviceDuration)
     }
 
     private mutating func createAppointments() {
