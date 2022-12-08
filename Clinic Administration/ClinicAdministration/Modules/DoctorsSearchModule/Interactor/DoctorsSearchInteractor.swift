@@ -18,7 +18,7 @@ final class DoctorsSearchInteractor {
 
 extension DoctorsSearchInteractor: DoctorsSearchInteraction {
     func getDoctors() {
-        guard let doctorsEntities = database?.readDoctors() else { return }
+        guard let doctorsEntities = database?.read() else { return }
 
         let doctors = doctorsEntities.compactMap { Doctor(entity: $0) }
         delegate?.doctorsDidRecieved(doctors)

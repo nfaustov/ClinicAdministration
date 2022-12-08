@@ -165,7 +165,7 @@ final class DoctorsDatabase: Database {
 
     // MARK: - Read
 
-    func readDoctors() -> [DoctorEntity] {
+    func read() -> [DoctorEntity] {
         let request: NSFetchRequest = DoctorEntity.fetchRequest()
 
         guard let doctors = try? context.fetch(request) else {

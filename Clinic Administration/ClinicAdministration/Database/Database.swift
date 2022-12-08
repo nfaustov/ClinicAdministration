@@ -12,7 +12,7 @@ protocol Database {
     associatedtype Object
 
     func create(objectWithModel: Model)
-    func readDoctors() -> [Object]
+    func read() -> [Object]
     func update(changes: (() -> Void)?)
     func delete(object: Object)
 }

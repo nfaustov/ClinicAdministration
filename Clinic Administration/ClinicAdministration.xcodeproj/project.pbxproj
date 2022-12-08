@@ -20,6 +20,8 @@
 		8B1779612742A3D600B1392E /* PatientAppointmentOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1779602742A3D600B1392E /* PatientAppointmentOptionsView.swift */; };
 		8B17796327430BE900B1392E /* PatientAppointmentOptionField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B17796227430BE900B1392E /* PatientAppointmentOptionField.swift */; };
 		8B188983259CCA4E000B0077 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B188982259CCA4E000B0077 /* Settings.swift */; };
+		8B1E93A62940F92900F2315A /* PatientsDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1E93A52940F92900F2315A /* PatientsDatabase.swift */; };
+		8B1E93A92941348D00F2315A /* PatientModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B1E93A72941348D00F2315A /* PatientModel.xcdatamodeld */; };
 		8B20CE0426298F630007C20A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0326298F630007C20A /* Coordinator.swift */; };
 		8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0726298FCE0007C20A /* MainCoordinator.swift */; };
 		8B20CE0F262995FA0007C20A /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B20CE0E262995FA0007C20A /* DatePicker.swift */; };
@@ -160,6 +162,8 @@
 		8B1779602742A3D600B1392E /* PatientAppointmentOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointmentOptionsView.swift; sourceTree = "<group>"; };
 		8B17796227430BE900B1392E /* PatientAppointmentOptionField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointmentOptionField.swift; sourceTree = "<group>"; };
 		8B188982259CCA4E000B0077 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8B1E93A52940F92900F2315A /* PatientsDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsDatabase.swift; sourceTree = "<group>"; };
+		8B1E93A82941348D00F2315A /* PatientModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PatientModel.xcdatamodel; sourceTree = "<group>"; };
 		8B20CE0326298F630007C20A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8B20CE0726298FCE0007C20A /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		8B20CE0E262995FA0007C20A /* DatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
@@ -431,6 +435,15 @@
 				8B188982259CCA4E000B0077 /* Settings.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		8B1E93AA294134DC00F2315A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8B1E93A72941348D00F2315A /* PatientModel.xcdatamodeld */,
+				8BA701D7264BE64B008C80ED /* DoctorModel.xcdatamodeld */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8B20CE0026298DCE0007C20A /* Coordinators */ = {
@@ -1038,7 +1051,8 @@
 			children = (
 				8BE80C37264AA0A300CCA7F7 /* Database.swift */,
 				8BA701D5264BD9E1008C80ED /* DoctorsDatabase.swift */,
-				8BA701D7264BE64B008C80ED /* DoctorModel.xcdatamodeld */,
+				8B1E93A52940F92900F2315A /* PatientsDatabase.swift */,
+				8B1E93AA294134DC00F2315A /* Models */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -1253,6 +1267,7 @@
 				8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */,
 				8B6B0F87261CA56700F416D1 /* ScheduleAction.swift in Sources */,
 				8B38A1AA260D133500CA01A0 /* ScheduleViewController.swift in Sources */,
+				8B1E93A62940F92900F2315A /* PatientsDatabase.swift in Sources */,
 				8BCB05082674BBF60062F396 /* CreateScheduleCellFactory.swift in Sources */,
 				8BCD1ACE270F5F3700D91D3C /* IntervalCell.swift in Sources */,
 				8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */,
@@ -1267,6 +1282,7 @@
 				8B10E3922625D04A00476862 /* GraphicScheduleInteractor.swift in Sources */,
 				8B10E30526383C6D006022BB /* CreateScheduleSubscription.swift in Sources */,
 				8B62D6282615ECC7006A78F4 /* CallButtonFooter.swift in Sources */,
+				8B1E93A92941348D00F2315A /* PatientModel.xcdatamodeld in Sources */,
 				8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */,
 				8B5CBAA22741A92F0053F91D /* PatientAppointmentViewController.swift in Sources */,
 				8B5E5558263ADA60002E54FF /* CustomPresentationController.swift in Sources */,
@@ -1616,6 +1632,16 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
+		8B1E93A72941348D00F2315A /* PatientModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8B1E93A82941348D00F2315A /* PatientModel.xcdatamodel */,
+			);
+			currentVersion = 8B1E93A82941348D00F2315A /* PatientModel.xcdatamodel */;
+			path = PatientModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		8BA701D7264BE64B008C80ED /* DoctorModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
