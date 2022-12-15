@@ -132,3 +132,16 @@ extension ScheduleCoordinator: PatientAppointmentSubscription {
         navigationController.pushViewController(viewController, animated: true)
     }
 }
+
+// MARK: - PatientsSearchSubscription
+
+extension ScheduleCoordinator: PatientsSearchSubscription {
+    func routeToPatientsSearch(didFInish: @escaping (Patient?) -> Void) {
+        let (viewController, module) = modules.patientsSearch()
+        module.didFinish = { [navigationController] patient in
+            navigationController.popViewController(animated: true)
+            didFInish(patient)
+        }
+        navigationController.pushViewController(viewController, animated: true)
+    }
+}

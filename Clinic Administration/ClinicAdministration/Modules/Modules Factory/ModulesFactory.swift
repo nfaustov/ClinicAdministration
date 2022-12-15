@@ -105,4 +105,13 @@ final class ModulesFactory: Modules {
 
         return (view, presenter)
     }
+
+    func patientsSearch() -> (UIViewController, PatientsSearchModule) {
+        let view = PatientsSearchViewController()
+        let interactor = PatientsSearchInteractor()
+        // interactor database
+        let presenter = PatientsSearchPresenter(view: view, interactor: interactor)
+
+        return (view, presenter)
+    }
 }

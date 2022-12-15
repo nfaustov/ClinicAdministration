@@ -20,4 +20,5 @@ protocol Modules {
         schedule: DoctorSchedule,
         appointment: PatientAppointment
     ) -> (UIViewController, PatientAppointmentModule)
+    func patientsSearch() -> (UIViewController, PatientsSearchModule)
 }
