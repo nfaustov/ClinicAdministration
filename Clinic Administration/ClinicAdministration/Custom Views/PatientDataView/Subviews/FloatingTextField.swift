@@ -11,22 +11,39 @@ final class FloatingTextField: UIView {
     private let textField = UITextField()
     private let placeholderLabel = UILabel()
 
-    private var escapedPlaceholderFont: UIFont {
-        Design.Font.robotoFont(ofSize: 13, weight: .light)
-    }
-    private var placeholderFont: UIFont {
-        Design.Font.robotoFont(ofSize: 17, weight: .light)
-    }
-
     private var placeholderTopConstraint = NSLayoutConstraint()
 
     private var isEmpty: Bool {
         textField.text?.isEmpty ?? true
     }
 
-    private let keyboardType: UIKeyboardType?
+    private let keyboardType: UIKeyboardType
 
     private var placeholder: String
+
+    private var isActive: Bool {
+        textField.isFirstResponder || !isEmpty
+    }
+
+    private var activity: Bool = false {
+        didSet {
+            guard activity != oldValue else { return }
+
+            UIView.animate(withDuration: 0.15) {
+                if self.activity {
+                    let placeholderX = self.placeholderLabel.frame.width * 0.21
+                    self.placeholderLabel.transform = .init(scaleX: 0.7, y: 0.7)
+                        .translatedBy(x: -placeholderX, y: 0)
+                    self.placeholderTopConstraint.constant = 0
+                } else {
+                    self.placeholderLabel.transform = .identity
+                    self.placeholderTopConstraint.constant = 15
+                }
+
+                self.layoutIfNeeded()
+            }
+        }
+    }
 
     var text: String? {
         get {
@@ -34,10 +51,11 @@ final class FloatingTextField: UIView {
         }
         set {
             textField.text = newValue
+            activity = isActive
         }
     }
 
-    init(placeholder: String, keyboardType: UIKeyboardType? = nil) {
+    init(placeholder: String, keyboardType: UIKeyboardType = .default) {
         self.placeholder = placeholder
         self.keyboardType = keyboardType
         super.init(frame: .zero)
@@ -54,14 +72,15 @@ final class FloatingTextField: UIView {
         textField.textColor = Design.Color.chocolate
         textField.borderStyle = .none
         textField.autocapitalizationType = .words
-        textField.keyboardType = keyboardType ?? .default
+        textField.keyboardType = keyboardType
+        textField.delegate = self
         addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.addTarget(self, action: #selector(textRecognizer), for: .allEditingEvents)
 
         placeholderLabel.text = placeholder
         placeholderLabel.textColor = Design.Color.darkGray
-        placeholderLabel.font = placeholderFont
+        placeholderLabel.font = Design.Font.robotoFont(ofSize: 17, weight: .light)
         textField.addSubview(placeholderLabel)
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -70,10 +89,10 @@ final class FloatingTextField: UIView {
         addSubview(underline)
         underline.translatesAutoresizingMaskIntoConstraints = false
 
-        placeholderTopConstraint = placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10)
+        placeholderTopConstraint = placeholderLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15)
 
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor),
             textField.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -91,13 +110,7 @@ final class FloatingTextField: UIView {
     }
 
     @objc private func textRecognizer() {
-        let isActive = textField.isFirstResponder || !isEmpty
-
-        UIView.animate(withDuration: 0.15) {
-            self.placeholderLabel.font = isActive ? self.escapedPlaceholderFont : self.placeholderFont
-            self.placeholderTopConstraint.constant = isActive ? 0 : 10
-            self.layoutIfNeeded()
-        }
+        activity = isActive
     }
 }
 
