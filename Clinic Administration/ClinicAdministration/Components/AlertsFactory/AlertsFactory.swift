@@ -42,7 +42,7 @@ final class AlertsFactory {
         )
         let createAction = UIAlertAction(title: "ДА", style: .default) { _ in
             alertController.dismiss(animated: true) {
-                createAction(doctor, Date())
+                createAction(doctor, Date().addingTimeInterval(86_400))
             }
         }
         let cancelAction = UIAlertAction(title: "НЕТ", style: .cancel) { _ in
