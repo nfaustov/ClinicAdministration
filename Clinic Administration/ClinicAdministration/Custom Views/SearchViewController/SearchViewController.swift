@@ -80,8 +80,12 @@ class SearchViewController<Model: Hashable>: UIViewController {
                 fatalError("Unknown section type.")
             }
 
+            guard let filterSectionLayout = self.createFilterSectionLayout() else {
+                return self.createResultSectionLayout()
+            }
+
             switch section {
-            case .filter: return self.createFilterSectionLayout()
+            case .filter: return filterSectionLayout
             case .result: return self.createResultSectionLayout()
             }
         }
@@ -93,7 +97,7 @@ class SearchViewController<Model: Hashable>: UIViewController {
         fatalError("This method must be overriden")
     }
 
-    func createFilterSectionLayout() -> NSCollectionLayoutSection {
-        fatalError("This method must be overriden.")
+    func createFilterSectionLayout() -> NSCollectionLayoutSection? {
+        nil
     }
 }

@@ -57,7 +57,7 @@ final class PatientsSearchViewController: SearchViewController<Patient> {
             heightDimension: .fractionalHeight(1)
         )
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(40))
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         layoutSection.interGroupSpacing = 2
@@ -108,7 +108,7 @@ extension PatientsSearchViewController: PatientsSearchView {
     func patientsSnapshot(_ patients: [Patient]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.result])
-        snapshot.appendItems(patients)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        snapshot.appendItems(patients, toSection: .result)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
