@@ -8,16 +8,19 @@
 import Foundation
 
 protocol PatientAppointmentModule: AnyObject {
-    var coordinator: ScheduleCoordinator? { get set }
+    var coordinator: PatientsSearchSubscription? { get set }
     var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 
 protocol PatientAppointmentView: View {
     var schedule: DoctorSchedule! { get set }
+
+    func inputData(with: Patient)
     func showError(message: String)
 }
 
 protocol PatientAppointmentPresentation: AnyObject {
+    func findPatient()
     func updateSchedule(with newAppointment: PatientAppointment)
 }
 

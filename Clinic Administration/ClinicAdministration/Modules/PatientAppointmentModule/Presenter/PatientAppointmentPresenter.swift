@@ -9,13 +9,21 @@ import Foundation
 
 final class PatientAppointmentPresenter<V, I>: PresenterInteractor<V, I>, PatientAppointmentModule
 where V: PatientAppointmentView, I: PatientAppointmentInteraction {
-    weak var coordinator: ScheduleCoordinator?
+    weak var coordinator: PatientsSearchSubscription?
     var didFinish: ((DoctorSchedule?) -> Void)?
 }
 
 // MARK: - PatientAppointmentPresentation
 
 extension PatientAppointmentPresenter: PatientAppointmentPresentation {
+    func findPatient() {
+        coordinator?.routeToPatientsSearch { patient in
+            guard let patient = patient else { return }
+
+            self.view?.inputData(with: patient)
+        }
+    }
+
     func updateSchedule(with newAppointment: PatientAppointment) {
         view?.schedule.updateAppointments(with: newAppointment) { errorMessage in
             guard let errorMessage = errorMessage else { return }

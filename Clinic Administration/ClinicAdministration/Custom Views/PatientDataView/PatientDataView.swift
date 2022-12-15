@@ -52,4 +52,11 @@ final class PatientDataView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func inputData(with patient: Patient) {
+        firstNameTextField.text = patient.firstName
+        secondNameTextField.text = patient.secondName
+        patronymicNameTextField.text = patient.patronymicName
+        phoneNumberTextField.text = patient.phoneNumber
+    }
 }

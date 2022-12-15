@@ -125,6 +125,7 @@ extension ScheduleCoordinator: PatientAppointmentSubscription {
         didFinish: @escaping (DoctorSchedule?) -> Void
     ) {
         let (viewController, module) = modules.patientAppointment(schedule: schedule, appointment: appointment)
+        module.coordinator = self
         module.didFinish = { [navigationController] schedule in
             navigationController.popViewController(animated: true)
             didFinish(schedule)

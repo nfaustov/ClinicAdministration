@@ -28,6 +28,15 @@ final class PatientAppointmentViewController: UIViewController {
 
         view.backgroundColor = Design.Color.lightGray
 
+        let searchIcon = UIImage(systemName: "magnifyingglass")
+        let rightBarButton = UIBarButtonItem(
+            image: searchIcon,
+            style: .plain,
+            target: self,
+            action: #selector(findPatient)
+        )
+        navigationItem.rightBarButtonItem = rightBarButton
+
         configureHierarchy()
 
         NotificationCenter.default.addObserver(
@@ -72,6 +81,10 @@ final class PatientAppointmentViewController: UIViewController {
         }
 
         setupConstraints()
+    }
+
+    @objc private func findPatient() {
+        presenter.findPatient()
     }
 
     @objc private func addPatient() {
@@ -156,5 +169,9 @@ extension PatientAppointmentViewController: PatientAppointmentView {
     func showError(message: String) {
         let alert = AlertsFactory.makeDefault(message: message)
         present(alert, animated: true)
+    }
+
+    func inputData(with patient: Patient) {
+        patientDataInput.inputData(with: patient)
     }
 }
