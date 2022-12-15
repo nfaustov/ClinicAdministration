@@ -12,14 +12,14 @@ final class PatientItemCell: UICollectionViewCell, SelfConfiguredCell {
 
     let nameLabel: UILabel = {
        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 14, weight: .regular)
+        label.font = Design.Font.robotoFont(ofSize: 16, weight: .regular)
         label.textColor = Design.Color.chocolate
         label.numberOfLines = 2
         return label
     }()
     let phoneLabel: UILabel = {
        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 14, weight: .regular)
+        label.font = Design.Font.robotoFont(ofSize: 15, weight: .thin)
         label.textColor = Design.Color.chocolate
         return label
     }()
@@ -29,6 +29,10 @@ final class PatientItemCell: UICollectionViewCell, SelfConfiguredCell {
 
         backgroundColor = Design.Color.white
         layer.cornerRadius = Design.CornerRadius.small
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowColor = Design.Color.darkGray.cgColor
+        layer.shadowOpacity = 0.15
+        layer.shadowRadius = 5
 
         addSubview(nameLabel)
         addSubview(phoneLabel)
@@ -48,6 +52,12 @@ final class PatientItemCell: UICollectionViewCell, SelfConfiguredCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.small).cgPath
     }
 
     func configure(with patient: Patient) {

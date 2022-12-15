@@ -17,7 +17,7 @@ final class PatientsSearchViewController: SearchViewController<Patient> {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Выберите пациента"
 
-        view.backgroundColor = Design.Color.white
+        view.backgroundColor = Design.Color.lightGray
         searchBar.tintColor = Design.Color.darkGray
 
         searchBar.delegate = self
@@ -57,11 +57,11 @@ final class PatientsSearchViewController: SearchViewController<Patient> {
             heightDimension: .fractionalHeight(1)
         )
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(40))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(45))
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.interGroupSpacing = 2
-        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        layoutSection.interGroupSpacing = 5
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 10, bottom: 20, trailing: 10)
 
         return layoutSection
     }
