@@ -122,6 +122,16 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
             )
         }
     }
+
+    mutating func maxServiceDuration(for appointment: PatientAppointment) -> TimeInterval {
+        guard let index = patientAppointments.firstIndex(where: { $0.scheduledTime == appointment.scheduledTime }) else { return 0 }
+
+        if let nextReservedAppointment = patientAppointments[index..<patientAppointments.count].first(where: { $0.patient != nil }) {
+            return nextReservedAppointment.scheduledTime?.timeIntervalSince(appointment.scheduledTime ?? Date()) ?? 0
+        } else {
+            return endingTime.timeIntervalSince(appointment.scheduledTime ?? Date())
+        }
+    }
 }
 
 // MARK: - Private methods
