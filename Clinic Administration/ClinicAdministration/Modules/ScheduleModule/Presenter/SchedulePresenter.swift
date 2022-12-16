@@ -21,7 +21,7 @@ final class SchedulePresenter<V, I>: PresenterInteractor<V, I>,
     private func prepareIfNeeded(_ schedule: DoctorSchedule) -> DoctorSchedule {
         if schedule.patientAppointments.count % 2 != 0 {
             var preparedSchedule = schedule
-            let cell = PatientAppointment(scheduledTime: nil, duration: 0, patient: nil)
+            let cell = PatientAppointment(scheduledTime: Date(), duration: 0, patient: nil)
             preparedSchedule.patientAppointments.append(cell)
             return preparedSchedule
         } else {

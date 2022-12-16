@@ -56,7 +56,7 @@ final class PatientAppointmentViewController: UIViewController {
     private func configureHierarchy() {
         appointmentView = PatientAppointmentDataView(
             doctor: schedule.doctor,
-            date: appointment.scheduledTime ?? Date(),
+            date: appointment.scheduledTime,
             serviceDuration: Float(appointment.duration),
             maxServiceDuration: Float(schedule.maxServiceDuration(for: appointment))
         )

@@ -63,12 +63,7 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         } else {
             patientAppointments.removeAll(where: { $0.patient == nil })
             editAppointments()
-            patientAppointments.sort { appointment0, appointment1 in
-                guard let scheduledTime0 = appointment0.scheduledTime,
-                      let scheduledTime1 = appointment1.scheduledTime else { return false }
-
-                return scheduledTime0 < scheduledTime1
-            }
+            patientAppointments.sort { $0.scheduledTime < $1.scheduledTime }
         }
     }
 
@@ -104,12 +99,12 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
     }
 
     mutating func maxServiceDuration(for appointment: PatientAppointment) -> TimeInterval {
-        guard let index = patientAppointments.firstIndex(where: { $0.scheduledTime == appointment.scheduledTime }) else { return 0 }
-
-        if let nextReservedAppointment = patientAppointments[index..<patientAppointments.count].first(where: { $0.patient != nil }) {
-            return nextReservedAppointment.scheduledTime?.timeIntervalSince(appointment.scheduledTime ?? Date()) ?? 0
+        if let nextReservedAppointment = patientAppointments
+            .filter({ $0.scheduledTime > appointment.scheduledTime })
+            .first(where: { $0.patient != nil }) {
+            return nextReservedAppointment.scheduledTime.timeIntervalSince(appointment.scheduledTime)
         } else {
-            return endingTime.timeIntervalSince(appointment.scheduledTime ?? Date())
+            return endingTime.timeIntervalSince(appointment.scheduledTime)
         }
     }
 }
@@ -137,8 +132,7 @@ extension DoctorSchedule {
 
     private mutating func editAppointments() {
         guard let firstPatientStarting = patientAppointments.first(where: { $0.patient != nil })?.scheduledTime,
-              let lastPatient = patientAppointments.last(where: { $0.patient != nil }),
-              let lastPatientEnding = lastPatient.scheduledTime?.addingTimeInterval(lastPatient.duration) else {
+              let lastPatient = patientAppointments.last(where: { $0.patient != nil }) else {
             return
         }
 
@@ -148,7 +142,7 @@ extension DoctorSchedule {
             addingAppointmentIteration(&appointmentTime)
         }
 
-        appointmentTime = lastPatientEnding
+        appointmentTime = lastPatient.scheduledTime.addingTimeInterval(lastPatient.duration)
 
         while appointmentTime < endingTime {
             addingAppointmentIteration(&appointmentTime)

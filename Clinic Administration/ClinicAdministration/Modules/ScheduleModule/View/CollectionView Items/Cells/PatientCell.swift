@@ -52,7 +52,7 @@ final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
             view.removeFromSuperview()
         }
 
-        guard let scheduledTime = cell.scheduledTime else {
+        guard cell.duration != 0 else {
             timeLabel.text = ""
             backgroundColor = Design.Color.lightGray
             return
@@ -61,7 +61,7 @@ final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
         backgroundColor = Design.Color.white
 
         DateFormatter.shared.dateFormat = "H:mm"
-        timeLabel.text = DateFormatter.shared.string(from: scheduledTime)
+        timeLabel.text = DateFormatter.shared.string(from: cell.scheduledTime)
 
         if let patient = cell.patient {
             timeLabel.textColor = Design.Color.darkGray

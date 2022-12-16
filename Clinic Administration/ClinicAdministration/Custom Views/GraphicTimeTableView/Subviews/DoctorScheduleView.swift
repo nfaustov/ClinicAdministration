@@ -200,8 +200,8 @@ final class DoctorScheduleView: UIView {
 
         switch kind {
         case .bottom:
-            if let appointment = schedule.patientAppointments.last(where: { $0.patient != nil }),
-               let lastAppointmentEnding = appointment.scheduledTime?.addingTimeInterval(appointment.duration) {
+            if let appointment = schedule.patientAppointments.last(where: { $0.patient != nil }) {
+                let lastAppointmentEnding = appointment.scheduledTime.addingTimeInterval(appointment.duration)
                 let lastFreeMinutes = schedule.endingTime.timeIntervalSince(lastAppointmentEnding) / 60
                 minTY = -lastFreeMinutes * minuteHeight
             } else {
@@ -210,9 +210,8 @@ final class DoctorScheduleView: UIView {
 
             frame.size.height = originalHeight + max(min(translationY, maxTY), minTY)
         case .top:
-            if let appointment = schedule.patientAppointments.first(where: { $0.patient != nil }),
-               let firstAppointmentStarting = appointment.scheduledTime {
-                let firstFreeMinutes = firstAppointmentStarting.timeIntervalSince(schedule.startingTime) / 60
+            if let appointment = schedule.patientAppointments.first(where: { $0.patient != nil }) {
+                let firstFreeMinutes = appointment.scheduledTime.timeIntervalSince(schedule.startingTime) / 60
                 maxTY = firstFreeMinutes * minuteHeight
             } else {
                 maxTY = originalHeight - serviceDurationHeight

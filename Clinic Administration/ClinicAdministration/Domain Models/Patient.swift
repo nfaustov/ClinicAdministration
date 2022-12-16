@@ -8,18 +8,18 @@
 import Foundation
 
 struct PatientAppointment: Codable, Hashable {
-    var scheduledTime: Date?
+    var scheduledTime: Date
     var duration: TimeInterval
     var patient: Patient?
 
-    init(scheduledTime: Date?, duration: TimeInterval, patient: Patient?) {
+    init(scheduledTime: Date, duration: TimeInterval, patient: Patient?) {
         self.scheduledTime = scheduledTime
         self.duration = duration
         self.patient = patient
     }
 
     init?(entity: PatientAppointmentEntity) {
-        scheduledTime = entity.sheduledTime
+        scheduledTime = entity.sheduledTime ?? Date()
         duration = entity.duration
 
         if let entityPatient = entity.patient {

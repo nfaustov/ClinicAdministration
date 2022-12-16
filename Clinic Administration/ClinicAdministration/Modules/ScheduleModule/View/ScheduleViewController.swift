@@ -279,7 +279,9 @@ extension ScheduleViewController: ScheduleView {
         snapshot.appendSections([.doctor, .patient])
         snapshot.appendItems(doctorSectionPlaceHolder, toSection: .doctor)
         snapshot.appendItems(
-            (0...3).map { PatientAppointment(scheduledTime: nil, duration: Double($0), patient: nil) },
+            (0...3).map {
+                PatientAppointment(scheduledTime: Date(timeIntervalSince1970: Double($0)), duration: 0, patient: nil)
+            },
             toSection: .patient
         )
         dataSource?.apply(snapshot, animatingDifferences: false)
