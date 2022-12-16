@@ -25,11 +25,7 @@ extension PatientAppointmentPresenter: PatientAppointmentPresentation {
     }
 
     func updateSchedule(with newAppointment: PatientAppointment) {
-        view?.schedule.updateAppointments(with: newAppointment) { errorMessage in
-            guard let errorMessage = errorMessage else { return }
-
-            self.view?.showError(message: errorMessage)
-        }
+        view?.schedule.updateAppointments(with: newAppointment)
 
         guard let schedule = view?.schedule else { return }
 

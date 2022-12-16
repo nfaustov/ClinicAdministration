@@ -72,52 +72,32 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         }
     }
 
-    /// Replace appointments with new appointment at the same scheduled time
-    /// only if they are not contains scheduled patients, otherwise it sends error message in completion.
+    /// Replace appointments with new appointment at the same scheduled time.
     /// - Parameters:
-    ///   - newAppointment: New appointment to insert
-    ///   - completion: Possible error message.
-    mutating func updateAppointments(with newAppointment: PatientAppointment, completion: @escaping (String?) -> Void) {
+    ///   - newAppointment: New appointment to update
+    mutating func updateAppointments(with newAppointment: PatientAppointment) {
         guard let index = patientAppointments.firstIndex(
             where: { $0.scheduledTime == newAppointment.scheduledTime }
         ) else {
-            completion("Cannot find corresponding appointment.")
-            return
+            preconditionFailure("Cannot find corresponding appointment.")
         }
 
         if newAppointment.duration == patientAppointments[index].duration {
-            guard patientAppointments[index].patient == nil else {
-                completion("На это время уже записан пациент: \(patientAppointments[index].patient?.fullName ?? "")")
-                return
-            }
-
             patientAppointments[index].patient = newAppointment.patient
         } else if newAppointment.duration > patientAppointments[index].duration {
             let crossedIndex = index + Int(newAppointment.duration / doctor.serviceDuration)
-
-            guard crossedIndex <= patientAppointments.count else {
-                completion("Длительность приема выходит за рамки длительности расписания.")
-                return
-            }
+            precondition(
+                crossedIndex <= patientAppointments.count,
+                "Длительность приема выходит за рамки длительности расписания."
+            )
 
             let replacedPatients = patientAppointments[index..<crossedIndex].compactMap { $0.patient }
-
-            guard replacedPatients.isEmpty else {
-                if let appointment = patientAppointments[index..<crossedIndex].first(where: { $0.patient != nil }),
-                   let scheduledTime = appointment.scheduledTime,
-                   let fullName = appointment.patient?.fullName {
-                    let dateFormatter = DateFormatter.shared
-                    dateFormatter.dateFormat = "H:mm"
-                    let stringTime = dateFormatter.string(from: scheduledTime)
-                    completion("На \(stringTime) уже записан пациент: \(fullName)")
-                }
-                return
-            }
+            precondition(replacedPatients.isEmpty, "На данном интервале уже есть записанный пациент")
 
             patientAppointments.removeSubrange(index..<crossedIndex)
             patientAppointments.insert(newAppointment, at: index)
         } else {
-            completion(
+            preconditionFailure(
                 "Длительность приема слишком маленькая, необходимо по крайней мере \(doctor.serviceDuration / 60) мин."
             )
         }

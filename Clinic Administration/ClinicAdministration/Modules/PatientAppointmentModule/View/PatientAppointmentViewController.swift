@@ -167,11 +167,6 @@ final class PatientAppointmentViewController: UIViewController {
 // MARK: - PatientAppointmentView
 
 extension PatientAppointmentViewController: PatientAppointmentView {
-    func showError(message: String) {
-        let alert = AlertsFactory.makeDefault(message: message)
-        present(alert, animated: true)
-    }
-
     func inputData(with patient: Patient) {
         patientDataInput.inputData(with: patient)
     }

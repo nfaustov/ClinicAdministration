@@ -16,7 +16,6 @@ protocol PatientAppointmentView: View {
     var schedule: DoctorSchedule! { get set }
 
     func inputData(with: Patient)
-    func showError(message: String)
 }
 
 protocol PatientAppointmentPresentation: AnyObject {
