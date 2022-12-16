@@ -56,8 +56,9 @@ final class PatientAppointmentViewController: UIViewController {
     private func configureHierarchy() {
         appointmentView = PatientAppointmentDataView(
             doctor: schedule.doctor,
-            date: schedule.startingTime,
-            scheduledTime: appointment.scheduledTime ?? Date()
+            date: appointment.scheduledTime ?? Date(),
+            serviceDuration: Float(appointment.duration),
+            maxServiceDuration: Float(schedule.maxServiceDuration(for: appointment))
         )
         appointmentView.layer.cornerRadius = Design.CornerRadius.large
         appointmentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

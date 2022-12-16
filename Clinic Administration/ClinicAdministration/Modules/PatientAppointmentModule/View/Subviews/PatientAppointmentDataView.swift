@@ -10,9 +10,9 @@ import UIKit
 final class PatientAppointmentDataView: UIView {
     private let doctor: Doctor
     private let date: Date
-    private let scheduledTime: Date
 
     private var serviceDuration: Float
+    private var maxSericeDuration: Float
 
     private var dateTitleLabel = Design.Label.titleLabel("Дата")
     private var timeTitleLabel = Design.Label.titleLabel("Время")
@@ -42,16 +42,11 @@ final class PatientAppointmentDataView: UIView {
         Double(durationSlider.value * 60)
     }
 
-    init(doctor: Doctor, date: Date, scheduledTime: Date, serviceDuration: Float? = nil) {
+    init(doctor: Doctor, date: Date, serviceDuration: Float, maxServiceDuration: Float) {
         self.doctor = doctor
         self.date = date
-        self.scheduledTime = scheduledTime
-
-        if let serviceDuration = serviceDuration {
-            self.serviceDuration = serviceDuration
-        } else {
-            self.serviceDuration = Float(doctor.serviceDuration / 60)
-        }
+        self.serviceDuration = serviceDuration
+        self.maxSericeDuration = maxServiceDuration
 
         super.init(frame: .zero)
 
@@ -67,8 +62,8 @@ final class PatientAppointmentDataView: UIView {
     private func configureLabels() {
         doctorLabel.text = "\(doctor.fullName)"
         DateFormatter.shared.dateFormat = "H:mm"
-        timeLabel.text = DateFormatter.shared.string(from: scheduledTime)
-        durationLabel.text = "\(Int(serviceDuration)) минут"
+        timeLabel.text = DateFormatter.shared.string(from: date)
+        durationLabel.text = adaptedTimeString(from: serviceDuration / 60)
     }
 
     private func configureSlider() {
@@ -76,24 +71,27 @@ final class PatientAppointmentDataView: UIView {
         durationSlider.maximumTrackTintColor = Design.Color.brown
         durationSlider.thumbTintColor = Design.Color.white
         durationSlider.minimumValue = Float(doctor.serviceDuration / 60)
-        durationSlider.maximumValue = 120
-        durationSlider.value = serviceDuration
+        durationSlider.maximumValue = maxSericeDuration / 60
+        durationSlider.value = serviceDuration / 60
         durationSlider.addTarget(self, action: #selector(slide), for: .valueChanged)
+    }
+
+    private func adaptedTimeString(from minutesValue: Float) -> String {
+        let hours = Int(minutesValue) / 60
+        let minutes = Int(minutesValue) % 60
+
+        if hours >= 1 {
+            return minutes == 0 ? "\(hours) \(hoursTitle)" : "\(hours) \(hoursTitle) \(minutes) минут"
+        } else {
+            return "\(minutes) минут"
+        }
     }
 
     @objc private func slide() {
         let step = Float(doctor.serviceDuration / 60)
         let newStep = roundf(durationSlider.value / step)
         durationSlider.value = newStep * step
-
-        let hours = Int(durationSlider.value) / 60
-        let minutes = Int(durationSlider.value) % 60
-
-        if hours >= 1 {
-            durationLabel.text = minutes == 0 ? "\(hours) \(hoursTitle)" : "\(hours) \(hoursTitle) \(minutes) минут"
-        } else {
-            durationLabel.text = "\(minutes) минут"
-        }
+        durationLabel.text = adaptedTimeString(from: durationSlider.value)
     }
 
     private func configureHierarchy() {
