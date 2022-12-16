@@ -94,15 +94,27 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
             patientAppointments[index].patient = newAppointment.patient
         } else if newAppointment.duration > patientAppointments[index].duration {
             let crossedIndex = index + Int(newAppointment.duration / doctor.serviceDuration)
-            let replacedPatients = patientAppointments[index...crossedIndex].compactMap { $0.patient }
 
-            guard replacedPatients.isEmpty else {
-                let fullNames = replacedPatients.map { $0.fullName }.reduce("") { $0 + ", " + $1 }
-                completion("На это время уже записаны пациенты: \(fullNames)")
+            guard crossedIndex <= patientAppointments.count else {
+                completion("Длительность приема выходит за рамки длительности расписания.")
                 return
             }
 
-            patientAppointments.removeSubrange(index...crossedIndex)
+            let replacedPatients = patientAppointments[index..<crossedIndex].compactMap { $0.patient }
+
+            guard replacedPatients.isEmpty else {
+                if let appointment = patientAppointments[index..<crossedIndex].first(where: { $0.patient != nil }),
+                   let scheduledTime = appointment.scheduledTime,
+                   let fullName = appointment.patient?.fullName {
+                    let dateFormatter = DateFormatter.shared
+                    dateFormatter.dateFormat = "H:mm"
+                    let stringTime = dateFormatter.string(from: scheduledTime)
+                    completion("На \(stringTime) уже записан пациент: \(fullName)")
+                }
+                return
+            }
+
+            patientAppointments.removeSubrange(index..<crossedIndex)
             patientAppointments.insert(newAppointment, at: index)
         } else {
             completion(
