@@ -153,7 +153,7 @@ final class DoctorsDatabase: Database {
                     forEntityName: "PatientAppointment",
                     into: context
                 ) as? PatientAppointmentEntity {
-                    patientAppointmentEntity.sheduledTime = appointment.scheduledTime
+                    patientAppointmentEntity.scheduledTime = appointment.scheduledTime
                     patientAppointmentEntity.duration = appointment.duration
                     patientAppointmentEntity.schedule = scheduleEntity
                 }
@@ -253,7 +253,7 @@ final class DoctorsDatabase: Database {
                     forEntityName: "PatientAppointment",
                     into: self.context
                 ) as? PatientAppointmentEntity {
-                    patientAppointmentEntity.sheduledTime = appointment.scheduledTime
+                    patientAppointmentEntity.scheduledTime = appointment.scheduledTime
                     patientAppointmentEntity.duration = appointment.duration
                     patientAppointmentEntity.schedule = scheduleEntity
                     if let patientEntity = NSEntityDescription.insertNewObject(

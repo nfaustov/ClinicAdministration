@@ -19,7 +19,7 @@ struct PatientAppointment: Codable, Hashable {
     }
 
     init?(entity: PatientAppointmentEntity) {
-        scheduledTime = entity.sheduledTime ?? Date()
+        scheduledTime = entity.scheduledTime ?? Date()
         duration = entity.duration
 
         if let entityPatient = entity.patient {

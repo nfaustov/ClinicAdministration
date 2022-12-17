@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0856BE271465A8001B0F11 /* WorkingHours.swift */; };
+		8B0A5373294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A5371294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld */; };
 		8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */; };
 		8B0F774D2631FF7F00D68B43 /* GraphicScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F774C2631FF7F00D68B43 /* GraphicScheduleModule.swift */; };
 		8B10E2FD26382158006022BB /* CreateScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E2FC26382158006022BB /* CreateScheduleModule.swift */; };
@@ -103,7 +104,6 @@
 		8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA60308260DDBCA00DF686B /* PatientCell.swift */; };
 		8BA6030D260DDF8300DF686B /* SchedulePatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6030C260DDF8300DF686B /* SchedulePatientView.swift */; };
 		8BA701D6264BD9E1008C80ED /* DoctorsDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA701D5264BD9E1008C80ED /* DoctorsDatabase.swift */; };
-		8BA701D9264BE64B008C80ED /* DoctorModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8BA701D7264BE64B008C80ED /* DoctorModel.xcdatamodeld */; };
 		8BAC076D266D475F004AB1F3 /* DoctorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAC076C266D475F004AB1F3 /* DoctorView.swift */; };
 		8BADB070261623DF00DEC3AC /* ScheduleCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BADB06F261623DF00DEC3AC /* ScheduleCollectionViewLayout.swift */; };
 		8BAE474826426AD9008B0B28 /* GraphicTimeTablePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAE474726426AD9008B0B28 /* GraphicTimeTablePreviewViewController.swift */; };
@@ -154,6 +154,7 @@
 
 /* Begin PBXFileReference section */
 		8B0856BE271465A8001B0F11 /* WorkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHours.swift; sourceTree = "<group>"; };
+		8B0A5372294CFB4A00AB4BE0 /* Doctor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Doctor.xcdatamodel; sourceTree = "<group>"; };
 		8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableModule.swift; sourceTree = "<group>"; };
 		8B0F774C2631FF7F00D68B43 /* GraphicScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicScheduleModule.swift; sourceTree = "<group>"; };
 		8B10E2FC26382158006022BB /* CreateScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModule.swift; sourceTree = "<group>"; };
@@ -248,7 +249,6 @@
 		8BA60308260DDBCA00DF686B /* PatientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCell.swift; sourceTree = "<group>"; };
 		8BA6030C260DDF8300DF686B /* SchedulePatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePatientView.swift; sourceTree = "<group>"; };
 		8BA701D5264BD9E1008C80ED /* DoctorsDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsDatabase.swift; sourceTree = "<group>"; };
-		8BA701D8264BE64B008C80ED /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8BAC076C266D475F004AB1F3 /* DoctorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorView.swift; sourceTree = "<group>"; };
 		8BADB06F261623DF00DEC3AC /* ScheduleCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewLayout.swift; sourceTree = "<group>"; };
 		8BAE474726426AD9008B0B28 /* GraphicTimeTablePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTablePreviewViewController.swift; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				8B1E93A72941348D00F2315A /* PatientModel.xcdatamodeld */,
-				8BA701D7264BE64B008C80ED /* DoctorModel.xcdatamodeld */,
+				8B0A5371294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1335,7 +1335,6 @@
 				8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */,
 				8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */,
 				8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */,
-				8BA701D9264BE64B008C80ED /* DoctorModel.xcdatamodeld in Sources */,
 				8BA383BF2710E8E400E21179 /* CellFactory.swift in Sources */,
 				8BAE4752264275A3008B0B28 /* GraphicTimeTablePreviewInteractor.swift in Sources */,
 				8B38A1D8260D16E600CA01A0 /* Patient.swift in Sources */,
@@ -1351,6 +1350,7 @@
 				8B58AFAB272336E700121258 /* CalendarControlDayOfWeekRow.swift in Sources */,
 				8B7D5D6329407FD000B174E9 /* DoctorsSearchCellFactory.swift in Sources */,
 				8B433A3C2643EC7E000FB7DC /* GraphicTimeTableView.swift in Sources */,
+				8B0A5373294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld in Sources */,
 				8BAC076D266D475F004AB1F3 /* DoctorView.swift in Sources */,
 				8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */,
 				8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */,
@@ -1672,6 +1672,16 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
+		8B0A5371294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8B0A5372294CFB4A00AB4BE0 /* Doctor.xcdatamodel */,
+			);
+			currentVersion = 8B0A5372294CFB4A00AB4BE0 /* Doctor.xcdatamodel */;
+			path = DoctorModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		8B1E93A72941348D00F2315A /* PatientModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
@@ -1679,16 +1689,6 @@
 			);
 			currentVersion = 8B1E93A82941348D00F2315A /* PatientModel.xcdatamodel */;
 			path = PatientModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		8BA701D7264BE64B008C80ED /* DoctorModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8BA701D8264BE64B008C80ED /* Model.xcdatamodel */,
-			);
-			currentVersion = 8BA701D8264BE64B008C80ED /* Model.xcdatamodel */;
-			path = DoctorModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
