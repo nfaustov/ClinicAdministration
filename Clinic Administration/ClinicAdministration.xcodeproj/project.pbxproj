@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B05643C294DCB6000166DAC /* PatientAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05643B294DCB6000166DAC /* PatientAppointment.swift */; };
+		8B05643E294DD05F00166DAC /* PriceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05643D294DD05F00166DAC /* PriceList.swift */; };
 		8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0856BE271465A8001B0F11 /* WorkingHours.swift */; };
 		8B0A5373294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A5371294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld */; };
 		8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */; };
@@ -151,6 +153,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B05643B294DCB6000166DAC /* PatientAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointment.swift; sourceTree = "<group>"; };
+		8B05643D294DD05F00166DAC /* PriceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceList.swift; sourceTree = "<group>"; };
 		8B0856BE271465A8001B0F11 /* WorkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHours.swift; sourceTree = "<group>"; };
 		8B0A5372294CFB4A00AB4BE0 /* Doctor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Doctor.xcdatamodel; sourceTree = "<group>"; };
 		8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableModule.swift; sourceTree = "<group>"; };
@@ -333,9 +337,11 @@
 		8B0F5BC9255D49F400894410 /* Domain Models */ = {
 			isa = PBXGroup;
 			children = (
-				8B38A1D7260D16E600CA01A0 /* Patient.swift */,
-				8BCAB7C02559D618001A93D0 /* DoctorSchedule.swift */,
 				8B843667256DB0D1006057EF /* Doctor.swift */,
+				8BCAB7C02559D618001A93D0 /* DoctorSchedule.swift */,
+				8B05643B294DCB6000166DAC /* PatientAppointment.swift */,
+				8B38A1D7260D16E600CA01A0 /* Patient.swift */,
+				8B05643D294DD05F00166DAC /* PriceList.swift */,
 			);
 			path = "Domain Models";
 			sourceTree = "<group>";
@@ -1273,6 +1279,7 @@
 				8B83BAB02715FA06007E9C71 /* SchedulesListSubscription.swift in Sources */,
 				8B20CE0426298F630007C20A /* Coordinator.swift in Sources */,
 				8BE26CEA2616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift in Sources */,
+				8B05643C294DCB6000166DAC /* PatientAppointment.swift in Sources */,
 				8B5CBAA82741AC6F0053F91D /* PatientAppointmentSubscription.swift in Sources */,
 				8B687694293FC5B700C7D1C0 /* IntervalsHeader.swift in Sources */,
 				8B38A1B8260D13B900CA01A0 /* SchedulePresenter.swift in Sources */,
@@ -1354,6 +1361,7 @@
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,
 				8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */,
 				8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */,
+				8B05643E294DD05F00166DAC /* PriceList.swift in Sources */,
 				8B29975F267261A90050C5E1 /* ScheduleOptionView.swift in Sources */,
 				8B5CBAA02741A8620053F91D /* PatientAppointmentModule.swift in Sources */,
 				8B20CE2B262997B30007C20A /* DayLabel.swift in Sources */,
