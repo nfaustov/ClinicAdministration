@@ -114,4 +114,14 @@ final class ModulesFactory: Modules {
 
         return (view, presenter)
     }
+
+    func patientCard(patient: Patient) -> (UIViewController, PatientCardModule) {
+        let view = PatientCardViewController()
+        view.patient = patient
+        let interactor = PatientCardInteractor()
+        // interactor database
+        let presenter = PatientCardPresenter(view: view, interactor: interactor)
+
+        return (view, presenter)
+    }
 }
