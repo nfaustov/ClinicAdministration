@@ -13,12 +13,19 @@ final class PatientAppointmentViewController: UIViewController {
 
     private let patientDataInput = PatientDataView()
     private let buttonView = UIView()
-    private let button = UIButton(type: .custom)
+    private let addPatientButton = UIButton(type: .custom)
+    private let patientInfoButton = UIButton(type: .custom)
     private let bottomView = UIView()
 
     private var appointmentView: PatientAppointmentDataView!
 
     private var patientDataInputTopConstraint = NSLayoutConstraint()
+
+    private var databasePatient: Patient? {
+        didSet {
+            patientInfoButton.isHidden = databasePatient == nil
+        }
+    }
 
     var schedule: DoctorSchedule!
     var appointment: PatientAppointment!
@@ -65,14 +72,23 @@ final class PatientAppointmentViewController: UIViewController {
 
         patientDataInput.backgroundColor = Design.Color.white
 
+        patientInfoButton.setTitle("Подробнее", for: .normal)
+        patientInfoButton.setTitleColor(Design.Color.brown, for: .normal)
+        patientInfoButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .regular)
+        patientInfoButton.isHidden = true
+        patientInfoButton.addTarget(self, action: #selector(showPatientCard), for: .touchUpInside)
+
         buttonView.backgroundColor = Design.Color.white
-        button.backgroundColor = Design.Color.red
-        button.setTitle("ЗАПИСАТЬ", for: .normal)
-        button.setTitleColor(Design.Color.white, for: .normal)
-        button.layer.cornerRadius = Design.CornerRadius.medium
-        button.addTarget(self, action: #selector(addPatient), for: .touchUpInside)
-        buttonView.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        addPatientButton.backgroundColor = Design.Color.red
+        addPatientButton.setTitle("ЗАПИСАТЬ", for: .normal)
+        addPatientButton.setTitleColor(Design.Color.white, for: .normal)
+        addPatientButton.layer.cornerRadius = Design.CornerRadius.medium
+        addPatientButton.addTarget(self, action: #selector(addPatient), for: .touchUpInside)
+
+        buttonView.addSubview(patientInfoButton)
+        buttonView.addSubview(addPatientButton)
+        patientInfoButton.translatesAutoresizingMaskIntoConstraints = false
+        addPatientButton.translatesAutoresizingMaskIntoConstraints = false
 
         bottomView.backgroundColor = buttonView.backgroundColor
 
@@ -86,6 +102,12 @@ final class PatientAppointmentViewController: UIViewController {
 
     @objc private func findPatient() {
         presenter.findPatient()
+    }
+
+    @objc private func showPatientCard() {
+        guard let patient = patientDataInput.patientData else { return }
+
+        presenter.showPatientCard(patient: patient)
     }
 
     @objc private func addPatient() {
@@ -117,12 +139,17 @@ final class PatientAppointmentViewController: UIViewController {
             buttonView.topAnchor.constraint(equalTo: patientDataInput.bottomAnchor),
             buttonView.leadingAnchor.constraint(equalTo: patientDataInput.leadingAnchor),
             buttonView.trailingAnchor.constraint(equalTo: patientDataInput.trailingAnchor),
-            buttonView.heightAnchor.constraint(equalToConstant: 70),
+            buttonView.heightAnchor.constraint(equalToConstant: 120),
 
-            button.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor),
-            button.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
-            button.widthAnchor.constraint(equalToConstant: 180),
-            button.heightAnchor.constraint(equalToConstant: 50),
+            patientInfoButton.topAnchor.constraint(equalTo: buttonView.topAnchor, constant: 10),
+            patientInfoButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor, constant: -10),
+            patientInfoButton.heightAnchor.constraint(equalToConstant: 20),
+            patientInfoButton.widthAnchor.constraint(equalToConstant: 100),
+
+            addPatientButton.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
+            addPatientButton.bottomAnchor.constraint(equalTo: buttonView.bottomAnchor, constant: -15),
+            addPatientButton.widthAnchor.constraint(equalToConstant: 180),
+            addPatientButton.heightAnchor.constraint(equalToConstant: 50),
 
             bottomView.topAnchor.constraint(equalTo: buttonView.bottomAnchor, constant: 5),
             bottomView.leadingAnchor.constraint(equalTo: patientDataInput.leadingAnchor),
@@ -169,5 +196,6 @@ final class PatientAppointmentViewController: UIViewController {
 extension PatientAppointmentViewController: PatientAppointmentView {
     func inputData(with patient: Patient) {
         patientDataInput.inputData(with: patient)
+        databasePatient = patient
     }
 }
