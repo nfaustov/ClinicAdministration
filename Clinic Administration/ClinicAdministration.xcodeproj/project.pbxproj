@@ -83,6 +83,8 @@
 		8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */; };
 		8B7342AB27443ED100E6707C /* PatientDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7342AA27443ED100E6707C /* PatientDataView.swift */; };
 		8B7342AE2744429F00E6707C /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7342AD2744429F00E6707C /* FloatingTextField.swift */; };
+		8B786C6E294E104B003FF42B /* PassportButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B786C6D294E104B003FF42B /* PassportButtonView.swift */; };
+		8B786C71294E1D59003FF42B /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B786C70294E1D59003FF42B /* CheckButton.swift */; };
 		8B7A12622631DCA7007BC1AB /* ModulesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12612631DCA7007BC1AB /* ModulesFactory.swift */; };
 		8B7A12662631DCF9007BC1AB /* Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12652631DCF9007BC1AB /* Modules.swift */; };
 		8B7A126B2631E063007BC1AB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A126A2631E063007BC1AB /* View.swift */; };
@@ -233,6 +235,8 @@
 		8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		8B7342AA27443ED100E6707C /* PatientDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataView.swift; sourceTree = "<group>"; };
 		8B7342AD2744429F00E6707C /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
+		8B786C6D294E104B003FF42B /* PassportButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportButtonView.swift; sourceTree = "<group>"; };
+		8B786C70294E1D59003FF42B /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		8B7A12612631DCA7007BC1AB /* ModulesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesFactory.swift; sourceTree = "<group>"; };
 		8B7A12652631DCF9007BC1AB /* Modules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modules.swift; sourceTree = "<group>"; };
 		8B7A126A2631E063007BC1AB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -375,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				8B0ACDCD294DE28D00913B46 /* PatientCardViewController.swift */,
+				8B786C6C294E0FF4003FF42B /* SubViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,6 +503,7 @@
 		8B20CE0D262995910007C20A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				8B786C6F294E1D29003FF42B /* CheckButton */,
 				8B687695293FE88000C7D1C0 /* SearchViewController */,
 				8B7342A927443EB800E6707C /* PatientDataView */,
 				8B070B03266D3DD800F4D45F /* DoctorView */,
@@ -893,6 +899,22 @@
 				8B7342AD2744429F00E6707C /* FloatingTextField.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		8B786C6C294E0FF4003FF42B /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				8B786C6D294E104B003FF42B /* PassportButtonView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		8B786C6F294E1D29003FF42B /* CheckButton */ = {
+			isa = PBXGroup;
+			children = (
+				8B786C70294E1D59003FF42B /* CheckButton.swift */,
+			);
+			path = CheckButton;
 			sourceTree = "<group>";
 		};
 		8B7A12692631E046007BC1AB /* Base Module */ = {
@@ -1375,6 +1397,7 @@
 				8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */,
 				8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */,
 				8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */,
+				8B786C6E294E104B003FF42B /* PassportButtonView.swift in Sources */,
 				8BA383BF2710E8E400E21179 /* CellFactory.swift in Sources */,
 				8BAE4752264275A3008B0B28 /* GraphicTimeTablePreviewInteractor.swift in Sources */,
 				8B38A1D8260D16E600CA01A0 /* Patient.swift in Sources */,
@@ -1383,6 +1406,7 @@
 				8BAE474E264270FE008B0B28 /* GraphicTimeTablePreviewModule.swift in Sources */,
 				8B20CE0F262995FA0007C20A /* DatePicker.swift in Sources */,
 				8BAE474826426AD9008B0B28 /* GraphicTimeTablePreviewViewController.swift in Sources */,
+				8B786C71294E1D59003FF42B /* CheckButton.swift in Sources */,
 				8B92DFF52657A98A00B3D6B3 /* DatabaseDependencies.swift in Sources */,
 				8B5E5555263ACF02002E54FF /* PickCabinetSubscription.swift in Sources */,
 				8B20CE23262997A70007C20A /* CalendarTableViewController.swift in Sources */,
