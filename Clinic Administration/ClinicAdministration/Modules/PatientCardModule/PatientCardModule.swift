@@ -15,6 +15,8 @@ protocol PatientCardView: View {
 }
 
 protocol PatientCardPresentation: AnyObject {
+    func showPassportData(for: Patient)
+    func createCheck(for: Patient)
 }
 
 protocol PatientCardInteraction: Interactor {

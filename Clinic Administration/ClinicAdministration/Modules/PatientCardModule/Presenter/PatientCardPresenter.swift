@@ -16,6 +16,11 @@ final class PatientCardPresenter<V, I>: PresenterInteractor<V, I>,
 // MARK: - PatientCardPresentation
 
 extension PatientCardPresenter: PatientCardPresentation {
+    func showPassportData(for: Patient) {
+    }
+
+    func createCheck(for: Patient) {
+    }
 }
 
 // MARK: - PatientCardInteractorDelegate

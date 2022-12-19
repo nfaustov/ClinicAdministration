@@ -13,18 +13,28 @@ final class CheckButton: UIView {
 
     private var gradientLayer: CAGradientLayer = {
        let layer = CAGradientLayer()
-        let startColor = CGColor(red: 0.73, green: 0.33, blue: 0.10, alpha: 1)
-        let endColor = CGColor(red: 0.9, green: 0.37, blue: 0.07, alpha: 1)
-        layer.colors = [startColor, endColor]
-        layer.startPoint = CGPoint(x: 0.5, y: 0.14)
-        layer.endPoint = CGPoint(x: 0.5, y: 1)
+        layer.colors = [
+            UIColor(red: 0.286, green: 0.129, blue: 0.039, alpha: 1).cgColor,
+            UIColor(red: 0.396, green: 0.157, blue: 0.024, alpha: 0).cgColor
+        ]
+        layer.locations = [0, 1]
+        layer.startPoint = CGPoint(x: 0.5, y: 0.86)
+        layer.endPoint = CGPoint(x: 0.5, y: 0.0)
         return layer
     }()
+
+    override var bounds: CGRect {
+        didSet {
+            gradientLayer.frame = bounds.insetBy(dx: -0.5 * bounds.size.width, dy: -0.5 * bounds.size.height)
+        }
+    }
 
     init(title: String, image: UIImage? = nil) {
         self.title = title
         self.image = image
         super.init(frame: .zero)
+
+        configureHierarchy()
     }
 
     required init?(coder: NSCoder) {
@@ -32,7 +42,11 @@ final class CheckButton: UIView {
     }
 
     private func configureHierarchy() {
+        layer.backgroundColor = Design.Color.red.cgColor
+        layer.cornerRadius = Design.CornerRadius.medium
+        layer.masksToBounds = true
         layer.addSublayer(gradientLayer)
+        gradientLayer.cornerRadius = Design.CornerRadius.medium
 
         let label = UILabel()
         label.text = title
@@ -44,7 +58,7 @@ final class CheckButton: UIView {
         NSLayoutConstraint.activate([
             label.centerYAnchor.constraint(equalTo: centerYAnchor),
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            label.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor , constant: -10)
+            label.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -10)
         ])
 
         guard let image = image else { return }
