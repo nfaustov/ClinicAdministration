@@ -146,3 +146,13 @@ extension ScheduleCoordinator: PatientsSearchSubscription {
         navigationController.pushViewController(viewController, animated: true)
     }
 }
+
+// MARK: - PatientCardSubscription
+
+extension ScheduleCoordinator: PatientCardSubscription {
+    func routeToPatientCard(patient: Patient) {
+        let (viewController, module) = modules.patientCard(patient: patient)
+        module.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
+}

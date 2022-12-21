@@ -9,7 +9,8 @@ import Foundation
 
 final class PatientAppointmentPresenter<V, I>: PresenterInteractor<V, I>, PatientAppointmentModule
 where V: PatientAppointmentView, I: PatientAppointmentInteraction {
-    weak var coordinator: PatientsSearchSubscription?
+    weak var coordinator: (PatientsSearchSubscription &
+                           PatientCardSubscription)?
     var didFinish: ((DoctorSchedule?) -> Void)?
 }
 
@@ -22,6 +23,10 @@ extension PatientAppointmentPresenter: PatientAppointmentPresentation {
 
             self.view?.inputData(with: patient)
         }
+    }
+
+    func showPatientCard(patient: Patient) {
+        coordinator?.routeToPatientCard(patient: patient)
     }
 
     func updateSchedule(with newAppointment: PatientAppointment) {

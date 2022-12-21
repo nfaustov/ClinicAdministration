@@ -8,7 +8,8 @@
 import Foundation
 
 protocol PatientAppointmentModule: AnyObject {
-    var coordinator: PatientsSearchSubscription? { get set }
+    var coordinator: (PatientsSearchSubscription &
+                     PatientCardSubscription)? { get set }
     var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 
@@ -20,6 +21,7 @@ protocol PatientAppointmentView: View {
 
 protocol PatientAppointmentPresentation: AnyObject {
     func findPatient()
+    func showPatientCard(patient: Patient)
     func updateSchedule(with newAppointment: PatientAppointment)
 }
 

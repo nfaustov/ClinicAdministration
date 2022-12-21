@@ -11,6 +11,11 @@
 		8B05643E294DD05F00166DAC /* PriceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05643D294DD05F00166DAC /* PriceList.swift */; };
 		8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0856BE271465A8001B0F11 /* WorkingHours.swift */; };
 		8B0A5373294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A5371294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld */; };
+		8B0ACDC9294DE17700913B46 /* PatientCardModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDC8294DE17700913B46 /* PatientCardModule.swift */; };
+		8B0ACDCE294DE28D00913B46 /* PatientCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDCD294DE28D00913B46 /* PatientCardViewController.swift */; };
+		8B0ACDD0294DE34400913B46 /* PatientCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDCF294DE34400913B46 /* PatientCardInteractor.swift */; };
+		8B0ACDD2294DE42400913B46 /* PatientCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDD1294DE42400913B46 /* PatientCardPresenter.swift */; };
+		8B0ACDD4294DE75500913B46 /* PatientCardSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDD3294DE75500913B46 /* PatientCardSubscription.swift */; };
 		8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */; };
 		8B0F774D2631FF7F00D68B43 /* GraphicScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F774C2631FF7F00D68B43 /* GraphicScheduleModule.swift */; };
 		8B10E2FD26382158006022BB /* CreateScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E2FC26382158006022BB /* CreateScheduleModule.swift */; };
@@ -80,6 +85,8 @@
 		8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */; };
 		8B7342AB27443ED100E6707C /* PatientDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7342AA27443ED100E6707C /* PatientDataView.swift */; };
 		8B7342AE2744429F00E6707C /* FloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7342AD2744429F00E6707C /* FloatingTextField.swift */; };
+		8B786C6E294E104B003FF42B /* PassportButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B786C6D294E104B003FF42B /* PassportButtonView.swift */; };
+		8B786C71294E1D59003FF42B /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B786C70294E1D59003FF42B /* CheckButton.swift */; };
 		8B7A12622631DCA7007BC1AB /* ModulesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12612631DCA7007BC1AB /* ModulesFactory.swift */; };
 		8B7A12662631DCF9007BC1AB /* Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12652631DCF9007BC1AB /* Modules.swift */; };
 		8B7A126B2631E063007BC1AB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A126A2631E063007BC1AB /* View.swift */; };
@@ -163,6 +170,11 @@
 		8B05643D294DD05F00166DAC /* PriceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceList.swift; sourceTree = "<group>"; };
 		8B0856BE271465A8001B0F11 /* WorkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHours.swift; sourceTree = "<group>"; };
 		8B0A5372294CFB4A00AB4BE0 /* Doctor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Doctor.xcdatamodel; sourceTree = "<group>"; };
+		8B0ACDC8294DE17700913B46 /* PatientCardModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardModule.swift; sourceTree = "<group>"; };
+		8B0ACDCD294DE28D00913B46 /* PatientCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardViewController.swift; sourceTree = "<group>"; };
+		8B0ACDCF294DE34400913B46 /* PatientCardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardInteractor.swift; sourceTree = "<group>"; };
+		8B0ACDD1294DE42400913B46 /* PatientCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardPresenter.swift; sourceTree = "<group>"; };
+		8B0ACDD3294DE75500913B46 /* PatientCardSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardSubscription.swift; sourceTree = "<group>"; };
 		8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableModule.swift; sourceTree = "<group>"; };
 		8B0F774C2631FF7F00D68B43 /* GraphicScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicScheduleModule.swift; sourceTree = "<group>"; };
 		8B10E2FC26382158006022BB /* CreateScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModule.swift; sourceTree = "<group>"; };
@@ -231,6 +243,8 @@
 		8B6E9DAE2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		8B7342AA27443ED100E6707C /* PatientDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataView.swift; sourceTree = "<group>"; };
 		8B7342AD2744429F00E6707C /* FloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingTextField.swift; sourceTree = "<group>"; };
+		8B786C6D294E104B003FF42B /* PassportButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportButtonView.swift; sourceTree = "<group>"; };
+		8B786C70294E1D59003FF42B /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		8B7A12612631DCA7007BC1AB /* ModulesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesFactory.swift; sourceTree = "<group>"; };
 		8B7A12652631DCF9007BC1AB /* Modules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modules.swift; sourceTree = "<group>"; };
 		8B7A126A2631E063007BC1AB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -344,6 +358,42 @@
 				8B0856BE271465A8001B0F11 /* WorkingHours.swift */,
 			);
 			path = WorkingHours;
+			sourceTree = "<group>";
+		};
+		8B0ACDC7294DE15F00913B46 /* PatientCardModule */ = {
+			isa = PBXGroup;
+			children = (
+				8B0ACDCC294DE23D00913B46 /* View */,
+				8B0ACDCB294DE23400913B46 /* Presenter */,
+				8B0ACDCA294DE22D00913B46 /* Interactor */,
+				8B0ACDC8294DE17700913B46 /* PatientCardModule.swift */,
+			);
+			path = PatientCardModule;
+			sourceTree = "<group>";
+		};
+		8B0ACDCA294DE22D00913B46 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8B0ACDCF294DE34400913B46 /* PatientCardInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8B0ACDCB294DE23400913B46 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8B0ACDD1294DE42400913B46 /* PatientCardPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8B0ACDCC294DE23D00913B46 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B0ACDCD294DE28D00913B46 /* PatientCardViewController.swift */,
+				8B786C6C294E0FF4003FF42B /* SubViews */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		8B0F5BC9255D49F400894410 /* Domain Models */ = {
@@ -465,6 +515,7 @@
 		8B20CE0D262995910007C20A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				8B786C6F294E1D29003FF42B /* CheckButton */,
 				8B687695293FE88000C7D1C0 /* SearchViewController */,
 				8B7342A927443EB800E6707C /* PatientDataView */,
 				8B070B03266D3DD800F4D45F /* DoctorView */,
@@ -705,6 +756,7 @@
 				8B83BAAF2715FA06007E9C71 /* SchedulesListSubscription.swift */,
 				8B5CBAA72741AC6F0053F91D /* PatientAppointmentSubscription.swift */,
 				8B2137E0294B1171004E62B7 /* PatientsSearchSubscription.swift */,
+				8B0ACDD3294DE75500913B46 /* PatientCardSubscription.swift */,
 			);
 			path = "Modules Subscriptions";
 			sourceTree = "<group>";
@@ -793,6 +845,7 @@
 				8B83BAA32715F56F007E9C71 /* SchedulesListModule */,
 				8B5CBA9B2741A8260053F91D /* PatientAppointmentModule */,
 				8B2137D1294B02A9004E62B7 /* PatientsSearchModule */,
+				8B0ACDC7294DE15F00913B46 /* PatientCardModule */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -858,6 +911,22 @@
 				8B7342AD2744429F00E6707C /* FloatingTextField.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		8B786C6C294E0FF4003FF42B /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				8B786C6D294E104B003FF42B /* PassportButtonView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		8B786C6F294E1D29003FF42B /* CheckButton */ = {
+			isa = PBXGroup;
+			children = (
+				8B786C70294E1D59003FF42B /* CheckButton.swift */,
+			);
+			path = CheckButton;
 			sourceTree = "<group>";
 		};
 		8B7A12692631E046007BC1AB /* Base Module */ = {
@@ -1368,7 +1437,9 @@
 				8B10E30526383C6D006022BB /* CreateScheduleSubscription.swift in Sources */,
 				8B62D6282615ECC7006A78F4 /* CallButtonFooter.swift in Sources */,
 				8B1E93A92941348D00F2315A /* PatientModel.xcdatamodeld in Sources */,
+				8B0ACDC9294DE17700913B46 /* PatientCardModule.swift in Sources */,
 				8B6E9DAF2621B0D900DD2631 /* ActionListBackgroundDecorationView.swift in Sources */,
+				8B0ACDCE294DE28D00913B46 /* PatientCardViewController.swift in Sources */,
 				8B5CBAA22741A92F0053F91D /* PatientAppointmentViewController.swift in Sources */,
 				8B5E5558263ADA60002E54FF /* CustomPresentationController.swift in Sources */,
 				8B20CE2D262997B30007C20A /* DayOfWeekRow.swift in Sources */,
@@ -1380,6 +1451,7 @@
 				8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */,
 				8BCAB7C12559D618001A93D0 /* DoctorSchedule.swift in Sources */,
 				8B20CE0826298FCE0007C20A /* MainCoordinator.swift in Sources */,
+				8B786C6E294E104B003FF42B /* PassportButtonView.swift in Sources */,
 				8BA383BF2710E8E400E21179 /* CellFactory.swift in Sources */,
 				8BAE4752264275A3008B0B28 /* GraphicTimeTablePreviewInteractor.swift in Sources */,
 				8B38A1D8260D16E600CA01A0 /* Patient.swift in Sources */,
@@ -1388,6 +1460,7 @@
 				8BAE474E264270FE008B0B28 /* GraphicTimeTablePreviewModule.swift in Sources */,
 				8B20CE0F262995FA0007C20A /* DatePicker.swift in Sources */,
 				8BAE474826426AD9008B0B28 /* GraphicTimeTablePreviewViewController.swift in Sources */,
+				8B786C71294E1D59003FF42B /* CheckButton.swift in Sources */,
 				8B92DFF52657A98A00B3D6B3 /* DatabaseDependencies.swift in Sources */,
 				8B5E5555263ACF02002E54FF /* PickCabinetSubscription.swift in Sources */,
 				8B20CE23262997A70007C20A /* CalendarTableViewController.swift in Sources */,
@@ -1398,6 +1471,7 @@
 				8B82801A2951A8F7006A12FC /* DoctorEndpoint.swift in Sources */,
 				8B0A5373294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld in Sources */,
 				8BAC076D266D475F004AB1F3 /* DoctorView.swift in Sources */,
+				8B0ACDD4294DE75500913B46 /* PatientCardSubscription.swift in Sources */,
 				8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */,
 				8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */,
 				8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */,
@@ -1431,6 +1505,7 @@
 				8B20CE532629995C0007C20A /* Design.swift in Sources */,
 				8BAE47542642799B008B0B28 /* GraphicTimeTablePreviewSubscription.swift in Sources */,
 				8B7342AB27443ED100E6707C /* PatientDataView.swift in Sources */,
+				8B0ACDD0294DE34400913B46 /* PatientCardInteractor.swift in Sources */,
 				8B7A12712631E077007BC1AB /* Interactor.swift in Sources */,
 				8B0F774D2631FF7F00D68B43 /* GraphicScheduleModule.swift in Sources */,
 				8B38A1BC260D13DD00CA01A0 /* ScheduleInteraction.swift in Sources */,
@@ -1441,6 +1516,7 @@
 				8B92DFF12657A91D00B3D6B3 /* DependencyContainer.swift in Sources */,
 				8BFEE593266257CA00D27064 /* AlertsFactory.swift in Sources */,
 				8BB450BE2630495D00C143A4 /* GraphicScheduleSubscription.swift in Sources */,
+				8B0ACDD2294DE42400913B46 /* PatientCardPresenter.swift in Sources */,
 				8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */,
 				8B188983259CCA4E000B0077 /* Settings.swift in Sources */,
 				8B33A652266968340003631A /* DoctorsSearchSubscription.swift in Sources */,
