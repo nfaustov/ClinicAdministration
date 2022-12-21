@@ -22,4 +22,5 @@ protocol Modules {
     ) -> (UIViewController, PatientAppointmentModule)
     func patientsSearch() -> (UIViewController, PatientsSearchModule)
     func patientCard(patient: Patient) -> (UIViewController, PatientCardModule)
+    func visits() -> (UIViewController, VisitsModule)
 }

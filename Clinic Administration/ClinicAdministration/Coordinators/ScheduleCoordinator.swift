@@ -156,3 +156,13 @@ extension ScheduleCoordinator: PatientCardSubscription {
         navigationController.pushViewController(viewController, animated: true)
     }
 }
+
+// MARK: - VisitsSubscription
+
+extension ScheduleCoordinator: VisitsSubscription {
+    func routeToVisits() {
+        let (viewController, module) = modules.visits()
+        module.coordinator = self
+        customPresent(viewController)
+    }
+}

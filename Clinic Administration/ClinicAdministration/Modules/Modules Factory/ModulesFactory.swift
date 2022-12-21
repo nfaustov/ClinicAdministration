@@ -124,4 +124,12 @@ final class ModulesFactory: Modules {
 
         return (view, presenter)
     }
+
+    func visits() -> (UIViewController, VisitsModule) {
+        let view = VisitsViewController()
+        let interactor = VisitsInteractor()
+        let presenter = VisitsPresenter(view: view, interactor: interactor)
+
+        return (view, presenter)
+    }
 }
