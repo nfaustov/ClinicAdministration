@@ -13,6 +13,17 @@ final class VisitsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let headerView = VisitsHeaderView()
+        view.addSubview(headerView)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: view.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerView.widthAnchor.constraint(equalToConstant: 300)
+        ])
     }
 }
 
