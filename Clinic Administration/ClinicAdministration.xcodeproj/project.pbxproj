@@ -58,6 +58,8 @@
 		8B3E1635267792260070BDAF /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E1634267792260070BDAF /* OptionCell.swift */; };
 		8B41FE7F261E3D4B009ED53E /* ScheduleCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41FE7E261E3D4B009ED53E /* ScheduleCellFactory.swift */; };
 		8B433A3C2643EC7E000FB7DC /* GraphicTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B433A3B2643EC7E000FB7DC /* GraphicTimeTableView.swift */; };
+		8B47BF1429532C6200C90072 /* DoctorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47BF1329532C6200C90072 /* DoctorService.swift */; };
+		8B47BF1629532E5600C90072 /* DoctorServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47BF1529532E5600C90072 /* DoctorServiceClient.swift */; };
 		8B4FC4F82632B2AF00D7627A /* ScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4FC4F72632B2AF00D7627A /* ScheduleModule.swift */; };
 		8B52D7FA2727534900C7DD1E /* CalendarControlMonthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */; };
 		8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */; };
@@ -89,6 +91,9 @@
 		8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */; };
 		8B7F8B19263AF6AA00B75324 /* PickCabinetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */; };
 		8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */; };
+		8B82801A2951A8F7006A12FC /* DoctorEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8280192951A8F7006A12FC /* DoctorEndpoint.swift */; };
+		8B82801C2951AC98006A12FC /* NetworkControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82801B2951AC98006A12FC /* NetworkControllerProtocol.swift */; };
+		8B82801E2951AD7F006A12FC /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B82801D2951AD7F006A12FC /* NetworkController.swift */; };
 		8B83BAA82715F5C3007E9C71 /* SchedulesListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83BAA72715F5C3007E9C71 /* SchedulesListModule.swift */; };
 		8B83BAAA2715F6B5007E9C71 /* SchedulesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83BAA92715F6B5007E9C71 /* SchedulesListViewController.swift */; };
 		8B83BAAC2715F72B007E9C71 /* SchedulesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83BAAB2715F72B007E9C71 /* SchedulesListPresenter.swift */; };
@@ -98,6 +103,7 @@
 		8B92DFF12657A91D00B3D6B3 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */; };
 		8B92DFF32657A96400B3D6B3 /* HttpServiceDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF22657A96400B3D6B3 /* HttpServiceDependencies.swift */; };
 		8B92DFF52657A98A00B3D6B3 /* DatabaseDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */; };
+		8B93661D2953033A00774D15 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B93661C2953033A00774D15 /* Log.swift */; };
 		8B95FA292624CF5E007DAF9D /* DoctorPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */; };
 		8BA383BF2710E8E400E21179 /* CellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA383BE2710E8E400E21179 /* CellFactory.swift */; };
 		8BA602F9260DA36700DF686B /* DoctorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA602F8260DA36700DF686B /* DoctorCell.swift */; };
@@ -203,6 +209,8 @@
 		8B3E1634267792260070BDAF /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		8B41FE7E261E3D4B009ED53E /* ScheduleCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCellFactory.swift; sourceTree = "<group>"; };
 		8B433A3B2643EC7E000FB7DC /* GraphicTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTimeTableView.swift; sourceTree = "<group>"; };
+		8B47BF1329532C6200C90072 /* DoctorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorService.swift; sourceTree = "<group>"; };
+		8B47BF1529532E5600C90072 /* DoctorServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorServiceClient.swift; sourceTree = "<group>"; };
 		8B4FC4F72632B2AF00D7627A /* ScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModule.swift; sourceTree = "<group>"; };
 		8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlMonthHeader.swift; sourceTree = "<group>"; };
 		8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSectionPlaceholder.swift; sourceTree = "<group>"; };
@@ -234,6 +242,9 @@
 		8B7F8B16263AF62900B75324 /* PickCabinetModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetModule.swift; sourceTree = "<group>"; };
 		8B7F8B18263AF6AA00B75324 /* PickCabinetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetViewController.swift; sourceTree = "<group>"; };
 		8B7F8B1A263AF77E00B75324 /* PickCabinetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickCabinetPresenter.swift; sourceTree = "<group>"; };
+		8B8280192951A8F7006A12FC /* DoctorEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorEndpoint.swift; sourceTree = "<group>"; };
+		8B82801B2951AC98006A12FC /* NetworkControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkControllerProtocol.swift; sourceTree = "<group>"; };
+		8B82801D2951AD7F006A12FC /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		8B83BAA72715F5C3007E9C71 /* SchedulesListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesListModule.swift; sourceTree = "<group>"; };
 		8B83BAA92715F6B5007E9C71 /* SchedulesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesListViewController.swift; sourceTree = "<group>"; };
 		8B83BAAB2715F72B007E9C71 /* SchedulesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesListPresenter.swift; sourceTree = "<group>"; };
@@ -243,6 +254,7 @@
 		8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		8B92DFF22657A96400B3D6B3 /* HttpServiceDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpServiceDependencies.swift; sourceTree = "<group>"; };
 		8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDependencies.swift; sourceTree = "<group>"; };
+		8B93661C2953033A00774D15 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		8B95FA282624CF5E007DAF9D /* DoctorPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorPlaceholder.swift; sourceTree = "<group>"; };
 		8BA383BE2710E8E400E21179 /* CellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellFactory.swift; sourceTree = "<group>"; };
 		8BA602F8260DA36700DF686B /* DoctorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorCell.swift; sourceTree = "<group>"; };
@@ -893,6 +905,43 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		8B8280142951975C006A12FC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8B82801F2951AF46006A12FC /* NetworkController */,
+				8B8280172951A88B006A12FC /* Services */,
+				8B93661C2953033A00774D15 /* Log.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8B8280172951A88B006A12FC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8B8280182951A8A9006A12FC /* DoctorService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8B8280182951A8A9006A12FC /* DoctorService */ = {
+			isa = PBXGroup;
+			children = (
+				8B8280192951A8F7006A12FC /* DoctorEndpoint.swift */,
+				8B47BF1329532C6200C90072 /* DoctorService.swift */,
+				8B47BF1529532E5600C90072 /* DoctorServiceClient.swift */,
+			);
+			path = DoctorService;
+			sourceTree = "<group>";
+		};
+		8B82801F2951AF46006A12FC /* NetworkController */ = {
+			isa = PBXGroup;
+			children = (
+				8B82801D2951AD7F006A12FC /* NetworkController.swift */,
+				8B82801B2951AC98006A12FC /* NetworkControllerProtocol.swift */,
+			);
+			path = NetworkController;
+			sourceTree = "<group>";
+		};
 		8B83BAA32715F56F007E9C71 /* SchedulesListModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1021,6 +1070,7 @@
 				8B20CE0026298DCE0007C20A /* Coordinators */,
 				8B92DFEF2657A90C00B3D6B3 /* DependencyContainer */,
 				8BE80C39264AA0DA00CCA7F7 /* Database */,
+				8B8280142951975C006A12FC /* Network */,
 				8B5D15B82627561F003450F6 /* Modules */,
 				8B20CE0D262995910007C20A /* Custom Views */,
 				8B188985259CCA55000B0077 /* Settings */,
@@ -1264,6 +1314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B82801E2951AD7F006A12FC /* NetworkController.swift in Sources */,
 				8BA6030D260DDF8300DF686B /* SchedulePatientView.swift in Sources */,
 				8B3E1635267792260070BDAF /* OptionCell.swift in Sources */,
 				8B7A12662631DCF9007BC1AB /* Modules.swift in Sources */,
@@ -1271,10 +1322,12 @@
 				8B20CE5D2629998F0007C20A /* Bundle-Decodable.swift in Sources */,
 				8B83BAAA2715F6B5007E9C71 /* SchedulesListViewController.swift in Sources */,
 				8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */,
+				8B47BF1429532C6200C90072 /* DoctorService.swift in Sources */,
 				8B20CE5E2629998F0007C20A /* DateFormatterExtension.swift in Sources */,
 				8B33A65726696F720003631A /* DoctorsSearchInteractor.swift in Sources */,
 				8BCB050A267576EB0062F396 /* CreateScheduleCollectionViewLayout.swift in Sources */,
 				8B62D6242615CB7A006A78F4 /* DatePickerHeader.swift in Sources */,
+				8B82801C2951AC98006A12FC /* NetworkControllerProtocol.swift in Sources */,
 				8BF026D6267383C3002B0C39 /* ScheduleOption.swift in Sources */,
 				8B83BAB02715FA06007E9C71 /* SchedulesListSubscription.swift in Sources */,
 				8B20CE0426298F630007C20A /* Coordinator.swift in Sources */,
@@ -1306,6 +1359,7 @@
 				8B4FC4F82632B2AF00D7627A /* ScheduleModule.swift in Sources */,
 				8B7D5D662940856100B174E9 /* SpecializationCell.swift in Sources */,
 				8B33A650266906D80003631A /* DoctorItemCell.swift in Sources */,
+				8B93661D2953033A00774D15 /* Log.swift in Sources */,
 				8BA701D6264BD9E1008C80ED /* DoctorsDatabase.swift in Sources */,
 				8B52D7FA2727534900C7DD1E /* CalendarControlMonthHeader.swift in Sources */,
 				8B7C90EF2718A5FF00CA11F8 /* ScheduleCell.swift in Sources */,
@@ -1341,6 +1395,7 @@
 				8B58AFAB272336E700121258 /* CalendarControlDayOfWeekRow.swift in Sources */,
 				8B7D5D6329407FD000B174E9 /* DoctorsSearchCellFactory.swift in Sources */,
 				8B433A3C2643EC7E000FB7DC /* GraphicTimeTableView.swift in Sources */,
+				8B82801A2951A8F7006A12FC /* DoctorEndpoint.swift in Sources */,
 				8B0A5373294CFB4A00AB4BE0 /* DoctorModel.xcdatamodeld in Sources */,
 				8BAC076D266D475F004AB1F3 /* DoctorView.swift in Sources */,
 				8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */,
@@ -1356,6 +1411,7 @@
 				8B83BAA82715F5C3007E9C71 /* SchedulesListModule.swift in Sources */,
 				8B10E30326382314006022BB /* CreateScheduleInteractor.swift in Sources */,
 				8B2137DC294B0536004E62B7 /* PatientsSearchPresenter.swift in Sources */,
+				8B47BF1629532E5600C90072 /* DoctorServiceClient.swift in Sources */,
 				8B58AFA92723354C00121258 /* CalendarControlDayLabel.swift in Sources */,
 				8B33A6492668E1160003631A /* DoctorsSearchModule.swift in Sources */,
 				8B843668256DB0D1006057EF /* Doctor.swift in Sources */,
