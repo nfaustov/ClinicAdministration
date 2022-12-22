@@ -22,6 +22,7 @@ final class ModulesFactory: Modules {
         }
         let interactor = ScheduleInteractor()
         interactor.database = dependencies.doctorsDatabase
+        interactor.doctorScheduleService = dependencies.doctorScheduleService
         let presenter = SchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)

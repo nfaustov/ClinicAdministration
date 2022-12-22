@@ -58,7 +58,7 @@
 		8B33A65726696F720003631A /* DoctorsSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B33A65626696F720003631A /* DoctorsSearchInteractor.swift */; };
 		8B38A1AA260D133500CA01A0 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1A9260D133500CA01A0 /* ScheduleViewController.swift */; };
 		8B38A1B8260D13B900CA01A0 /* SchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1B7260D13B900CA01A0 /* SchedulePresenter.swift */; };
-		8B38A1BC260D13DD00CA01A0 /* ScheduleInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1BB260D13DD00CA01A0 /* ScheduleInteraction.swift */; };
+		8B38A1BC260D13DD00CA01A0 /* ScheduleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1BB260D13DD00CA01A0 /* ScheduleInteractor.swift */; };
 		8B38A1D8260D16E600CA01A0 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B38A1D7260D16E600CA01A0 /* Patient.swift */; };
 		8B3E1635267792260070BDAF /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E1634267792260070BDAF /* OptionCell.swift */; };
 		8B41FE7F261E3D4B009ED53E /* ScheduleCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B41FE7E261E3D4B009ED53E /* ScheduleCellFactory.swift */; };
@@ -220,7 +220,7 @@
 		8B33A65626696F720003631A /* DoctorsSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsSearchInteractor.swift; sourceTree = "<group>"; };
 		8B38A1A9260D133500CA01A0 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		8B38A1B7260D13B900CA01A0 /* SchedulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenter.swift; sourceTree = "<group>"; };
-		8B38A1BB260D13DD00CA01A0 /* ScheduleInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInteraction.swift; sourceTree = "<group>"; };
+		8B38A1BB260D13DD00CA01A0 /* ScheduleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInteractor.swift; sourceTree = "<group>"; };
 		8B38A1D7260D16E600CA01A0 /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		8B3E1634267792260070BDAF /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		8B41FE7E261E3D4B009ED53E /* ScheduleCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCellFactory.swift; sourceTree = "<group>"; };
@@ -736,7 +736,7 @@
 		8B38A1A6260D12D300CA01A0 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				8B38A1BB260D13DD00CA01A0 /* ScheduleInteraction.swift */,
+				8B38A1BB260D13DD00CA01A0 /* ScheduleInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1532,7 +1532,7 @@
 				8B0ACDD0294DE34400913B46 /* PatientCardInteractor.swift in Sources */,
 				8B7A12712631E077007BC1AB /* Interactor.swift in Sources */,
 				8B0F774D2631FF7F00D68B43 /* GraphicScheduleModule.swift in Sources */,
-				8B38A1BC260D13DD00CA01A0 /* ScheduleInteraction.swift in Sources */,
+				8B38A1BC260D13DD00CA01A0 /* ScheduleInteractor.swift in Sources */,
 				8B687697293FE89F00C7D1C0 /* SearchViewController.swift in Sources */,
 				8B33A64B2668E22C0003631A /* DoctorsSearchViewController.swift in Sources */,
 				8B303B08263BE24700DD343A /* PickerViewController.swift in Sources */,
