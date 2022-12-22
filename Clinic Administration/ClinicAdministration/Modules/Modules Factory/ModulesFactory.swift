@@ -32,6 +32,7 @@ final class ModulesFactory: Modules {
         view.date = date
         let interactor = GraphicScheduleInteractor()
         interactor.database = dependencies.doctorsDatabase
+        interactor.doctorScheduleService = dependencies.doctorScheduleService
         let presenter = GraphicSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
