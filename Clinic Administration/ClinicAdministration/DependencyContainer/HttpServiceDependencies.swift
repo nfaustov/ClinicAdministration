@@ -8,4 +8,5 @@
 import Foundation
 
 protocol HttpServiceDependencies {
+    var doctorService: DoctorService { get }
 }

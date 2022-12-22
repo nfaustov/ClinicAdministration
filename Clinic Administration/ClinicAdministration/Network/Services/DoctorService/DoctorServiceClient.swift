@@ -16,54 +16,42 @@ final class DoctorServiceClient: DoctorService {
     }
 
     func getAllDoctors() -> AnyPublisher<[Doctor], Error> {
-        let endpoint = DoctorEndpoint.index
-
-        return networkController.get(
+        networkController.request(
             type: [Doctor].self,
-            url: endpoint.url,
-            headers: endpoint.headers
+            method: .get,
+            endpoint: DoctorEndpoint.index
         )
     }
 
     func createDoctor(_ doctor: Doctor) -> AnyPublisher<Doctor, Error> {
-        let endpoint = DoctorEndpoint.create(doctor)
-
-        return networkController.post(
+        networkController.request(
             type: Doctor.self,
-            url: endpoint.url,
-            headers: endpoint.headers,
-            body: endpoint.body
+            method: .post,
+            endpoint: DoctorEndpoint.create(doctor)
         )
     }
 
     func getDoctor(id: UUID) -> AnyPublisher<Doctor, Error> {
-        let endpoint = DoctorEndpoint.doctor(id)
-
-        return networkController.get(
+        networkController.request(
             type: Doctor.self,
-            url: endpoint.url,
-            headers: endpoint.headers
+            method: .get,
+            endpoint: DoctorEndpoint.doctor(id)
         )
     }
 
     func updateDoctor(_ doctor: Doctor) -> AnyPublisher<Doctor, Error> {
-        let endpoint = DoctorEndpoint.update(doctor)
-
-        return networkController.put(
+        networkController.request(
             type: Doctor.self,
-            url: endpoint.url,
-            headers: endpoint.headers,
-            body: endpoint.body
+            method: .put,
+            endpoint: DoctorEndpoint.update(doctor)
         )
     }
 
     func deleteDoctor(id: UUID) -> AnyPublisher<Doctor, Error> {
-        let endpoint = DoctorEndpoint.doctor(id)
-
-        return networkController.delete(
+        networkController.request(
             type: Doctor.self,
-            url: endpoint.url,
-            headers: endpoint.headers
+            method: .delete,
+            endpoint: DoctorEndpoint.doctor(id)
         )
     }
 }

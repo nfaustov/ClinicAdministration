@@ -13,4 +13,6 @@ final class DependencyContainer: DatabaseDependencies, HttpServiceDependencies {
     lazy var doctorsDatabase = DoctorsDatabase()
 
     // MARK: - HttpService
+
+    lazy var doctorService: DoctorService = DoctorServiceClient()
 }

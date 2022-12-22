@@ -127,6 +127,7 @@
 		8BB450B0263017CD00C143A4 /* ScheduleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB450AF263017CD00C143A4 /* ScheduleCoordinator.swift */; };
 		8BB450BA2630491700C143A4 /* CalendarSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB450B92630491700C143A4 /* CalendarSubscription.swift */; };
 		8BB450BE2630495D00C143A4 /* GraphicScheduleSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB450BD2630495D00C143A4 /* GraphicScheduleSubscription.swift */; };
+		8BBD9CC22954574100F45CE6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD9CC12954574100F45CE6 /* Endpoint.swift */; };
 		8BBEEF32261C968700A06B2D /* ActionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBEEF31261C968700A06B2D /* ActionListCell.swift */; };
 		8BCAB79A2559D4A4001A93D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */; };
 		8BCAB79C2559D4A4001A93D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCAB79B2559D4A4001A93D0 /* SceneDelegate.swift */; };
@@ -285,6 +286,7 @@
 		8BB450AF263017CD00C143A4 /* ScheduleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCoordinator.swift; sourceTree = "<group>"; };
 		8BB450B92630491700C143A4 /* CalendarSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSubscription.swift; sourceTree = "<group>"; };
 		8BB450BD2630495D00C143A4 /* GraphicScheduleSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicScheduleSubscription.swift; sourceTree = "<group>"; };
+		8BBD9CC12954574100F45CE6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		8BBEEF31261C968700A06B2D /* ActionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionListCell.swift; sourceTree = "<group>"; };
 		8BCAB7962559D4A4001A93D0 /* ClinicAdministration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClinicAdministration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCAB7992559D4A4001A93D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1007,6 +1009,7 @@
 			children = (
 				8B82801D2951AD7F006A12FC /* NetworkController.swift */,
 				8B82801B2951AC98006A12FC /* NetworkControllerProtocol.swift */,
+				8BBD9CC12954574100F45CE6 /* Endpoint.swift */,
 			);
 			path = NetworkController;
 			sourceTree = "<group>";
@@ -1423,6 +1426,7 @@
 				8BCD1ACE270F5F3700D91D3C /* IntervalCell.swift in Sources */,
 				8B2137E1294B1171004E62B7 /* PatientsSearchSubscription.swift in Sources */,
 				8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */,
+				8BBD9CC22954574100F45CE6 /* Endpoint.swift in Sources */,
 				8BBEEF32261C968700A06B2D /* ActionListCell.swift in Sources */,
 				8B2137DA294B04A6004E62B7 /* PatientsSearchInteractor.swift in Sources */,
 				8B4FC4F82632B2AF00D7627A /* ScheduleModule.swift in Sources */,
