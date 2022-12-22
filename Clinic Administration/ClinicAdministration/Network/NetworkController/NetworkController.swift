@@ -13,9 +13,7 @@ final class NetworkController: NetworkControllerProtocol {
         var urlRequest = URLRequest(url: endpoint.url)
         urlRequest.httpBody = endpoint.body
         urlRequest.httpMethod = method.rawValue
-        endpoint.headers.forEach { key, value in
-            urlRequest.setValue(value, forHTTPHeaderField: key)
-        }
+        urlRequest.allHTTPHeaderFields = endpoint.headers
 
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             .map(\.data)
