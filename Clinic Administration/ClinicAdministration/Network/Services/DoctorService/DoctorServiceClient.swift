@@ -19,7 +19,7 @@ final class DoctorServiceClient: DoctorService {
         networkController.request(
             type: [Doctor].self,
             method: .get,
-            endpoint: DoctorEndpoint.index
+            endpoint: DoctorEndpoint.doctors
         )
     }
 
@@ -31,7 +31,7 @@ final class DoctorServiceClient: DoctorService {
         )
     }
 
-    func getDoctor(id: UUID) -> AnyPublisher<Doctor, Error> {
+    func getDoctor(id: UUID?) -> AnyPublisher<Doctor, Error> {
         networkController.request(
             type: Doctor.self,
             method: .get,
@@ -47,7 +47,7 @@ final class DoctorServiceClient: DoctorService {
         )
     }
 
-    func deleteDoctor(id: UUID) -> AnyPublisher<Doctor, Error> {
+    func deleteDoctor(id: UUID?) -> AnyPublisher<Doctor, Error> {
         networkController.request(
             type: Doctor.self,
             method: .delete,

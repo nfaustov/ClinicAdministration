@@ -9,4 +9,5 @@ import Foundation
 
 protocol NetworkServiceDependencies {
     var doctorService: DoctorService { get }
+    var doctorScheduleService: DoctorScheduleService { get }
 }

@@ -15,4 +15,5 @@ final class DependencyContainer: DatabaseDependencies, NetworkServiceDependencie
     // MARK: - NetworkService
 
     lazy var doctorService: DoctorService = DoctorServiceClient()
+    lazy var doctorScheduleService: DoctorScheduleService = DoctorScheduleServiceClient()
 }

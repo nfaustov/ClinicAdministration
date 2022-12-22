@@ -10,17 +10,17 @@ import Foundation
 struct DoctorEndpoint: Endpoint {
     var path: String
     var body: Data?
-    var queryParams: [String: Any] = [:]
+    var queryParams: [String: Any]?
 }
 
 extension DoctorEndpoint {
-    static var index: Self {
+    static var doctors: Self {
         DoctorEndpoint(path: "/doctors")
     }
 
     static func create(_ doctor: Doctor) -> Self {
-        guard let json = try? JSONEncoder().encode(doctor.self) else {
-            preconditionFailure("Decoding error")
+        guard let json = try? JSONEncoder().encode(doctor) else {
+            preconditionFailure("Encoding error")
         }
 
         return DoctorEndpoint(path: "/doctors", body: json)
@@ -39,8 +39,8 @@ extension DoctorEndpoint {
             preconditionFailure("Invalid ID")
         }
 
-        guard let json = try? JSONEncoder().encode(doctor.self) else {
-            preconditionFailure("Decoding error")
+        guard let json = try? JSONEncoder().encode(doctor) else {
+            preconditionFailure("Encoding error")
         }
 
         return DoctorEndpoint(path: "/doctors/\(id)", body: json)

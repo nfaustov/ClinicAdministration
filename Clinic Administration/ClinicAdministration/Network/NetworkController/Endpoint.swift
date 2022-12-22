@@ -10,12 +10,18 @@ import Foundation
 protocol Endpoint {
     var path: String { get set }
     var body: Data? { get set }
-    var queryParams: [String: Any] { get set }
+    var queryParams: [String: Any]? { get set }
 }
 
 extension Endpoint {
     var url: URL {
-        guard let url = URL(string: BaseURL.localhost + path) else {
+        var urlComponents = URLComponents(string: BaseURL.localhost + path)
+
+        if let queryParams = queryParams {
+            urlComponents?.queryItems = queryParams.map({ URLQueryItem(name: $0.key, value: "\($0.value)") })
+        }
+
+        guard let url = urlComponents?.url else {
             preconditionFailure("Invalid URL")
         }
 
