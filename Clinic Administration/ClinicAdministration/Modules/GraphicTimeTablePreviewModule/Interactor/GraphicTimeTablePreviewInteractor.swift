@@ -11,7 +11,7 @@ final class GraphicTimeTablePreviewInteractor {
     typealias Delegate = GraphicTimeTablePreviewInteractorDelegate
     weak var delegate: Delegate?
 
-    var database: DoctorsDatabase?
+    var database: DoctorDatabase?
 }
 
 // MARK: - GraphicTimeTablePreviewInteraction

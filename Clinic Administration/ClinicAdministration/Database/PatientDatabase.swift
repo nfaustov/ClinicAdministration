@@ -1,5 +1,5 @@
 //
-//  PatientsDatabase.swift
+//  PatientDatabase.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 07.12.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class PatientsDatabase: Database {
+final class PatientDatabase: Database {
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "PatientModel")
         container.loadPersistentStores(completionHandler: { _, error in

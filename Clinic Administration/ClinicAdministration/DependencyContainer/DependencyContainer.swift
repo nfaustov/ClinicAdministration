@@ -7,10 +7,13 @@
 
 import Foundation
 
-final class DependencyContainer: DatabaseDependencies, HttpServiceDependencies {
+final class DependencyContainer: DatabaseDependencies, NetworkServiceDependencies {
     // MARK: - Database
 
-    lazy var doctorsDatabase = DoctorsDatabase()
+    lazy var doctorsDatabase = DoctorDatabase()
 
-    // MARK: - HttpService
+    // MARK: - NetworkService
+
+    lazy var doctorService: DoctorService = DoctorServiceClient()
+    lazy var doctorScheduleService: DoctorScheduleService = DoctorScheduleServiceClient()
 }

@@ -11,7 +11,7 @@ final class DoctorsSearchInteractor {
     typealias Delegate = DoctorsSearchInteractorDelegate
     weak var delegate: Delegate?
 
-    var database: DoctorsDatabase?
+    var database: DoctorDatabase?
 }
 
 // MARK: - DoctorsSearchInteraction

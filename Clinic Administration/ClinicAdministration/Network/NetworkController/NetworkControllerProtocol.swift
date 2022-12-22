@@ -9,10 +9,12 @@ import Foundation
 import Combine
 
 protocol NetworkControllerProtocol: AnyObject {
-    typealias Headers = [String: String]
+    func request<T>(type: T.Type, method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable
+}
 
-    func post<T>(type: T.Type, url: URL, headers: Headers, body: Data?) -> AnyPublisher<T, Error> where T: Codable
-    func get<T>(type: T.Type, url: URL, headers: Headers) -> AnyPublisher<T, Error> where T: Codable
-    func put<T>(type: T.Type, url: URL, headers: Headers, body: Data?) -> AnyPublisher<T, Error> where T: Codable
-    func delete<T>(type: T.Type, url: URL, headers: Headers) -> AnyPublisher<T, Error> where T: Codable
+enum HttpMethod: String {
+    case post = "POST"
+    case get = "GET"
+    case put = "PUT"
+    case delete = "DELETE"
 }

@@ -11,7 +11,7 @@ final class CreateScheduleInteractor {
     typealias Delegate = CreateScheduleInteractorDelegate
     weak var delegate: Delegate?
 
-    var database: DoctorsDatabase?
+    var database: DoctorDatabase?
 }
 
 // MARK: - CreateScheduleInteraction
