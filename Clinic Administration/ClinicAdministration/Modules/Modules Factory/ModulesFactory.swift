@@ -59,6 +59,7 @@ final class ModulesFactory: Modules {
         let view = DoctorsSearchViewController()
         let interactor = DoctorsSearchInteractor()
         interactor.database = dependencies.doctorsDatabase
+        interactor.doctorService = dependencies.doctorService
         let presenter = DoctorsSearchPresenter(view: view, interactor: interactor)
 
         return (view, presenter)

@@ -129,8 +129,6 @@ final class DoctorDatabase: Database {
         doctor.specialization = model.specialization
         if let cabinet = model.defaultCabinet { doctor.defaultCabinet = Int16(cabinet) }
         doctor.serviceDuration = model.serviceDuration
-        doctor.salaryType = model.salaryType.rawValue
-        doctor.monthlySalary = model.monthlySalary
 
         update()
     }

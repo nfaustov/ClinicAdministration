@@ -15,6 +15,11 @@ final class NetworkController: NetworkControllerProtocol {
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = endpoint.headers
 
+        let decoder = JSONDecoder()
+        let dateFormatter = DateFormatter.shared
+        dateFormatter.dateFormat = "dd-MM-yyyy'T'HH:mm"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             .map(\.data)
             .decode(type: T.self, decoder: JSONDecoder())

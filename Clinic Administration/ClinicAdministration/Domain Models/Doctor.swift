@@ -20,14 +20,11 @@ struct Doctor: Codable, Hashable {
     var phoneNumber: String
     var birthDate: Date?
     var specialization: String
-    var basicService: String
+    var basicService: String?
     var serviceDuration: TimeInterval
     var defaultCabinet: Int?
     var info: String?
     var imageData: Data?
-    var salaryType: SalaryType
-    var monthlySalary: Double
-    var agentSalary: Double
 
     var fullName: String {
         secondName + " " + firstName + " " + patronymicName
@@ -48,14 +45,11 @@ struct Doctor: Codable, Hashable {
         phoneNumber: String,
         birthDate: Date?,
         specialization: String,
-        basicService: String,
+        basicService: String?,
         serviceDuration: TimeInterval,
         defaultCabinet: Int? = nil,
         info: String? = nil,
-        imageData: Data? = nil,
-        salaryType: SalaryType,
-        monthlySalary: Double = 0,
-        agentSalary: Double = 0
+        imageData: Data? = nil
     ) {
         self.id = id
         self.secondName = secondName
@@ -69,9 +63,6 @@ struct Doctor: Codable, Hashable {
         self.defaultCabinet = defaultCabinet
         self.info = info
         self.imageData = imageData
-        self.salaryType = salaryType
-        self.monthlySalary = monthlySalary
-        self.agentSalary = agentSalary
     }
 
     init?(entity: DoctorEntity) {
@@ -93,8 +84,5 @@ struct Doctor: Codable, Hashable {
         defaultCabinet = Int(entity.defaultCabinet)
         info = entity.info
         imageData = entity.imageData
-        salaryType = SalaryType(rawValue: entity.salaryType ?? "") ?? .fixedSalary
-        monthlySalary = entity.monthlySalary
-        agentSalary = entity.agentSalary
     }
 }
