@@ -11,7 +11,7 @@ final class GraphicScheduleInteractor {
     typealias Delegate = GraphicScheduleInteractorDelegate
     weak var delegate: Delegate?
 
-    var database: DoctorsDatabase?
+    var database: DoctorDatabase?
 }
 
 // MARK: - GraphicScheduleInteraction

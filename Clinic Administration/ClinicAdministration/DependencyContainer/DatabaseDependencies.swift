@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DatabaseDependencies {
-    var doctorsDatabase: DoctorsDatabase { get }
+    var doctorsDatabase: DoctorDatabase { get }
 }

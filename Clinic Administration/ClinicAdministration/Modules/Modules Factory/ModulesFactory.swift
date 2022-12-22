@@ -8,9 +8,9 @@
 import UIKit
 
 final class ModulesFactory: Modules {
-    private let dependencies: DatabaseDependencies & HttpServiceDependencies
+    private let dependencies: DatabaseDependencies & NetworkServiceDependencies
 
-    init(dependencies: DatabaseDependencies & HttpServiceDependencies) {
+    init(dependencies: DatabaseDependencies & NetworkServiceDependencies) {
         self.dependencies = dependencies
     }
 

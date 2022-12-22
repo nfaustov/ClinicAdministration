@@ -11,7 +11,7 @@ final class PatientAppointmentInteractor {
     typealias Delegate = PatientAppointmentInteractorDelegate
     weak var delegate: Delegate?
 
-    var database: DoctorsDatabase?
+    var database: DoctorDatabase?
 }
 
 // MARK: - PatientAppointmentInteraction

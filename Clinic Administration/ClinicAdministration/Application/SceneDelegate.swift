@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let navigationController = UINavigationController()
-        let dependencies: DatabaseDependencies & HttpServiceDependencies = DependencyContainer()
+        let dependencies: DatabaseDependencies & NetworkServiceDependencies = DependencyContainer()
         let modules = ModulesFactory(dependencies: dependencies)
         coordinator = MainCoordinator(navigationController: navigationController, modules: modules)
         coordinator?.start()
@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        let database = DoctorsDatabase()
+        let database = DoctorDatabase()
         database.saveContext()
     }
 }
