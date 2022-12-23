@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class NetworkController: NetworkControllerProtocol {
-    func request<T>(type: T.Type, method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable {
+    func request<T>(method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable {
         var urlRequest = URLRequest(url: endpoint.url)
         urlRequest.httpBody = endpoint.body
         urlRequest.httpMethod = method.rawValue
@@ -22,7 +22,7 @@ final class NetworkController: NetworkControllerProtocol {
 
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             .map(\.data)
-            .decode(type: T.self, decoder: JSONDecoder())
+            .decode(type: T.self, decoder: decoder)
             .eraseToAnyPublisher()
     }
 }

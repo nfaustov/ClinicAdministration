@@ -17,7 +17,6 @@ final class DoctorScheduleServiceClient: DoctorScheduleService {
 
     func create(_ doctorSchedule: DoctorSchedule) -> AnyPublisher<DoctorSchedule, Error> {
         networkController.request(
-            type: DoctorSchedule.self,
             method: .post,
             endpoint: DoctorScheduleEndpoint.create(doctorSchedule)
         )
@@ -25,7 +24,6 @@ final class DoctorScheduleServiceClient: DoctorScheduleService {
 
     func getSchedulesByDate(_ date: Date) -> AnyPublisher<[DoctorSchedule], Error> {
         networkController.request(
-            type: [DoctorSchedule].self,
             method: .get,
             endpoint: DoctorScheduleEndpoint.getByDate(date)
         )
@@ -33,7 +31,6 @@ final class DoctorScheduleServiceClient: DoctorScheduleService {
 
     func getSchedulesByDoctor(_ doctorID: UUID?) -> AnyPublisher<[DoctorSchedule], Error> {
         networkController.request(
-            type: [DoctorSchedule].self,
             method: .get,
             endpoint: DoctorScheduleEndpoint.getByDoctor(doctorID)
         )
@@ -41,7 +38,6 @@ final class DoctorScheduleServiceClient: DoctorScheduleService {
 
     func updateSchedule(_ schedule: DoctorSchedule) -> AnyPublisher<DoctorSchedule, Error> {
         networkController.request(
-            type: DoctorSchedule.self,
             method: .put,
             endpoint: DoctorScheduleEndpoint.update(schedule)
         )
@@ -49,7 +45,6 @@ final class DoctorScheduleServiceClient: DoctorScheduleService {
 
     func deleteSchedule(_ scheduleID: UUID?) -> AnyPublisher<DoctorSchedule, Error> {
         networkController.request(
-            type: DoctorSchedule.self,
             method: .delete,
             endpoint: DoctorScheduleEndpoint.delete(scheduleID)
         )

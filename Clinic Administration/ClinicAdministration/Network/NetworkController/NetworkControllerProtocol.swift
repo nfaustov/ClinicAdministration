@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol NetworkControllerProtocol: AnyObject {
-    func request<T>(type: T.Type, method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable
+    func request<T>(method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable
 }
 
 enum HttpMethod: String {

@@ -72,7 +72,6 @@ extension ScheduleInteractor: ScheduleInteraction {
                 delegate?.scheduleDidRecieved(schedules.first)
             })
             .store(in: &subscriptions)
-        
     }
 
     func deleteSchedule(_ schedule: DoctorSchedule) {
