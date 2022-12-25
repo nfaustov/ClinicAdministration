@@ -46,7 +46,6 @@ extension ScheduleInteractor: ScheduleInteraction {
 
     func getSchedules(for date: Date) {
         doctorScheduleService?.getSchedulesByDate(date)
-            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [delegate] completion in
                 switch completion {
                 case .failure(let error):
@@ -62,7 +61,6 @@ extension ScheduleInteractor: ScheduleInteraction {
 
     func getDoctorsNextSchedule(after currentSchedule: DoctorSchedule) {
         doctorScheduleService?.getSchedulesByDoctor(currentSchedule.doctor.id)
-            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -77,7 +75,6 @@ extension ScheduleInteractor: ScheduleInteraction {
 
     func deleteSchedule(_ schedule: DoctorSchedule) {
         doctorScheduleService?.deleteSchedule(schedule.id)
-            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):

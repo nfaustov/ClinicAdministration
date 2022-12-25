@@ -34,7 +34,6 @@ extension GraphicScheduleInteractor: GraphicScheduleInteraction {
 
     func getSchedules(for date: Date) {
         doctorScheduleService?.getSchedulesByDate(date)
-            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
@@ -49,7 +48,6 @@ extension GraphicScheduleInteractor: GraphicScheduleInteraction {
 
     func updateSchedule(_ schedule: DoctorSchedule) {
         doctorScheduleService?.updateSchedule(schedule)
-            .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):

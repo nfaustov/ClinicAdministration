@@ -52,6 +52,7 @@ final class ModulesFactory: Modules {
         view.date = date
         let interactor = CreateScheduleInteractor()
         interactor.database = dependencies.doctorsDatabase
+        interactor.doctorScheduleService = dependencies.doctorScheduleService
         let presenter = CreateSchedulePresenter(view: view, interactor: interactor)
 
         return (view, presenter)
@@ -80,6 +81,7 @@ final class ModulesFactory: Modules {
         view.newSchedule = schedule
         let interactor = GraphicTimeTablePreviewInteractor()
         interactor.database = dependencies.doctorsDatabase
+        interactor.doctorScheduleService = dependencies.doctorScheduleService
         let presenter = GraphicTimeTablePreviewPresenter(view: view, interactor: interactor)
 
         return (view, presenter)
@@ -90,6 +92,7 @@ final class ModulesFactory: Modules {
         view.doctor = doctor
         let interactor = SchedulesListInteractor()
         interactor.database = dependencies.doctorsDatabase
+        interactor.doctorScheduleService = dependencies.doctorScheduleService
         let presenter = SchedulesListPresenter(view: view, interactor: interactor)
 
         return (view, presenter)
@@ -104,6 +107,7 @@ final class ModulesFactory: Modules {
         view.appointment = appointment
         let interactor = PatientAppointmentInteractor()
         interactor.database = dependencies.doctorsDatabase
+        interactor.doctorScheduleService = dependencies.doctorScheduleService
         let presenter = PatientAppointmentPresenter(view: view, interactor: interactor)
 
         return (view, presenter)
