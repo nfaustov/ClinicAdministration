@@ -15,5 +15,5 @@ protocol DoctorScheduleService: AnyObject {
     func getSchedulesByDate(_ date: Date) -> AnyPublisher<[DoctorSchedule], Error>
     func getSchedulesByDoctor(_ doctorID: UUID?) -> AnyPublisher<[DoctorSchedule], Error>
     func updateSchedule(_ schedule: DoctorSchedule) -> AnyPublisher<DoctorSchedule, Error>
-    func deleteSchedule(_ scheduleID: UUID?) -> AnyPublisher<DoctorSchedule, Error>
+    func deleteSchedule(_ scheduleID: UUID?) -> AnyPublisher<Bool, Error>
 }

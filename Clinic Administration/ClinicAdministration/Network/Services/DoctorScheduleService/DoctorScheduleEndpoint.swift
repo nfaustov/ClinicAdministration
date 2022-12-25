@@ -23,8 +23,8 @@ extension DoctorScheduleEndpoint {
     }
 
     static func getByDate(_ date: Date) -> Self {
-        // TODO: Convert date to seconds from 1970
-        let query = ["date": date]
+        let seconds = date.timeIntervalSince1970
+        let query = ["date": "\(seconds)"]
 
         return DoctorScheduleEndpoint(path: "/schedules", queryParams: query)
     }

@@ -43,10 +43,7 @@ final class DoctorServiceClient: DoctorService {
         )
     }
 
-    func deleteDoctor(id: UUID?) -> AnyPublisher<Doctor, Error> {
-        networkController.request(
-            method: .delete,
-            endpoint: DoctorEndpoint.doctor(id)
-        )
+    func deleteDoctor(id: UUID?) -> AnyPublisher<Bool, Error> {
+        networkController.deleteRequest(endpoint: DoctorEndpoint.doctor(id))
     }
 }

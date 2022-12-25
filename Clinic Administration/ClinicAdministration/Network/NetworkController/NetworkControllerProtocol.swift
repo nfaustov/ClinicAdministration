@@ -10,6 +10,7 @@ import Combine
 
 protocol NetworkControllerProtocol: AnyObject {
     func request<T>(method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable
+    func deleteRequest(endpoint: Endpoint) -> AnyPublisher<Bool, Error>
 }
 
 enum HttpMethod: String {

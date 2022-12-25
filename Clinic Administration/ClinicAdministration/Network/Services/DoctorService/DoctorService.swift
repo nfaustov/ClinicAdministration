@@ -15,5 +15,5 @@ protocol DoctorService: AnyObject {
     func createDoctor(_ doctor: Doctor) -> AnyPublisher<Doctor, Error>
     func getDoctor(id: UUID?) -> AnyPublisher<Doctor, Error>
     func updateDoctor(_ doctor: Doctor) -> AnyPublisher<Doctor, Error>
-    func deleteDoctor(id: UUID?) -> AnyPublisher<Doctor, Error>
+    func deleteDoctor(id: UUID?) -> AnyPublisher<Bool, Error>
 }
