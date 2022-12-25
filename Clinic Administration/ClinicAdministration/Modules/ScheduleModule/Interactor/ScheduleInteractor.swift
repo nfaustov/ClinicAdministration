@@ -47,10 +47,11 @@ extension ScheduleInteractor: ScheduleInteraction {
     func getSchedules(for date: Date) {
         doctorScheduleService?.getSchedulesByDate(date)
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [delegate] completion in
                 switch completion {
                 case .failure(let error):
                     Log.error(error.localizedDescription)
+                    delegate?.schedulesDidRecieved([])
                 case .finished: break
                 }
             }, receiveValue: { [delegate] schedules in
@@ -83,8 +84,11 @@ extension ScheduleInteractor: ScheduleInteraction {
                     Log.error(error.localizedDescription)
                 case .finished: break
                 }
-            }, receiveValue: { schedule in
-                Log.info("Successfully deleted schedule for doctor \(schedule.doctor.fullName)")
+            }, receiveValue: { [getSchedules] success in
+                if success {
+                    getSchedules(schedule.startingTime)
+                    Log.info("Successfully deleted schedule for doctor \(schedule.doctor.fullName)")
+                }
             })
             .store(in: &subscriptions)
     }

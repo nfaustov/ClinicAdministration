@@ -70,7 +70,6 @@ extension SchedulePresenter: SchedulePresentation {
 
     func removeDoctorSchedule(_ schedule: DoctorSchedule) {
         interactor.deleteSchedule(schedule)
-        interactor.getSchedules(for: schedule.startingTime)
     }
 
     func switchToGraphicScreen(onDate date: Date) {
