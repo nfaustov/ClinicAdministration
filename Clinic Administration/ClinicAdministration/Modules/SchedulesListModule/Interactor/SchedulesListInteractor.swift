@@ -53,9 +53,9 @@ extension SchedulesListInteractor: SchedulesListInteraction {
             }, receiveValue: { [delegate] schedules in
                 let filteredSchedules = schedules
                     .filter {
-                        Calendar.current.compare($0.startingTime, to: Date(), toGranularity: .day) != .orderedAscending
+                        Calendar.current.compare($0.starting, to: Date(), toGranularity: .day) != .orderedAscending
                     }
-                    .sorted(by: { $0.startingTime < $1.startingTime })
+                    .sorted(by: { $0.starting < $1.starting })
 
                 guard let date = date else {
                     delegate?.schedulesDidRecieved(schedules)
@@ -66,7 +66,7 @@ extension SchedulesListInteractor: SchedulesListInteraction {
 
                 delegate?.schedulesDidRecieved(
                     filteredSchedules.filter {
-                        Calendar.current.dateComponents([.year, .month, .day], from: $0.startingTime) == dateComponents
+                        Calendar.current.dateComponents([.year, .month, .day], from: $0.starting) == dateComponents
                     }
                 )
             })

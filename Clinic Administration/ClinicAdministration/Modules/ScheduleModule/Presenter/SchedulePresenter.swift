@@ -117,7 +117,7 @@ extension SchedulePresenter: ScheduleInteractorDelegate {
     func scheduleDidRecieved(_ schedule: DoctorSchedule?) {
         if let schedule = schedule {
             view?.selectedSchedule = schedule
-            view?.changeDate(schedule.startingTime)
+            view?.changeDate(schedule.starting)
             view?.doctorSnapshot(schedule: prepareIfNeeded(schedule))
         } else {
             view?.noNextScheduleAlert()

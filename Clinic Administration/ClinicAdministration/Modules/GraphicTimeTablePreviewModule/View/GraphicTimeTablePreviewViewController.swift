@@ -26,7 +26,7 @@ class GraphicTimeTablePreviewViewController: UIViewController {
     }()
 
     private var date: Date {
-        newSchedule.startingTime
+        newSchedule.starting
     }
 
     private var graphicTimeTableView: GraphicTimeTableView!

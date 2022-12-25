@@ -36,12 +36,12 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
         dateLabel.numberOfLines = 2
         dateLabel.adjustsFontSizeToFitWidth = true
         dateLabel.textAlignment = .center
-        dateLabel.text = formatter.string(from: schedule.startingTime)
+        dateLabel.text = formatter.string(from: schedule.starting)
         dateLabel.textColor = Design.Color.white
         dateLabel.font = Design.Font.robotoFont(ofSize: 17, weight: .regular)
         formatter.dateFormat = "H:mm"
-        let startingTime = formatter.string(from: schedule.startingTime)
-        let endingTime = formatter.string(from: schedule.endingTime)
+        let startingTime = formatter.string(from: schedule.starting)
+        let endingTime = formatter.string(from: schedule.ending)
         intervalLabel.text = "\(startingTime) - \(endingTime)"
         intervalLabel.textColor = Design.Color.chocolate
         intervalLabel.font = Design.Font.robotoFont(ofSize: 20, weight: .medium)

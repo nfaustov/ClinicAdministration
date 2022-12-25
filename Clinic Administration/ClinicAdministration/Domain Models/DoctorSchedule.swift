@@ -11,23 +11,23 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
     let id: UUID?
     let doctor: Doctor
     var cabinet: Int
-    var startingTime: Date
-    var endingTime: Date
+    var starting: Date
+    var ending: Date
     var patientAppointments: [PatientAppointment]
 
     init(
         id: UUID? = UUID(),
         doctor: Doctor,
-        startingTime: Date,
-        endingTime: Date,
+        starting: Date,
+        ending: Date,
         cabinet: Int,
         patientAppointments: [PatientAppointment] = []
     ) {
         self.id = id
         self.doctor = doctor
         self.cabinet = cabinet
-        self.startingTime = startingTime
-        self.endingTime = endingTime
+        self.starting = starting
+        self.ending = ending
         self.patientAppointments = patientAppointments
 
         if self.patientAppointments.isEmpty {
@@ -46,8 +46,8 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
         id = entity.id
         self.doctor = doctor
         cabinet = Int(entity.cabinet)
-        startingTime = entityStartingTime
-        endingTime = entityEndingTime
+        starting = entityStartingTime
+        ending = entityEndingTime
         patientAppointments = entityPatientAppointments.compactMap { PatientAppointment(entity: $0) }
 
         if self.patientAppointments.isEmpty {
@@ -104,7 +104,7 @@ struct DoctorSchedule: Codable, Equatable, Hashable {
             .first(where: { $0.patient != nil }) {
             return nextReservedAppointment.scheduledTime.timeIntervalSince(appointment.scheduledTime)
         } else {
-            return endingTime.timeIntervalSince(appointment.scheduledTime)
+            return ending.timeIntervalSince(appointment.scheduledTime)
         }
     }
 }
@@ -123,11 +123,11 @@ extension DoctorSchedule {
     }
 
     private mutating func createAppointments() {
-        var appointmentTime = startingTime
+        var appointmentTime = starting
 
         repeat {
             addingAppointmentIteration(&appointmentTime)
-        } while appointmentTime < endingTime
+        } while appointmentTime < ending
     }
 
     private mutating func editAppointments() {
@@ -136,7 +136,7 @@ extension DoctorSchedule {
             return
         }
 
-        var appointmentTime = startingTime
+        var appointmentTime = starting
 
         while appointmentTime < firstPatientStarting {
             addingAppointmentIteration(&appointmentTime)
@@ -144,7 +144,7 @@ extension DoctorSchedule {
 
         appointmentTime = lastPatient.scheduledTime.addingTimeInterval(lastPatient.duration)
 
-        while appointmentTime < endingTime {
+        while appointmentTime < ending {
             addingAppointmentIteration(&appointmentTime)
         }
     }

@@ -43,7 +43,7 @@ extension CreateScheduleInteractor: CreateScheduleInteraction {
             }, receiveValue: { [delegate] schedules in
                 let filteredSchedules = schedules
                     .filter { $0.cabinet == cabinet }
-                    .sorted(by: { $0.startingTime < $1.startingTime })
+                    .sorted(by: { $0.starting < $1.starting })
                 delegate?.schedulesDidRecieved(filteredSchedules, date: date)
             })
             .store(in: &subscriptions)

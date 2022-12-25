@@ -142,8 +142,8 @@ final class DoctorDatabase: Database {
         ) as? DoctorScheduleEntity {
             scheduleEntity.id = schedule.id
             scheduleEntity.cabinet = Int16(schedule.cabinet)
-            scheduleEntity.startingTime = schedule.startingTime
-            scheduleEntity.endingTime = schedule.endingTime
+            scheduleEntity.startingTime = schedule.starting
+            scheduleEntity.endingTime = schedule.ending
             scheduleEntity.doctor = doctor
 
             schedule.patientAppointments.forEach { appointment in
@@ -243,8 +243,8 @@ final class DoctorDatabase: Database {
         guard let scheduleEntity = try? context.fetch(request).first else { return }
 
         update {
-            scheduleEntity.startingTime = schedule.startingTime
-            scheduleEntity.endingTime = schedule.endingTime
+            scheduleEntity.startingTime = schedule.starting
+            scheduleEntity.endingTime = schedule.ending
             scheduleEntity.patientAppointments = []
             schedule.patientAppointments.forEach { appointment in
                 if let patientAppointmentEntity = NSEntityDescription.insertNewObject(

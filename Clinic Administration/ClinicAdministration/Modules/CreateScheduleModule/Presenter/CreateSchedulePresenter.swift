@@ -70,18 +70,18 @@ extension CreateSchedulePresenter: CreateScheduleInteractorDelegate {
                 let previousSchedule = schedules[index - 1]
                 let currentSchedule = schedules[index]
                 let freeInterval = DateInterval(
-                    start: previousSchedule.endingTime,
-                    end: currentSchedule.startingTime
+                    start: previousSchedule.ending,
+                    end: currentSchedule.starting
                 )
                 intervals.append(freeInterval)
             }
         }
         let firstInterval = DateInterval(
             start: workingHours.opening,
-            end: schedules.first?.startingTime ?? Date()
+            end: schedules.first?.starting ?? Date()
         )
         let lastInterval = DateInterval(
-            start: schedules.last?.endingTime ?? Date(),
+            start: schedules.last?.ending ?? Date(),
             end: workingHours.close
         )
         intervals.insert(firstInterval, at: 0)

@@ -33,7 +33,7 @@ extension SchedulesListPresenter: SchedulesListInteractorDelegate {
         guard let view = view else { return }
 
         if view.workingDays.isEmpty {
-            view.workingDays = schedules.map { $0.startingTime }
+            view.workingDays = schedules.map { $0.starting }
         }
     }
 }

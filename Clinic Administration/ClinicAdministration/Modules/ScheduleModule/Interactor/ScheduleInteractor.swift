@@ -83,7 +83,7 @@ extension ScheduleInteractor: ScheduleInteraction {
                 }
             }, receiveValue: { [getSchedules] success in
                 if success {
-                    getSchedules(schedule.startingTime)
+                    getSchedules(schedule.starting)
                     Log.info("Successfully deleted schedule for doctor \(schedule.doctor.fullName)")
                 }
             })

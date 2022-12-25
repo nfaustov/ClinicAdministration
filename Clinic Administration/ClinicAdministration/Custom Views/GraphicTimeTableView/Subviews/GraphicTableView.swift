@@ -133,7 +133,7 @@ final class GraphicTableView: UIView {
         for index in schedules.indices {
             let scheduleStartingTime = calendar.dateComponents(
                 [.year, .month, .day, .hour, .minute],
-                from: schedules[index].startingTime
+                from: schedules[index].starting
             )
             let timeIntervalFromOpening = calendar.dateComponents(
                 [.hour, .minute],
@@ -142,8 +142,8 @@ final class GraphicTableView: UIView {
             )
             let timeIntervalFromStarting = calendar.dateComponents(
                 [.hour, .minute],
-                from: schedules[index].startingTime,
-                to: schedules[index].endingTime
+                from: schedules[index].starting,
+                to: schedules[index].ending
             )
 
             guard let hoursFromOpening = timeIntervalFromOpening.hour,
@@ -202,7 +202,7 @@ final class GraphicTableView: UIView {
 
         let cabinetDoctorViews = doctorViews
             .filter { $0.schedule.cabinet == doctorView.schedule.cabinet }
-            .sorted(by: { $0.schedule.startingTime < $1.schedule.startingTime })
+            .sorted(by: { $0.schedule.starting < $1.schedule.starting })
 
         guard let index = cabinetDoctorViews.firstIndex(where: { $0 == doctorView }),
               let cabinetView = doctorView.superview else { return (minTY, maxTY) }

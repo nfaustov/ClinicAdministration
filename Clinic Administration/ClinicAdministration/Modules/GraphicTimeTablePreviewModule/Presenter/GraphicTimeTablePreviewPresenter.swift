@@ -22,8 +22,8 @@ extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewPresentation 
     }
 
     func updateNewSchedule(_ schedule: DoctorSchedule) {
-        view?.newSchedule.startingTime = schedule.startingTime
-        view?.newSchedule.endingTime = schedule.endingTime
+        view?.newSchedule.starting = schedule.starting
+        view?.newSchedule.ending = schedule.ending
     }
 
     func updateSchedule(_ schedule: DoctorSchedule) {

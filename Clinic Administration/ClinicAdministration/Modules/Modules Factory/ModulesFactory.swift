@@ -18,7 +18,7 @@ final class ModulesFactory: Modules {
         let view = ScheduleViewController()
         if let selectedSchedule = selectedSchedule {
             view.selectedSchedule = selectedSchedule
-            view.date = selectedSchedule.startingTime
+            view.date = selectedSchedule.starting
         }
         let interactor = ScheduleInteractor()
         interactor.database = dependencies.doctorsDatabase
