@@ -23,7 +23,7 @@ final class NetworkController: NetworkControllerProtocol {
                     throw httpError(0)
                 }
 
-                Log.info("Status code: \(response.statusCode) '\(urlRequest.url!)'")
+                Log.info("Status code: \(response.statusCode) '\(urlRequest.url?.absoluteString ?? "")'")
 
                 if !(200...299).contains(response.statusCode) {
                     throw httpError(response.statusCode)
@@ -44,13 +44,12 @@ final class NetworkController: NetworkControllerProtocol {
         let urlRequest = makeRequest(method: .delete, endpoint: endpoint)
 
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
-            .tryMap({ [httpError] _ , response in
-
+            .tryMap({ [httpError] _, response in
                 guard let response = response as? HTTPURLResponse else {
                     throw httpError(0)
                 }
 
-                Log.info("Status code: \(response.statusCode) '\(urlRequest.url!)'")
+                Log.info("Status code: \(response.statusCode) '\(urlRequest.url?.absoluteString ?? "")'")
 
                 if !(200...299).contains(response.statusCode) {
                     throw httpError(response.statusCode)
@@ -72,7 +71,7 @@ extension NetworkController {
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = endpoint.headers
 
-        Log.info("(\(urlRequest.httpMethod!)) '\(urlRequest.url!)'")
+        Log.info("(\(urlRequest.httpMethod ?? "")) '\(urlRequest.url?.absoluteString ?? "")'")
 
         return urlRequest
     }

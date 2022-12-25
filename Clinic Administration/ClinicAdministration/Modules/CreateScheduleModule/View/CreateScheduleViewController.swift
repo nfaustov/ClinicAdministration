@@ -58,7 +58,8 @@ final class CreateScheduleViewController: UIViewController {
         registerViews()
         configureDataSource()
         configureSupplementaryViews()
-        initialSnapshot()
+
+        presenter.makeIntervals(onDate: date, forCabinet: selectedCabinet)
     }
 
     private func configureHierarchy() {
@@ -126,8 +127,6 @@ final class CreateScheduleViewController: UIViewController {
     private func initialSnapshot() {
         guard let currentDoctor = currentDoctor else { return }
 
-        presenter.makeIntervals(onDate: date, forCabinet: selectedCabinet)
-
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.doctor, .options, .intervals])
         snapshot.appendItems([currentDoctor], toSection: .doctor)
@@ -168,15 +167,18 @@ extension CreateScheduleViewController: UICollectionViewDelegate {
 extension CreateScheduleViewController: CreateScheduleView {
     func createdIntervals(_ intervals: [DateInterval]) {
         self.intervals = intervals
+        initialSnapshot()
     }
 
     func pickedCabinet(_ cabinet: Int) {
         selectedCabinet = cabinet
+        presenter.makeIntervals(onDate: date, forCabinet: selectedCabinet)
         initialSnapshot()
     }
 
     func pickedDate(_ date: Date) {
         self.date = date
+        presenter.makeIntervals(onDate: date, forCabinet: selectedCabinet)
         initialSnapshot()
     }
 }
