@@ -12,11 +12,6 @@ final class NetworkController: NetworkControllerProtocol {
     func request<T>(method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable {
         let urlRequest = makeRequest(method: method, endpoint: endpoint)
 
-        let decoder = JSONDecoder()
-        let dateFormatter = DateFormatter.shared
-        dateFormatter.dateFormat = "dd-MM-yyyy'T'HH:mm"
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             .tryMap({ [httpError] data, response in
                 guard let response = response as? HTTPURLResponse else {
@@ -32,7 +27,7 @@ final class NetworkController: NetworkControllerProtocol {
                 return data
             })
             .receive(on: RunLoop.main)
-            .decode(type: T.self, decoder: decoder)
+            .decode(type: T.self, decoder: JSONDecoder())
             .mapError({ [handleError] error in
                 Log.error("\(error)")
                 return handleError(error)
