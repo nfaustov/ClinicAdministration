@@ -124,35 +124,9 @@ extension ScheduleCoordinator: PatientAppointmentSubscription {
         appointment: PatientAppointment,
         didFinish: @escaping (DoctorSchedule?) -> Void
     ) {
-        let (viewController, module) = modules.patientAppointment(schedule: schedule, appointment: appointment)
-        module.coordinator = self
-        module.didFinish = { [navigationController] schedule in
-            navigationController.popViewController(animated: true)
-            didFinish(schedule)
-        }
-        navigationController.pushViewController(viewController, animated: true)
-    }
-}
-
-// MARK: - PatientsSearchSubscription
-
-extension ScheduleCoordinator: PatientsSearchSubscription {
-    func routeToPatientsSearch(didFInish: @escaping (Patient?) -> Void) {
-        let (viewController, module) = modules.patientsSearch()
-        module.didFinish = { [navigationController] patient in
-            navigationController.popViewController(animated: true)
-            didFInish(patient)
-        }
-        navigationController.pushViewController(viewController, animated: true)
-    }
-}
-
-// MARK: - PatientCardSubscription
-
-extension ScheduleCoordinator: PatientCardSubscription {
-    func routeToPatientCard(patient: Patient) {
-        let (viewController, module) = modules.patientCard(patient: patient)
-        module.coordinator = self
-        navigationController.pushViewController(viewController, animated: true)
+        let child = PatientCoordinator(navigationController: navigationController, modules: modules)
+        child.parentCoordinator = self
+        childCoordinators.append(child)
+        child.routeToPatientAppointment(schedule: schedule, appointment: appointment, didFinish: didFinish)
     }
 }

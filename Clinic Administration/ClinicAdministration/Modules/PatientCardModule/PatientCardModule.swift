@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PatientCardModule: AnyObject {
-    var coordinator: ScheduleCoordinator? { get set }
+    var coordinator: PatientCoordinator? { get set }
 }
 
 protocol PatientCardView: View {

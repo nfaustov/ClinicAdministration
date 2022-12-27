@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let dependencies: DatabaseDependencies & NetworkServiceDependencies = DependencyContainer()
         let modules = ModulesFactory(dependencies: dependencies)
         coordinator = MainCoordinator(navigationController: navigationController, modules: modules)
-        coordinator?.start()
+        coordinator?.scheduleCoordinator()
 
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController

@@ -10,7 +10,7 @@ import Foundation
 final class PatientCardPresenter<V, I>: PresenterInteractor<V, I>,
                                         PatientCardModule where V: PatientCardView,
                                                                 I: PatientCardInteractor {
-    weak var coordinator: ScheduleCoordinator?
+    weak var coordinator: PatientCoordinator?
 }
 
 // MARK: - PatientCardPresentation

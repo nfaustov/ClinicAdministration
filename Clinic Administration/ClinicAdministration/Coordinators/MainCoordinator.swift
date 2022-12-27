@@ -18,10 +18,6 @@ final class MainCoordinator: Coordinator {
         self.modules = modules
     }
 
-    func start() {
-        scheduleCoordinator()
-    }
-
     func scheduleCoordinator() {
         let child = ScheduleCoordinator(navigationController: navigationController, modules: modules)
         child.parentCoordinator = self

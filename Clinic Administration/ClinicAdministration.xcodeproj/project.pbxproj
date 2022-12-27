@@ -16,6 +16,7 @@
 		8B0ACDD0294DE34400913B46 /* PatientCardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDCF294DE34400913B46 /* PatientCardInteractor.swift */; };
 		8B0ACDD2294DE42400913B46 /* PatientCardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDD1294DE42400913B46 /* PatientCardPresenter.swift */; };
 		8B0ACDD4294DE75500913B46 /* PatientCardSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACDD3294DE75500913B46 /* PatientCardSubscription.swift */; };
+		8B0C53522959AF61003AD436 /* PatientCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0C53512959AF61003AD436 /* PatientCoordinator.swift */; };
 		8B0F77412631EDEF00D68B43 /* CalendarTableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */; };
 		8B0F774D2631FF7F00D68B43 /* GraphicScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0F774C2631FF7F00D68B43 /* GraphicScheduleModule.swift */; };
 		8B10E2FD26382158006022BB /* CreateScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B10E2FC26382158006022BB /* CreateScheduleModule.swift */; };
@@ -179,6 +180,7 @@
 		8B0ACDCF294DE34400913B46 /* PatientCardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardInteractor.swift; sourceTree = "<group>"; };
 		8B0ACDD1294DE42400913B46 /* PatientCardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardPresenter.swift; sourceTree = "<group>"; };
 		8B0ACDD3294DE75500913B46 /* PatientCardSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCardSubscription.swift; sourceTree = "<group>"; };
+		8B0C53512959AF61003AD436 /* PatientCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientCoordinator.swift; sourceTree = "<group>"; };
 		8B0F77402631EDEF00D68B43 /* CalendarTableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableModule.swift; sourceTree = "<group>"; };
 		8B0F774C2631FF7F00D68B43 /* GraphicScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicScheduleModule.swift; sourceTree = "<group>"; };
 		8B10E2FC26382158006022BB /* CreateScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleModule.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				8B20CE0326298F630007C20A /* Coordinator.swift */,
 				8B20CE0726298FCE0007C20A /* MainCoordinator.swift */,
 				8BB450AF263017CD00C143A4 /* ScheduleCoordinator.swift */,
+				8B0C53512959AF61003AD436 /* PatientCoordinator.swift */,
 				8B556BD9263303870018E0C6 /* Modules Subscriptions */,
 			);
 			path = Coordinators;
@@ -1517,6 +1520,7 @@
 				8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */,
 				8B05643E294DD05F00166DAC /* PriceList.swift in Sources */,
 				8B29975F267261A90050C5E1 /* ScheduleOptionView.swift in Sources */,
+				8B0C53522959AF61003AD436 /* PatientCoordinator.swift in Sources */,
 				8B5CBAA02741A8620053F91D /* PatientAppointmentModule.swift in Sources */,
 				8B20CE2B262997B30007C20A /* DayLabel.swift in Sources */,
 				8BCAB7B22559D564001A93D0 /* GraphicScheduleViewController.swift in Sources */,
