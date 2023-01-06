@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0274DA2968578A0023A51A /* DoctorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0274D92968578A0023A51A /* DoctorCoordinator.swift */; };
 		8B05643C294DCB6000166DAC /* PatientAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05643B294DCB6000166DAC /* PatientAppointment.swift */; };
 		8B05643E294DD05F00166DAC /* PriceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05643D294DD05F00166DAC /* PriceList.swift */; };
 		8B0856BF271465A8001B0F11 /* WorkingHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0856BE271465A8001B0F11 /* WorkingHours.swift */; };
@@ -171,6 +172,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B0274D92968578A0023A51A /* DoctorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorCoordinator.swift; sourceTree = "<group>"; };
 		8B05643B294DCB6000166DAC /* PatientAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointment.swift; sourceTree = "<group>"; };
 		8B05643D294DD05F00166DAC /* PriceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceList.swift; sourceTree = "<group>"; };
 		8B0856BE271465A8001B0F11 /* WorkingHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHours.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				8B20CE0326298F630007C20A /* Coordinator.swift */,
 				8B20CE0726298FCE0007C20A /* MainCoordinator.swift */,
 				8BB450AF263017CD00C143A4 /* ScheduleCoordinator.swift */,
+				8B0274D92968578A0023A51A /* DoctorCoordinator.swift */,
 				8B0C53512959AF61003AD436 /* PatientCoordinator.swift */,
 				8B556BD9263303870018E0C6 /* Modules Subscriptions */,
 			);
@@ -1432,6 +1435,7 @@
 				8BE80C38264AA0A300CCA7F7 /* Database.swift in Sources */,
 				8B20CE33262997D00007C20A /* CalendarTablePresenter.swift in Sources */,
 				8B33A64D2668E2FD0003631A /* DoctorsSearchPresenter.swift in Sources */,
+				8B0274DA2968578A0023A51A /* DoctorCoordinator.swift in Sources */,
 				8B83BAAC2715F72B007E9C71 /* SchedulesListPresenter.swift in Sources */,
 				8B10E301263822FC006022BB /* CreateSchedulePresenter.swift in Sources */,
 				8BF026DE2673881B002B0C39 /* DoctorViewCell.swift in Sources */,

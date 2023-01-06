@@ -57,12 +57,10 @@ extension ScheduleCoordinator: GraphicScheduleSubscription {
 
 extension ScheduleCoordinator: DoctorsSearchSubscription {
     func routeToDoctorsSearch(didFinish: @escaping (Doctor?) -> Void) {
-        let (viewController, module) = modules.doctorsSearch()
-        module.didFinish = { [navigationController] doctor in
-            navigationController.popViewController(animated: true)
-            didFinish(doctor)
-        }
-        navigationController.pushViewController(viewController, animated: true)
+        let child = DoctorCoordinator(navigationController: navigationController, modules: modules)
+        child.parentCoordinator = self
+        childCoordinators.append(child)
+        child.routeToDoctorsSearch(didFinish: didFinish)
     }
 }
 
