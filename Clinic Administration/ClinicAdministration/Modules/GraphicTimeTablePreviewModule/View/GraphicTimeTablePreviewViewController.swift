@@ -75,7 +75,7 @@ class GraphicTimeTablePreviewViewController: UIViewController {
     }
 
     @objc private func confirmSchedule() {
-        presenter.didFinish(with: newSchedule)
+        presenter.saveNewSchedule(newSchedule)
     }
 }
 
@@ -96,5 +96,15 @@ extension GraphicTimeTablePreviewViewController: GraphicTimeTableViewDelegate {
 extension GraphicTimeTablePreviewViewController: GraphicTimeTablePreviewView {
     func applySchedules(_ schedules: [DoctorSchedule]) {
         graphicTimeTableView.updateTable(with: schedules)
+    }
+
+    func errorAlert(message: String) {
+        let alert = AlertsFactory.makeError(message: message)
+        present(alert, animated: true)
+    }
+
+    func successAlert(message: String) {
+        let alert = AlertsFactory.makeSuccess(message: message)
+        present(alert, animated: true)
     }
 }

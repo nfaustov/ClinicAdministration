@@ -21,28 +21,13 @@ final class GraphicTimeTablePreviewInteractor {
 // MARK: - GraphicTimeTablePreviewInteraction
 
 extension GraphicTimeTablePreviewInteractor: GraphicTimeTablePreviewInteraction {
-//    func getSchedules(for date: Date) {
-//        guard let doctorScheduleEntities = database?.readSchedules(for: date) else { return }
-//
-//        let schedules = doctorScheduleEntities.compactMap { DoctorSchedule(entity: $0) }
-//        delegate?.schedulesDidRecieved(schedules)
-//    }
-//
-//    func updateSchedule(_ schedule: DoctorSchedule) {
-//        database?.updateSchedule(schedule)
-//    }
-//
-//    func createSchedule(_ schedule: DoctorSchedule) {
-//        database?.createDoctorSchedule(schedule)
-//        delegate?.scheduleDidCreated(schedule)
-//    }
-
     func getSchedules(for date: Date) {
         doctorScheduleService?.getSchedulesByDate(date)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [delegate] completion in
                 switch completion {
                 case .failure(let error):
-                    Log.error(error.localizedDescription)
+                    delegate?.schedulesDidRecieved([])
+                    delegate?.scheduleFailure(message: error.localizedDescription)
                 case .finished: break
                 }
             }, receiveValue: { [delegate] schedules in
@@ -53,28 +38,29 @@ extension GraphicTimeTablePreviewInteractor: GraphicTimeTablePreviewInteraction 
 
     func updateSchedule(_ schedule: DoctorSchedule) {
         doctorScheduleService?.updateSchedule(schedule)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [delegate] completion in
                 switch completion {
                 case .failure(let error):
-                    Log.error(error.localizedDescription)
+                    delegate?.scheduleFailure(message: "Не удалось обновить расписание. \(error.localizedDescription)")
                 case .finished: break
                 }
-            }, receiveValue: { schedule in
-                Log.info("Schedule for \(schedule.doctor.fullName) was updated")
+            }, receiveValue: { [delegate] schedule in
+                delegate?.scheduleDidUpdated(schedule)
             })
             .store(in: &subscriptions)
     }
 
     func createSchedule(_ schedule: DoctorSchedule) {
         doctorScheduleService?.create(schedule)
-            .sink(receiveCompletion: { completion in
+            .sink(receiveCompletion: { [delegate] completion in
                 switch completion {
                 case .failure(let error):
-                    Log.error(error.localizedDescription)
+                    delegate?.scheduleFailure(message: "Не удалось создать расписание. \(error.localizedDescription)")
                 case .finished: break
                 }
-            }, receiveValue: { schedule in
-                Log.info("Schedule for \(schedule.doctor.fullName) was created")
+            }, receiveValue: { [delegate] schedule in
+                print(schedule.starting)
+                delegate?.scheduleDidCreated(schedule)
             })
             .store(in: &subscriptions)
     }

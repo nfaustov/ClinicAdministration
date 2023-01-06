@@ -15,7 +15,7 @@ where V: GraphicTimeTablePreviewView, I: GraphicTimeTablePreviewInteractor {
 // MARK: - GraphicTimeTablePreviewPresentation
 
 extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewPresentation {
-    func didFinish(with schedule: DoctorSchedule) {
+    func saveNewSchedule(_ schedule: DoctorSchedule) {
         var newSchedule = schedule
         newSchedule.updateAppointments()
         interactor.createSchedule(newSchedule)
@@ -48,7 +48,15 @@ extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewInteractorDel
         view?.applySchedules(updatedSchedules)
     }
 
+    func scheduleDidUpdated(_ schedule: DoctorSchedule) {
+        view?.successAlert(message: "Расписание доктора \(schedule.doctor.fullName) обновлено.")
+    }
+
     func scheduleDidCreated(_ schedule: DoctorSchedule) {
         didFinish?(schedule)
+    }
+
+    func scheduleFailure(message: String) {
+        view?.errorAlert(message: message)
     }
 }

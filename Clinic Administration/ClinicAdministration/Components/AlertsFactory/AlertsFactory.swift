@@ -54,8 +54,18 @@ final class AlertsFactory {
         return alertController
     }
 
-    static func makeDefault(message: String) -> UIAlertController {
+    static func makeError(message: String) -> UIAlertController {
         let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Понятно", style: .default) { _ in
+            alertController.dismiss(animated: true)
+        }
+        alertController.addAction(confirmAction)
+
+        return alertController
+    }
+
+    static func makeSuccess(message: String) -> UIAlertController {
+        let alertController = UIAlertController(title: "Успешно", message: message, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Понятно", style: .default) { _ in
             alertController.dismiss(animated: true)
         }

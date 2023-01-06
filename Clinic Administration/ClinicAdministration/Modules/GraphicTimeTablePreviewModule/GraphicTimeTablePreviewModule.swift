@@ -15,10 +15,12 @@ protocol GraphicTimeTablePreviewView: View {
     var newSchedule: DoctorSchedule! { get set }
 
     func applySchedules(_ schedules: [DoctorSchedule])
+    func errorAlert(message: String)
+    func successAlert(message: String)
 }
 
 protocol GraphicTimeTablePreviewPresentation: AnyObject {
-    func didFinish(with schedule: DoctorSchedule)
+    func saveNewSchedule(_ schedule: DoctorSchedule)
     func updateNewSchedule(_ schedule: DoctorSchedule)
     func updateSchedule(_ schedule: DoctorSchedule)
     func didSelected(date: Date)
@@ -32,5 +34,7 @@ protocol GraphicTimeTablePreviewInteraction: Interactor {
 
 protocol GraphicTimeTablePreviewInteractorDelegate: AnyObject {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule])
+    func scheduleDidUpdated(_ schedule: DoctorSchedule)
     func scheduleDidCreated(_ schedule: DoctorSchedule)
+    func scheduleFailure(message: String)
 }
