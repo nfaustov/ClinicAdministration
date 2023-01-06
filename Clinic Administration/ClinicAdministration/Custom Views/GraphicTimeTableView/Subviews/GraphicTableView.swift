@@ -96,6 +96,7 @@ final class GraphicTableView: UIView {
     func addSchedules(_ schedules: [DoctorSchedule]) {
         self.schedules = schedules
         schedules.forEach { addDoctorSchedule($0) }
+        setNeedsLayout()
     }
 
     func reload(with date: Date, schedules: [DoctorSchedule]) {
@@ -111,7 +112,6 @@ final class GraphicTableView: UIView {
         }
 
         addSchedules(schedules)
-        setNeedsLayout()
     }
 
     override func layoutSubviews() {
