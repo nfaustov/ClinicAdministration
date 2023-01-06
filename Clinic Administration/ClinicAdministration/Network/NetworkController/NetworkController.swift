@@ -12,6 +12,9 @@ final class NetworkController: NetworkControllerProtocol {
     func request<T>(method: HttpMethod, endpoint: Endpoint) -> AnyPublisher<T, Error> where T: Codable {
         let urlRequest = makeRequest(method: method, endpoint: endpoint)
 
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .secondsSince1970
+
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             .tryMap({ [httpError] data, response in
                 guard let response = response as? HTTPURLResponse else {
@@ -26,8 +29,8 @@ final class NetworkController: NetworkControllerProtocol {
 
                 return data
             })
-            .receive(on: RunLoop.main)
-            .decode(type: T.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .decode(type: T.self, decoder: decoder)
             .mapError({ [handleError] error in
                 Log.error("\(error)")
                 return handleError(error)
@@ -52,7 +55,7 @@ final class NetworkController: NetworkControllerProtocol {
 
                 return true
             })
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 }
