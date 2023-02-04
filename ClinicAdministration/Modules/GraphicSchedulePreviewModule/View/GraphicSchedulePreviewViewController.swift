@@ -1,5 +1,5 @@
 //
-//  GraphicTimeTablePreviewViewController.swift
+//  GraphicSchedulePreviewViewController.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 05.05.2021.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class GraphicTimeTablePreviewViewController: UIViewController {
-    typealias PresenterType = GraphicTimeTablePreviewPresentation
+class GraphicSchedulePreviewViewController: UIViewController {
+    typealias PresenterType = GraphicSchedulePreviewPresentation
     var presenter: PresenterType!
 
     private let confirmButton: UIButton = {
@@ -81,7 +81,7 @@ class GraphicTimeTablePreviewViewController: UIViewController {
 
 // MARK: - GraphicTimeTableViewDelegate
 
-extension GraphicTimeTablePreviewViewController: GraphicTimeTableViewDelegate {
+extension GraphicSchedulePreviewViewController: GraphicTimeTableViewDelegate {
     func scheduleDidChanged(_ schedule: DoctorSchedule) {
         if schedule.id == newSchedule.id {
             presenter.updateNewSchedule(schedule)
@@ -91,9 +91,9 @@ extension GraphicTimeTablePreviewViewController: GraphicTimeTableViewDelegate {
     }
 }
 
-// MARK: - GraphicTimeTablePreviewView
+// MARK: - GraphicSchedulePreviewView
 
-extension GraphicTimeTablePreviewViewController: GraphicTimeTablePreviewView {
+extension GraphicSchedulePreviewViewController: GraphicSchedulePreviewView {
     func applySchedules(_ schedules: [DoctorSchedule]) {
         graphicTimeTableView.updateTable(with: schedules)
     }

@@ -1,5 +1,5 @@
 //
-//  GraphicTimeTablePreviewPresenter.swift
+//  GraphicSchedulePreviewPresenter.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 05.05.2021.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-final class GraphicTimeTablePreviewPresenter<V, I>: PresenterInteractor<V, I>, GraphicTimeTablePreviewModule
-where V: GraphicTimeTablePreviewView, I: GraphicTimeTablePreviewInteractor {
+final class GraphicSchedulePreviewPresenter<V, I>: PresenterInteractor<V, I>, GraphicSchedulePreviewModule
+where V: GraphicSchedulePreviewView, I: GraphicSchedulePreviewInteractor {
     var didFinish: ((DoctorSchedule) -> Void)?
 }
 
-// MARK: - GraphicTimeTablePreviewPresentation
+// MARK: - GraphicSchedulePreviewPresentation
 
-extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewPresentation {
+extension GraphicSchedulePreviewPresenter: GraphicSchedulePreviewPresentation {
     func saveNewSchedule(_ schedule: DoctorSchedule) {
         var newSchedule = schedule
         newSchedule.updateAppointments()
@@ -37,9 +37,9 @@ extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewPresentation 
     }
 }
 
-// MARK: - GraphicTimeTablePreviewInteractorDelegate
+// MARK: - GraphicSchedulePreviewInteractorDelegate
 
-extension GraphicTimeTablePreviewPresenter: GraphicTimeTablePreviewInteractorDelegate {
+extension GraphicSchedulePreviewPresenter: GraphicSchedulePreviewInteractorDelegate {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule]) {
         guard let newSchedule = view?.newSchedule else { return }
 

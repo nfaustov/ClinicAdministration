@@ -123,10 +123,10 @@ final class SchedulesListViewController: UIViewController {
                 )
             )
         )
-            .withDayItemModelProvider { day in
+        .dayItemProvider { day in
                 self.customizeDay(day)
             }
-            .withMonthHeaderItemModelProvider { month in
+        .monthHeaderItemProvider { month in
                 CalendarItemModel<CalendarControlMonthHeader>(
                     invariantViewProperties: .init(
                         font: Design.Font.robotoFont(ofSize: 22, weight: .medium),
@@ -136,7 +136,7 @@ final class SchedulesListViewController: UIViewController {
                     viewModel: .init(month: month)
                 )
             }
-            .withDayOfWeekItemModelProvider { _, dayOfWeekIndex in
+        .dayOfWeekItemProvider { _, dayOfWeekIndex in
                 CalendarItemModel<CalendarControlDayOfWeekRow>(
                     invariantViewProperties: .init(
                         font: Design.Font.robotoFont(ofSize: 16, weight: .regular),
@@ -146,10 +146,10 @@ final class SchedulesListViewController: UIViewController {
                     viewModel: .init(dayOfWeekIndex: dayOfWeekIndex)
                 )
             }
-            .withMonthDayInsets(.init(top: 0, left: 0, bottom: 12, right: 12))
-            .withDaysOfTheWeekRowSeparator(options: .init(height: 1, color: Design.Color.darkGray))
-            .withVerticalDayMargin(8)
-            .withHorizontalDayMargin(8)
+        .monthDayInsets(.init(top: 0, left: 0, bottom: 12, right: 12))
+        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Design.Color.darkGray))
+        .verticalDayMargin(8)
+        .horizontalDayMargin(8)
     }
 
     private func customizeDay(_ day: Day) -> CalendarItemModel<CalendarControlDayLabel> {

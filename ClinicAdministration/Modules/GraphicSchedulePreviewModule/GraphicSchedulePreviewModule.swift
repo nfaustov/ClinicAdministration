@@ -1,5 +1,5 @@
 //
-//  GraphicTimeTablePreviewModule.swift
+//  GraphicSchedulePreviewModule.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 05.05.2021.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol GraphicTimeTablePreviewModule: AnyObject {
+protocol GraphicSchedulePreviewModule: AnyObject {
     var didFinish: ((DoctorSchedule) -> Void)? { get set }
 }
 
-protocol GraphicTimeTablePreviewView: View {
+protocol GraphicSchedulePreviewView: View {
     var newSchedule: DoctorSchedule! { get set }
 
     func applySchedules(_ schedules: [DoctorSchedule])
@@ -19,20 +19,20 @@ protocol GraphicTimeTablePreviewView: View {
     func successAlert(message: String)
 }
 
-protocol GraphicTimeTablePreviewPresentation: AnyObject {
+protocol GraphicSchedulePreviewPresentation: AnyObject {
     func saveNewSchedule(_ schedule: DoctorSchedule)
     func updateNewSchedule(_ schedule: DoctorSchedule)
     func updateSchedule(_ schedule: DoctorSchedule)
     func didSelected(date: Date)
 }
 
-protocol GraphicTimeTablePreviewInteraction: Interactor {
+protocol GraphicSchedulePreviewInteraction: Interactor {
     func getSchedules(for date: Date)
     func updateSchedule(_ schedule: DoctorSchedule)
     func createSchedule(_ schedule: DoctorSchedule)
 }
 
-protocol GraphicTimeTablePreviewInteractorDelegate: AnyObject {
+ protocol GraphicSchedulePreviewInteractorDelegate: AnyObject {
     func schedulesDidRecieved(_ schedules: [DoctorSchedule])
     func scheduleDidUpdated(_ schedule: DoctorSchedule)
     func scheduleDidCreated(_ schedule: DoctorSchedule)

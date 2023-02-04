@@ -31,7 +31,7 @@ final class CreateScheduleViewController: UIViewController {
             ScheduleOption(
                 title: "Кабинет",
                 placeholder: selectedCabinet == currentDoctor?.defaultCabinet ?
-                "\(selectedCabinet) (по умолчанию)": "\(selectedCabinet)",
+                "\(selectedCabinet) (по умолчанию)" : "\(selectedCabinet)",
                 icon: UIImage(named: "chevron_down"),
                 date: nil
             )

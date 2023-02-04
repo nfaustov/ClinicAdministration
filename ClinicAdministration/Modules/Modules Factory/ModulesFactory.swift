@@ -76,13 +76,13 @@ final class ModulesFactory: Modules {
         return (view, presenter)
     }
 
-    func graphicTimeTablePreview(_ schedule: DoctorSchedule) -> (UIViewController, GraphicTimeTablePreviewModule) {
-        let view = GraphicTimeTablePreviewViewController()
+    func graphicTimeTablePreview(_ schedule: DoctorSchedule) -> (UIViewController, GraphicSchedulePreviewModule) {
+        let view = GraphicSchedulePreviewViewController()
         view.newSchedule = schedule
-        let interactor = GraphicTimeTablePreviewInteractor()
+        let interactor = GraphicSchedulePreviewInteractor()
         interactor.database = dependencies.doctorsDatabase
         interactor.doctorScheduleService = dependencies.doctorScheduleService
-        let presenter = GraphicTimeTablePreviewPresenter(view: view, interactor: interactor)
+        let presenter = GraphicSchedulePreviewPresenter(view: view, interactor: interactor)
 
         return (view, presenter)
     }

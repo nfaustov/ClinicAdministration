@@ -1,5 +1,5 @@
 //
-//  GraphicTimeTablePreviewInteractor.swift
+//  GraphicSchedulePreviewInteractor.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 05.05.2021.
@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-final class GraphicTimeTablePreviewInteractor {
-    typealias Delegate = GraphicTimeTablePreviewInteractorDelegate
+final class GraphicSchedulePreviewInteractor {
+    typealias Delegate = GraphicSchedulePreviewInteractorDelegate
     weak var delegate: Delegate?
 
     var database: DoctorDatabase?
@@ -18,9 +18,9 @@ final class GraphicTimeTablePreviewInteractor {
     var subscriptions = Set<AnyCancellable>()
 }
 
-// MARK: - GraphicTimeTablePreviewInteraction
+// MARK: - GraphicSchedulePreviewInteraction
 
-extension GraphicTimeTablePreviewInteractor: GraphicTimeTablePreviewInteraction {
+extension GraphicSchedulePreviewInteractor: GraphicSchedulePreviewInteraction {
     func getSchedules(for date: Date) {
         doctorScheduleService?.getSchedulesByDate(date)
             .sink(receiveCompletion: { [delegate] completion in

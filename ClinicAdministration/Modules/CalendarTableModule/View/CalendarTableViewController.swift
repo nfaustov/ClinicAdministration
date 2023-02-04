@@ -112,9 +112,7 @@ final class CalendarTableViewController: UIViewController {
                     invariantViewProperties.backgroundColor = Design.Color.chocolate
                 }
 
-                if self.compareToNow(day) == .orderedAscending {
-                    invariantViewProperties.textColor = Design.Color.gray
-                }
+                if self.compareToNow(day) == .orderedAscending { invariantViewProperties.textColor = Design.Color.gray }
 
                 return CalendarItemModel<DayLabel>(
                     invariantViewProperties: invariantViewProperties,
