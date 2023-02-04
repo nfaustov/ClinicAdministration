@@ -100,7 +100,7 @@ final class CalendarTableViewController: UIViewController {
                 options: VerticalMonthsLayoutOptions(pinDaysOfWeekToTop: true, alwaysShowCompleteBoundaryMonths: true)
             )
         )
-            .withDayItemModelProvider { day in
+        .dayItemProvider { day in
                 var invariantViewProperties = DayLabel.InvariantViewProperties(
                     font: Design.Font.robotoFont(ofSize: 19, weight: .regular),
                     textColor: Design.Color.brown,
@@ -121,7 +121,7 @@ final class CalendarTableViewController: UIViewController {
                     viewModel: .init(day: day)
                 )
             }
-            .withMonthHeaderItemModelProvider { month in
+        .monthHeaderItemProvider { month in
                 CalendarItemModel<MonthHeader>(
                     invariantViewProperties: .init(
                         font: Design.Font.robotoFont(ofSize: 22, weight: .medium),
@@ -131,7 +131,7 @@ final class CalendarTableViewController: UIViewController {
                     viewModel: .init(month: month)
                 )
             }
-            .withDayOfWeekItemModelProvider { _, dayOfWeekIndex in
+        .dayOfWeekItemProvider { _, dayOfWeekIndex in
                 CalendarItemModel<DayOfWeekRow>(
                     invariantViewProperties: .init(
                         font: Design.Font.robotoFont(ofSize: 17, weight: .medium),
@@ -141,10 +141,10 @@ final class CalendarTableViewController: UIViewController {
                     viewModel: .init(dayOfWeekIndex: dayOfWeekIndex)
                 )
             }
-            .withDaysOfTheWeekRowSeparator(options: .init(height: 1, color: Design.Color.darkGray))
-            .withVerticalDayMargin(8)
-            .withHorizontalDayMargin(8)
-            .withInterMonthSpacing(20)
+        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Design.Color.darkGray))
+        .verticalDayMargin(8)
+        .horizontalDayMargin(8)
+        .interMonthSpacing(20)
     }
 
     private func configureConfirmation() {
