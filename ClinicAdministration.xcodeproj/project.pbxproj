@@ -84,6 +84,9 @@
 		8B669CF02954685C00B6C43E /* DoctorScheduleEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B669CEF2954685C00B6C43E /* DoctorScheduleEndpoint.swift */; };
 		8B669CF229547B0D00B6C43E /* DoctorScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B669CF129547B0D00B6C43E /* DoctorScheduleService.swift */; };
 		8B669CF429547C7800B6C43E /* DoctorScheduleServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B669CF329547C7800B6C43E /* DoctorScheduleServiceClient.swift */; };
+		8B67FB592992332D00EF76B4 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 8B67FB582992332D00EF76B4 /* Inject */; };
+		8B67FB5D29923BB900EF76B4 /* VisitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67FB5C29923BB900EF76B4 /* VisitCell.swift */; };
+		8B67FB5F2992452F00EF76B4 /* VisitsHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67FB5E2992452F00EF76B4 /* VisitsHistoryView.swift */; };
 		8B687694293FC5B700C7D1C0 /* IntervalsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B687693293FC5B700C7D1C0 /* IntervalsHeader.swift */; };
 		8B687697293FE89F00C7D1C0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B687696293FE89F00C7D1C0 /* SearchViewController.swift */; };
 		8B6B0F87261CA56700F416D1 /* ScheduleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B0F86261CA56700F416D1 /* ScheduleAction.swift */; };
@@ -112,6 +115,7 @@
 		8B83BAAE2715F759007E9C71 /* SchedulesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83BAAD2715F759007E9C71 /* SchedulesListInteractor.swift */; };
 		8B83BAB02715FA06007E9C71 /* SchedulesListSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83BAAF2715FA06007E9C71 /* SchedulesListSubscription.swift */; };
 		8B843668256DB0D1006057EF /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843667256DB0D1006057EF /* Doctor.swift */; };
+		8B8AB659298EB90A0035C1D1 /* VisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AB658298EB90A0035C1D1 /* VisitsView.swift */; };
 		8B92DFF12657A91D00B3D6B3 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */; };
 		8B92DFF32657A96400B3D6B3 /* NetworkServiceDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF22657A96400B3D6B3 /* NetworkServiceDependencies.swift */; };
 		8B92DFF52657A98A00B3D6B3 /* DatabaseDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */; };
@@ -248,6 +252,8 @@
 		8B669CEF2954685C00B6C43E /* DoctorScheduleEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorScheduleEndpoint.swift; sourceTree = "<group>"; };
 		8B669CF129547B0D00B6C43E /* DoctorScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorScheduleService.swift; sourceTree = "<group>"; };
 		8B669CF329547C7800B6C43E /* DoctorScheduleServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorScheduleServiceClient.swift; sourceTree = "<group>"; };
+		8B67FB5C29923BB900EF76B4 /* VisitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitCell.swift; sourceTree = "<group>"; };
+		8B67FB5E2992452F00EF76B4 /* VisitsHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHistoryView.swift; sourceTree = "<group>"; };
 		8B687693293FC5B700C7D1C0 /* IntervalsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalsHeader.swift; sourceTree = "<group>"; };
 		8B687696293FE89F00C7D1C0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8B6B0F86261CA56700F416D1 /* ScheduleAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAction.swift; sourceTree = "<group>"; };
@@ -276,6 +282,7 @@
 		8B83BAAD2715F759007E9C71 /* SchedulesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesListInteractor.swift; sourceTree = "<group>"; };
 		8B83BAAF2715FA06007E9C71 /* SchedulesListSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesListSubscription.swift; sourceTree = "<group>"; };
 		8B843667256DB0D1006057EF /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
+		8B8AB658298EB90A0035C1D1 /* VisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsView.swift; sourceTree = "<group>"; };
 		8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		8B92DFF22657A96400B3D6B3 /* NetworkServiceDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceDependencies.swift; sourceTree = "<group>"; };
 		8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDependencies.swift; sourceTree = "<group>"; };
@@ -335,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B2669AC276E97F4009B2BEA /* HorizonCalendar in Frameworks */,
+				8B67FB592992332D00EF76B4 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +902,23 @@
 			path = DoctorScheduleService;
 			sourceTree = "<group>";
 		};
+		8B67FB5A29923B7100EF76B4 /* VisitsView */ = {
+			isa = PBXGroup;
+			children = (
+				8B8AB658298EB90A0035C1D1 /* VisitsView.swift */,
+				8B67FB5B29923B7B00EF76B4 /* CollectionView Items */,
+			);
+			path = VisitsView;
+			sourceTree = "<group>";
+		};
+		8B67FB5B29923B7B00EF76B4 /* CollectionView Items */ = {
+			isa = PBXGroup;
+			children = (
+				8B67FB5C29923BB900EF76B4 /* VisitCell.swift */,
+			);
+			path = "CollectionView Items";
+			sourceTree = "<group>";
+		};
 		8B687692293FC58700C7D1C0 /* Supplementaries */ = {
 			isa = PBXGroup;
 			children = (
@@ -941,6 +966,8 @@
 			isa = PBXGroup;
 			children = (
 				8B786C6D294E104B003FF42B /* PassportButtonView.swift */,
+				8B67FB5E2992452F00EF76B4 /* VisitsHistoryView.swift */,
+				8B67FB5A29923B7100EF76B4 /* VisitsView */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -1296,6 +1323,7 @@
 			name = ClinicAdministration;
 			packageProductDependencies = (
 				8B2669AB276E97F4009B2BEA /* HorizonCalendar */,
+				8B67FB582992332D00EF76B4 /* Inject */,
 			);
 			productName = "Clinic Administration";
 			productReference = 8BCAB7962559D4A4001A93D0 /* ClinicAdministration.app */;
@@ -1348,6 +1376,7 @@
 			mainGroup = 8BCAB78D2559D4A4001A93D0;
 			packageReferences = (
 				8B2669AA276E97F4009B2BEA /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
+				8B67FB572992332D00EF76B4 /* XCRemoteSwiftPackageReference "Inject" */,
 			);
 			productRefGroup = 8BCAB7972559D4A4001A93D0 /* Products */;
 			projectDirPath = "";
@@ -1415,6 +1444,7 @@
 				8B3E1635267792260070BDAF /* OptionCell.swift in Sources */,
 				8B7A12662631DCF9007BC1AB /* Modules.swift in Sources */,
 				8BF23AA326371103009D9A7A /* DoctorControlCell.swift in Sources */,
+				8B67FB5D29923BB900EF76B4 /* VisitCell.swift in Sources */,
 				8B20CE5D2629998F0007C20A /* Bundle-Decodable.swift in Sources */,
 				8B83BAAA2715F6B5007E9C71 /* SchedulesListViewController.swift in Sources */,
 				8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */,
@@ -1510,6 +1540,7 @@
 				8B92DFF32657A96400B3D6B3 /* NetworkServiceDependencies.swift in Sources */,
 				8B29219E257930630058B51E /* TimelineView.swift in Sources */,
 				8B20CE2A262997B30007C20A /* MonthHeader.swift in Sources */,
+				8B67FB5F2992452F00EF76B4 /* VisitsHistoryView.swift in Sources */,
 				8B10E2FF263822C5006022BB /* CreateScheduleViewController.swift in Sources */,
 				8B7A12622631DCA7007BC1AB /* ModulesFactory.swift in Sources */,
 				8BB450B0263017CD00C143A4 /* ScheduleCoordinator.swift in Sources */,
@@ -1530,6 +1561,7 @@
 				8B20CE2B262997B30007C20A /* DayLabel.swift in Sources */,
 				8BCAB7B22559D564001A93D0 /* GraphicScheduleViewController.swift in Sources */,
 				8B7A12752631E084007BC1AB /* Presenter.swift in Sources */,
+				8B8AB659298EB90A0035C1D1 /* VisitsView.swift in Sources */,
 				8B2137D8294B0436004E62B7 /* PatientsSearchViewController.swift in Sources */,
 				8B83BAAE2715F759007E9C71 /* SchedulesListInteractor.swift in Sources */,
 				8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */,
@@ -1818,6 +1850,14 @@
 				minimumVersion = 1.16.0;
 			};
 		};
+		8B67FB572992332D00EF76B4 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1825,6 +1865,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8B2669AA276E97F4009B2BEA /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
 			productName = HorizonCalendar;
+		};
+		8B67FB582992332D00EF76B4 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B67FB572992332D00EF76B4 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
 		};
 /* End XCSwiftPackageProductDependency section */
 

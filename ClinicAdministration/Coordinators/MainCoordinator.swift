@@ -24,4 +24,19 @@ final class MainCoordinator: Coordinator {
         childCoordinators.append(child)
         child.start()
     }
+
+    func patientCoordinator() {
+        let child = PatientCoordinator(navigationController: navigationController, modules: modules)
+        child.parentCoordinator = self
+        childCoordinators.append(child)
+        // MOCK
+        let patient = Patient(
+            secondName: "Фаустов",
+            firstName: "Николай",
+            patronymicName: "Игоревич",
+            phoneNumber: "8 (999) 999-99-99"
+        )
+        //
+        child.routeToPatientCard(patient: patient)
+    }
 }

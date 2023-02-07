@@ -35,7 +35,29 @@ final class PatientCardViewController: UIViewController {
         let checkButtonTap = UITapGestureRecognizer(target: self, action: #selector(newCheck))
         checkButton.addGestureRecognizer(checkButtonTap)
 
-        for subview in [patientDataInput, passportButton, checkButton] {
+        let visits = [
+            Visit(
+                registrationDate: Date(),
+                visitDate: Date(),
+                doctorsConclusion: nil,
+                contract: nil
+            ),
+            Visit(
+                registrationDate: Date().addingTimeInterval(86_400),
+                visitDate: Date().addingTimeInterval(86_400),
+                doctorsConclusion: nil,
+                contract: nil
+            ),
+            Visit(
+                registrationDate: Date().addingTimeInterval(172_800),
+                visitDate: Date().addingTimeInterval(172_800),
+                doctorsConclusion: nil,
+                contract: nil
+            )
+        ]
+        let visitsHistoryView = VisitsHistoryView(visits: visits)
+
+        for subview in [patientDataInput, passportButton, checkButton, visitsHistoryView] {
             view.addSubview(subview)
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -54,7 +76,12 @@ final class PatientCardViewController: UIViewController {
             checkButton.topAnchor.constraint(equalTo: passportButton.bottomAnchor, constant: 20),
             checkButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             checkButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.65),
-            checkButton.heightAnchor.constraint(equalToConstant: 50)
+            checkButton.heightAnchor.constraint(equalToConstant: 50),
+
+            visitsHistoryView.topAnchor.constraint(equalTo: checkButton.bottomAnchor, constant: 35),
+            visitsHistoryView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            visitsHistoryView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            visitsHistoryView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
