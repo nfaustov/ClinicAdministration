@@ -74,7 +74,7 @@ final class PatientAppointmentViewController: UIViewController {
 
         patientInfoButton.setTitle("Подробнее", for: .normal)
         patientInfoButton.setTitleColor(Design.Color.brown, for: .normal)
-        patientInfoButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .regular)
+        patientInfoButton.titleLabel?.font = Font.titleMedium
         patientInfoButton.isHidden = true
         patientInfoButton.addTarget(self, action: #selector(showPatientCard), for: .touchUpInside)
 

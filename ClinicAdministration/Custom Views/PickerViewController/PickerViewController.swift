@@ -56,7 +56,7 @@ class PickerViewController<Model: Hashable>: UIViewController,
     private func configureButton() {
         button.setTitle("ГОТОВО", for: .normal)
         button.setTitleColor(Design.Color.chocolate, for: .normal)
-        button.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .medium)
+        button.titleLabel?.font = Font.titleMedium
         button.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         button.sizeToFit()
         view.addSubview(button)

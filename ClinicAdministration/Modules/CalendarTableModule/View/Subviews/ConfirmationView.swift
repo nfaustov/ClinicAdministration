@@ -9,9 +9,31 @@ import UIKit
 
 final class ConfirmationView: UIView {
     private let separatorView = UIView()
-    private let confirmButton = UIButton()
-    private let cancelButton = UIButton()
-    private let dateLabel = UILabel()
+    private let confirmButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = Design.Color.red
+        button.setTitle("ГОТОВО", for: .normal)
+        button.titleLabel?.font = Font.titleMedium
+        button.setTitleColor(Design.Color.white, for: .normal)
+        button.layer.cornerRadius = Design.CornerRadius.small
+        return button
+    }()
+    private let cancelButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = Design.Color.gray
+        button.setTitle("ОТМЕНИТЬ", for: .normal)
+        button.titleLabel?.font = Font.titleMedium
+        button.setTitleColor(Design.Color.brown, for: .normal)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = Design.Color.chocolate.cgColor
+        button.layer.cornerRadius = Design.CornerRadius.small
+        return button
+    }()
+    private let dateLabel: UILabel = {
+        let label = Label.titleMedium(color: Design.Color.chocolate)
+        label.numberOfLines = 2
+        return label
+    }()
 
     var dateText: String = " " {
         didSet {
@@ -26,29 +48,13 @@ final class ConfirmationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        configureHierarchy()
+    }
+
+    private func configureHierarchy() {
         backgroundColor = Design.Color.white
 
         separatorView.backgroundColor = Design.Color.darkGray
-
-        dateLabel.numberOfLines = 2
-        dateLabel.font = Design.Font.robotoFont(ofSize: 16, weight: .medium)
-        dateLabel.textColor = Design.Color.chocolate
-
-        cancelButton.backgroundColor = Design.Color.gray
-        cancelButton.setTitle("ОТМЕНИТЬ", for: .normal)
-        cancelButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 16, weight: .regular)
-        cancelButton.setTitleColor(Design.Color.brown, for: .normal)
-        cancelButton.layer.borderWidth = 1
-        cancelButton.layer.borderColor = Design.Color.chocolate.cgColor
-        cancelButton.layer.cornerRadius = Design.CornerRadius.small
-        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
-
-        confirmButton.backgroundColor = Design.Color.red
-        confirmButton.setTitle("ГОТОВО", for: .normal)
-        confirmButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 16, weight: .regular)
-        confirmButton.setTitleColor(Design.Color.white, for: .normal)
-        confirmButton.layer.cornerRadius = Design.CornerRadius.small
-        confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
 
         for view in [separatorView, dateLabel, cancelButton, confirmButton] {
             addSubview(view)
@@ -74,6 +80,9 @@ final class ConfirmationView: UIView {
             confirmButton.widthAnchor.constraint(equalTo: cancelButton.widthAnchor),
             confirmButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+
+        confirmButton.addTarget(self, action: #selector(confirm), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
 
     required init?(coder: NSCoder) {

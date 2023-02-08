@@ -18,9 +18,9 @@ final class DatePicker: UIView {
     private let today = Date()
     private let calendar = Calendar.current
 
-    private let monthLabel = UILabel()
-    private let dayLabel = UILabel()
-    private let weekdayLabel = UILabel()
+    private let monthLabel = Label.bold(ofSize: .headlineMedium, color: Design.Color.white)
+    private let dayLabel = Label.regular(ofSize: .headlineMedium, color: Design.Color.chocolate)
+    private let weekdayLabel = Label.thin(ofSize: .headlineMedium, color: Design.Color.white)
 
     private let selectionLine = UIView()
     private var selectionLineConstraint: NSLayoutConstraint!
@@ -111,6 +111,7 @@ final class DatePicker: UIView {
     }
 
     private func configureLabels() {
+        // TODO: Add @Formatted wrapper
         DateFormatter.shared.dateFormat = "LLLL d EEEE"
 
         let stringDate = DateFormatter.shared.string(from: selectedDate)
@@ -120,12 +121,8 @@ final class DatePicker: UIView {
         let weekday = "\(splitDate[2])"
 
         monthLabel.text = month
-        monthLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .bold)
-        monthLabel.textColor = Design.Color.white
 
         dayLabel.text = day
-        dayLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .regular)
-        dayLabel.textColor = Design.Color.chocolate
         dayLabel.textAlignment = .center
         dayLabel.layer.backgroundColor = Design.Color.lightGray.cgColor
         dayLabel.layer.cornerRadius = Design.CornerRadius.small
@@ -133,8 +130,6 @@ final class DatePicker: UIView {
         dayLabel.widthAnchor.constraint(equalToConstant: 38).isActive = true
 
         weekdayLabel.text = weekday
-        weekdayLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .thin)
-        weekdayLabel.textColor = Design.Color.white
     }
 
     private func configureLabelsStack() {
@@ -225,7 +220,7 @@ final class DatePicker: UIView {
         if let buttonTitle = title {
             button.setTitle(buttonTitle, for: .normal)
             button.setTitleColor(Design.Color.brown, for: .normal)
-            button.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .regular)
+            button.titleLabel?.font = Font.titleMedium
         } else if let buttonImage = image {
             button.setBackgroundImage(buttonImage, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false

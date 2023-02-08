@@ -48,10 +48,7 @@ final class CheckButton: UIView {
         layer.addSublayer(gradientLayer)
         gradientLayer.cornerRadius = Design.CornerRadius.medium
 
-        let label = UILabel()
-        label.text = title
-        label.textColor = Design.Color.white
-        label.font = Design.Font.robotoFont(ofSize: 20, weight: .bold)
+        let label = Label.headlineSmall(color: Design.Color.white, withText: title)
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
 

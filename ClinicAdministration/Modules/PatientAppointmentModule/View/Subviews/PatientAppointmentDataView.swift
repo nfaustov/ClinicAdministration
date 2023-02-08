@@ -14,16 +14,16 @@ final class PatientAppointmentDataView: UIView {
     private var serviceDuration: Float
     private var maxSericeDuration: Float
 
-    private var dateTitleLabel = Design.Label.titleLabel("Дата")
-    private var timeTitleLabel = Design.Label.titleLabel("Время")
-    private var doctorTitleLabel = Design.Label.titleLabel("Врач")
-    private var durationTitleLabel = Design.Label.titleLabel("Длительность")
+    private var dateTitleLabel = Label.labelLarge(color: Design.Color.darkGray, withText: "Дата")
+    private var timeTitleLabel = Label.labelLarge(color: Design.Color.darkGray, withText: "Время")
+    private var doctorTitleLabel = Label.labelLarge(color: Design.Color.darkGray, withText: "Врач")
+    private var durationTitleLabel = Label.labelLarge(color: Design.Color.darkGray, withText: "Длительность")
 
-    private var durationLabel = Design.Label.valueLabel()
-    private var doctorLabel = Design.Label.valueLabel()
-    private var timeLabel = Design.Label.valueLabel()
+    private var durationLabel = Label.titleLarge(color: Design.Color.lightGray)
+    private var doctorLabel = Label.titleLarge(color: Design.Color.lightGray)
+    private var timeLabel = Label.titleLarge(color: Design.Color.lightGray)
     private var dateLabel: UILabel {
-        Design.Label.dateLabel(date, ofSize: 18, textColor: Design.Color.lightGray)
+        Label.dateLabel(date, ofSize: .titleLarge, textColor: Design.Color.lightGray)
     }
 
     private var durationSlider = UISlider()

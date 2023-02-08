@@ -11,9 +11,7 @@ final class DoctorItemCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "DoctorItemCell"
 
     let label: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 14, weight: .regular)
-        label.textColor = Design.Color.chocolate
+        let label = Label.labelLarge(color: Design.Color.chocolate)
         label.numberOfLines = 2
         return label
     }()

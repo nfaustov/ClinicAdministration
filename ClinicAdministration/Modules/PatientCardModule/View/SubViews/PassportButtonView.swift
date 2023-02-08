@@ -8,10 +8,6 @@
 import UIKit
 
 final class PassportButtonView: UIView {
-    private var color: UIColor {
-        Design.Color.brown
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -25,15 +21,12 @@ final class PassportButtonView: UIView {
     private func configureHierarchy() {
         layer.backgroundColor = Design.Color.white.cgColor
         layer.cornerRadius = Design.CornerRadius.medium
-        layer.borderColor = color.cgColor
+        layer.borderColor = Design.Color.brown.cgColor
         layer.borderWidth = 1
 
-        let label = UILabel()
-        label.text = "Паспортные данные"
-        label.textColor = color
-        label.font = Design.Font.robotoFont(ofSize: 20, weight: .bold)
+        let label = Label.headlineSmall(color: Design.Color.brown, withText: "Паспортные данные")
 
-        let image = UIImage(named: "chevron_right")?.withTintColor(color)
+        let image = UIImage(named: "chevron_right")?.withTintColor(Design.Color.brown)
         let imageView = UIImageView(image: image)
 
         for view in [label, imageView] {

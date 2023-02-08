@@ -10,8 +10,8 @@ import UIKit
 final class IntervalCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "IntervalCell"
 
-    private let startingLabel = UILabel()
-    private let endingLabel = UILabel()
+    private let startingLabel = Label.headlineMedium(color: Design.Color.brown)
+    private let endingLabel = Label.headlineMedium(color: Design.Color.brown)
 
     func configure(with interval: DateInterval) {
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
@@ -21,11 +21,6 @@ final class IntervalCell: UICollectionViewCell, SelfConfiguredCell {
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 8
-
-        [startingLabel, endingLabel].forEach { label in
-            label.font = Design.Font.robotoFont(ofSize: 24, weight: .regular)
-            label.textColor = Design.Color.brown
-        }
 
         DateFormatter.shared.dateFormat = "H:mm"
         startingLabel.text = DateFormatter.shared.string(from: interval.start)

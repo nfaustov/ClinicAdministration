@@ -9,19 +9,14 @@ import UIKit
 
 final class SchedulePatientView: UIView {
     private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 17, weight: .regular)
-        label.textColor = Design.Color.white
+        let label = Label.titleLarge(color: Design.Color.white)
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    private let phoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 17, weight: .light)
-        label.textColor = Design.Color.white
-        return label
-    }()
+
+    private let phoneNumberLabel = Label.light(ofSize: .titleLarge, color: Design.Color.white)
+
     private let separator: UIView = {
         let view = UIView()
         view.backgroundColor = Design.Color.gray

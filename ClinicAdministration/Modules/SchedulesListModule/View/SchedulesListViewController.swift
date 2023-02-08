@@ -129,8 +129,7 @@ final class SchedulesListViewController: UIViewController {
         .monthHeaderItemProvider { month in
                 CalendarItemModel<CalendarControlMonthHeader>(
                     invariantViewProperties: .init(
-                        font: Design.Font.robotoFont(ofSize: 22, weight: .medium),
-                        textColor: Design.Color.lightGray,
+                        label: Label.headlineSmall(color: Design.Color.lightGray),
                         backgroundColor: .clear
                     ),
                     viewModel: .init(month: month)
@@ -139,8 +138,7 @@ final class SchedulesListViewController: UIViewController {
         .dayOfWeekItemProvider { _, dayOfWeekIndex in
                 CalendarItemModel<CalendarControlDayOfWeekRow>(
                     invariantViewProperties: .init(
-                        font: Design.Font.robotoFont(ofSize: 16, weight: .regular),
-                        textColor: Design.Color.darkGray,
+                        label: Label.titleMedium(color: Design.Color.darkGray),
                         backgroundColor: .clear
                     ),
                     viewModel: .init(dayOfWeekIndex: dayOfWeekIndex)
@@ -156,8 +154,7 @@ final class SchedulesListViewController: UIViewController {
         let workingDaysComponents = workingDays.map { calendar.dateComponents([.era, .year, .month, .day], from: $0) }
 
         var invariantViewProperties = CalendarControlDayLabel.InvariantViewProperties(
-            font: Design.Font.robotoFont(ofSize: 18, weight: .regular),
-            textColor: Design.Color.gray,
+            label: Label.titleLarge(color: Design.Color.gray),
             backgroundColor: .clear,
             borderColor: .clear
         )
@@ -170,13 +167,13 @@ final class SchedulesListViewController: UIViewController {
         }
         // customize selected day
         if day == selectedDay {
-            invariantViewProperties.textColor = Design.Color.brown
+            invariantViewProperties.label.textColor = Design.Color.brown
             invariantViewProperties.backgroundColor = Design.Color.lightGray
         }
 
         // customize past days
         if compareToNow(day) == .orderedAscending {
-            invariantViewProperties.textColor = Design.Color.darkGray
+            invariantViewProperties.label.textColor = Design.Color.darkGray
         }
 
         return CalendarItemModel<CalendarControlDayLabel>(

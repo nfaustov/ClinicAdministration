@@ -15,7 +15,7 @@ class GraphicSchedulePreviewViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
         button.setTitleColor(Design.Color.chocolate, for: .normal)
-        button.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .medium)
+        button.titleLabel?.font = Font.titleMedium
         button.backgroundColor = Design.Color.white
         button.layer.cornerRadius = Design.CornerRadius.small
         button.layer.shadowColor = Design.Color.brown.cgColor

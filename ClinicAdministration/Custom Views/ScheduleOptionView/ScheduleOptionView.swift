@@ -9,35 +9,23 @@ import UIKit
 
 class ScheduleOptionView: UIView {
     private let imageView = UIImageView()
-    private let dateStack = UIStackView()
 
-    private let monthLabel = UILabel()
-    private let dayLabel = UILabel()
-    private let weekdayLabel = UILabel()
-
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 13, weight: .regular)
-        label.textColor = Design.Color.darkGray
-        return label
-    }()
-    private let valueLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 18, weight: .regular)
-        label.textColor = Design.Color.white
-        return label
-    }()
+    private let titleLabel = Label.labelLarge(color: Design.Color.darkGray)
+    private var dateLabel: UILabel?
+    private var valueLabel: UILabel?
 
     private let imageSize: CGFloat
 
-    var value: String! {
+    var value: String? {
         didSet {
-            valueLabel.text = value
+            valueLabel?.text = value
         }
     }
-    var date: Date! {
+    var date: Date? {
         didSet {
-            configureDateLabels(with: date)
+            guard let date = date else { return }
+
+            dateLabel = Label.dateLabel(date, ofSize: .titleLarge, textColor: Design.Color.white)
         }
     }
 
@@ -46,7 +34,7 @@ class ScheduleOptionView: UIView {
         super.init(frame: .zero)
 
         titleLabel.text = title
-        valueLabel.text = valuePlaceholder
+        valueLabel = Label.titleLarge(color: Design.Color.white, withText: valuePlaceholder)
         imageView.image = UIImage(named: "chevron_down")?.withTintColor(Design.Color.lightGray)
 
         configureHierarchy(with: valueLabel)
@@ -59,15 +47,17 @@ class ScheduleOptionView: UIView {
         titleLabel.text = title
         imageView.image = UIImage(named: "calendar")?.withTintColor(Design.Color.lightGray)
 
-        configureHierarchy(with: dateStack)
-        configureDateLabels(with: date)
+        dateLabel = Label.dateLabel(date, ofSize: .titleLarge, textColor: Design.Color.white)
+        configureHierarchy(with: dateLabel)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func configureHierarchy(with valueView: UIView) {
+    private func configureHierarchy(with valueView: UIView?) {
+        guard let valueView = valueView else { return }
+
         layer.backgroundColor = Design.Color.chocolate.cgColor
         layer.cornerRadius = Design.CornerRadius.large
 
@@ -90,29 +80,5 @@ class ScheduleOptionView: UIView {
             imageView.leadingAnchor.constraint(greaterThanOrEqualTo: valueView.trailingAnchor, constant: 8),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
-    }
-
-    private func configureDateLabels(with date: Date) {
-        DateFormatter.shared.dateFormat = "LLLL d EEEE"
-        let stringDate = DateFormatter.shared.string(from: date)
-        let splitDate = stringDate.split(separator: " ")
-        let month = "\(splitDate[0].capitalized.replacingOccurrences(of: ".", with: ""))"
-        let day = "\(splitDate[1])"
-        let weekday = "\(splitDate[2])"
-
-        configureDateLabel(monthLabel, text: month, fontWeight: .medium)
-        configureDateLabel(dayLabel, text: day, fontWeight: .regular)
-        configureDateLabel(weekdayLabel, text: weekday, fontWeight: .light)
-
-        [monthLabel, dayLabel, weekdayLabel].forEach { label in
-            dateStack.addArrangedSubview(label)
-        }
-        dateStack.spacing = 4
-    }
-
-    private func configureDateLabel(_ label: UILabel, text: String, fontWeight: Design.RobotoFontWeight) {
-        label.text = text
-        label.textColor = Design.Color.white
-        label.font = Design.Font.robotoFont(ofSize: 18, weight: fontWeight)
     }
 }

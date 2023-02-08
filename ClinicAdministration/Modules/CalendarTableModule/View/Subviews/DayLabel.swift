@@ -10,8 +10,7 @@ import HorizonCalendar
 
 struct DayLabel: CalendarItemViewRepresentable {
     struct InvariantViewProperties: Hashable {
-        let font: UIFont
-        var textColor: UIColor
+        let label: UILabel
         var backgroundColor: UIColor
     }
 
@@ -20,12 +19,8 @@ struct DayLabel: CalendarItemViewRepresentable {
     }
 
     static func makeView(withInvariantViewProperties invariantViewProperties: InvariantViewProperties) -> UILabel {
-        let label = UILabel()
-
-        label.font = invariantViewProperties.font
-        label.textColor = invariantViewProperties.textColor
+        let label = invariantViewProperties.label
         label.backgroundColor = invariantViewProperties.backgroundColor
-
         label.textAlignment = .center
         label.clipsToBounds = true
         label.layer.cornerRadius = Design.CornerRadius.small

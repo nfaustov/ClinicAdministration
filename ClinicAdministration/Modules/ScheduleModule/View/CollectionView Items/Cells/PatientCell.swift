@@ -10,11 +10,7 @@ import UIKit
 final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "PatientCell"
 
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 24, weight: .medium)
-        return label
-    }()
+    private let timeLabel = Label.headlineMedium(color: Design.Color.chocolate)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,8 +79,6 @@ final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
                 patientView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.82),
                 patientView.heightAnchor.constraint(equalToConstant: 70)
             ])
-        } else {
-            timeLabel.textColor = Design.Color.chocolate
         }
     }
 }

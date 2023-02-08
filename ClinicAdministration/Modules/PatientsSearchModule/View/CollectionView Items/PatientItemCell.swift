@@ -11,18 +11,12 @@ final class PatientItemCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "PatientItemCell"
 
     let nameLabel: UILabel = {
-       let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 16, weight: .regular)
-        label.textColor = Design.Color.chocolate
+        let label = Label.titleMedium(color: Design.Color.chocolate)
         label.numberOfLines = 2
         return label
     }()
-    let phoneLabel: UILabel = {
-       let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 15, weight: .thin)
-        label.textColor = Design.Color.chocolate
-        return label
-    }()
+    // TODO: 
+    let phoneLabel = Label.thin(ofSize: .titleSmall, color: Design.Color.chocolate)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

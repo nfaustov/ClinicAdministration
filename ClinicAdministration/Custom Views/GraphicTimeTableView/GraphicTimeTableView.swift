@@ -116,11 +116,8 @@ final class GraphicTimeTableView: UIView {
 
     private func setupCabinetLabels() {
         for cabinet in 1...Settings.cabinets {
-            let label = UILabel()
-            label.text = "\(cabinet)"
-            label.font = Design.Font.robotoFont(ofSize: 18, weight: .medium)
+            let label = Label.titleLarge(color: Design.Color.white, withText: "\(cabinet)")
             label.sizeToFit()
-            label.textColor = Design.Color.white
             headerView.addSubview(label)
 
             label.translatesAutoresizingMaskIntoConstraints = false

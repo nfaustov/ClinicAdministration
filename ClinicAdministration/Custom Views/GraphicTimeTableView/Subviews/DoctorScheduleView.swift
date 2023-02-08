@@ -106,7 +106,7 @@ final class DoctorScheduleView: UIView {
         """
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
-        nameLabel.font = Design.Font.robotoFont(ofSize: 11, weight: .medium)
+        nameLabel.font = Font.labelSmall
         nameLabel.sizeToFit()
         addSubview(nameLabel)
 

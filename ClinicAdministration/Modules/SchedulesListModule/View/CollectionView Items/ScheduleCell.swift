@@ -10,8 +10,8 @@ import UIKit
 final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "ScheduleCell"
 
-    let dateLabel = UILabel()
-    let intervalLabel = UILabel()
+    let dateLabel = Label.titleLarge(color: Design.Color.white)
+    let intervalLabel = Label.headlineSmall(color: Design.Color.chocolate)
     let dateView = UIView()
 
     override init(frame: CGRect) {
@@ -37,14 +37,10 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
         dateLabel.adjustsFontSizeToFitWidth = true
         dateLabel.textAlignment = .center
         dateLabel.text = formatter.string(from: schedule.starting)
-        dateLabel.textColor = Design.Color.white
-        dateLabel.font = Design.Font.robotoFont(ofSize: 17, weight: .regular)
         formatter.dateFormat = "H:mm"
         let startingTime = formatter.string(from: schedule.starting)
         let endingTime = formatter.string(from: schedule.ending)
         intervalLabel.text = "\(startingTime) - \(endingTime)"
-        intervalLabel.textColor = Design.Color.chocolate
-        intervalLabel.font = Design.Font.robotoFont(ofSize: 20, weight: .medium)
 
         dateView.layer.backgroundColor = Design.Color.darkGray.cgColor
         addSubview(dateView)

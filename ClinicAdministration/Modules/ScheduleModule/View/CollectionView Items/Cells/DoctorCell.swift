@@ -11,17 +11,13 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "DoctorCell"
 
     private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 17, weight: .medium)
-        label.textColor = Design.Color.chocolate
+        let label = Label.titleLarge(color: Design.Color.chocolate)
         label.numberOfLines = 3
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let specializationLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 14, weight: .light)
-        label.textColor = Design.Color.chocolate
+        let label = Label.labelLarge(color: Design.Color.chocolate)
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 2
         return label

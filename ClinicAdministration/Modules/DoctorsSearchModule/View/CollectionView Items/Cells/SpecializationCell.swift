@@ -11,9 +11,7 @@ final class SpecializationCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "SpecializationCell"
 
     let label: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 11, weight: .regular)
-        label.textColor = Design.Color.brown
+        let label = Label.labelSmall(color: Design.Color.brown)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label

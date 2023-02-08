@@ -11,9 +11,7 @@ class ActionListCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "ActionListCell"
 
     private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 15, weight: .medium)
-        label.textColor = Design.Color.chocolate
+        let label = Label.titleMedium(color: Design.Color.chocolate)
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label

@@ -13,13 +13,7 @@ final class VisitsHistoryView: UIView {
         case allTime = "За всё время"
     }
 
-    private let titleLabel: UILabel = {
-       let label = UILabel()
-        label.text = "Визиты"
-        label.textColor = Design.Color.white
-        label.font = Design.Font.robotoFont(ofSize: 24, weight: .bold)
-        return label
-    }()
+    private let titleLabel = Label.headlineMedium(color: Design.Color.white, withText: "Визиты")
 
     private var filter: Filter = .thisYear
     private var visits: [Visit]

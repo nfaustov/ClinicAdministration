@@ -11,33 +11,22 @@ class DoctorView: UIView {
     private var image = UIView()
 
     private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 18, weight: .medium)
-        label.textColor = Design.Color.chocolate
+        let label = Label.titleLarge(color: Design.Color.chocolate)
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let specializationLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 18, weight: .light)
-        label.textColor = Design.Color.brown
+        let label = Label.titleLarge(color: Design.Color.brown)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let durationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = Design.Color.brown
+        let label = Label.titleLarge(color: Design.Color.brown)
         label.numberOfLines = 2
         return label
     }()
-    private let infoLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 16, weight: .light)
-        label.textColor = Design.Color.chocolate
-        label.numberOfLines = 0
-        return label
-    }()
+    private let infoLabel = Label.titleMedium(color: Design.Color.brown)
 
     var doctor: Doctor {
         didSet {
@@ -95,8 +84,9 @@ class DoctorView: UIView {
         let durationText = "Длительность приема: "
         let durationValueText = "\(Int(doctor.serviceDuration / 60)) мин"
         let summaryDurationText = durationText + durationValueText
-        let durationFont = Design.Font.robotoFont(ofSize: 16, weight: .light)
-        let durationValueFont = Design.Font.robotoFont(ofSize: 16, weight: .regular)
+        // TODO:
+        let durationFont = Font.robotoFont(ofSize: .titleMedium, weight: .light)
+        let durationValueFont = Font.robotoFont(ofSize: .titleMedium, weight: .regular)
         let attributedDurationText = NSMutableAttributedString(
             string: summaryDurationText,
             attributes: [NSAttributedString.Key.font: durationFont]
