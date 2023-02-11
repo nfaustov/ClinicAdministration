@@ -9,7 +9,7 @@ import UIKit
 
 final class FloatingTextField: UIView {
     private let textField = UITextField()
-    private let placeholderLabel = Label.light(ofSize: .titleMedium, color: Design.Color.darkGray)
+    private let placeholderLabel = Label.light(ofSize: .titleMedium, color: Color.placeholderText)
 
     private var placeholderTopConstraint = NSLayoutConstraint()
 
@@ -69,7 +69,7 @@ final class FloatingTextField: UIView {
 
     private func configureHierarchy() {
         textField.font = Font.titleMedium
-        textField.textColor = Design.Color.chocolate
+        textField.textColor = Color.label
         textField.borderStyle = .none
         textField.autocapitalizationType = .words
         textField.keyboardType = keyboardType
@@ -83,7 +83,7 @@ final class FloatingTextField: UIView {
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
 
         let underline = UIView()
-        underline.backgroundColor = Design.Color.darkGray
+        underline.backgroundColor = Color.darkSeparator
         addSubview(underline)
         underline.translatesAutoresizingMaskIntoConstraints = false
 

@@ -11,7 +11,7 @@ final class SpecializationCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "SpecializationCell"
 
     let label: UILabel = {
-        let label = Label.labelSmall(color: Design.Color.brown)
+        let label = Label.labelSmall(color: Color.label)
         label.numberOfLines = 2
         label.textAlignment = .center
         return label
@@ -19,15 +19,15 @@ final class SpecializationCell: UICollectionViewCell, SelfConfiguredCell {
 
     override var isSelected: Bool {
         didSet {
-            backgroundColor = isSelected ? Design.Color.chocolate : Design.Color.lightGray
-            label.textColor = isSelected ? Design.Color.lightGray : Design.Color.brown
+            backgroundColor = isSelected ? Color.secondaryFill : Color.background
+            label.textColor = isSelected ? Color.lightSecondaryLabel : Color.label
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = Design.Color.lightGray
+        backgroundColor = Color.background
         layer.cornerRadius = Design.CornerRadius.small
 
         addSubview(label)

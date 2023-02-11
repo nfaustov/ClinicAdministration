@@ -19,14 +19,14 @@ final class PassportButtonView: UIView {
     }
 
     private func configureHierarchy() {
-        layer.backgroundColor = Design.Color.white.cgColor
+        layer.backgroundColor = Color.secondaryBackground.cgColor
         layer.cornerRadius = Design.CornerRadius.medium
-        layer.borderColor = Design.Color.brown.cgColor
+        layer.borderColor = Color.secondaryLabel.cgColor
         layer.borderWidth = 1
 
-        let label = Label.headlineSmall(color: Design.Color.brown, withText: "Паспортные данные")
+        let label = Label.headlineSmall(color: Color.secondaryLabel, withText: "Паспортные данные")
 
-        let image = UIImage(named: "chevron_right")?.withTintColor(Design.Color.brown)
+        let image = UIImage(named: "chevron_right")?.withTintColor(Color.secondaryLabel)
         let imageView = UIImageView(image: image)
 
         for view in [label, imageView] {

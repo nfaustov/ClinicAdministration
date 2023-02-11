@@ -16,7 +16,7 @@ final class OptionCell: UICollectionViewCell, SelfConfiguredCell {
         super.init(frame: frame)
 
         layer.cornerRadius = Design.CornerRadius.large
-        layer.shadowColor = Design.Color.brown.cgColor
+        layer.shadowColor = Color.selectedShadow.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.35
         layer.shadowRadius = 8

@@ -46,7 +46,7 @@ final class CreateScheduleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.navigationBar.tintColor = Design.Color.chocolate
+        navigationController?.navigationBar.tintColor = Color.label
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Расписание врача"
 
@@ -65,7 +65,7 @@ final class CreateScheduleViewController: UIViewController {
     private func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = Design.Color.lightGray
+        collectionView.backgroundColor = Color.background
         collectionView.delegate = self
         view.addSubview(collectionView)
     }

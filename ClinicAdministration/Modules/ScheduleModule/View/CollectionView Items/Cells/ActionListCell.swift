@@ -11,7 +11,7 @@ class ActionListCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "ActionListCell"
 
     private let nameLabel: UILabel = {
-        let label = Label.titleMedium(color: Design.Color.chocolate)
+        let label = Label.titleMedium(color: Color.label)
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -23,7 +23,7 @@ class ActionListCell: UICollectionViewCell, SelfConfiguredCell {
         layer.cornerRadius = Design.CornerRadius.small
 
         let separator = UIView()
-        separator.backgroundColor = Design.Color.gray
+        separator.backgroundColor = Color.lightSeparator
 
         [nameLabel, separator].forEach { view in
             addSubview(view)
@@ -52,7 +52,7 @@ class ActionListCell: UICollectionViewCell, SelfConfiguredCell {
         guard let icon = action.icon else { return }
 
         let imageView = UIImageView()
-        imageView.image = icon.withTintColor(Design.Color.brown)
+        imageView.image = icon.withTintColor(Color.secondaryLabel)
         addSubview(imageView)
 
         imageView.translatesAutoresizingMaskIntoConstraints = false

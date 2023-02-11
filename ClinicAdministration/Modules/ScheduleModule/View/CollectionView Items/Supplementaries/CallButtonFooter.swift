@@ -15,8 +15,8 @@ final class CallButtonFooter: UICollectionReusableView {
 
         let button = UIButton()
         button.setTitle("СВЯЗАТЬСЯ С ВРАЧОМ", for: .normal)
-        button.setTitleColor(Design.Color.white, for: .normal)
-        button.backgroundColor = Design.Color.red
+        button.setTitleColor(Color.lightLabel, for: .normal)
+        button.backgroundColor = Color.fill
         button.layer.cornerRadius = Design.CornerRadius.medium
         button.titleEdgeInsets.left = -70
         addSubview(button)

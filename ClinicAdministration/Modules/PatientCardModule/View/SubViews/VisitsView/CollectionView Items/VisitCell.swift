@@ -11,7 +11,7 @@ final class VisitCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "VisitCell"
 
     func configure(with: Visit) {
-        layer.backgroundColor = Design.Color.lightGray.cgColor
+        layer.backgroundColor = Color.background.cgColor
         layer.cornerRadius = Design.CornerRadius.large
     }
 }

@@ -46,7 +46,7 @@ final class GraphicTimeTableView: UIView {
         self.date = date
         super.init(frame: .zero)
 
-        backgroundColor = Design.Color.white
+        backgroundColor = Color.secondaryBackground
         layer.cornerRadius = Design.CornerRadius.large
 
         vScrollView.showsVerticalScrollIndicator = false
@@ -101,7 +101,7 @@ final class GraphicTimeTableView: UIView {
 
     private func setupHeader() {
         addSubview(headerView)
-        headerView.backgroundColor = Design.Color.chocolate
+        headerView.backgroundColor = Color.secondaryFill
         headerView.layer.cornerRadius = Design.CornerRadius.large
         headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +116,7 @@ final class GraphicTimeTableView: UIView {
 
     private func setupCabinetLabels() {
         for cabinet in 1...Settings.cabinets {
-            let label = Label.titleLarge(color: Design.Color.white, withText: "\(cabinet)")
+            let label = Label.titleLarge(color: Color.lightLabel, withText: "\(cabinet)")
             label.sizeToFit()
             headerView.addSubview(label)
 

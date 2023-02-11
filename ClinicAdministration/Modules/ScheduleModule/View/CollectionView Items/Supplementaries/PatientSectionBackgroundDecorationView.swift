@@ -14,7 +14,7 @@ final class PatientSectionBackgroundDecorationView: UICollectionReusableView {
         super.init(frame: frame)
 
         let view = UIView()
-        view.layer.backgroundColor = Design.Color.chocolate.cgColor
+        view.layer.backgroundColor = Color.secondaryFill.cgColor
         view.layer.cornerRadius = Design.CornerRadius.large
         addSubview(view)
 

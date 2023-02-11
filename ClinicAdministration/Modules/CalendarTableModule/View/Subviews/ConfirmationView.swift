@@ -11,26 +11,26 @@ final class ConfirmationView: UIView {
     private let separatorView = UIView()
     private let confirmButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = Design.Color.red
+        button.backgroundColor = Color.fill
         button.setTitle("ГОТОВО", for: .normal)
         button.titleLabel?.font = Font.titleMedium
-        button.setTitleColor(Design.Color.white, for: .normal)
+        button.setTitleColor(Color.lightLabel, for: .normal)
         button.layer.cornerRadius = Design.CornerRadius.small
         return button
     }()
     private let cancelButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = Design.Color.gray
+        button.backgroundColor = Color.background
         button.setTitle("ОТМЕНИТЬ", for: .normal)
         button.titleLabel?.font = Font.titleMedium
-        button.setTitleColor(Design.Color.brown, for: .normal)
+        button.setTitleColor(Color.secondaryLabel, for: .normal)
         button.layer.borderWidth = 1
-        button.layer.borderColor = Design.Color.chocolate.cgColor
+        button.layer.borderColor = Color.secondaryLabel.cgColor // .style(.secondaryLabel).cgColor
         button.layer.cornerRadius = Design.CornerRadius.small
         return button
     }()
     private let dateLabel: UILabel = {
-        let label = Label.titleMedium(color: Design.Color.chocolate)
+        let label = Label.titleMedium(color: Color.label)
         label.numberOfLines = 2
         return label
     }()
@@ -52,9 +52,9 @@ final class ConfirmationView: UIView {
     }
 
     private func configureHierarchy() {
-        backgroundColor = Design.Color.white
+        backgroundColor = Color.secondaryBackground
 
-        separatorView.backgroundColor = Design.Color.darkGray
+        separatorView.backgroundColor = Color.darkSeparator
 
         for view in [separatorView, dateLabel, cancelButton, confirmButton] {
             addSubview(view)

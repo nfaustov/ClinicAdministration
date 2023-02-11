@@ -32,7 +32,7 @@ final class VisitsView: UIView {
         layer.masksToBounds = true
 
         visitsCollectionView = UICollectionView(frame: bounds, collectionViewLayout: createLayout())
-        visitsCollectionView.backgroundColor = Design.Color.white
+        visitsCollectionView.backgroundColor = Color.secondaryBackground
         addSubview(visitsCollectionView)
         visitsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         visitsCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

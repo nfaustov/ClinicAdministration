@@ -11,20 +11,20 @@ final class PatientItemCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "PatientItemCell"
 
     let nameLabel: UILabel = {
-        let label = Label.titleMedium(color: Design.Color.chocolate)
+        let label = Label.titleMedium(color: Color.label)
         label.numberOfLines = 2
         return label
     }()
-    // TODO: 
-    let phoneLabel = Label.thin(ofSize: .titleSmall, color: Design.Color.chocolate)
+
+    let phoneLabel = Label.thin(ofSize: .titleSmall, color: Color.label)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = Design.Color.white
+        backgroundColor = Color.secondaryBackground
         layer.cornerRadius = Design.CornerRadius.small
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowColor = Design.Color.darkGray.cgColor
+        layer.shadowColor = Color.passiveShadow.cgColor
         layer.shadowOpacity = 0.15
         layer.shadowRadius = 5
 

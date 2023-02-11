@@ -10,13 +10,13 @@ import UIKit
 class DoctorPlaceholder: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier = "DoctorPlaceholder"
 
-    let messageLabel = Label.titleMedium(color: Design.Color.chocolate)
+    let messageLabel = Label.titleMedium(color: Color.label)
 
     let createScheduleButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.backgroundColor = Design.Color.white
+        button.backgroundColor = Color.secondaryBackground
         button.layer.cornerRadius = Design.CornerRadius.small
-        button.layer.shadowColor = Design.Color.brown.cgColor
+        button.layer.shadowColor = Color.selectedShadow.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0.2
@@ -58,7 +58,7 @@ class DoctorPlaceholder: UICollectionViewCell, SelfConfiguredCell {
     func configure(with model: DoctorSectionPlaceholder) {
         messageLabel.text = model.message
         createScheduleButton.setTitle(model.buttonTitle, for: .normal)
-        createScheduleButton.setTitleColor(Design.Color.chocolate, for: .normal)
+        createScheduleButton.setTitleColor(Color.label, for: .normal)
         createScheduleButton.titleLabel?.font = Font.titleSmall
         createScheduleButton.addTarget(model.target, action: model.action, for: .touchUpInside)
     }

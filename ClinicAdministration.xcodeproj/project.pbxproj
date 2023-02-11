@@ -157,7 +157,9 @@
 		8BCB05082674BBF60062F396 /* CreateScheduleCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB05072674BBF60062F396 /* CreateScheduleCellFactory.swift */; };
 		8BCB050A267576EB0062F396 /* CreateScheduleCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB0509267576EB0062F396 /* CreateScheduleCollectionViewLayout.swift */; };
 		8BCD1ACE270F5F3700D91D3C /* IntervalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCD1ACD270F5F3700D91D3C /* IntervalCell.swift */; };
+		8BCEBAA12996E871001FB205 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCEBAA02996E871001FB205 /* Button.swift */; };
 		8BD0E77E2771028400847621 /* PatientAppointmentDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD0E77D2771028400847621 /* PatientAppointmentDataView.swift */; };
+		8BD4897C299514A600B82BB5 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD4897B299514A600B82BB5 /* Color.swift */; };
 		8BE26CEA2616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE26CE92616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift */; };
 		8BE80C38264AA0A300CCA7F7 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE80C37264AA0A300CCA7F7 /* Database.swift */; };
 		8BF026D6267383C3002B0C39 /* ScheduleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF026D5267383C3002B0C39 /* ScheduleOption.swift */; };
@@ -329,7 +331,9 @@
 		8BCB05072674BBF60062F396 /* CreateScheduleCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleCellFactory.swift; sourceTree = "<group>"; };
 		8BCB0509267576EB0062F396 /* CreateScheduleCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScheduleCollectionViewLayout.swift; sourceTree = "<group>"; };
 		8BCD1ACD270F5F3700D91D3C /* IntervalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalCell.swift; sourceTree = "<group>"; };
+		8BCEBAA02996E871001FB205 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		8BD0E77D2771028400847621 /* PatientAppointmentDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAppointmentDataView.swift; sourceTree = "<group>"; };
+		8BD4897B299514A600B82BB5 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8BE26CE92616A9D800B65513 /* PatientSectionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientSectionBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		8BE80C37264AA0A300CCA7F7 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		8BF026D5267383C3002B0C39 /* ScheduleOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleOption.swift; sourceTree = "<group>"; };
@@ -606,7 +610,9 @@
 			isa = PBXGroup;
 			children = (
 				8B20CE522629995C0007C20A /* Design.swift */,
+				8BCEBAA02996E871001FB205 /* Button.swift */,
 				8B444DED2992FE0000223FB6 /* Label.swift */,
+				8BD4897B299514A600B82BB5 /* Color.swift */,
 				8B444DEF2993065100223FB6 /* Font.swift */,
 				8B444DF12993079100223FB6 /* Standards.swift */,
 				8BCAB7C72559DC72001A93D0 /* Fonts */,
@@ -1455,6 +1461,7 @@
 				8BF23AA326371103009D9A7A /* DoctorControlCell.swift in Sources */,
 				8B67FB5D29923BB900EF76B4 /* VisitCell.swift in Sources */,
 				8B20CE5D2629998F0007C20A /* Bundle-Decodable.swift in Sources */,
+				8BCEBAA12996E871001FB205 /* Button.swift in Sources */,
 				8B83BAAA2715F6B5007E9C71 /* SchedulesListViewController.swift in Sources */,
 				8B7F8B17263AF62900B75324 /* PickCabinetModule.swift in Sources */,
 				8B47BF1429532C6200C90072 /* DoctorService.swift in Sources */,
@@ -1591,6 +1598,7 @@
 				8B303B08263BE24700DD343A /* PickerViewController.swift in Sources */,
 				8BB450BA2630491700C143A4 /* CalendarSubscription.swift in Sources */,
 				8B92DFF12657A91D00B3D6B3 /* DependencyContainer.swift in Sources */,
+				8BD4897C299514A600B82BB5 /* Color.swift in Sources */,
 				8BFEE593266257CA00D27064 /* AlertsFactory.swift in Sources */,
 				8BB450BE2630495D00C143A4 /* GraphicScheduleSubscription.swift in Sources */,
 				8B0ACDD2294DE42400913B46 /* PatientCardPresenter.swift in Sources */,

@@ -27,7 +27,7 @@ final class GraphicScheduleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Design.Color.lightGray
+        view.backgroundColor = Color.background
 
         datePicker = DatePicker(
             selectedDate: date,

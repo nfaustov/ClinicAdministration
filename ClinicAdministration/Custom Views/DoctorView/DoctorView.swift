@@ -11,22 +11,22 @@ class DoctorView: UIView {
     private var image = UIView()
 
     private let nameLabel: UILabel = {
-        let label = Label.titleLarge(color: Design.Color.chocolate)
+        let label = Label.titleLarge(color: Color.label)
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let specializationLabel: UILabel = {
-        let label = Label.titleLarge(color: Design.Color.brown)
+        let label = Label.titleLarge(color: Color.secondaryLabel)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let durationLabel: UILabel = {
-        let label = Label.titleLarge(color: Design.Color.brown)
+        let label = Label.titleLarge(color: Color.secondaryLabel)
         label.numberOfLines = 2
         return label
     }()
-    private let infoLabel = Label.titleMedium(color: Design.Color.brown)
+    private let infoLabel = Label.titleMedium(color: Color.secondaryLabel)
 
     var doctor: Doctor {
         didSet {
@@ -40,7 +40,7 @@ class DoctorView: UIView {
         self.doctor = doctor
         super.init(frame: .zero)
 
-        backgroundColor = Design.Color.white
+        backgroundColor = Color.secondaryBackground
 
         applyDoctor()
     }
@@ -63,7 +63,7 @@ class DoctorView: UIView {
             image = imageView
         } else {
             let imagePlaceholder = UIView()
-            imagePlaceholder.backgroundColor = Design.Color.gray
+            imagePlaceholder.backgroundColor = Color.separator
             addSubview(imagePlaceholder)
             imagePlaceholder.translatesAutoresizingMaskIntoConstraints = false
             image = imagePlaceholder
@@ -84,7 +84,6 @@ class DoctorView: UIView {
         let durationText = "Длительность приема: "
         let durationValueText = "\(Int(doctor.serviceDuration / 60)) мин"
         let summaryDurationText = durationText + durationValueText
-        // TODO:
         let durationFont = Font.robotoFont(ofSize: .titleMedium, weight: .light)
         let durationValueFont = Font.robotoFont(ofSize: .titleMedium, weight: .regular)
         let attributedDurationText = NSMutableAttributedString(

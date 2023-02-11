@@ -19,8 +19,8 @@ final class DoctorsSearchViewController: SearchViewController<Doctor> {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Выберите врача"
 
-        view.backgroundColor = Design.Color.white
-        searchBar.tintColor = Design.Color.darkGray
+        view.backgroundColor = Color.secondaryBackground
+        searchBar.tintColor = Color.tertiaryLabel
 
         searchBar.delegate = self
         searchCollectionView.delegate = self

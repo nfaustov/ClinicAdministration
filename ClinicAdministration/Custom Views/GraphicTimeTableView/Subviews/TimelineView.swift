@@ -40,7 +40,7 @@ final class TimelineView: UIView {
                 let text = (minutes == 0) ?
                     "\(openingHour + hour):00" :
                     "\(openingHour + hour):\(minutes)"
-                let label = Label.labelLarge(color: Design.Color.brown, withText: text)
+                let label = Label.labelLarge(color: Color.secondaryLabel, withText: text)
                 label.sizeToFit()
                 label.frame.origin = CGPoint(
                     x: 9,

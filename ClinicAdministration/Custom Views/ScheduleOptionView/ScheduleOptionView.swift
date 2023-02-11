@@ -10,7 +10,8 @@ import UIKit
 class ScheduleOptionView: UIView {
     private let imageView = UIImageView()
 
-    private let titleLabel = Label.labelLarge(color: Design.Color.darkGray)
+    private let titleLabel = Label.labelLarge(color: Color.tertiaryLabel)
+
     private var dateLabel: UILabel?
     private var valueLabel: UILabel?
 
@@ -25,7 +26,7 @@ class ScheduleOptionView: UIView {
         didSet {
             guard let date = date else { return }
 
-            dateLabel = Label.dateLabel(date, ofSize: .titleLarge, textColor: Design.Color.white)
+            dateLabel = Label.dateLabel(date, ofSize: .titleLarge, textColor: Color.lightSecondaryLabel)
         }
     }
 
@@ -34,8 +35,8 @@ class ScheduleOptionView: UIView {
         super.init(frame: .zero)
 
         titleLabel.text = title
-        valueLabel = Label.titleLarge(color: Design.Color.white, withText: valuePlaceholder)
-        imageView.image = UIImage(named: "chevron_down")?.withTintColor(Design.Color.lightGray)
+        valueLabel = Label.titleLarge(color: Color.lightSecondaryLabel, withText: valuePlaceholder)
+        imageView.image = UIImage(named: "chevron_down")?.withTintColor(Color.lightSecondaryLabel)
 
         configureHierarchy(with: valueLabel)
     }
@@ -45,9 +46,9 @@ class ScheduleOptionView: UIView {
         super.init(frame: .zero)
 
         titleLabel.text = title
-        imageView.image = UIImage(named: "calendar")?.withTintColor(Design.Color.lightGray)
+        imageView.image = UIImage(named: "calendar")?.withTintColor(Color.lightSecondaryLabel)
 
-        dateLabel = Label.dateLabel(date, ofSize: .titleLarge, textColor: Design.Color.white)
+        dateLabel = Label.dateLabel(date, ofSize: .titleLarge, textColor: Color.lightSecondaryLabel)
         configureHierarchy(with: dateLabel)
     }
 
@@ -58,7 +59,7 @@ class ScheduleOptionView: UIView {
     private func configureHierarchy(with valueView: UIView?) {
         guard let valueView = valueView else { return }
 
-        layer.backgroundColor = Design.Color.chocolate.cgColor
+        layer.backgroundColor = Color.secondaryFill.cgColor
         layer.cornerRadius = Design.CornerRadius.large
 
         [titleLabel, valueView, imageView].forEach { view in

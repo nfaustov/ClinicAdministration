@@ -34,7 +34,7 @@ final class GraphicTableView: UIView {
         self.transformAction = transformAction
         super.init(frame: .zero)
 
-        backgroundColor = Design.Color.white
+        backgroundColor = Color.secondaryBackground
 
         setWorkingHours(date)
         addCabinets()
@@ -85,11 +85,11 @@ final class GraphicTableView: UIView {
         dashLinePath.setLineDash(dashes, count: dashes.count, phase: 0)
 
         dashLinePath.close()
-        Design.Color.gray.set()
+        Color.separator.set()
         dashLinePath.stroke()
 
         linePath.close()
-        Design.Color.gray.set()
+        Color.separator.set()
         linePath.stroke()
     }
 

@@ -43,7 +43,7 @@ final class CalendarTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Design.Color.white
+        view.backgroundColor = Color.secondaryBackground
 
         calendar.locale = Locale(identifier: "ru_RU")
 
@@ -65,7 +65,7 @@ final class CalendarTableViewController: UIViewController {
 
     private func configureCalendar() {
         let calendarView = CalendarView(initialContent: makeContent())
-        calendarView.backgroundColor = Design.Color.white
+        calendarView.backgroundColor = Color.secondaryBackground
         view.addSubview(calendarView)
 
         calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -102,17 +102,17 @@ final class CalendarTableViewController: UIViewController {
         )
         .dayItemProvider { day in
                 var invariantViewProperties = DayLabel.InvariantViewProperties(
-                    label: Label.titleLarge(color: Design.Color.brown),
+                    label: Label.titleLarge(color: Color.secondaryLabel),
                     backgroundColor: .clear
                 )
 
                 if day == selectedDay {
-                    invariantViewProperties.label.textColor = Design.Color.white
-                    invariantViewProperties.backgroundColor = Design.Color.chocolate
+                    invariantViewProperties.label.textColor = Color.lightLabel
+                    invariantViewProperties.backgroundColor = Color.secondaryFill
                 }
 
             if self.compareToNow(day) == .orderedAscending {
-                invariantViewProperties.label.textColor = Design.Color.gray
+                invariantViewProperties.label.textColor = Color.quaternaryLabel
             }
 
                 return CalendarItemModel<DayLabel>(
@@ -123,7 +123,7 @@ final class CalendarTableViewController: UIViewController {
         .monthHeaderItemProvider { month in
                 CalendarItemModel<MonthHeader>(
                     invariantViewProperties: .init(
-                        label: Label.headlineSmall(color: Design.Color.chocolate),
+                        label: Label.headlineSmall(color: Color.label),
                         backgoundColor: .clear
                     ),
                     viewModel: .init(month: month)
@@ -132,13 +132,13 @@ final class CalendarTableViewController: UIViewController {
         .dayOfWeekItemProvider { _, dayOfWeekIndex in
                 CalendarItemModel<DayOfWeekRow>(
                     invariantViewProperties: .init(
-                        label: Label.titleLarge(color: Design.Color.darkGray),
+                        label: Label.titleLarge(color: Color.tertiaryLabel),
                         backgroundColor: .clear
                     ),
                     viewModel: .init(dayOfWeekIndex: dayOfWeekIndex)
                 )
             }
-        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Design.Color.darkGray))
+        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Color.darkSeparator))
         .verticalDayMargin(8)
         .horizontalDayMargin(8)
         .interMonthSpacing(20)

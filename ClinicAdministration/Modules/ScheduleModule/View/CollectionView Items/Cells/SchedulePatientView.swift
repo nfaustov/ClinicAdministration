@@ -9,29 +9,29 @@ import UIKit
 
 final class SchedulePatientView: UIView {
     private let nameLabel: UILabel = {
-        let label = Label.titleLarge(color: Design.Color.white)
+        let label = Label.titleLarge(color: Color.lightLabel)
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
-    private let phoneNumberLabel = Label.light(ofSize: .titleLarge, color: Design.Color.white)
+    private let phoneNumberLabel = Label.light(ofSize: .titleLarge, color: Color.lightLabel)
 
     private let separator: UIView = {
         let view = UIView()
-        view.backgroundColor = Design.Color.gray
+        view.backgroundColor = Color.separator
         return view
     }()
 
     init(secondName: String, firstName: String, patronymicName: String, phoneNumber: String) {
         super.init(frame: CGRect.zero)
 
-        layer.backgroundColor = Design.Color.darkGray.cgColor
+        layer.backgroundColor = Color.tertiaryFill.cgColor
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = Design.Color.chocolate.cgColor
+        layer.borderColor = Color.border.cgColor
         layer.shadowOffset = .zero
-        layer.shadowColor = Design.Color.darkGray.cgColor
+        layer.shadowColor = Color.passiveShadow.cgColor
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 10
 

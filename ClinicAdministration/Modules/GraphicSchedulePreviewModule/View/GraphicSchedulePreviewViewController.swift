@@ -14,11 +14,11 @@ class GraphicSchedulePreviewViewController: UIViewController {
     private let confirmButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
-        button.setTitleColor(Design.Color.chocolate, for: .normal)
+        button.setTitleColor(Color.label, for: .normal)
         button.titleLabel?.font = Font.titleMedium
-        button.backgroundColor = Design.Color.white
+        button.backgroundColor = Color.secondaryBackground
         button.layer.cornerRadius = Design.CornerRadius.small
-        button.layer.shadowColor = Design.Color.brown.cgColor
+        button.layer.shadowColor = Color.selectedShadow.cgColor
         button.layer.shadowOffset = CGSize(width: 0, height: 2)
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0.2
@@ -38,7 +38,7 @@ class GraphicSchedulePreviewViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = false
 
-        view.backgroundColor = Design.Color.lightGray
+        view.backgroundColor = Color.background
 
         graphicTimeTableView = GraphicTimeTableView(date: date)
         graphicTimeTableView.delegate = self
