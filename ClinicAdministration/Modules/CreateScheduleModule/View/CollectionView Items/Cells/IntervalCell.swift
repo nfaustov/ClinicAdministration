@@ -10,29 +10,24 @@ import UIKit
 final class IntervalCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "IntervalCell"
 
-    private let startingLabel = UILabel()
-    private let endingLabel = UILabel()
+    private let startingLabel = Label.headlineMedium(color: Color.secondaryLabel)
+    private let endingLabel = Label.headlineMedium(color: Color.secondaryLabel)
 
     func configure(with interval: DateInterval) {
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
-        layer.backgroundColor = Design.Color.white.cgColor
+        layer.backgroundColor = Color.secondaryBackground.cgColor
         layer.cornerRadius = Design.CornerRadius.medium
-        layer.shadowColor = Design.Color.brown.cgColor
+        layer.shadowColor = Color.selectedShadow.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 8
-
-        [startingLabel, endingLabel].forEach { label in
-            label.font = Design.Font.robotoFont(ofSize: 24, weight: .regular)
-            label.textColor = Design.Color.brown
-        }
 
         DateFormatter.shared.dateFormat = "H:mm"
         startingLabel.text = DateFormatter.shared.string(from: interval.start)
         endingLabel.text = DateFormatter.shared.string(from: interval.end)
 
         let separator = UIView()
-        separator.backgroundColor = Design.Color.lightGray
+        separator.backgroundColor = Color.lightSeparator
 
         [startingLabel, endingLabel, separator].forEach { view in
             addSubview(view)

@@ -18,17 +18,17 @@ final class DatePicker: UIView {
     private let today = Date()
     private let calendar = Calendar.current
 
-    private let monthLabel = UILabel()
-    private let dayLabel = UILabel()
-    private let weekdayLabel = UILabel()
+    private let monthLabel = Label.bold(ofSize: .headlineMedium, color: Color.lightLabel)
+    private let dayLabel = Label.regular(ofSize: .headlineMedium, color: Color.label)
+    private let weekdayLabel = Label.thin(ofSize: .headlineMedium, color: Color.lightLabel)
 
     private let selectionLine = UIView()
     private var selectionLineConstraint: NSLayoutConstraint!
 
     private let buttonsStack = UIStackView()
 
-    private let calendarImage = UIImage(named: "calendar")?.withTintColor(Design.Color.brown)
-    private let selectedCalendarImage = UIImage(named: "calendar")?.withTintColor(Design.Color.lightGray)
+    private let calendarImage = UIImage(named: "calendar")?.withTintColor(Color.secondaryLabel)
+    private let selectedCalendarImage = UIImage(named: "calendar")?.withTintColor(Color.lightSecondaryLabel)
 
     private var state: DatePickerState! {
         didSet {
@@ -57,7 +57,7 @@ final class DatePicker: UIView {
         self.calendarAction = calendarAction
         super.init(frame: .zero)
 
-        layer.backgroundColor = Design.Color.chocolate.cgColor
+        layer.backgroundColor = Color.secondaryFill.cgColor
         layer.cornerRadius = Design.CornerRadius.large
 
         configureLabels()
@@ -92,9 +92,9 @@ final class DatePicker: UIView {
         for button in buttons {
             if button.currentTitle == rawValue {
                 updateSelectionLine(anchor: button)
-                button.setTitleColor(Design.Color.lightGray, for: .normal)
+                button.setTitleColor(Color.lightSecondaryLabel, for: .normal)
             } else {
-                button.setTitleColor(Design.Color.brown, for: .normal)
+                button.setTitleColor(Color.secondaryLabel, for: .normal)
             }
         }
     }
@@ -111,6 +111,7 @@ final class DatePicker: UIView {
     }
 
     private func configureLabels() {
+        // TODO: Add @Formatted wrapper
         DateFormatter.shared.dateFormat = "LLLL d EEEE"
 
         let stringDate = DateFormatter.shared.string(from: selectedDate)
@@ -120,21 +121,15 @@ final class DatePicker: UIView {
         let weekday = "\(splitDate[2])"
 
         monthLabel.text = month
-        monthLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .bold)
-        monthLabel.textColor = Design.Color.white
 
         dayLabel.text = day
-        dayLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .regular)
-        dayLabel.textColor = Design.Color.chocolate
         dayLabel.textAlignment = .center
-        dayLabel.layer.backgroundColor = Design.Color.lightGray.cgColor
+        dayLabel.layer.backgroundColor = Color.background.cgColor
         dayLabel.layer.cornerRadius = Design.CornerRadius.small
         dayLabel.translatesAutoresizingMaskIntoConstraints = false
         dayLabel.widthAnchor.constraint(equalToConstant: 38).isActive = true
 
         weekdayLabel.text = weekday
-        weekdayLabel.font = Design.Font.robotoFont(ofSize: 24, weight: .thin)
-        weekdayLabel.textColor = Design.Color.white
     }
 
     private func configureLabelsStack() {
@@ -176,7 +171,7 @@ final class DatePicker: UIView {
         addSubview(buttonsStack)
         buttonsStack.translatesAutoresizingMaskIntoConstraints = false
 
-        selectionLine.backgroundColor = Design.Color.lightGray
+        selectionLine.backgroundColor = Color.lightSecondaryLabel
         addSubview(selectionLine)
         selectionLine.translatesAutoresizingMaskIntoConstraints = false
 
@@ -224,8 +219,8 @@ final class DatePicker: UIView {
 
         if let buttonTitle = title {
             button.setTitle(buttonTitle, for: .normal)
-            button.setTitleColor(Design.Color.brown, for: .normal)
-            button.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .regular)
+            button.setTitleColor(Color.secondaryLabel, for: .normal)
+            button.titleLabel?.font = Font.titleMedium
         } else if let buttonImage = image {
             button.setBackgroundImage(buttonImage, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false

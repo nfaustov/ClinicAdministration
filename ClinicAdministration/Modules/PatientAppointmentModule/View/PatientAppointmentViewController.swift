@@ -33,7 +33,7 @@ final class PatientAppointmentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Design.Color.lightGray
+        view.backgroundColor = Color.background
 
         let searchIcon = UIImage(systemName: "magnifyingglass")
         let rightBarButton = UIBarButtonItem(
@@ -70,18 +70,18 @@ final class PatientAppointmentViewController: UIViewController {
         appointmentView.layer.cornerRadius = Design.CornerRadius.large
         appointmentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
-        patientDataInput.backgroundColor = Design.Color.white
+        patientDataInput.backgroundColor = Color.secondaryBackground
 
         patientInfoButton.setTitle("Подробнее", for: .normal)
-        patientInfoButton.setTitleColor(Design.Color.brown, for: .normal)
-        patientInfoButton.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .regular)
+        patientInfoButton.setTitleColor(Color.label, for: .normal)
+        patientInfoButton.titleLabel?.font = Font.titleMedium
         patientInfoButton.isHidden = true
         patientInfoButton.addTarget(self, action: #selector(showPatientCard), for: .touchUpInside)
 
-        buttonView.backgroundColor = Design.Color.white
-        addPatientButton.backgroundColor = Design.Color.red
+        buttonView.backgroundColor = Color.secondaryBackground
+        addPatientButton.backgroundColor = Color.fill
         addPatientButton.setTitle("ЗАПИСАТЬ", for: .normal)
-        addPatientButton.setTitleColor(Design.Color.white, for: .normal)
+        addPatientButton.setTitleColor(Color.lightLabel, for: .normal)
         addPatientButton.layer.cornerRadius = Design.CornerRadius.medium
         addPatientButton.addTarget(self, action: #selector(addPatient), for: .touchUpInside)
 

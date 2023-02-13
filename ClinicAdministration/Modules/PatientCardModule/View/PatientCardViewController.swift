@@ -18,7 +18,7 @@ final class PatientCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Design.Color.lightGray
+        view.backgroundColor = Color.background
 
         configureHierarchy()
 
@@ -30,7 +30,7 @@ final class PatientCardViewController: UIViewController {
         let passportButtonTap = UITapGestureRecognizer(target: self, action: #selector(passportData))
         passportButton.addGestureRecognizer(passportButtonTap)
 
-        let image = UIImage(named: "chevron_right")?.withTintColor(Design.Color.white)
+        let image = UIImage(named: "chevron_right")?.withTintColor(Color.lightLabel)
         let checkButton = CheckButton(title: "Новый счет", image: image)
         let checkButtonTap = UITapGestureRecognizer(target: self, action: #selector(newCheck))
         checkButton.addGestureRecognizer(checkButtonTap)

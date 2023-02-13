@@ -39,4 +39,11 @@ final class MainCoordinator: Coordinator {
         //
         child.routeToPatientCard(patient: patient)
     }
+
+    func doctorCoordinator() {
+        let child = DoctorCoordinator(navigationController: navigationController, modules: modules)
+        child.parentCoordinator = self
+        childCoordinators.append(child)
+        child.routeToDoctorsSearch { _ in }
+    }
 }

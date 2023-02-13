@@ -80,7 +80,7 @@ final class DoctorScheduleView: UIView {
         self.editingAction = editingAction
         super.init(frame: .zero)
 
-        layer.shadowColor = Design.Color.brown.cgColor
+        layer.shadowColor = Color.selectedShadow.cgColor
         layer.cornerRadius = Design.CornerRadius.large
 
         checkState()
@@ -106,7 +106,7 @@ final class DoctorScheduleView: UIView {
         """
         nameLabel.numberOfLines = 0
         nameLabel.textAlignment = .center
-        nameLabel.font = Design.Font.robotoFont(ofSize: 11, weight: .medium)
+        nameLabel.font = Font.labelSmall
         nameLabel.sizeToFit()
         addSubview(nameLabel)
 
@@ -161,17 +161,17 @@ final class DoctorScheduleView: UIView {
     func checkState() {
         switch mode {
         case .editing:
-            layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.35).cgColor
-            layer.borderColor = Design.Color.darkGray.withAlphaComponent(0.6).cgColor
+            layer.backgroundColor = Color.background.withAlphaComponent(0.35).cgColor
+            layer.borderColor = Color.border.withAlphaComponent(0.6).cgColor
             layer.borderWidth = 1
             layer.shadowOpacity = 0
-            nameLabel.textColor = Design.Color.chocolate.withAlphaComponent(0.6)
+            nameLabel.textColor = Color.label.withAlphaComponent(0.6)
             transform = .init(scaleX: 1.1, y: 1)
         case .viewing:
-            nameLabel.textColor = Design.Color.chocolate
+            nameLabel.textColor = Color.label
             transform = .identity
-            layer.backgroundColor = Design.Color.lightGray.withAlphaComponent(0.75).cgColor
-            layer.borderColor = Design.Color.darkGray.cgColor
+            layer.backgroundColor = Color.background.withAlphaComponent(0.75).cgColor
+            layer.borderColor = Color.border.cgColor
             layer.borderWidth = 1
             layer.shadowOffset = CGSize(width: 0, height: 3)
             layer.shadowRadius = 6

@@ -30,7 +30,7 @@ final class SchedulesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.navigationBar.tintColor = Design.Color.lightGray
+        navigationController?.navigationBar.tintColor = Color.lightSecondaryLabel
 
         calendar.locale = Locale(identifier: "ru_RU")
 
@@ -65,10 +65,10 @@ final class SchedulesListViewController: UIViewController {
     }
 
     private func configureHierarchy() {
-        view.backgroundColor = Design.Color.lightGray
+        view.backgroundColor = Color.background
 
         let calendarView = CalendarView(initialContent: makeContent())
-        calendarView.backgroundColor = Design.Color.chocolate
+        calendarView.backgroundColor = Color.secondaryFill
         view.addSubview(calendarView)
         calendarView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -129,8 +129,7 @@ final class SchedulesListViewController: UIViewController {
         .monthHeaderItemProvider { month in
                 CalendarItemModel<CalendarControlMonthHeader>(
                     invariantViewProperties: .init(
-                        font: Design.Font.robotoFont(ofSize: 22, weight: .medium),
-                        textColor: Design.Color.lightGray,
+                        label: Label.headlineSmall(color: Color.lightSecondaryLabel),
                         backgroundColor: .clear
                     ),
                     viewModel: .init(month: month)
@@ -139,15 +138,14 @@ final class SchedulesListViewController: UIViewController {
         .dayOfWeekItemProvider { _, dayOfWeekIndex in
                 CalendarItemModel<CalendarControlDayOfWeekRow>(
                     invariantViewProperties: .init(
-                        font: Design.Font.robotoFont(ofSize: 16, weight: .regular),
-                        textColor: Design.Color.darkGray,
+                        label: Label.titleMedium(color: Color.tertiaryLabel),
                         backgroundColor: .clear
                     ),
                     viewModel: .init(dayOfWeekIndex: dayOfWeekIndex)
                 )
             }
         .monthDayInsets(.init(top: 0, left: 0, bottom: 12, right: 12))
-        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Design.Color.darkGray))
+        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Color.tertiaryLabel))
         .verticalDayMargin(8)
         .horizontalDayMargin(8)
     }
@@ -156,8 +154,7 @@ final class SchedulesListViewController: UIViewController {
         let workingDaysComponents = workingDays.map { calendar.dateComponents([.era, .year, .month, .day], from: $0) }
 
         var invariantViewProperties = CalendarControlDayLabel.InvariantViewProperties(
-            font: Design.Font.robotoFont(ofSize: 18, weight: .regular),
-            textColor: Design.Color.gray,
+            label: Label.titleLarge(color: Color.quaternaryLabel),
             backgroundColor: .clear,
             borderColor: .clear
         )
@@ -165,18 +162,18 @@ final class SchedulesListViewController: UIViewController {
         // customize marked working days
         workingDaysComponents.forEach { components in
             if day.components == components {
-                invariantViewProperties.borderColor = Design.Color.darkGray
+                invariantViewProperties.borderColor = Color.border
             }
         }
         // customize selected day
         if day == selectedDay {
-            invariantViewProperties.textColor = Design.Color.brown
-            invariantViewProperties.backgroundColor = Design.Color.lightGray
+            invariantViewProperties.label.textColor = Color.secondaryLabel
+            invariantViewProperties.backgroundColor = Color.background
         }
 
         // customize past days
         if compareToNow(day) == .orderedAscending {
-            invariantViewProperties.textColor = Design.Color.darkGray
+            invariantViewProperties.label.textColor = Color.tertiaryLabel
         }
 
         return CalendarItemModel<CalendarControlDayLabel>(

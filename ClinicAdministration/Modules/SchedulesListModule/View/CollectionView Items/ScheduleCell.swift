@@ -10,18 +10,18 @@ import UIKit
 final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "ScheduleCell"
 
-    let dateLabel = UILabel()
-    let intervalLabel = UILabel()
+    let dateLabel = Label.titleLarge(color: Color.lightLabel)
+    let intervalLabel = Label.headlineSmall(color: Color.label)
     let dateView = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = Design.Color.white
+        backgroundColor = Color.secondaryBackground
         layer.masksToBounds = true
         layer.cornerRadius = Design.CornerRadius.small
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowColor = Design.Color.darkGray.cgColor
+        layer.shadowColor = Color.shadow.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 7
     }
@@ -37,16 +37,12 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
         dateLabel.adjustsFontSizeToFitWidth = true
         dateLabel.textAlignment = .center
         dateLabel.text = formatter.string(from: schedule.starting)
-        dateLabel.textColor = Design.Color.white
-        dateLabel.font = Design.Font.robotoFont(ofSize: 17, weight: .regular)
         formatter.dateFormat = "H:mm"
         let startingTime = formatter.string(from: schedule.starting)
         let endingTime = formatter.string(from: schedule.ending)
         intervalLabel.text = "\(startingTime) - \(endingTime)"
-        intervalLabel.textColor = Design.Color.chocolate
-        intervalLabel.font = Design.Font.robotoFont(ofSize: 20, weight: .medium)
 
-        dateView.layer.backgroundColor = Design.Color.darkGray.cgColor
+        dateView.layer.backgroundColor = Color.tertiaryBackground.cgColor
         addSubview(dateView)
         dateView.translatesAutoresizingMaskIntoConstraints = false
 

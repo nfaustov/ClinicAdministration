@@ -10,11 +10,7 @@ import UIKit
 final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "PatientCell"
 
-    private let timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 24, weight: .medium)
-        return label
-    }()
+    private let timeLabel = Label.headlineMedium(color: Color.label)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +18,7 @@ final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
         layer.masksToBounds = true
         layer.cornerRadius = Design.CornerRadius.small
         layer.borderWidth = 1
-        layer.borderColor = Design.Color.darkGray.cgColor
+        layer.borderColor = Color.border.cgColor
 
         addSubview(timeLabel)
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +39,7 @@ final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
         trigonPath.addLine(to: CGPoint(x: frame.width, y: frame.height))
         trigonPath.addLine(to: CGPoint(x: frame.width, y: frame.height - 20))
         trigonPath.close()
-        Design.Color.gray.set()
+        Color.separator.set()
         trigonPath.fill()
     }
 
@@ -54,17 +50,17 @@ final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
 
         guard cell.duration != 0 else {
             timeLabel.text = ""
-            backgroundColor = Design.Color.lightGray
+            backgroundColor = Color.background
             return
         }
 
-        backgroundColor = Design.Color.white
+        backgroundColor = Color.secondaryBackground
 
         DateFormatter.shared.dateFormat = "H:mm"
         timeLabel.text = DateFormatter.shared.string(from: cell.scheduledTime)
 
         if let patient = cell.patient {
-            timeLabel.textColor = Design.Color.darkGray
+            timeLabel.textColor = Color.tertiaryLabel
 
             let patientView = SchedulePatientView(
                 secondName: patient.secondName,
@@ -83,8 +79,6 @@ final class PatientCell: UICollectionViewCell, SelfConfiguredCell {
                 patientView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.82),
                 patientView.heightAnchor.constraint(equalToConstant: 70)
             ])
-        } else {
-            timeLabel.textColor = Design.Color.chocolate
         }
     }
 }

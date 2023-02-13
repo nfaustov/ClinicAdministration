@@ -14,10 +14,10 @@ final class ActionListBackgroundDecorationView: UICollectionReusableView {
         super.init(frame: frame)
 
         let view = UIView()
-        view.layer.backgroundColor = Design.Color.white.cgColor
+        view.layer.backgroundColor = Color.secondaryBackground.cgColor
         view.layer.cornerRadius = Design.CornerRadius.small
         view.layer.borderWidth = 1
-        view.layer.borderColor = Design.Color.gray.cgColor
+        view.layer.borderColor = Color.separator.cgColor
         addSubview(view)
 
         view.translatesAutoresizingMaskIntoConstraints = false

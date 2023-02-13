@@ -13,14 +13,14 @@ class DoctorControlCell: UICollectionViewCell, SelfConfiguredCell {
     let plusButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "user_plus"), for: .normal)
-        button.backgroundColor = Design.Color.brown.withAlphaComponent(0.15)
+        button.backgroundColor = Color.secondaryLabel.withAlphaComponent(0.15)
         button.layer.cornerRadius = Design.CornerRadius.medium
         return button
     }()
     let deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "user_close"), for: .normal)
-        button.backgroundColor = Design.Color.brown.withAlphaComponent(0.15)
+        button.backgroundColor = Color.secondaryLabel.withAlphaComponent(0.15)
         button.layer.cornerRadius = Design.CornerRadius.medium
         return button
     }()

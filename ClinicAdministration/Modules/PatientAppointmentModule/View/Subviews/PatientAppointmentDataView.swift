@@ -14,16 +14,16 @@ final class PatientAppointmentDataView: UIView {
     private var serviceDuration: Float
     private var maxSericeDuration: Float
 
-    private var dateTitleLabel = Design.Label.titleLabel("Дата")
-    private var timeTitleLabel = Design.Label.titleLabel("Время")
-    private var doctorTitleLabel = Design.Label.titleLabel("Врач")
-    private var durationTitleLabel = Design.Label.titleLabel("Длительность")
+    private var dateTitleLabel = Label.labelLarge(color: Color.tertiaryLabel, withText: "Дата")
+    private var timeTitleLabel = Label.labelLarge(color: Color.tertiaryLabel, withText: "Время")
+    private var doctorTitleLabel = Label.labelLarge(color: Color.tertiaryLabel, withText: "Врач")
+    private var durationTitleLabel = Label.labelLarge(color: Color.tertiaryLabel, withText: "Длительность")
 
-    private var durationLabel = Design.Label.valueLabel()
-    private var doctorLabel = Design.Label.valueLabel()
-    private var timeLabel = Design.Label.valueLabel()
+    private var durationLabel = Label.titleLarge(color: Color.lightSecondaryLabel)
+    private var doctorLabel = Label.titleLarge(color: Color.lightSecondaryLabel)
+    private var timeLabel = Label.titleLarge(color: Color.lightSecondaryLabel)
     private var dateLabel: UILabel {
-        Design.Label.dateLabel(date, ofSize: 18, textColor: Design.Color.lightGray)
+        Label.dateLabel(date, ofSize: .titleLarge, textColor: Color.lightSecondaryLabel)
     }
 
     private var durationSlider = UISlider()
@@ -67,9 +67,9 @@ final class PatientAppointmentDataView: UIView {
     }
 
     private func configureSlider() {
-        durationSlider.minimumTrackTintColor = Design.Color.lightGray
-        durationSlider.maximumTrackTintColor = Design.Color.brown
-        durationSlider.thumbTintColor = Design.Color.white
+        durationSlider.minimumTrackTintColor = Color.lightSecondaryLabel
+        durationSlider.maximumTrackTintColor = Color.secondaryLabel
+        durationSlider.thumbTintColor = Color.lightSecondaryLabel
         durationSlider.minimumValue = Float(doctor.serviceDuration / 60)
         durationSlider.maximumValue = maxSericeDuration / 60
         durationSlider.value = serviceDuration / 60
@@ -95,12 +95,12 @@ final class PatientAppointmentDataView: UIView {
     }
 
     private func configureHierarchy() {
-        backgroundColor = Design.Color.chocolate
+        backgroundColor = Color.secondaryFill
 
         let doctorSeparator = UIView()
-        doctorSeparator.backgroundColor = Design.Color.brown
+        doctorSeparator.backgroundColor = Color.tertiaryLabel
         let dateSeparator = UIView()
-        dateSeparator.backgroundColor = Design.Color.brown
+        dateSeparator.backgroundColor = Color.tertiaryLabel
 
         [doctorSeparator, dateSeparator].forEach { separator in
             addSubview(separator)

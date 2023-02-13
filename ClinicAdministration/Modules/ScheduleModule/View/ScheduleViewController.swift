@@ -76,7 +76,7 @@ final class ScheduleViewController: UIViewController {
             collectionViewLayout: createCompositionalLayout(withSchedules: true)
         )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = Design.Color.lightGray
+        collectionView.backgroundColor = Color.background
         collectionView.delegate = self
         view.addSubview(collectionView)
 
@@ -88,7 +88,7 @@ final class ScheduleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationController?.navigationBar.tintColor = Design.Color.chocolate
+        navigationController?.navigationBar.tintColor = Color.label
 
         presenter.didSelected(date: date)
     }

@@ -17,8 +17,8 @@ final class PatientsSearchViewController: SearchViewController<Patient> {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.title = "Выберите пациента"
 
-        view.backgroundColor = Design.Color.lightGray
-        searchBar.tintColor = Design.Color.darkGray
+        view.backgroundColor = Color.background
+        searchBar.tintColor = Color.tertiaryLabel
 
         searchBar.delegate = self
         searchCollectionView.delegate = self

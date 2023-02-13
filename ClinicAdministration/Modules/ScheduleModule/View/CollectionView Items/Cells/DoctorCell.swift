@@ -11,17 +11,13 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
     static let reuseIdentifier: String = "DoctorCell"
 
     private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 17, weight: .medium)
-        label.textColor = Design.Color.chocolate
+        let label = Label.titleLarge(color: Color.label)
         label.numberOfLines = 3
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private let specializationLabel: UILabel = {
-        let label = UILabel()
-        label.font = Design.Font.robotoFont(ofSize: 14, weight: .light)
-        label.textColor = Design.Color.chocolate
+        let label = Label.labelLarge(color: Color.label)
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 2
         return label
@@ -29,7 +25,7 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
 
     private var gradientLayer: CAGradientLayer = {
        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [Design.Color.lightGray.cgColor, Design.Color.lightGray.withAlphaComponent(0).cgColor]
+        gradientLayer.colors = [Color.background.cgColor, Color.background.withAlphaComponent(0).cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.8)
         return gradientLayer
@@ -37,7 +33,7 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
 
     override var isSelected: Bool {
         didSet {
-            layer.shadowColor = isSelected ? Design.Color.brown.cgColor : Design.Color.darkGray.cgColor
+            layer.shadowColor = isSelected ? Color.selectedShadow.cgColor : Color.shadow.cgColor
             transform = isSelected ? CGAffineTransform(scaleX: 1.08, y: 1.08) : .identity
         }
     }
@@ -45,12 +41,12 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        layer.backgroundColor = Design.Color.white.cgColor
+        layer.backgroundColor = Color.secondaryBackground.cgColor
         layer.cornerRadius = Design.CornerRadius.medium
         layer.borderWidth = 1
-        layer.borderColor = Design.Color.darkGray.cgColor
+        layer.borderColor = Color.border.cgColor
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.medium).cgPath
-        layer.shadowColor = Design.Color.darkGray.cgColor
+        layer.shadowColor = Color.shadow.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.shadowRadius = 9
         layer.shadowOpacity = 0.4

@@ -24,13 +24,13 @@ class PickerViewController<Model: Hashable>: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Design.Color.white
+        view.backgroundColor = Color.secondaryBackground
 
-        separator.backgroundColor = Design.Color.lightGray
+        separator.backgroundColor = Color.lightSeparator
         view.addSubview(separator)
         separator.translatesAutoresizingMaskIntoConstraints = false
 
-        pickerView.tintColor = Design.Color.chocolate
+        pickerView.tintColor = Color.label
         view.addSubview(pickerView)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.dataSource = self
@@ -55,8 +55,8 @@ class PickerViewController<Model: Hashable>: UIViewController,
 
     private func configureButton() {
         button.setTitle("ГОТОВО", for: .normal)
-        button.setTitleColor(Design.Color.chocolate, for: .normal)
-        button.titleLabel?.font = Design.Font.robotoFont(ofSize: 15, weight: .medium)
+        button.setTitleColor(Color.label, for: .normal)
+        button.titleLabel?.font = Font.titleMedium
         button.addTarget(self, action: #selector(confirm), for: .touchUpInside)
         button.sizeToFit()
         view.addSubview(button)

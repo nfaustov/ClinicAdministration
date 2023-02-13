@@ -11,10 +11,7 @@ final class IntervalsHeader: UICollectionReusableView {
     static let reuseIdentifier = "IntervalsHeader"
 
     func configure() {
-        let label = UILabel()
-        label.text = "Доступные интервалы времени"
-        label.font = Design.Font.robotoFont(ofSize: 14, weight: .regular)
-        label.textColor = Design.Color.darkGray
+        let label = Label.labelLarge(color: Color.tertiaryLabel, withText: "Доступные интервалы времени")
         label.textAlignment = .center
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false

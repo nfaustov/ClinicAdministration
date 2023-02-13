@@ -13,8 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        UINavigationBar.appearance().tintColor = Design.Color.chocolate
-        UINavigationBar.appearance().barTintColor = Design.Color.lightGray
+        UINavigationBar.appearance().tintColor = Color.label
+        UINavigationBar.appearance().barTintColor = Color.background
         UINavigationBar.appearance().shadowImage = UIImage()
 
         return true

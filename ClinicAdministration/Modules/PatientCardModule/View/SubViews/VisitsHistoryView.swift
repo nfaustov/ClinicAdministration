@@ -13,13 +13,7 @@ final class VisitsHistoryView: UIView {
         case allTime = "За всё время"
     }
 
-    private let titleLabel: UILabel = {
-       let label = UILabel()
-        label.text = "Визиты"
-        label.textColor = Design.Color.white
-        label.font = Design.Font.robotoFont(ofSize: 24, weight: .bold)
-        return label
-    }()
+    private let titleLabel = Label.headlineMedium(color: Color.lightLabel, withText: "Визиты")
 
     private var filter: Filter = .thisYear
     private var visits: [Visit]
@@ -36,7 +30,7 @@ final class VisitsHistoryView: UIView {
     }
 
     private func configureHierarchy() {
-        layer.backgroundColor = Design.Color.chocolate.cgColor
+        layer.backgroundColor = Color.secondaryFill.cgColor
         layer.cornerRadius = Design.CornerRadius.large
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 

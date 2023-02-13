@@ -42,16 +42,13 @@ final class CheckButton: UIView {
     }
 
     private func configureHierarchy() {
-        layer.backgroundColor = Design.Color.red.cgColor
+        layer.backgroundColor = Color.fill.cgColor
         layer.cornerRadius = Design.CornerRadius.medium
         layer.masksToBounds = true
         layer.addSublayer(gradientLayer)
         gradientLayer.cornerRadius = Design.CornerRadius.medium
 
-        let label = UILabel()
-        label.text = title
-        label.textColor = Design.Color.white
-        label.font = Design.Font.robotoFont(ofSize: 20, weight: .bold)
+        let label = Label.headlineSmall(color: Color.lightLabel, withText: title)
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
 
