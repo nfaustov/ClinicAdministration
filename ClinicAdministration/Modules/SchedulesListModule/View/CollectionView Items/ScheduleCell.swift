@@ -21,7 +21,7 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
         layer.masksToBounds = true
         layer.cornerRadius = Design.CornerRadius.small
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowColor = Color.passiveShadow.cgColor
+        layer.shadowColor = Color.shadow.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 7
     }
@@ -42,7 +42,7 @@ final class ScheduleCell: UICollectionViewCell, SelfConfiguredCell {
         let endingTime = formatter.string(from: schedule.ending)
         intervalLabel.text = "\(startingTime) - \(endingTime)"
 
-        dateView.layer.backgroundColor = Color.tertiaryFill.cgColor
+        dateView.layer.backgroundColor = Color.tertiaryBackground.cgColor
         addSubview(dateView)
         dateView.translatesAutoresizingMaskIntoConstraints = false
 

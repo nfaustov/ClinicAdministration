@@ -10,100 +10,93 @@ import UIKit
 /// An object that stores color data
 enum Color {
     // MARK: - Background colors
-    /// The color for the main background of interface
     static var background: UIColor {
-        color(withHEX: "#E4E6E3") // lightGray
+        Color["#E4E6E3"]
     }
 
     static var secondaryBackground: UIColor {
-        color(withHEX: "FEFEFD") // white
+        Color["FEFEFD"]
+    }
+
+    static var tertiaryBackground: UIColor {
+        Color["#A0A194"]
     }
 
     // MARK: - Fill colors
 
     static var fill: UIColor {
-        color(withHEX: "#652806") // red
+        Color["#652806"]
     }
 
     static var secondaryFill: UIColor {
-        color(withHEX: "#3C3325") // chocolate
-    }
-
-    static var tertiaryFill: UIColor {
-        Color["#A0A194"] // darkGray
+        Color["#3C3325"]
     }
 
     // MARK: - Label colors
 
     static var label: UIColor {
-        color(withHEX: "#3C3325") // chocolate
+        Color["#3C3325"]
     }
 
     static var lightLabel: UIColor {
-        color(withHEX: "FEFEFD") // white
+        Color["FEFEFD"]
     }
 
     static var secondaryLabel: UIColor {
-        color(withHEX: "#75644A") // brown
+        Color["#75644A"]
     }
 
     static var lightSecondaryLabel: UIColor {
-        color(withHEX: "E4E6E3") // lightGray
+        Color["#E4E6E3"]
     }
 
     static var tertiaryLabel: UIColor {
-        color(withHEX: "#A0A194") // darkGray
+        Color["#A0A194"]
     }
 
     static var quaternaryLabel: UIColor {
-        color(withHEX: "#D0D0C5") // gray
+        Color["#D0D0C5"]
     }
 
     // MARK: - Text colors
 
     static var placeholderText: UIColor {
-        color(withHEX: "#A0A194") // darkGray
+        Color["#A0A194"]
     }
 
-    // MARK: - Separator
+    // MARK: - Separator colors
 
     static var separator: UIColor {
-        Color["#D0D0C5"] // gray
+        Color["#D0D0C5"]
     }
 
     static var lightSeparator: UIColor {
-        color(withHEX: "E4E6E3") // lightGray
+        Color["#E4E6E3"]
     }
 
-    static var darkSeparator: UIColor {
-        Color["#A0A194"] // darkGray
-    }
+    // MARK: - Shadow colors
 
-    // MARK: - Shadow
+    static var shadow: UIColor {
+        Color["#A0A194"]
+    }
 
     static var selectedShadow: UIColor {
-        Color["#75644A"] // brown
+        Color["#75644A"]
     }
 
-    static var passiveShadow: UIColor {
-        Color["#A0A194"] // darkGray
-    }
-
-    // MARK: - Border
+    // MARK: - Border colors
 
     static var border: UIColor {
-        Color["#A0A194"] // darkGray
+        Color["#A0A194"]
     }
 
     static var lightBorder: UIColor {
-        Color["#E4E6E3"] // lightGray
+        Color["#E4E6E3"]
     }
+}
 
+extension Color {
     static subscript(_ hex: String) -> UIColor {
-        color(withHEX: hex)
-    }
-
-    private static func color(withHEX hex: String) -> UIColor {
         var hexFormatted = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
         if hexFormatted.hasPrefix("#") {

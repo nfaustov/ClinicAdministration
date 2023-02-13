@@ -83,7 +83,7 @@ final class FloatingTextField: UIView {
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
 
         let underline = UIView()
-        underline.backgroundColor = Color.darkSeparator
+        underline.backgroundColor = Color.placeholderText
         addSubview(underline)
         underline.translatesAutoresizingMaskIntoConstraints = false
 

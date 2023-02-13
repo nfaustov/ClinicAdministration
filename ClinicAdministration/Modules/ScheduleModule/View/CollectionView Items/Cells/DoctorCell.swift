@@ -33,7 +33,7 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
 
     override var isSelected: Bool {
         didSet {
-            layer.shadowColor = isSelected ? Color.selectedShadow.cgColor : Color.passiveShadow.cgColor
+            layer.shadowColor = isSelected ? Color.selectedShadow.cgColor : Color.shadow.cgColor
             transform = isSelected ? CGAffineTransform(scaleX: 1.08, y: 1.08) : .identity
         }
     }
@@ -46,7 +46,7 @@ final class DoctorCell: UICollectionViewCell, SelfConfiguredCell {
         layer.borderWidth = 1
         layer.borderColor = Color.border.cgColor
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: Design.CornerRadius.medium).cgPath
-        layer.shadowColor = Color.passiveShadow.cgColor
+        layer.shadowColor = Color.shadow.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.shadowRadius = 9
         layer.shadowOpacity = 0.4

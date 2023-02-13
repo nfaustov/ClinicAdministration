@@ -138,7 +138,7 @@ final class CalendarTableViewController: UIViewController {
                     viewModel: .init(dayOfWeekIndex: dayOfWeekIndex)
                 )
             }
-        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Color.darkSeparator))
+        .daysOfTheWeekRowSeparator(options: .init(height: 1, color: Color.separator))
         .verticalDayMargin(8)
         .horizontalDayMargin(8)
         .interMonthSpacing(20)

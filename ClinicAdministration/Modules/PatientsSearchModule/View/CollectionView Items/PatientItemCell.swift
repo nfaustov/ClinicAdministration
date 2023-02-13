@@ -24,7 +24,7 @@ final class PatientItemCell: UICollectionViewCell, SelfConfiguredCell {
         backgroundColor = Color.secondaryBackground
         layer.cornerRadius = Design.CornerRadius.small
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowColor = Color.passiveShadow.cgColor
+        layer.shadowColor = Color.shadow.cgColor
         layer.shadowOpacity = 0.15
         layer.shadowRadius = 5
 

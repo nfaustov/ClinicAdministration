@@ -54,7 +54,7 @@ final class ConfirmationView: UIView {
     private func configureHierarchy() {
         backgroundColor = Color.secondaryBackground
 
-        separatorView.backgroundColor = Color.darkSeparator
+        separatorView.backgroundColor = Color.separator
 
         for view in [separatorView, dateLabel, cancelButton, confirmButton] {
             addSubview(view)

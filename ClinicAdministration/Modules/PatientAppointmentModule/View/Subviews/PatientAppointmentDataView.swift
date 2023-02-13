@@ -98,9 +98,9 @@ final class PatientAppointmentDataView: UIView {
         backgroundColor = Color.secondaryFill
 
         let doctorSeparator = UIView()
-        doctorSeparator.backgroundColor = Color.darkSeparator
+        doctorSeparator.backgroundColor = Color.tertiaryLabel
         let dateSeparator = UIView()
-        dateSeparator.backgroundColor = Color.darkSeparator
+        dateSeparator.backgroundColor = Color.tertiaryLabel
 
         [doctorSeparator, dateSeparator].forEach { separator in
             addSubview(separator)

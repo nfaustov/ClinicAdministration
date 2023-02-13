@@ -26,12 +26,12 @@ final class SchedulePatientView: UIView {
     init(secondName: String, firstName: String, patronymicName: String, phoneNumber: String) {
         super.init(frame: CGRect.zero)
 
-        layer.backgroundColor = Color.tertiaryFill.cgColor
+        layer.backgroundColor = Color.tertiaryBackground.cgColor
         layer.cornerRadius = 5
         layer.borderWidth = 1
         layer.borderColor = Color.border.cgColor
         layer.shadowOffset = .zero
-        layer.shadowColor = Color.passiveShadow.cgColor
+        layer.shadowColor = Color.shadow.cgColor
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 10
 
