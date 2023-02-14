@@ -70,6 +70,10 @@
 		8B444DF22993079100223FB6 /* Standards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B444DF12993079100223FB6 /* Standards.swift */; };
 		8B47BF1429532C6200C90072 /* DoctorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47BF1329532C6200C90072 /* DoctorService.swift */; };
 		8B47BF1629532E5600C90072 /* DoctorServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47BF1529532E5600C90072 /* DoctorServiceClient.swift */; };
+		8B4D0DF2299BA7C10034A022 /* AdminPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D0DF1299BA7C10034A022 /* AdminPanelViewController.swift */; };
+		8B4D0DF4299BA7D70034A022 /* AdminPanelModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D0DF3299BA7D60034A022 /* AdminPanelModule.swift */; };
+		8B4D0DF6299BA8BA0034A022 /* AdminPanelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D0DF5299BA8BA0034A022 /* AdminPanelPresenter.swift */; };
+		8B4D0DF8299BA9CE0034A022 /* AdminPanelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D0DF7299BA9CE0034A022 /* AdminPanelInteractor.swift */; };
 		8B4FC4F82632B2AF00D7627A /* ScheduleModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4FC4F72632B2AF00D7627A /* ScheduleModule.swift */; };
 		8B52D7FA2727534900C7DD1E /* CalendarControlMonthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */; };
 		8B576BA72624ADEF0013E62E /* DoctorSectionPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */; };
@@ -242,6 +246,10 @@
 		8B444DF12993079100223FB6 /* Standards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Standards.swift; sourceTree = "<group>"; };
 		8B47BF1329532C6200C90072 /* DoctorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorService.swift; sourceTree = "<group>"; };
 		8B47BF1529532E5600C90072 /* DoctorServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorServiceClient.swift; sourceTree = "<group>"; };
+		8B4D0DF1299BA7C10034A022 /* AdminPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelViewController.swift; sourceTree = "<group>"; };
+		8B4D0DF3299BA7D60034A022 /* AdminPanelModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelModule.swift; sourceTree = "<group>"; };
+		8B4D0DF5299BA8BA0034A022 /* AdminPanelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelPresenter.swift; sourceTree = "<group>"; };
+		8B4D0DF7299BA9CE0034A022 /* AdminPanelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelInteractor.swift; sourceTree = "<group>"; };
 		8B4FC4F72632B2AF00D7627A /* ScheduleModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModule.swift; sourceTree = "<group>"; };
 		8B52D7F92727534900C7DD1E /* CalendarControlMonthHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarControlMonthHeader.swift; sourceTree = "<group>"; };
 		8B576BA62624ADEF0013E62E /* DoctorSectionPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorSectionPlaceholder.swift; sourceTree = "<group>"; };
@@ -779,6 +787,41 @@
 			path = CreateScheduleModule;
 			sourceTree = "<group>";
 		};
+		8B4D0DED299BA7070034A022 /* AdminPanelModule */ = {
+			isa = PBXGroup;
+			children = (
+				8B4D0DF0299BA7780034A022 /* View */,
+				8B4D0DEF299BA76E0034A022 /* Presenter */,
+				8B4D0DEE299BA7650034A022 /* Interactor */,
+				8B4D0DF3299BA7D60034A022 /* AdminPanelModule.swift */,
+			);
+			path = AdminPanelModule;
+			sourceTree = "<group>";
+		};
+		8B4D0DEE299BA7650034A022 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				8B4D0DF7299BA9CE0034A022 /* AdminPanelInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		8B4D0DEF299BA76E0034A022 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				8B4D0DF5299BA8BA0034A022 /* AdminPanelPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8B4D0DF0299BA7780034A022 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8B4D0DF1299BA7C10034A022 /* AdminPanelViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8B556BD9263303870018E0C6 /* Modules Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,6 +913,7 @@
 			children = (
 				8B7A12692631E046007BC1AB /* Base Module */,
 				8B556BDC26331A410018E0C6 /* Modules Factory */,
+				8B4D0DED299BA7070034A022 /* AdminPanelModule */,
 				8B20CE15262996D90007C20A /* CalendarTableModule */,
 				8BCAB7B42559D56A001A93D0 /* GraphicScheduleModule */,
 				8B38A1A3260D12B600CA01A0 /* ScheduleModule */,
@@ -1492,6 +1536,7 @@
 				8B38A1AA260D133500CA01A0 /* ScheduleViewController.swift in Sources */,
 				8B1E93A62940F92900F2315A /* PatientDatabase.swift in Sources */,
 				8BCB05082674BBF60062F396 /* CreateScheduleCellFactory.swift in Sources */,
+				8B4D0DF8299BA9CE0034A022 /* AdminPanelInteractor.swift in Sources */,
 				8BCD1ACE270F5F3700D91D3C /* IntervalCell.swift in Sources */,
 				8B2137E1294B1171004E62B7 /* PatientsSearchSubscription.swift in Sources */,
 				8BCAB7BE2559D608001A93D0 /* DoctorScheduleView.swift in Sources */,
@@ -1503,6 +1548,7 @@
 				8B669CF429547C7800B6C43E /* DoctorScheduleServiceClient.swift in Sources */,
 				8B33A650266906D80003631A /* DoctorItemCell.swift in Sources */,
 				8B93661D2953033A00774D15 /* Log.swift in Sources */,
+				8B4D0DF6299BA8BA0034A022 /* AdminPanelPresenter.swift in Sources */,
 				8BA701D6264BD9E1008C80ED /* DoctorDatabase.swift in Sources */,
 				8B52D7FA2727534900C7DD1E /* CalendarControlMonthHeader.swift in Sources */,
 				8B7C90EF2718A5FF00CA11F8 /* ScheduleCell.swift in Sources */,
@@ -1579,6 +1625,7 @@
 				8B8AB659298EB90A0035C1D1 /* VisitsView.swift in Sources */,
 				8B2137D8294B0436004E62B7 /* PatientsSearchViewController.swift in Sources */,
 				8B83BAAE2715F759007E9C71 /* SchedulesListInteractor.swift in Sources */,
+				8B4D0DF2299BA7C10034A022 /* AdminPanelViewController.swift in Sources */,
 				8BA60309260DDBCA00DF686B /* PatientCell.swift in Sources */,
 				8B41FE7F261E3D4B009ED53E /* ScheduleCellFactory.swift in Sources */,
 				8B7342AE2744429F00E6707C /* FloatingTextField.swift in Sources */,
@@ -1600,6 +1647,7 @@
 				8B0ACDD2294DE42400913B46 /* PatientCardPresenter.swift in Sources */,
 				8B7F8B1B263AF77E00B75324 /* PickCabinetPresenter.swift in Sources */,
 				8B188983259CCA4E000B0077 /* Settings.swift in Sources */,
+				8B4D0DF4299BA7D70034A022 /* AdminPanelModule.swift in Sources */,
 				8B33A652266968340003631A /* DoctorsSearchSubscription.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
