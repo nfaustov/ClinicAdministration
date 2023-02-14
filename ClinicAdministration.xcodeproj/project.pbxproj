@@ -122,6 +122,7 @@
 		8B83BAB02715FA06007E9C71 /* SchedulesListSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B83BAAF2715FA06007E9C71 /* SchedulesListSubscription.swift */; };
 		8B843668256DB0D1006057EF /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B843667256DB0D1006057EF /* Doctor.swift */; };
 		8B8AB659298EB90A0035C1D1 /* VisitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8AB658298EB90A0035C1D1 /* VisitsView.swift */; };
+		8B907DEC299BB22F005A3A67 /* AdminPanelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B907DEB299BB22F005A3A67 /* AdminPanelCoordinator.swift */; };
 		8B92DFF12657A91D00B3D6B3 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */; };
 		8B92DFF32657A96400B3D6B3 /* NetworkServiceDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF22657A96400B3D6B3 /* NetworkServiceDependencies.swift */; };
 		8B92DFF52657A98A00B3D6B3 /* DatabaseDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */; };
@@ -298,6 +299,7 @@
 		8B83BAAF2715FA06007E9C71 /* SchedulesListSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesListSubscription.swift; sourceTree = "<group>"; };
 		8B843667256DB0D1006057EF /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
 		8B8AB658298EB90A0035C1D1 /* VisitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsView.swift; sourceTree = "<group>"; };
+		8B907DEB299BB22F005A3A67 /* AdminPanelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelCoordinator.swift; sourceTree = "<group>"; };
 		8B92DFF02657A91D00B3D6B3 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		8B92DFF22657A96400B3D6B3 /* NetworkServiceDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceDependencies.swift; sourceTree = "<group>"; };
 		8B92DFF42657A98A00B3D6B3 /* DatabaseDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDependencies.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 			children = (
 				8B20CE0326298F630007C20A /* Coordinator.swift */,
 				8B20CE0726298FCE0007C20A /* MainCoordinator.swift */,
+				8B907DEB299BB22F005A3A67 /* AdminPanelCoordinator.swift */,
 				8BB450AF263017CD00C143A4 /* ScheduleCoordinator.swift */,
 				8B0274D92968578A0023A51A /* DoctorCoordinator.swift */,
 				8B0C53512959AF61003AD436 /* PatientCoordinator.swift */,
@@ -1497,6 +1500,7 @@
 				8B82801E2951AD7F006A12FC /* NetworkController.swift in Sources */,
 				8BA6030D260DDF8300DF686B /* SchedulePatientView.swift in Sources */,
 				8B3E1635267792260070BDAF /* OptionCell.swift in Sources */,
+				8B907DEC299BB22F005A3A67 /* AdminPanelCoordinator.swift in Sources */,
 				8B7A12662631DCF9007BC1AB /* Modules.swift in Sources */,
 				8BF23AA326371103009D9A7A /* DoctorControlCell.swift in Sources */,
 				8B67FB5D29923BB900EF76B4 /* VisitCell.swift in Sources */,

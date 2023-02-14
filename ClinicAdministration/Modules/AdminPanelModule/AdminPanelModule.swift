@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AdminPanelModule: AnyObject {
-    var coordinator: MainCoordinator? { get set }
+    var coordinator: AdminPanelCoordinator? { get set }
 }
 
 protocol AdminPanelView: BaseView {

@@ -18,6 +18,13 @@ final class MainCoordinator: Coordinator {
         self.modules = modules
     }
 
+    func adminPanelCoordinator() {
+        let child = AdminPanelCoordinator(navigationController: navigationController, modules: modules)
+        child.parentCoordinator = self
+        childCoordinators.append(child)
+        child.start()
+    }
+
     func scheduleCoordinator() {
         let child = ScheduleCoordinator(navigationController: navigationController, modules: modules)
         child.parentCoordinator = self

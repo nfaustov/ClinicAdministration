@@ -9,7 +9,7 @@ import Foundation
 
 final class AdminPanelPresenter<V, I>: PresenterInteractor<V, I>,
                                        AdminPanelModule where V: AdminPanelView, I: AdminPanelInteraction {
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: AdminPanelCoordinator?
 }
 
 // MARK: - AdminPanelPresentation

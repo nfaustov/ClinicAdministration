@@ -14,6 +14,14 @@ final class ModulesFactory: Modules {
         self.dependencies = dependencies
     }
 
+    func adminPanel() -> (UIViewController, AdminPanelModule) {
+        let view = AdminPanelViewController()
+        let interactor = AdminPanelInteractor()
+        let presenter = AdminPanelPresenter(view: view, interactor: interactor)
+
+        return (view, presenter)
+    }
+
     func schedule(selectedSchedule: DoctorSchedule?) -> (UIViewController, ScheduleModule) {
         let view = ScheduleViewController()
         if let selectedSchedule = selectedSchedule {
