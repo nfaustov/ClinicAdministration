@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PickCabinetPresenter<V>: Presenter<V>, PickCabinetModule where V: PickCabinetView {
+final class PickCabinetPresenter<V>: BasePresenter<V>, PickCabinetModule where V: PickCabinetView {
     var didFinish: ((Int?) -> Void)?
 }
 

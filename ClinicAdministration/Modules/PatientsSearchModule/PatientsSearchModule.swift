@@ -11,7 +11,7 @@ protocol PatientsSearchModule: AnyObject {
     var didFinish: ((Patient?) -> Void)? { get set }
 }
 
-protocol PatientsSearchView: View {
+protocol PatientsSearchView: BaseView {
     var resultList: [Patient] { get set }
 
     func patientsSnapshot(_ patients: [Patient])
@@ -23,7 +23,7 @@ protocol PatientsSearchPresentation: AnyObject {
     func didFinish(with: Patient?)
 }
 
-protocol PatientsSearchInteraction: Interactor {
+protocol PatientsSearchInteraction: BaseInteractor {
     func getPatients()
 }
 

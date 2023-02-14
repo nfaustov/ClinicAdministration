@@ -12,7 +12,7 @@ protocol GraphicScheduleModule: AnyObject {
     var didFinish: ((_ date: Date) -> Void)? { get set }
 }
 
-protocol GraphicScheduleView: View {
+protocol GraphicScheduleView: BaseView {
     var date: Date! { get set }
 
     func updateTableView(with schedules: [DoctorSchedule])
@@ -26,7 +26,7 @@ protocol GraphicSchedulePresentation: AnyObject {
     func didFinish(with date: Date)
 }
 
-protocol GraphicScheduleInteraction: Interactor {
+protocol GraphicScheduleInteraction: BaseInteractor {
     func getSchedules(for date: Date)
     func updateSchedule(_ schedule: DoctorSchedule)
 }

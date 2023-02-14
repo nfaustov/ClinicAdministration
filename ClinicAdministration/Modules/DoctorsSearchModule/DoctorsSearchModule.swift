@@ -11,7 +11,7 @@ protocol DoctorsSearchModule: AnyObject {
     var didFinish: ((Doctor?) -> Void)? { get set }
 }
 
-protocol DoctorsSearchView: View {
+protocol DoctorsSearchView: BaseView {
     var resultList: [Doctor] { get set }
 
     func doctorsSnapshot(_ doctors: [Doctor])
@@ -23,7 +23,7 @@ protocol DoctorsSearchPresentation: AnyObject {
     func didFinish(with: Doctor?)
 }
 
-protocol DoctorsSearchInteraction: Interactor {
+protocol DoctorsSearchInteraction: BaseInteractor {
     func getDoctors()
 }
 

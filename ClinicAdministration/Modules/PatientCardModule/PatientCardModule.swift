@@ -11,7 +11,7 @@ protocol PatientCardModule: AnyObject {
     var coordinator: PatientCoordinator? { get set }
 }
 
-protocol PatientCardView: View {
+protocol PatientCardView: BaseView {
 }
 
 protocol PatientCardPresentation: AnyObject {
@@ -19,7 +19,7 @@ protocol PatientCardPresentation: AnyObject {
     func createCheck(for: Patient)
 }
 
-protocol PatientCardInteraction: Interactor {
+protocol PatientCardInteraction: BaseInteractor {
 }
 
 protocol PatientCardInteractorDelegate: AnyObject {
