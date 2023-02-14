@@ -13,7 +13,7 @@ protocol PatientAppointmentModule: AnyObject {
     var didFinish: ((DoctorSchedule?) -> Void)? { get set }
 }
 
-protocol PatientAppointmentView: View {
+protocol PatientAppointmentView: BaseView {
     var schedule: DoctorSchedule! { get set }
 
     func inputData(with: Patient)
@@ -25,7 +25,7 @@ protocol PatientAppointmentPresentation: AnyObject {
     func updateSchedule(with newAppointment: PatientAppointment)
 }
 
-protocol PatientAppointmentInteraction: Interactor {
+protocol PatientAppointmentInteraction: BaseInteractor {
     func updateSchedule(_ schedule: DoctorSchedule)
 }
 

@@ -17,7 +17,7 @@ protocol ScheduleModule: AnyObject {
     var didFinish: ((_ date: Date) -> Void)? { get set }
 }
 
-protocol ScheduleView: View {
+protocol ScheduleView: BaseView {
     var date: Date { get set }
     var selectedSchedule: DoctorSchedule? { get set }
 
@@ -42,7 +42,7 @@ protocol SchedulePresentation: AnyObject {
     func showPatientCard(_ patient: Patient)
 }
 
-protocol ScheduleInteraction: Interactor {
+protocol ScheduleInteraction: BaseInteractor {
     func getSchedules(for date: Date)
     func getDoctorsNextSchedule(after currentSchedule: DoctorSchedule)
     func deleteSchedule(_ schedule: DoctorSchedule)

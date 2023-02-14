@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CalendarTablePresenter<V>: Presenter<V>, CalendarTableModule where V: CalendarTableView {
+final class CalendarTablePresenter<V>: BasePresenter<V>, CalendarTableModule where V: CalendarTableView {
     var didFinish: ((Date?) -> Void)?
 }
 

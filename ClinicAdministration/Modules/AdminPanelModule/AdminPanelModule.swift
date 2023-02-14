@@ -11,13 +11,13 @@ protocol AdminPanelModule: AnyObject {
     var coordinator: MainCoordinator? { get set }
 }
 
-protocol AdminPanelView: View {
+protocol AdminPanelView: BaseView {
 }
 
 protocol AdminPanelPresentation: AnyObject {
 }
 
-protocol AdminPanelInteraction: Interactor {
+protocol AdminPanelInteraction: BaseInteractor {
 }
 
 protocol AdminPanelInteractorDelegate: AnyObject {

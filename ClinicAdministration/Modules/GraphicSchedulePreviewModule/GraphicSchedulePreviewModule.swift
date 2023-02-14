@@ -11,7 +11,7 @@ protocol GraphicSchedulePreviewModule: AnyObject {
     var didFinish: ((DoctorSchedule) -> Void)? { get set }
 }
 
-protocol GraphicSchedulePreviewView: View {
+protocol GraphicSchedulePreviewView: BaseView {
     var newSchedule: DoctorSchedule! { get set }
 
     func applySchedules(_ schedules: [DoctorSchedule])
@@ -26,7 +26,7 @@ protocol GraphicSchedulePreviewPresentation: AnyObject {
     func didSelected(date: Date)
 }
 
-protocol GraphicSchedulePreviewInteraction: Interactor {
+protocol GraphicSchedulePreviewInteraction: BaseInteractor {
     func getSchedules(for date: Date)
     func updateSchedule(_ schedule: DoctorSchedule)
     func createSchedule(_ schedule: DoctorSchedule)

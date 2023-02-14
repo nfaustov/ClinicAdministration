@@ -1,5 +1,5 @@
 //
-//  Presenter.swift
+//  BasePresenter.swift
 //  ClinicAdministration
 //
 //  Created by Nikolai Faustov on 22.04.2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Presenter<V: View> {
+class BasePresenter<V: BaseView> {
     weak var view: V?
 
     init(view: V) {
@@ -21,7 +21,7 @@ class Presenter<V: View> {
     }
 }
 
-class PresenterInteractor<V: View, I: Interactor>: Presenter<V> {
+class PresenterInteractor<V: BaseView, I: BaseInteractor>: BasePresenter<V> {
     var interactor: I
 
     init(view: V, interactor: I) {

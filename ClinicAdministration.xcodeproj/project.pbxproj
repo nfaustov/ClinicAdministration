@@ -103,9 +103,9 @@
 		8B786C71294E1D59003FF42B /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B786C70294E1D59003FF42B /* CheckButton.swift */; };
 		8B7A12622631DCA7007BC1AB /* ModulesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12612631DCA7007BC1AB /* ModulesFactory.swift */; };
 		8B7A12662631DCF9007BC1AB /* Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12652631DCF9007BC1AB /* Modules.swift */; };
-		8B7A126B2631E063007BC1AB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A126A2631E063007BC1AB /* View.swift */; };
-		8B7A12712631E077007BC1AB /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12702631E077007BC1AB /* Interactor.swift */; };
-		8B7A12752631E084007BC1AB /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12742631E084007BC1AB /* Presenter.swift */; };
+		8B7A126B2631E063007BC1AB /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A126A2631E063007BC1AB /* BaseView.swift */; };
+		8B7A12712631E077007BC1AB /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12702631E077007BC1AB /* BaseInteractor.swift */; };
+		8B7A12752631E084007BC1AB /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A12742631E084007BC1AB /* BasePresenter.swift */; };
 		8B7C90EF2718A5FF00CA11F8 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C90EE2718A5FF00CA11F8 /* ScheduleCell.swift */; };
 		8B7D5D6329407FD000B174E9 /* DoctorsSearchCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D5D6229407FD000B174E9 /* DoctorsSearchCellFactory.swift */; };
 		8B7D5D662940856100B174E9 /* SpecializationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D5D652940856100B174E9 /* SpecializationCell.swift */; };
@@ -279,9 +279,9 @@
 		8B786C70294E1D59003FF42B /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		8B7A12612631DCA7007BC1AB /* ModulesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesFactory.swift; sourceTree = "<group>"; };
 		8B7A12652631DCF9007BC1AB /* Modules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modules.swift; sourceTree = "<group>"; };
-		8B7A126A2631E063007BC1AB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		8B7A12702631E077007BC1AB /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
-		8B7A12742631E084007BC1AB /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		8B7A126A2631E063007BC1AB /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		8B7A12702631E077007BC1AB /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
+		8B7A12742631E084007BC1AB /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		8B7C90EE2718A5FF00CA11F8 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		8B7D5D6229407FD000B174E9 /* DoctorsSearchCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsSearchCellFactory.swift; sourceTree = "<group>"; };
 		8B7D5D652940856100B174E9 /* SpecializationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecializationCell.swift; sourceTree = "<group>"; };
@@ -1040,9 +1040,9 @@
 		8B7A12692631E046007BC1AB /* Base Module */ = {
 			isa = PBXGroup;
 			children = (
-				8B7A126A2631E063007BC1AB /* View.swift */,
-				8B7A12742631E084007BC1AB /* Presenter.swift */,
-				8B7A12702631E077007BC1AB /* Interactor.swift */,
+				8B7A126A2631E063007BC1AB /* BaseView.swift */,
+				8B7A12742631E084007BC1AB /* BasePresenter.swift */,
+				8B7A12702631E077007BC1AB /* BaseInteractor.swift */,
 			);
 			path = "Base Module";
 			sourceTree = "<group>";
@@ -1552,7 +1552,7 @@
 				8BA701D6264BD9E1008C80ED /* DoctorDatabase.swift in Sources */,
 				8B52D7FA2727534900C7DD1E /* CalendarControlMonthHeader.swift in Sources */,
 				8B7C90EF2718A5FF00CA11F8 /* ScheduleCell.swift in Sources */,
-				8B7A126B2631E063007BC1AB /* View.swift in Sources */,
+				8B7A126B2631E063007BC1AB /* BaseView.swift in Sources */,
 				8B10E3922625D04A00476862 /* GraphicScheduleInteractor.swift in Sources */,
 				8B10E30526383C6D006022BB /* CreateScheduleSubscription.swift in Sources */,
 				8B62D6282615ECC7006A78F4 /* CallButtonFooter.swift in Sources */,
@@ -1621,7 +1621,7 @@
 				8B5CBAA02741A8620053F91D /* PatientAppointmentModule.swift in Sources */,
 				8B20CE2B262997B30007C20A /* DayLabel.swift in Sources */,
 				8BCAB7B22559D564001A93D0 /* GraphicScheduleViewController.swift in Sources */,
-				8B7A12752631E084007BC1AB /* Presenter.swift in Sources */,
+				8B7A12752631E084007BC1AB /* BasePresenter.swift in Sources */,
 				8B8AB659298EB90A0035C1D1 /* VisitsView.swift in Sources */,
 				8B2137D8294B0436004E62B7 /* PatientsSearchViewController.swift in Sources */,
 				8B83BAAE2715F759007E9C71 /* SchedulesListInteractor.swift in Sources */,
@@ -1633,7 +1633,7 @@
 				8BAE47542642799B008B0B28 /* GraphicTimeTablePreviewSubscription.swift in Sources */,
 				8B7342AB27443ED100E6707C /* PatientDataView.swift in Sources */,
 				8B0ACDD0294DE34400913B46 /* PatientCardInteractor.swift in Sources */,
-				8B7A12712631E077007BC1AB /* Interactor.swift in Sources */,
+				8B7A12712631E077007BC1AB /* BaseInteractor.swift in Sources */,
 				8B0F774D2631FF7F00D68B43 /* GraphicScheduleModule.swift in Sources */,
 				8B38A1BC260D13DD00CA01A0 /* ScheduleInteractor.swift in Sources */,
 				8B687697293FE89F00C7D1C0 /* SearchViewController.swift in Sources */,
@@ -1722,7 +1722,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1777,7 +1777,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1797,7 +1797,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ClinicAdministration/Application/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Clinic Administration";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1819,7 +1819,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ClinicAdministration/Application/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Clinic Administration";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1838,7 +1838,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WQ6FU7ZZ8T;
 				INFOPLIST_FILE = ClinicAdministrationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1859,7 +1859,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WQ6FU7ZZ8T;
 				INFOPLIST_FILE = ClinicAdministrationTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

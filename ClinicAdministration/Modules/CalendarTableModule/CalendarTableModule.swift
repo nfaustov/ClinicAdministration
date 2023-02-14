@@ -11,7 +11,7 @@ protocol CalendarTableModule: AnyObject {
     var didFinish: ((_ date: Date?) -> Void)? { get set }
 }
 
-protocol CalendarTableView: View { }
+protocol CalendarTableView: BaseView { }
 
 protocol CalendarTablePresentation: AnyObject {
     func didFinish(with date: Date?)
